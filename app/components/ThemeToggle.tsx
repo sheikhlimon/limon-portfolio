@@ -1,32 +1,26 @@
 'use client'
 
 import { useTheme } from 'next-themes'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme()
-  const [mounted] = useState(typeof window !== 'undefined')
+  const [mounted, setMounted] = useState(false)
 
-  if (!mounted) {
-    return (
-      <button
-        className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200"
-        aria-label="Toggle theme"
-        disabled
-      >
-        <div className="w-5 h-5" />
-      </button>
-    )
-  }
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
+  // Render the same content on server and client to prevent hydration mismatch
   return (
     <button
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      onClick={() => mounted && setTheme(theme === 'dark' ? 'light' : 'dark')}
       className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 group"
       aria-label="Toggle theme"
       title="Toggle theme"
+      suppressHydrationWarning
     >
-      {theme === 'dark' ? (
+      {mounted && theme === 'dark' ? (
         <svg
           className="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-yellow-500 transition-all duration-300 rotate-0"
           viewBox="0 0 24 24"

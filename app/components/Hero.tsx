@@ -32,8 +32,7 @@ export default function Hero() {
       >
         {BIO} As an active open-source contributor with {OPENSOURCE_STATS.prs.merged} merged PRs,
         I&apos;ve shipped production features, improved CI/CD pipelines, and resolved critical bugs
-        in a {OPENSOURCE_STATS.repository.stars}
-        repository.
+        in a repository.
       </motion.p>
 
       <motion.p

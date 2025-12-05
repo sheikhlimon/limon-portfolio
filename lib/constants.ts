@@ -1,11 +1,10 @@
 export const BIO =
-  "I'm a self-taught full-stack engineer specializing in React, Node.js, TypeScript, and scalable API development."
+  "Self-taught full-stack developer who ships production-ready code to open-source projects with 22k+ stars. Passionate about building scalable applications and contributing to mission-critical features that impact millions of users."
 
 export const OPENSOURCE_STATS = {
   repository: {
     name: 'goose',
     url: 'https://github.com/block/goose',
-    stars: '22k★',
   },
   prs: {
     submitted: '45+',
