@@ -6,7 +6,7 @@ export default function OSS() {
     <section id="oss" className="space-y-6">
       <h2 className="text-2xl font-semibold">Open-Source Contributions</h2>
 
-      <div className="space-y-6">
+      <div className="max-w-2xl mx-auto space-y-6">
         <a
           href={OPENSOURCE_STATS.repository.url}
           target="_blank"

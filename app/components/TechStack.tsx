@@ -20,7 +20,7 @@ export default function TechStack() {
     <section id="tech-stack" className="space-y-6">
       <h2 className="text-2xl font-semibold">Tech Stack</h2>
 
-      <div className="space-y-6 text-gray-700 dark:text-gray-300">
+      <div className="max-w-2xl mx-auto space-y-6 text-gray-700 dark:text-gray-300">
         <div>
           <span className="font-bold">OS & Tools:</span>
           <div className="flex flex-wrap gap-3 mt-2">

@@ -5,7 +5,7 @@ export default function Projects() {
     <section id="projects" className="space-y-6">
       <h2 className="text-2xl font-semibold">Featured Projects</h2>
 
-      <div className="space-y-6">
+      <div className="max-w-2xl mx-auto space-y-6">
         <a
           href="https://github.com/sheikhlimon/gesture-share"
           target="_blank"
