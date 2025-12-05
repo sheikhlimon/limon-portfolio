@@ -7,11 +7,7 @@ import ThemeToggle from '../app/components/ThemeToggle'
 export default function Navbar() {
   const pathname = usePathname()
 
-  const getInitialSection = (path: string) => {
-    if (path === '/projects') return 'projects'
-    return 'about'
-  }
-
+  
   const [activeSection, setActiveSection] = useState('about')
 
   const navItems = useMemo(
@@ -32,28 +28,13 @@ export default function Navbar() {
           </svg>
         ),
       },
-      {
-        name: 'Projects',
-        href: '/projects',
-        icon: (
-          <svg
-            className="w-4 h-4"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
-          </svg>
-        ),
-      },
     ],
     []
   )
 
   const currentSection = useMemo(() => {
-    return activeSection !== 'about' ? activeSection : getInitialSection(pathname)
-  }, [activeSection, pathname])
+    return activeSection !== 'about' ? activeSection : 'about'
+  }, [activeSection])
 
   useEffect(() => {
     // Handle scroll for anchor links on home page
@@ -90,29 +71,11 @@ export default function Navbar() {
           className="hover:opacity-80 transition-opacity"
           aria-label="Sheikh Limon - Home"
         >
-          <svg className="w-12 h-12 text-gray-900 dark:text-white" viewBox="0 0 40 40" fill="none">
-            {/* Animated SL text */}
-            <text
-              x="20"
-              y="26"
-              fontSize="18"
-              fontWeight="bold"
-              textAnchor="middle"
-              fill="currentColor"
-              fontFamily="system-ui"
-            >
-              S
-              <tspan opacity="1">
-                L
-                <animate
-                  attributeName="opacity"
-                  values="0;1;1;0"
-                  dur="8s"
-                  repeatCount="indefinite"
-                />
-              </tspan>
-            </text>
-          </svg>
+          <img
+            src="/logo.svg"
+            alt="SL Logo"
+            className="w-12 h-12 invert dark:invert-0"
+          />
         </a>
       </div>
 

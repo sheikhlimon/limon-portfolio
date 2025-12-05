@@ -1,5 +1,5 @@
 export const BIO =
-  "Self-taught full-stack developer who ships production-ready code to open-source projects with 22k+ stars. Passionate about building scalable applications and contributing to mission-critical features that impact millions of users."
+  "Self-taught full-stack developer with a passion for building scalable applications and contributing to open-source projects. I enjoy solving complex problems, whether it's implementing new features, improving development workflows, or fixing critical bugs. Currently focused on React, Node.js, and TypeScript development."
 
 export const OPENSOURCE_STATS = {
   repository: {

@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <section id="about" className="space-y-6 pt-8">
       <motion.h1
-        className="text-5xl font-bold tracking-tight bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent"
+        className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
@@ -32,7 +32,7 @@ export default function Hero() {
       >
         {BIO} As an active open-source contributor with {OPENSOURCE_STATS.prs.merged} merged PRs,
         I&apos;ve shipped production features, improved CI/CD pipelines, and resolved critical bugs
-        in a repository.
+        in open-source projects.
       </motion.p>
 
       <motion.p

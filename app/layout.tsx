@@ -4,6 +4,7 @@ import { ThemeProvider } from 'next-themes'
 import SmoothScrollWrapper from '../components/SmoothScrollWrapper'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import GoToTop from './components/GoToTop'
 
 export const metadata: Metadata = {
   title: 'Sheikh Limon – Full-Stack Developer',
@@ -131,6 +132,7 @@ export default function RootLayout({
               <main className="max-w-4xl mx-auto px-5 py-10 grow">{children}</main>
               <Footer />
             </div>
+            <GoToTop />
           </SmoothScrollWrapper>
         </ThemeProvider>
       </body>

@@ -18,7 +18,7 @@ import {
 export default function TechStack() {
   return (
     <section id="tech-stack" className="space-y-6">
-      <h2 className="text-3xl font-semibold">Tech Stack</h2>
+      <h2 className="text-2xl font-semibold">Tech Stack</h2>
 
       <div className="space-y-6 text-gray-700 dark:text-gray-300">
         <div>
