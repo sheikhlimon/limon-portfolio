@@ -34,7 +34,10 @@ export default function OSS() {
                   <code className="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-sm">
                     --output-format json
                   </code>{' '}
-                  flag <span className="text-sm text-gray-500">(130+ LOC, multiple review iterations)</span>
+                  flag{' '}
+                  <span className="text-sm text-gray-500">
+                    (130+ LOC, multiple review iterations)
+                  </span>
                 </span>
               </li>
               <li className="flex items-start gap-2">

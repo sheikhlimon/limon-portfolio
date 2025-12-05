@@ -1,4 +1,12 @@
-<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="48" height="48" rx="12" fill="currentColor" opacity="0.1"/>
-  <text x="24" y="30" fontSize="20" fontWeight="bold" textAnchor="middle" fill="currentColor" fontFamily="system-ui, -apple-system, sans-serif">SL</text>
+<svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+  <g fill="currentColor">
+    <!-- Less-than symbol -->
+    <path d="M 8 20 L 20 8 L 20 12 L 12 20 L 20 28 L 20 32 Z"/>
+    <!-- SL text -->
+    <text x="60" y="26" font-family="'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace" font-size="18" font-weight="600" text-anchor="middle">SL</text>
+    <!-- Greater-than symbol -->
+    <path d="M 92 20 L 80 8 L 80 12 L 88 20 L 80 28 L 80 32 Z"/>
+    <!-- Slash -->
+    <rect x="58" y="10" width="4" height="20" fill="currentColor"/>
+  </g>
 </svg>

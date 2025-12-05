@@ -2,12 +2,19 @@
 
 import { useState, useEffect, useMemo } from 'react'
 import { usePathname } from 'next/navigation'
-import ThemeToggle from '../app/components/ThemeToggle'
+import dynamic from 'next/dynamic'
+import LogoTypewriter from './LogoTypewriter'
+
+const ThemeToggle = dynamic(() => import('../app/components/ThemeToggle'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-9 h-9 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
+  ),
+})
 
 export default function Navbar() {
   const pathname = usePathname()
 
-  
   const [activeSection, setActiveSection] = useState('about')
 
   const navItems = useMemo(
@@ -71,11 +78,7 @@ export default function Navbar() {
           className="hover:opacity-80 transition-opacity"
           aria-label="Sheikh Limon - Home"
         >
-          <img
-            src="/logo.svg"
-            alt="SL Logo"
-            className="w-12 h-12 invert dark:invert-0"
-          />
+          <LogoTypewriter />
         </a>
       </div>
 

@@ -9,7 +9,21 @@ import GoToTop from './components/GoToTop'
 export const metadata: Metadata = {
   title: 'Sheikh Limon – Full-Stack Developer',
   description: 'React • Node.js • TypeScript • Open-Source Contributor',
-  keywords: ['Full-Stack Developer', 'React', 'Node.js', 'Open Source', 'Portfolio'],
+  keywords: [
+    'Full-Stack Developer',
+    'React',
+    'Node.js',
+    'Open Source',
+    'Portfolio',
+    'Sheikh Limon',
+    'sheikhlimon',
+    'limon',
+  ],
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon-16x16.png',
+    apple: '/apple-touch-icon.png',
+  },
   other: {
     'format-detection': 'telephone=no, date=no, email=no, address=no',
   },
@@ -129,7 +143,7 @@ export default function RootLayout({
           <SmoothScrollWrapper>
             <div className="flex flex-col min-h-screen">
               <Navbar />
-              <main className="max-w-4xl mx-auto px-5 py-10 grow">{children}</main>
+              <main className="max-w-3xl mx-auto px-5 py-10 grow">{children}</main>
               <Footer />
             </div>
             <GoToTop />
