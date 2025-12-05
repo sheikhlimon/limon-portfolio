@@ -1,6 +1,6 @@
-import Hero from "./components/Hero";
-import TechStack from "./components/TechStack";
-import OSS from "./components/OSS";
+import Hero from './components/Hero'
+import TechStack from './components/TechStack'
+import OSS from './components/OSS'
 
 export default function Home() {
   return (
@@ -9,5 +9,5 @@ export default function Home() {
       <TechStack />
       <OSS />
     </div>
-  );
+  )
 }

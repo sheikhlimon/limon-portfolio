@@ -1,52 +1,77 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import { ThemeProvider } from "next-themes";
-import SmoothScrollWrapper from "../components/SmoothScrollWrapper";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-
+import type { Metadata } from 'next'
+import './globals.css'
+import { ThemeProvider } from 'next-themes'
+import SmoothScrollWrapper from '../components/SmoothScrollWrapper'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 
 export const metadata: Metadata = {
-  title: "Sheikh Limon – Full-Stack Developer",
-  description: "React • Node.js • TypeScript • Open-Source Contributor",
-  keywords: [
-    "Full-Stack Developer",
-    "React",
-    "Node.js",
-    "Open Source",
-    "Portfolio",
-  ],
+  title: 'Sheikh Limon – Full-Stack Developer',
+  description: 'React • Node.js • TypeScript • Open-Source Contributor',
+  keywords: ['Full-Stack Developer', 'React', 'Node.js', 'Open Source', 'Portfolio'],
   other: {
-    "format-detection": "telephone=no, date=no, email=no, address=no",
+    'format-detection': 'telephone=no, date=no, email=no, address=no',
   },
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className={`antialiased bg-gradient-to-br from-slate-50 to-slate-100 dark:from-black dark:via-zinc-950 dark:to-black text-gray-900 dark:text-white transition-colors duration-300 min-h-screen flex flex-col relative overflow-x-hidden`}
+        className={`antialiased -bg-linear-0-to-br from-slate-50 to-slate-100 dark:from-black dark:via-zinc-950 dark:to-black text-gray-900 dark:text-white transition-colors duration-300 min-h-screen flex flex-col relative overflow-x-hidden`}
       >
         {/* Starry background */}
         <div className="fixed inset-0 pointer-events-none">
           {/* Smaller stars - fixed positions to avoid hydration errors */}
           {[...Array(40)].map((_, i) => {
             const positions = [
-              { x: 10, y: 15 }, { x: 25, y: 8 }, { x: 40, y: 25 }, { x: 60, y: 12 }, { x: 75, y: 20 },
-              { x: 90, y: 10 }, { x: 15, y: 35 }, { x: 30, y: 45 }, { x: 55, y: 38 }, { x: 80, y: 42 },
-              { x: 5, y: 55 }, { x: 20, y: 68 }, { x: 45, y: 60 }, { x: 70, y: 75 }, { x: 85, y: 85 },
-              { x: 12, y: 88 }, { x: 35, y: 95 }, { x: 65, y: 92 }, { x: 88, y: 78 }, { x: 28, y: 28 },
-              { x: 52, y: 15 }, { x: 78, y: 55 }, { x: 8, y: 72 }, { x: 42, y: 82 }, { x: 68, y: 35 },
-              { x: 92, y: 48 }, { x: 18, y: 58 }, { x: 38, y: 70 }, { x: 58, y: 88 }, { x: 82, y: 92 },
-              { x: 22, y: 18 }, { x: 48, y: 32 }, { x: 72, y: 28 }, { x: 95, y: 65 }, { x: 32, y: 85 },
-              { x: 62, y: 65 }, { x: 87, y: 38 }, { x: 25, y: 52 }, { x: 50, y: 78 }, { x: 77, y: 68 },
-            ];
-            const pos = positions[i % positions.length];
+              { x: 10, y: 15 },
+              { x: 25, y: 8 },
+              { x: 40, y: 25 },
+              { x: 60, y: 12 },
+              { x: 75, y: 20 },
+              { x: 90, y: 10 },
+              { x: 15, y: 35 },
+              { x: 30, y: 45 },
+              { x: 55, y: 38 },
+              { x: 80, y: 42 },
+              { x: 5, y: 55 },
+              { x: 20, y: 68 },
+              { x: 45, y: 60 },
+              { x: 70, y: 75 },
+              { x: 85, y: 85 },
+              { x: 12, y: 88 },
+              { x: 35, y: 95 },
+              { x: 65, y: 92 },
+              { x: 88, y: 78 },
+              { x: 28, y: 28 },
+              { x: 52, y: 15 },
+              { x: 78, y: 55 },
+              { x: 8, y: 72 },
+              { x: 42, y: 82 },
+              { x: 68, y: 35 },
+              { x: 92, y: 48 },
+              { x: 18, y: 58 },
+              { x: 38, y: 70 },
+              { x: 58, y: 88 },
+              { x: 82, y: 92 },
+              { x: 22, y: 18 },
+              { x: 48, y: 32 },
+              { x: 72, y: 28 },
+              { x: 95, y: 65 },
+              { x: 32, y: 85 },
+              { x: 62, y: 65 },
+              { x: 87, y: 38 },
+              { x: 25, y: 52 },
+              { x: 50, y: 78 },
+              { x: 77, y: 68 },
+            ]
+            const pos = positions[i % positions.length]
             return (
               <div
                 key={`small-${i}`}
@@ -55,20 +80,27 @@ export default function RootLayout({
                   left: `${pos.x}%`,
                   top: `${pos.y}%`,
                   opacity: 0.3 + (i % 3) * 0.15,
-                  animation: `twinkle ${4 + (i % 4)}s ease-in-out ${(i % 3)}s infinite`,
+                  animation: `twinkle ${4 + (i % 4)}s ease-in-out ${i % 3}s infinite`,
                 }}
               />
-            );
+            )
           })}
 
           {/* Medium stars - fewer and dimmer */}
           {[...Array(10)].map((_, i) => {
             const positions = [
-              { x: 20, y: 25 }, { x: 50, y: 15 }, { x: 80, y: 30 }, { x: 15, y: 60 },
-              { x: 70, y: 70 }, { x: 35, y: 85 }, { x: 90, y: 50 }, { x: 10, y: 90 },
-              { x: 60, y: 45 }, { x: 85, y: 80 },
-            ];
-            const pos = positions[i % positions.length];
+              { x: 20, y: 25 },
+              { x: 50, y: 15 },
+              { x: 80, y: 30 },
+              { x: 15, y: 60 },
+              { x: 70, y: 70 },
+              { x: 35, y: 85 },
+              { x: 90, y: 50 },
+              { x: 10, y: 90 },
+              { x: 60, y: 45 },
+              { x: 85, y: 80 },
+            ]
+            const pos = positions[i % positions.length]
             return (
               <div
                 key={`medium-${i}`}
@@ -83,20 +115,25 @@ export default function RootLayout({
                   boxShadow: '0 0 2px rgba(255, 255, 255, 0.1)',
                 }}
               />
-            );
+            )
           })}
         </div>
 
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <SmoothScrollWrapper>
             <div className="flex flex-col min-h-screen">
               <Navbar />
-              <main className="max-w-4xl mx-auto px-5 py-10 flex-grow">{children}</main>
+              <main className="max-w-4xl mx-auto px-5 py-10 grow">{children}</main>
               <Footer />
             </div>
           </SmoothScrollWrapper>
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }

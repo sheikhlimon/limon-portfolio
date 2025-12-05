@@ -1,3 +1,5 @@
+import { OPENSOURCE_STATS } from '../../lib/constants'
+
 export default function OSS() {
   return (
     <section id="oss" className="space-y-6">
@@ -5,7 +7,16 @@ export default function OSS() {
 
       <div className="space-y-6">
         <div>
-          <h3 className="text-xl font-semibold">block/goose (22k★)</h3>
+          <h3 className="text-xl font-semibold">
+            <a
+              href={OPENSOURCE_STATS.repository.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline"
+            >
+              {OPENSOURCE_STATS.repository.name} ({OPENSOURCE_STATS.repository.stars})
+            </a>
+          </h3>
           <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300">
             <li>
               Implemented <code>--output-format json</code> (130+ LOC)
@@ -17,9 +28,10 @@ export default function OSS() {
         </div>
 
         <p className="text-gray-700 dark:text-gray-300">
-          45+ PRs submitted, 34+ merged across multiple organizations.
+          {OPENSOURCE_STATS.prs.submitted} PRs submitted, {OPENSOURCE_STATS.prs.merged} merged
+          across multiple organizations.
         </p>
       </div>
     </section>
-  );
+  )
 }

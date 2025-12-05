@@ -10,11 +10,12 @@ export default function Projects() {
           target="_blank"
           className="block p-6 rounded-xl hover:bg-white/80 dark:hover:bg-zinc-800/40 transition-all duration-300 hover:scale-[1.02] cursor-pointer group"
         >
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">gesture-share</h3>
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+            gesture-share
+          </h3>
           <p className="text-gray-700 dark:text-gray-300 mt-2">
-            Cross-device gesture-controlled file sharing using React, MediaPipe,
-            and WebRTC. Achieved 95%+ gesture accuracy and 80% faster setup
-            using QR-based pairing.
+            Cross-device gesture-controlled file sharing using React, MediaPipe, and WebRTC.
+            Achieved 95%+ gesture accuracy and 80% faster setup using QR-based pairing.
           </p>
         </a>
 
@@ -24,13 +25,15 @@ export default function Projects() {
           target="_blank"
           className="block p-6 rounded-xl hover:bg-white/80 dark:hover:bg-zinc-800/40 transition-all duration-300 hover:scale-[1.02] cursor-pointer group"
         >
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">crypto-guardian</h3>
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+            crypto-guardian
+          </h3>
           <p className="text-gray-700 dark:text-gray-300 mt-2">
-            Real-time crypto fraud detection system with sub-500ms scoring using
-            multi-API validation (Etherscan, Blockchair, CoinGecko).
+            Real-time crypto fraud detection system with sub-500ms scoring using multi-API
+            validation (Etherscan, Blockchair, CoinGecko).
           </p>
         </a>
       </div>
     </section>
-  );
+  )
 }

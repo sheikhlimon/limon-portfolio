@@ -1,10 +1,10 @@
-import { Metadata } from "next";
-import Projects from "../components/Projects";
+import { Metadata } from 'next'
+import Projects from '../components/Projects'
 
 export const metadata: Metadata = {
-  title: "Projects - Sheikh Limon",
-  description: "Featured projects by Sheikh Limon - Full-Stack Developer",
-};
+  title: 'Projects - Sheikh Limon',
+  description: 'Featured projects by Sheikh Limon - Full-Stack Developer',
+}
 
 export default function ProjectsPage() {
   return (
@@ -13,5 +13,5 @@ export default function ProjectsPage() {
         <Projects />
       </div>
     </div>
-  );
+  )
 }

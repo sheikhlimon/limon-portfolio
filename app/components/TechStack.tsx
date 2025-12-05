@@ -6,17 +6,14 @@ import {
   Package,
   Server,
   Layers,
-  Code,
   Cpu,
   Key,
-  Building2,
   Users,
   Zap,
   CheckCircle,
-  Coffee,
   Braces,
-  Atom
-} from "lucide-react";
+  Atom,
+} from 'lucide-react'
 
 export default function TechStack() {
   return (
@@ -125,5 +122,5 @@ export default function TechStack() {
         </div>
       </div>
     </section>
-  );
+  )
 }
