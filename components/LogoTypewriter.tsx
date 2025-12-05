@@ -22,7 +22,7 @@ const LogoTypewriter = () => {
       // Different speeds for different characters to feel more natural
       if (char === ' ') return 150 // Space - quick
       if (char === '<' || char === '/' || char === '>') return 200 // Symbols - medium
-      return 180 + Math.random() * 100 // Letters - varied natural speed
+      return 180 + 50 // Letters - fixed speed to avoid hydration mismatch
     }
 
     const typeNextChar = () => {

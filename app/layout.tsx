@@ -42,7 +42,7 @@ export default function RootLayout({
       >
         {/* Starry background */}
         <div className="fixed inset-0 pointer-events-none">
-          {/* Smaller stars - fixed positions to avoid hydration errors */}
+          {/* Smaller stars */}
           {[...Array(40)].map((_, i) => {
             const positions = [
               { x: 10, y: 15 },
