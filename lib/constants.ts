@@ -1,5 +1,5 @@
 export const BIO =
-  "Self-taught full-stack developer with a passion for building scalable applications and contributing to open-source projects. I enjoy solving complex problems, whether it's implementing new features, improving development workflows, or fixing critical bugs. Currently focused on React, Node.js, and TypeScript development."
+  'Full stack engineer who ships production code that matters. With more than 30 merged PRs across open source projects, I have built CLI tools developers actually use, fixed bugs that broke production, and engineered CI/CD pipelines that teams rely on every day. I thrive on turning complex problems into elegant solutions using React, TypeScript, and Node.js. My code runs in production systems used by global teams, and I am obsessed with building experiences that simply work. When I am not crafting clean and maintainable code, you will find me debugging the impossible or architecting systems that scale. I do not just write code, I build solutions that create real impact.'
 
 export const OPENSOURCE_STATS = {
   repository: {

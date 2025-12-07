@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { BIO, OPENSOURCE_STATS, SOCIAL_LINKS } from '../../lib/constants'
+import { BIO, SOCIAL_LINKS } from '../../lib/constants'
 
 export default function Hero() {
   return (
@@ -30,9 +30,7 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
       >
-        {BIO} As an active open-source contributor with {OPENSOURCE_STATS.prs.merged} merged PRs,
-        I&apos;ve shipped production features, improved CI/CD pipelines, and resolved critical bugs
-        in open-source projects.
+        {BIO}
       </motion.p>
 
       <motion.p
