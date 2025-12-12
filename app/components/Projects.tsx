@@ -76,7 +76,7 @@ export default function Projects() {
 
             <ul className="text-sm space-y-1">
               <li>• Fast risk scoring (&lt; 500ms) per wallet address</li>
-              <li>• Multi-API validation (Etherscan, Blockchair, CoinGecko)</li>
+              <li>• Multi-API validation (Etherscan, BlockCypher, CoinGecko)</li>
               <li>• Real-time fraud detection with 0-100 risk scores</li>
             </ul>
           </div>
