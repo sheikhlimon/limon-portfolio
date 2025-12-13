@@ -33,16 +33,7 @@ export default function Hero() {
         {BIO}
       </motion.p>
 
-      <motion.p
-        className="text-gray-600 dark:text-gray-300 max-w-2xl"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.7 }}
-      >
-        I enjoy building fast, intuitive user experiences and reliable backend systems following
-        clean architecture principles.
-      </motion.p>
-
+  
       <motion.div
         className="space-y-4"
         initial={{ opacity: 0 }}
