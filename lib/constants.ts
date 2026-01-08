@@ -1,5 +1,5 @@
 export const BIO =
-  'Full-stack developer building real-world web applications and contributing to open source. I work across frontend and backend systems, with a focus on clean architecture, performance, and reliable deployment workflows.'
+  'Full-stack developer building and maintaining production web applications, with hands-on experience across frontend, backend, and DevOps. Active open-source contributor focused on clean architecture, performance, and reliable deployment workflows.'
 
 export const OPENSOURCE_STATS = {
   repository: {
