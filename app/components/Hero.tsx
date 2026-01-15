@@ -21,7 +21,7 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        Full-Stack Developer • Open Source
+        Software Engineer • Open Source Contributor
       </motion.p>
 
       <motion.p
