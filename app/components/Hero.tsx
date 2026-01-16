@@ -65,7 +65,7 @@ export default function Hero() {
           <div className="pt-4">
             <p className="text-gray-700 dark:text-gray-300">
               Or mail me at{' '}
-              <span className="text-gray-600 dark:text-gray-400">sheikhlimon404@gmail.com</span>
+              <span className="text-gray-600 dark:text-gray-400">sheikhlimondev@gmail.com</span>
             </p>
           </div>
         </div>
