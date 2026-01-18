@@ -137,3 +137,26 @@
     opacity: 1;
   }
 }
+
+/* Markdown prose link styling */
+.prose a {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.dark .prose a {
+  color: #60a5fa;
+}
+
+.prose a:hover {
+  color: #1d4ed8;
+}
+
+.dark .prose a:hover {
+  color: #3b82f6;
+}
+
+.prose strong {
+  font-weight: 700;
+}
+

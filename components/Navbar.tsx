@@ -20,8 +20,8 @@ export default function Navbar() {
   const navItems = useMemo(
     () => [
       {
-        name: 'Blog',
-        href: '/blog',
+        name: 'Logs',
+        href: '/logs',
         icon: (
           <svg
             className="w-4 h-4"
