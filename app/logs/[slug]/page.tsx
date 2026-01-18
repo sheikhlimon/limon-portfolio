@@ -70,8 +70,29 @@ export default async function LogPage({ params }: { params: Promise<{ slug: stri
             <p className="text-sm text-gray-600 dark:text-gray-400">{data.date || ''}</p>
           </div>
 
-          <article className="prose prose-gray dark:prose-invert max-w-none">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          <article className="prose prose-gray dark:prose-invert max-w-none prose-headings:font-bold prose-pre:bg-gray-100 dark:prose-pre:bg-gray-800 prose-code:text-pink-600 dark:prose-code:text-pink-400 prose-code:before:content-[''] prose-code:after:content-['']">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                h2: ({...props}) => <h2 className="text-2xl font-bold mt-8 mb-4" {...props} />,
+                h3: ({...props}) => <h3 className="text-xl font-bold mt-6 mb-3" {...props} />,
+                p: ({...props}) => <p className="my-4 leading-7" {...props} />,
+                code: ({className, children, ...props}) => {
+                  const isInline = !className?.includes('language-')
+                  return isInline ? (
+                    <code className="bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-pink-600 dark:text-pink-400 font-mono text-sm" {...props}>
+                      {children}
+                    </code>
+                  ) : (
+                    <code className="block bg-gray-100 dark:bg-gray-800 p-4 rounded-lg font-mono text-sm overflow-x-auto" {...props}>
+                      {children}
+                    </code>
+                  )
+                },
+                ul: ({...props}) => <ul className="list-disc pl-6 my-4 space-y-2" {...props} />,
+                li: ({...props}) => <li className="leading-7" {...props} />,
+              }}
+            >
               {content}
             </ReactMarkdown>
           </article>
