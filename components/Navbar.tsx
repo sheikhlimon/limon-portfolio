@@ -22,7 +22,7 @@ export default function Navbar() {
         href: '/logs',
         icon: (
           <svg
-            className="w-4 h-4"
+            className="w-5 h-5"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -38,7 +38,7 @@ export default function Navbar() {
         href: '/projects',
         icon: (
           <svg
-            className="w-4 h-4"
+            className="w-5 h-5"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -53,7 +53,7 @@ export default function Navbar() {
         href: 'https://drive.google.com/file/d/1kpyed0ei3YN30LM5Wpvp5n_xhQsnx0Ou/view?usp=drive_link',
         icon: (
           <svg
-            className="w-4 h-4"
+            className="w-5 h-5"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -112,7 +112,7 @@ export default function Navbar() {
       </div>
 
       {/* Navigation Items */}
-      <div className="flex items-center gap-4 sm:gap-6">
+      <div className="flex items-center gap-5 sm:gap-6">
         {navItems.map((item) => (
           <a
             key={item.name}
