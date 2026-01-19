@@ -50,6 +50,22 @@ export default function Navbar() {
           </svg>
         ),
       },
+      {
+        name: 'Resume',
+        href: 'https://drive.google.com/file/d/1kpyed0ei3YN30LM5Wpvp5n_xhQsnx0Ou/view?usp=drive_link',
+        icon: (
+          <svg
+            className="w-4 h-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+            <polyline points="14 2 14 8 20 8" />
+          </svg>
+        ),
+      },
     ],
     []
   )
@@ -103,6 +119,8 @@ export default function Navbar() {
           <a
             key={item.name}
             href={item.href}
+            target={item.href.startsWith('http') ? '_blank' : undefined}
+            rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
             className={`flex items-center gap-2 text-sm font-medium transition-colors ${
               (item.href.startsWith('/') && pathname === item.href) ||
               (item.href.startsWith('#') && currentSection === item.href.substring(1))
