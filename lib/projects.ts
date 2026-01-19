@@ -19,6 +19,7 @@ export const projects: Project[] = [
       'P2P file transfers without keyboard requirements',
     ],
     github: 'https://github.com/sheikhlimon/gesture-share',
+    live: 'https://gesture-share.vercel.app',
     icon: 'Globe',
   },
   {
@@ -31,6 +32,7 @@ export const projects: Project[] = [
       'Real-time fraud detection with 0-100 risk scores',
     ],
     github: 'https://github.com/sheikhlimon/crypto-guardian',
+    live: 'https://crypto-guardian-frontend.vercel.app',
     icon: 'Shield',
   },
   {
