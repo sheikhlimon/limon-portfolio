@@ -1,3 +1,5 @@
+'use client'
+
 import { Project } from '../../lib/projects'
 
 interface ProjectCardProps {
