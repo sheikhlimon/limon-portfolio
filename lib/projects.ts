@@ -1,5 +1,3 @@
-import { Globe, Shield, GraduationCap, LucideIcon } from 'lucide-react'
-
 export interface Project {
   title: string
   description: string
@@ -7,7 +5,7 @@ export interface Project {
   features: string[]
   github: string
   live?: string
-  icon: LucideIcon
+  icon: 'Globe' | 'Shield' | 'GraduationCap'
 }
 
 export const projects: Project[] = [
@@ -21,7 +19,7 @@ export const projects: Project[] = [
       'P2P file transfers without keyboard requirements',
     ],
     github: 'https://github.com/sheikhlimon/gesture-share',
-    icon: Globe,
+    icon: 'Globe',
   },
   {
     title: 'crypto-guardian',
@@ -33,7 +31,7 @@ export const projects: Project[] = [
       'Real-time fraud detection with 0-100 risk scores',
     ],
     github: 'https://github.com/sheikhlimon/crypto-guardian',
-    icon: Shield,
+    icon: 'Shield',
   },
   {
     title: 'college-booking-app',
@@ -46,6 +44,6 @@ export const projects: Project[] = [
     ],
     github: 'https://github.com/sheikhlimon/college-booking-app',
     live: 'https://college-booking-app-nine.vercel.app',
-    icon: GraduationCap,
+    icon: 'GraduationCap',
   },
 ]
