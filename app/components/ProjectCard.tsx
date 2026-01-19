@@ -21,7 +21,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       href={project.live || project.github}
       target="_blank"
       rel="noopener noreferrer"
-      className="block border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg p-4 hover:border-indigo-400/50 dark:hover:border-indigo-500/50 transition-all duration-200 hover:shadow-lg hover:shadow-indigo-500/5 group hover:scale-[1.02] hover:-translate-y-1"
+      className="block border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg p-4 hover:border-indigo-400/50 dark:hover:border-indigo-500/50 hover:shadow-lg hover:shadow-indigo-500/5 group hover:scale-[1.02] hover:-translate-y-1 transition-transform duration-200"
     >
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-xl font-semibold group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors flex items-center gap-2">

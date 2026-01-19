@@ -1,5 +1,5 @@
 export const BIO =
-  "I'm a software engineer who enjoys working on the unglamorous parts of systems — APIs, edge cases, deployment pipelines, and reliability.\n\nI contribute to open-source projects used by real developers, focusing on maintainable code, predictable behavior, and changes that are safe to ship."
+  "I'm a software engineer who enjoys working on the unglamorous parts of systems like APIs, edge cases, deployment pipelines, and reliability.\n\nI contribute to open-source projects used by real developers, focusing on maintainable code, predictable behavior, and changes that are safe to ship."
 
 export const OPENSOURCE_STATS = {
   repository: {
