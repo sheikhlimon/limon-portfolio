@@ -99,7 +99,7 @@ export default function Navbar() {
   }, [pathname, navItems])
 
   return (
-    <nav className="flex items-center justify-between px-6 py-4 w-full">
+    <nav className="flex items-center justify-between px-4 sm:px-6 py-4 w-full">
       {/* SVG Logo */}
       <div className="flex items-center">
         <a
@@ -112,7 +112,7 @@ export default function Navbar() {
       </div>
 
       {/* Navigation Items */}
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-4 sm:gap-6">
         {navItems.map((item) => (
           <a
             key={item.name}
@@ -127,12 +127,12 @@ export default function Navbar() {
             }`}
           >
             {item.icon}
-            {item.name}
+            <span className="hidden sm:inline">{item.name}</span>
           </a>
         ))}
 
         {/* Theme Toggle */}
-        <div className="ml-6">
+        <div className="sm:ml-6">
           <ThemeToggle />
         </div>
       </div>
