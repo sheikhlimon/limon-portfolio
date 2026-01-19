@@ -18,7 +18,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
   return (
     <a
-      href={project.github}
+      href={project.live || project.github}
       target="_blank"
       rel="noopener noreferrer"
       className="block border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg p-4 hover:border-indigo-400/50 dark:hover:border-indigo-500/50 transition-all duration-200 hover:shadow-lg hover:shadow-indigo-500/5 group hover:scale-[1.02] hover:-translate-y-1"
@@ -30,13 +30,13 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </h3>
         {project.live && (
           <a
-            href={project.live}
+            href={project.github}
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs px-2 py-1 border border-zinc-400/70 dark:border-zinc-500/50 rounded hover:bg-indigo-50 dark:hover:bg-indigo-950/30 hover:border-indigo-400/50 dark:hover:border-indigo-500/50 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all"
             onClick={(e) => e.stopPropagation()}
           >
-            Live Demo →
+            GitHub →
           </a>
         )}
       </div>
