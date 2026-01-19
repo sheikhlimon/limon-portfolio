@@ -7,9 +7,7 @@ import LogoTypewriter from './LogoTypewriter'
 
 const ThemeToggle = dynamic(() => import('../app/components/ThemeToggle'), {
   ssr: false,
-  loading: () => (
-    <div className="w-9 h-9 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
-  ),
+  loading: () => <div className="w-9 h-9" />,
 })
 
 export default function Navbar() {
