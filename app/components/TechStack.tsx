@@ -4,15 +4,16 @@ import {
   Globe,
   GitBranch,
   Package,
-  Server,
   Layers,
   Cpu,
   Key,
-  Users,
   Zap,
   CheckCircle,
   Braces,
   Atom,
+  Shield,
+  FileCode,
+  Activity,
 } from 'lucide-react'
 
 export default function TechStack() {
@@ -22,31 +23,23 @@ export default function TechStack() {
 
       <div className="max-w-2xl mx-auto space-y-6 text-gray-700 dark:text-gray-300">
         <div>
-          <span className="font-bold">OS & Tools:</span>
+          <span className="font-bold">Languages & Frameworks:</span>
           <div className="flex flex-wrap gap-3 mt-2">
             <span className="flex items-center gap-1 px-2 py-1 text-sm border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg">
-              <Terminal className="w-4 h-4 text-gray-500" />
-              Linux
+              <Braces className="w-4 h-4 text-gray-500" />
+              TypeScript
             </span>
             <span className="flex items-center gap-1 px-2 py-1 text-sm border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg">
-              <Package className="w-4 h-4 text-gray-500" />
-              Docker
+              <Cpu className="w-4 h-4 text-gray-500" />
+              Node.js
             </span>
             <span className="flex items-center gap-1 px-2 py-1 text-sm border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg">
-              <GitBranch className="w-4 h-4 text-gray-500" />
-              CI/CD
+              <Zap className="w-4 h-4 text-gray-500" />
+              Express
             </span>
             <span className="flex items-center gap-1 px-2 py-1 text-sm border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg">
-              <Globe className="w-4 h-4 text-gray-500" />
-              Vercel
-            </span>
-            <span className="flex items-center gap-1 px-2 py-1 text-sm border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg">
-              <Server className="w-4 h-4 text-gray-500" />
-              Netlify
-            </span>
-            <span className="flex items-center gap-1 px-2 py-1 text-sm border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg">
-              <Layers className="w-4 h-4 text-gray-500" />
-              Render
+              <Atom className="w-4 h-4 text-gray-500" />
+              React
             </span>
           </div>
         </div>
@@ -66,27 +59,27 @@ export default function TechStack() {
         </div>
 
         <div>
-          <span className="font-bold">Languages/Frameworks:</span>
+          <span className="font-bold">DevOps & Tools:</span>
           <div className="flex flex-wrap gap-3 mt-2">
             <span className="flex items-center gap-1 px-2 py-1 text-sm border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg">
               <Terminal className="w-4 h-4 text-gray-500" />
-              Bash
+              Linux
             </span>
             <span className="flex items-center gap-1 px-2 py-1 text-sm border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg">
-              <Braces className="w-4 h-4 text-gray-500" />
-              JavaScript/TypeScript
+              <Package className="w-4 h-4 text-gray-500" />
+              Docker
             </span>
             <span className="flex items-center gap-1 px-2 py-1 text-sm border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg">
-              <Cpu className="w-4 h-4 text-gray-500" />
-              Node.js
+              <GitBranch className="w-4 h-4 text-gray-500" />
+              Git
             </span>
             <span className="flex items-center gap-1 px-2 py-1 text-sm border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg">
-              <Zap className="w-4 h-4 text-gray-500" />
-              Express
+              <Globe className="w-4 h-4 text-gray-500" />
+              GitHub
             </span>
             <span className="flex items-center gap-1 px-2 py-1 text-sm border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg">
-              <Atom className="w-4 h-4 text-gray-500" />
-              React
+              <Layers className="w-4 h-4 text-gray-500" />
+              CI/CD
             </span>
           </div>
         </div>
@@ -100,23 +93,23 @@ export default function TechStack() {
             </span>
             <span className="flex items-center gap-1 px-2 py-1 text-sm border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg">
               <Key className="w-4 h-4 text-gray-500" />
-              JWT Authentication
-            </span>
-            <span className="flex items-center gap-1 px-2 py-1 text-sm border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg">
-              <Layers className="w-4 h-4 text-gray-500" />
-              MVC
-            </span>
-            <span className="flex items-center gap-1 px-2 py-1 text-sm border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg">
-              <Users className="w-4 h-4 text-gray-500" />
-              Agile
+              JWT Auth
             </span>
             <span className="flex items-center gap-1 px-2 py-1 text-sm border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg">
               <CheckCircle className="w-4 h-4 text-gray-500" />
-              Testing
+              Input Validation
             </span>
             <span className="flex items-center gap-1 px-2 py-1 text-sm border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg">
-              <Cpu className="w-4 h-4 text-gray-500" />
-              Performance Optimization
+              <Shield className="w-4 h-4 text-gray-500" />
+              Fault Tolerance
+            </span>
+            <span className="flex items-center gap-1 px-2 py-1 text-sm border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg">
+              <FileCode className="w-4 h-4 text-gray-500" />
+              Schema Design
+            </span>
+            <span className="flex items-center gap-1 px-2 py-1 text-sm border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg">
+              <Activity className="w-4 h-4 text-gray-500" />
+              API Reliability
             </span>
           </div>
         </div>
