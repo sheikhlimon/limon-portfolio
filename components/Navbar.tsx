@@ -4,10 +4,11 @@ import { useState, useEffect, useMemo } from 'react'
 import { usePathname } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import LogoTypewriter from './LogoTypewriter'
+import Loading from './Loading'
 
 const ThemeToggle = dynamic(() => import('../app/components/ThemeToggle'), {
   ssr: false,
-  loading: () => <div className="w-9 h-9" />,
+  loading: () => <Loading size="inline" className="w-9 h-9 flex items-center justify-center" />,
 })
 
 export default function Navbar() {
