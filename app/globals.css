@@ -231,3 +231,24 @@
   padding: 0;
 }
 
+/* Top loader shimmer effect */
+#nprogress .bar {
+  background: linear-gradient(
+    90deg,
+    #6366f1 0%,
+    #818cf8 50%,
+    #6366f1 100%
+  ) !important;
+  background-size: 200% 100% !important;
+  animation: shimmer 1.5s infinite !important;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+

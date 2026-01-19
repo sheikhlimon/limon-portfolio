@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { ThemeProvider } from 'next-themes'
+import NextTopLoader from 'nextjs-toploader'
 import SmoothScrollWrapper from '../components/SmoothScrollWrapper'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import GoToTop from './components/GoToTop'
-import LoadingWrapper from '../components/LoadingWrapper'
 
 export const metadata: Metadata = {
   title: 'Sheikh Limon – Full-Stack Developer',
@@ -141,16 +141,21 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <LoadingWrapper>
-            <SmoothScrollWrapper>
-              <div className="flex flex-col min-h-screen">
-                <Navbar />
-                <main className="max-w-3xl mx-auto px-5 py-10 grow">{children}</main>
-                <Footer />
-              </div>
-              <GoToTop />
-            </SmoothScrollWrapper>
-          </LoadingWrapper>
+          <NextTopLoader
+            color="#6366f1"
+            initialPosition={0.08}
+            crawl={false}
+            height={2}
+            showSpinner={false}
+          />
+          <SmoothScrollWrapper>
+            <div className="flex flex-col min-h-screen">
+              <Navbar />
+              <main className="max-w-3xl mx-auto px-5 py-10 grow">{children}</main>
+              <Footer />
+            </div>
+            <GoToTop />
+          </SmoothScrollWrapper>
         </ThemeProvider>
       </body>
     </html>
