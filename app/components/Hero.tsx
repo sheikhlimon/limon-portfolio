@@ -38,7 +38,7 @@ export default function Hero() {
         {BIO.map((line, lineIndex) => (
           <p
             key={lineIndex}
-            className={lineIndex === 2 ? 'mb-0' : lineIndex === 1 ? '-mt-3' : ''}
+            className={lineIndex === 2 ? '-mt-3' : ''}
           >
             {line.map((item, itemIndex) => (
               <span key={itemIndex}>

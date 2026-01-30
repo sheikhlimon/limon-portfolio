@@ -2,20 +2,22 @@ export const TITLE = 'Backend engineer. Open source. Reliability nerd.'
 
 export const TAGLINE = 'TypeScript · Node.js · PostgreSQL · React'
 
-export const BIO = [
+type BioItem = {
+  text: string
+  link?: string
+  bold?: boolean
+  italic?: boolean
+}
+
+export const BIO: BioItem[][] = [
   [
     {
-      text: "I care about how backend systems behave in production.",
+      text: "Focused on how backend systems behave in production. Shipped auth, credential storage, and CLIs; built WebRTC P2P systems and crypto fraud-detection pipelines.",
     },
   ],
   [
     {
-      text: "I've shipped auth, credential storage, and CLIs, and built WebRTC P2P systems and crypto fraud detection pipelines.",
-    },
-  ],
-  [
-    {
-      text: 'Open-source contributor to Block\'s ',
+      text: 'Open-source contributor to ',
     },
     {
       text: 'Goose',
@@ -23,7 +25,7 @@ export const BIO = [
       link: 'https://github.com/block/goose',
     },
     {
-      text: ' AI agent framework.',
+      text: ' (Block → Linux Foundation).',
     },
   ],
   [
@@ -43,7 +45,7 @@ export const BIO = [
       text: '.',
     },
   ],
-] as const
+]
 
 export const OPENSOURCE_STATS = {
   repository: {
