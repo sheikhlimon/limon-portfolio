@@ -1,5 +1,5 @@
 export const BIO =
-  "I'm a software engineer who enjoys working on the unglamorous parts of systems like APIs, edge cases, deployment pipelines, and reliability.\n\nI contribute to open-source projects used by real developers, focusing on maintainable code, predictable behavior, and changes that are safe to ship."
+  "Backend engineer. Built P2P file transfer system over WebRTC and a crypto risk analysis dashboard. Currently contributing to Goose, Block's open-source AI agent framework—shipping authentication, credential management, and CLI features. Working with TypeScript, Node.js, PostgreSQL, and React."
 
 export const OPENSOURCE_STATS = {
   repository: {
