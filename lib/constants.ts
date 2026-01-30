@@ -1,5 +1,49 @@
-export const BIO =
-  "Backend engineer. Built P2P file transfer system over WebRTC and a crypto risk analysis dashboard. Currently contributing to Goose, Block's open-source AI agent framework—shipping authentication, credential management, and CLI features. Working with TypeScript, Node.js, PostgreSQL, and React."
+export const TITLE = 'Backend engineer. Open source. Reliability nerd.'
+
+export const TAGLINE = 'TypeScript · Node.js · PostgreSQL · React'
+
+export const BIO = [
+  [
+    {
+      text: "I care about how backend systems behave in production.",
+    },
+  ],
+  [
+    {
+      text: "I've shipped auth, credential storage, and CLIs, and built WebRTC P2P systems and crypto fraud detection pipelines.",
+    },
+  ],
+  [
+    {
+      text: 'Open-source contributor to Block\'s ',
+    },
+    {
+      text: 'Goose',
+      bold: true,
+      link: 'https://github.com/block/goose',
+    },
+    {
+      text: ' AI agent framework.',
+    },
+  ],
+  [
+    {
+      text: 'Exploring AI agents through contributions to their tooling and infrastructure.',
+    },
+  ],
+  [
+    {
+      text: "Fun fact: If it breaks in production, I want to know ",
+    },
+    {
+      text: 'why',
+      italic: true,
+    },
+    {
+      text: '.',
+    },
+  ],
+] as const
 
 export const OPENSOURCE_STATS = {
   repository: {

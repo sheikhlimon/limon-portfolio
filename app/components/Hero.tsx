@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { BIO, SOCIAL_LINKS } from '../../lib/constants'
+import { BIO, SOCIAL_LINKS, TITLE, TAGLINE } from '../../lib/constants'
 
 export default function Hero() {
   return (
@@ -15,14 +15,58 @@ export default function Hero() {
         Sheikh Limon
       </motion.h1>
 
-      <motion.p
-        className="text-gray-600 dark:text-gray-300 max-w-2xl whitespace-pre-line"
+      <motion.div
+        className="space-y-2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+      >
+        <p className="font-semibold text-gray-900 dark:text-white text-lg">
+          {TITLE}
+        </p>
+        <p className="text-gray-600 dark:text-gray-400 text-sm">
+          {TAGLINE}
+        </p>
+      </motion.div>
+
+      <motion.div
+        className="text-gray-600 dark:text-gray-300 max-w-2xl space-y-3"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
       >
-        {BIO}
-      </motion.p>
+        {BIO.map((line, lineIndex) => (
+          <p
+            key={lineIndex}
+            className={lineIndex === 2 ? 'mb-0' : lineIndex === 1 ? '-mt-3' : ''}
+          >
+            {line.map((item, itemIndex) => (
+              <span key={itemIndex}>
+                {item.link ? (
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-bold text-gray-900 dark:text-white hover:underline"
+                  >
+                    {item.text}
+                  </a>
+                ) : item.bold ? (
+                  <span className="font-bold text-gray-900 dark:text-white">
+                    {item.text}
+                  </span>
+                ) : item.italic ? (
+                  <span className="italic text-gray-500 dark:text-gray-400">
+                    {item.text}
+                  </span>
+                ) : (
+                  item.text
+                )}
+              </span>
+            ))}
+          </p>
+        ))}
+      </motion.div>
 
   
       <motion.div
