@@ -1,6 +1,6 @@
-export const TITLE = 'Backend engineer. Open source. Reliability nerd.'
+export const TITLE = 'Full-Stack Engineer. Open Source. Reliability Nerd.'
 
-export const TAGLINE = 'TypeScript · Node.js · PostgreSQL · React'
+export const TAGLINE = 'TypeScript · Node.js · React · MongoDB · PostgreSQL'
 
 type BioItem = {
   text: string
@@ -12,7 +12,7 @@ type BioItem = {
 export const BIO: BioItem[][] = [
   [
     {
-      text: "Focused on how backend systems behave in production. Shipped auth, credential storage, and CLIs; built WebRTC P2P systems and crypto fraud-detection pipelines.",
+      text: "I build reliable backend systems and developer tooling — authentication, CLI workflows, and systems that hold up under edge cases.",
     },
   ],
   [
