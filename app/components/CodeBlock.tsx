@@ -15,7 +15,7 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
       const { codeToHtml } = await import('shiki')
       const isDark = document.documentElement.classList.contains('dark')
       const html = await codeToHtml(code, {
-        lang: language as 'bash' | 'diff' | 'rust' | 'text' | 'typescript' | 'javascript', // eslint-disable-line @typescript-eslint/no-explicit-any
+        lang: language as 'bash' | 'diff' | 'rust' | 'text' | 'typescript' | 'javascript',
         theme: isDark ? 'github-dark' : 'github-light',
       })
       setHighlighted(html)
