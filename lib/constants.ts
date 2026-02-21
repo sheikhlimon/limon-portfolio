@@ -12,7 +12,14 @@ type BioItem = {
 export const BIO: BioItem[][] = [
   [
     {
-      text: "I build reliable backend systems and developer tooling — authentication, CLI workflows, and systems that hold up under edge cases.",
+      text: "Full-Stack Engineer with a passion for systems-level reliability. Currently recognized as an ",
+    },
+    {
+      text: 'Open Source Community All-Star',
+      bold: true,
+    },
+    {
+      text: ' for my work on AI infrastructure. I bridge the gap between modern web stacks (TypeScript/React) and the grit of the Unix process model.',
     },
   ],
   [
