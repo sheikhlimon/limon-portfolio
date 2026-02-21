@@ -59,7 +59,7 @@ export default function LogsPage() {
     <div className="min-h-screen">
       <div className="max-w-4xl mx-auto px-5 py-12">
         <div className="space-y-8">
-          <h1 className="text-2xl font-bold text-center">Logs</h1>
+          <h1 className="text-xl font-bold text-center">Logs</h1>
 
           <div className="space-y-10">
             {Object.entries(groupedLogs)
@@ -75,11 +75,11 @@ export default function LogsPage() {
                         <div className="flex items-baseline justify-between gap-6">
                           <Link
                             href={`/logs/${log.slug}`}
-                            className="text-base font-medium text-gray-900 dark:text-white hover:underline"
+                            className="text-base text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:underline"
                           >
                             {log.title}
                           </Link>
-                          <span className="text-sm text-gray-600 dark:text-gray-400">
+                          <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
                             {log.date}
                           </span>
                         </div>

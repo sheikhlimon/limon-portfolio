@@ -66,7 +66,7 @@ export default async function LogPage({ params }: { params: Promise<{ slug: stri
           </div>
 
           <div className="space-y-4">
-            <h1 className="text-3xl font-bold">{data.title || 'Untitled'}</h1>
+            <h1 className="text-xl font-bold">{data.title || 'Untitled'}</h1>
             <p className="text-sm text-gray-600 dark:text-gray-400">{data.date || ''}</p>
           </div>
 

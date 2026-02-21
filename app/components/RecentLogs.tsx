@@ -28,7 +28,7 @@ export default function RecentLogs() {
               className="block py-2 border-b border-gray-200 dark:border-gray-800"
             >
               <div className="flex items-baseline justify-between gap-4">
-                <h3 className="text-base font-medium text-gray-900 dark:text-white group-hover:underline">
+                <h3 className="text-base text-gray-900 dark:text-white group-hover:underline">
                   {log.title}
                 </h3>
                 <span className="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">

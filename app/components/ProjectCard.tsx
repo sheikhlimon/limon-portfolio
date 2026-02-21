@@ -17,17 +17,17 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const Icon = iconMap[project.icon]
 
   return (
-    <a
-      href={project.live || project.github}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg p-4 hover:border-indigo-400/50 dark:hover:border-indigo-500/50 hover:shadow-lg hover:shadow-indigo-500/5 group hover:scale-[1.02] hover:-translate-y-1 transition-transform duration-200"
-    >
+    <div suppressHydrationWarning className="border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg p-4 hover:border-indigo-400/50 dark:hover:border-indigo-500/50 hover:shadow-lg hover:shadow-indigo-500/5 group hover:scale-[1.02] hover:-translate-y-1 transition-transform duration-200">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-xl font-semibold group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors flex items-center gap-2">
+        <a
+          href={project.live || project.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xl font-semibold group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors flex items-center gap-2"
+        >
           <Icon className="w-4 h-4" />
           {project.title}
-        </h3>
+        </a>
         {project.live && (
           <a
             href={project.github}
@@ -61,6 +61,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           ))}
         </ul>
       </div>
-    </a>
+    </div>
   )
 }
