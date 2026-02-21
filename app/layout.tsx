@@ -8,12 +8,15 @@ import Footer from '../components/Footer'
 import GoToTop from './components/GoToTop'
 
 export const metadata: Metadata = {
-  title: 'Sheikh Limon – Full-Stack Developer',
-  description: 'React • Node.js • TypeScript • Open-Source Contributor',
+  title: 'Sheikh Limon – Full-Stack Engineer, AI Infrastructure',
+  description: 'Full-Stack Engineer building AI Infrastructure & Systems. Open Source Contributor.',
   keywords: [
-    'Full-Stack Developer',
+    'Full-Stack Engineer',
+    'AI Infrastructure',
+    'Systems',
     'React',
     'Node.js',
+    'TypeScript',
     'Open Source',
     'Portfolio',
     'Sheikh Limon',
@@ -37,9 +40,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Input+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+      </head>
       <body
         suppressHydrationWarning
-        className={`antialiased -bg-linear-0-to-br from-slate-50 to-slate-100 dark:from-black dark:via-zinc-950 dark:to-black text-gray-900 dark:text-white transition-colors duration-300 min-h-screen flex flex-col relative overflow-x-hidden`}
+        className="antialiased -bg-linear-0-to-br from-slate-50 to-slate-100 dark:from-black dark:via-zinc-950 dark:to-black text-gray-900 dark:text-white transition-colors duration-300 min-h-screen flex flex-col relative overflow-x-hidden"
+        style={{ fontFamily: "'Inter', ui-sans-serif, system-ui, sans-serif" }}
       >
         {/* Starry background */}
         <div className="fixed inset-0 pointer-events-none">

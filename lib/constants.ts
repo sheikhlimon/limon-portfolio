@@ -1,4 +1,4 @@
-export const TITLE = 'Full-Stack Engineer. Open Source. Reliability Nerd.'
+export const TITLE = 'Full-Stack Engineer. AI Infrastructure & Systems. Open Source.'
 
 export const TAGLINE = 'TypeScript · Node.js · React · MongoDB · PostgreSQL'
 

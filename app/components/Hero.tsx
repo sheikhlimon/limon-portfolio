@@ -32,7 +32,7 @@ export default function Hero() {
         <p className="font-semibold text-gray-900 dark:text-white text-lg">
           {TITLE}
         </p>
-        <p className="text-gray-600 dark:text-gray-400 text-sm">
+        <p className="text-gray-600 dark:text-gray-400 text-base">
           {TAGLINE}
         </p>
       </motion.div>
