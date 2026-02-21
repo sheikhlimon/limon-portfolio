@@ -1,9 +1,17 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 import { BIO, SOCIAL_LINKS, TITLE, TAGLINE } from '../../lib/constants'
 
 export default function Hero() {
+  const [copied, setCopied] = useState(false)
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText('sheikhlimondev@gmail.com')
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
   return (
     <section id="about" className="space-y-6 pt-8">
       <motion.h1
@@ -100,7 +108,17 @@ export default function Hero() {
           <div className="pt-4">
             <p className="text-gray-700 dark:text-gray-300">
               Or mail me at{' '}
-              <span className="text-gray-600 dark:text-gray-400">sheikhlimondev@gmail.com</span>
+              <span className="relative inline-block group">
+                <button
+                  onClick={copyEmail}
+                  className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 font-mono text-sm rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-all cursor-pointer"
+                >
+                  sheikhlimondev@gmail.com
+                </button>
+                <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity">
+                  {copied ? 'Copied!' : 'Click to copy'}
+                </span>
+              </span>
             </p>
           </div>
         </div>
