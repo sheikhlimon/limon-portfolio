@@ -11,6 +11,22 @@ export const metadata: Metadata = {
 
 const logsDirectory = path.join(process.cwd(), 'logs')
 
+function calculateReadingTime(content: string): string {
+  // Remove code blocks and markdown syntax
+  const plainText = content
+    .replace(/```[\s\S]*?```/g, '') // Remove code blocks
+    .replace(/`[^`]+`/g, '') // Remove inline code
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Replace links with just text
+    .replace(/[#*_~\[\]()]/g, '') // Remove markdown symbols
+    .replace(/\s+/g, ' ') // Normalize whitespace
+    .trim()
+
+  const wordsPerMinute = 130 // Technical content takes longer
+  const words = plainText.split(/\s+/).filter(w => w.length > 0).length
+  const minutes = Math.ceil(words / wordsPerMinute)
+  return `${minutes} min`
+}
+
 // Get all markdown files and parse them
 function getLogs() {
   if (!fs.existsSync(logsDirectory)) {
@@ -23,14 +39,14 @@ function getLogs() {
     .map((fileName) => {
       const fullPath = path.join(logsDirectory, fileName)
       const fileContents = fs.readFileSync(fullPath, 'utf8')
-      const { data } = matter(fileContents)
+      const { data, content } = matter(fileContents)
 
       return {
         title: data.title || '',
         date: data.date || '',
         year: data.year || '',
         slug: fileName.replace(/\.md$/, ''),
-        content: fileContents,
+        readingTime: calculateReadingTime(content),
       }
     })
 
@@ -80,7 +96,7 @@ export default function LogsPage() {
                             {log.title}
                           </Link>
                           <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
-                            {log.date}
+                            {log.date} · {log.readingTime}
                           </span>
                         </div>
                         {index < yearLogs.length - 1 && (
