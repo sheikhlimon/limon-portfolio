@@ -66,7 +66,7 @@ export default async function LogPage({ params }: { params: Promise<{ slug: stri
           </div>
 
           <div className="space-y-4">
-            <h1 className="text-xl font-bold">{data.title || 'Untitled'}</h1>
+            <h1 className="text-2xl font-bold">{data.title || 'Untitled'}</h1>
             <p className="text-sm text-gray-600 dark:text-gray-400">{data.date || ''}</p>
           </div>
 
@@ -74,8 +74,8 @@ export default async function LogPage({ params }: { params: Promise<{ slug: stri
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{
-                h2: ({...props}) => <h2 className="text-2xl font-bold mt-8 mb-4" {...props} />,
-                h3: ({...props}) => <h3 className="text-xl font-bold mt-6 mb-3" {...props} />,
+                h2: ({...props}) => <h2 className="text-base font-semibold mt-8 mb-4" {...props} />,
+                h3: ({...props}) => <h3 className="text-sm font-semibold mt-6 mb-3" {...props} />,
                 p: ({...props}) => <p className="my-4 leading-7" {...props} />,
                 pre: ({children, ...props}) => <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg font-mono text-sm whitespace-pre-wrap break-all max-w-full overflow-x-auto" {...props}>{children}</pre>,
                 code: ({className, children, ...props}) => {

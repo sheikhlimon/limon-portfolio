@@ -59,7 +59,7 @@ export default function LogsPage() {
     <div className="min-h-screen">
       <div className="max-w-4xl mx-auto px-5 py-12">
         <div className="space-y-8">
-          <h1 className="text-xl font-bold text-center">Logs</h1>
+          <h1 className="text-2xl font-bold text-center">Logs</h1>
 
           <div className="space-y-10">
             {Object.entries(groupedLogs)

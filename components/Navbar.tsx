@@ -119,11 +119,11 @@ export default function Navbar() {
             href={item.href}
             target={item.href.startsWith('http') ? '_blank' : undefined}
             rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-            className={`flex items-center gap-2 text-sm font-medium transition-colors ${
+            className={`flex items-center gap-2 text-sm transition-colors ${
               (item.href.startsWith('/') && pathname === item.href) ||
               (item.href.startsWith('#') && currentSection === item.href.substring(1))
-                ? 'text-gray-900 dark:text-white'
-                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                ? 'font-bold text-gray-900 dark:text-white'
+                : 'font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
             }`}
           >
             {item.icon}
