@@ -1,6 +1,6 @@
 'use client'
 
-import { Globe, Shield, GraduationCap } from 'lucide-react'
+import { Globe, Shield, GraduationCap, Server } from 'lucide-react'
 import { Project } from '../../lib/projects'
 
 interface ProjectCardProps {
@@ -11,6 +11,7 @@ const iconMap = {
   Globe,
   Shield,
   GraduationCap,
+  Server,
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
