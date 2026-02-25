@@ -15,12 +15,13 @@ export default function Hero() {
   return (
     <section id="about" className="space-y-6 pt-8">
       <motion.h1
-        className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white font-mono"
+        className="text-5xl font-serif tracking-tight"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
       >
-        Sheikh Limon
+        <span className="text-gray-900 dark:text-white">Sheikh</span>{' '}
+        <span className="text-gray-400 dark:text-gray-500">Limon</span>
       </motion.h1>
 
       <motion.div
@@ -29,10 +30,10 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
       >
-        <p className="font-semibold text-gray-900 dark:text-white text-lg">
+        <p className="font-semibold text-gray-900 dark:text-white text-lg font-sans">
           {TITLE}
         </p>
-        <p className="text-gray-600 dark:text-gray-400 text-base">
+        <p className="text-gray-600 dark:text-gray-400 text-base font-sans">
           {TAGLINE}
         </p>
       </motion.div>
