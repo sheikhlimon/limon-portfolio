@@ -29,7 +29,7 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
   if (!highlighted) {
     return (
       <div className="border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg p-0 my-4 overflow-hidden min-w-0 w-full max-w-full bg-gray-50 dark:bg-gray-900">
-        <pre className="font-mono text-sm whitespace-pre overflow-x-auto p-4"><code className="text-gray-700 dark:text-gray-300">{code}</code></pre>
+        <pre className="text-sm whitespace-pre overflow-x-auto p-4"><code className="text-gray-700 dark:text-gray-300">{code}</code></pre>
       </div>
     )
   }

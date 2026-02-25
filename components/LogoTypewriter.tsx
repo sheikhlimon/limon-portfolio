@@ -72,7 +72,7 @@ const LogoTypewriter = () => {
     <div className="flex items-center justify-center whitespace-nowrap">
       <span
         className="text-base font-bold text-gray-900 dark:text-white tracking-wide"
-        style={{ fontFamily: 'var(--font-mono), monospace' }}
+        style={{ fontFamily: 'var(--font-sans), sans-serif' }}
       >
         {displayText}
       </span>

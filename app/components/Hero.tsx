@@ -20,8 +20,8 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
       >
-        <span className="text-gray-900 dark:text-white">Sheikh</span>{' '}
-        <span className="text-gray-400 dark:text-gray-500">Limon</span>
+        <span className="text-gray-400 dark:text-gray-500">Sheikh</span>{' '}
+        <span className="text-gray-900 dark:text-white">Limon</span>
       </motion.h1>
 
       <motion.div
