@@ -18,16 +18,16 @@ export default function Hero() {
         className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
       >
         Sheikh Limon
       </motion.h1>
 
       <motion.div
         className="space-y-2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3 }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
       >
         <p className="font-semibold text-gray-900 dark:text-white text-lg">
           {TITLE}
@@ -39,14 +39,17 @@ export default function Hero() {
 
       <motion.div
         className="text-gray-600 dark:text-gray-300 max-w-2xl space-y-3"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
       >
         {BIO.map((line, lineIndex) => (
-          <p
+          <motion.p
             key={lineIndex}
             className={lineIndex === 2 ? '-mt-3' : ''}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.5 + lineIndex * 0.1, duration: 0.5 }}
           >
             {line.map((item, itemIndex) => (
               <span key={itemIndex}>
@@ -55,7 +58,7 @@ export default function Hero() {
                     href={item.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-bold text-gray-900 dark:text-white hover:underline"
+                    className="font-bold text-gray-900 dark:text-white hover:underline transition-all duration-300"
                   >
                     {item.text}
                   </a>
@@ -72,55 +75,65 @@ export default function Hero() {
                 )}
               </span>
             ))}
-          </p>
+          </motion.p>
         ))}
       </motion.div>
 
-  
+
       <motion.div
         className="space-y-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.9 }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.9, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
       >
         <h3 className="text-xl font-medium text-gray-900 dark:text-white">Find me on</h3>
         <div className="space-y-4">
           <div className="flex items-center gap-6">
-            {SOCIAL_LINKS.map((link) => (
-              <a
+            {SOCIAL_LINKS.map((link, index) => (
+              <motion.a
                 key={link.name}
                 href={link.href}
                 target="_blank"
-                className={`flex items-center gap-2 px-2 py-1 border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors ${
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1 + index * 0.1, duration: 0.3 }}
+                className={`group flex items-center gap-2 px-3 py-2 border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:border-indigo-400/50 dark:hover:border-indigo-500/50 hover:shadow-lg hover:shadow-indigo-500/10 hover:scale-105 transition-all duration-300 ${
                   link.name === 'LinkedIn' ? 'hover:text-blue-600 dark:hover:text-blue-400' : ''
                 }`}
                 aria-label={link.name}
                 title={link.name}
               >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <svg className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="currentColor">
                   <path d={link.path} />
                 </svg>
-                <span>{link.name}</span>
-              </a>
+                <span className="transition-colors">{link.name}</span>
+              </motion.a>
             ))}
           </div>
 
-          <div className="pt-4">
+          <motion.div 
+            className="pt-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.4, duration: 0.5 }}
+          >
             <p className="text-gray-700 dark:text-gray-300">
               Or mail me at{' '}
               <span className="relative inline-block group">
-                <button
+                <motion.button
                   onClick={copyEmail}
-                  className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 font-mono text-sm rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-all cursor-pointer"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 font-mono text-sm rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 cursor-pointer"
                 >
                   sheikhlimondev@gmail.com
-                </button>
-                <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity">
+                </motion.button>
+                <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300">
                   {copied ? 'Copied!' : 'Click to copy'}
                 </span>
               </span>
             </p>
-          </div>
+          </motion.div>
         </div>
       </motion.div>
     </section>

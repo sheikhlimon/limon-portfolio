@@ -18,28 +18,26 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const Icon = iconMap[project.icon]
 
   return (
-    <div suppressHydrationWarning className="border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg p-4 hover:border-indigo-400/50 dark:hover:border-indigo-500/50 hover:shadow-lg hover:shadow-indigo-500/5 group hover:scale-[1.02] hover:-translate-y-1 transition-transform duration-200">
-      <div className="flex items-center justify-between mb-3">
+    <div suppressHydrationWarning className="group border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg p-4 hover:border-indigo-400/50 dark:hover:border-indigo-500/50 hover:shadow-lg hover:shadow-indigo-500/10 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1">
+      <div className="flex items-center justify-between mb-3 gap-2">
         <a
           href={project.live || project.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xl font-semibold group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors flex items-center gap-2"
+          className="text-xl font-semibold group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300 flex items-center gap-2"
         >
-          <Icon className="w-4 h-4" />
-          {project.title}
+          <Icon className="w-4 h-4 flex-shrink-0 transition-transform duration-300 group-hover:scale-110" />
+          <span className="break-words">{project.title}</span>
         </a>
-        {project.live && (
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs px-2 py-1 border border-zinc-400/70 dark:border-zinc-500/50 rounded hover:bg-indigo-50 dark:hover:bg-indigo-950/30 hover:border-indigo-400/50 dark:hover:border-indigo-500/50 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all"
-            onClick={(e) => e.stopPropagation()}
-          >
-            GitHub →
-          </a>
-        )}
+        <a
+          href={project.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xs px-2 py-1 border border-zinc-400/70 dark:border-zinc-500/50 rounded hover:bg-indigo-50 dark:hover:bg-indigo-950/30 hover:border-indigo-400/50 dark:hover:border-indigo-500/50 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all duration-300 flex-shrink-0"
+          onClick={(e) => e.stopPropagation()}
+        >
+          GitHub →
+        </a>
       </div>
 
       <div className="space-y-3 text-gray-700 dark:text-gray-300">

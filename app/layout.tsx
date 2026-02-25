@@ -151,16 +151,17 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <NextTopLoader
-            color="#6366f1"
+            color="#6b7280"
             initialPosition={0.08}
             crawl={false}
             height={2}
             showSpinner={false}
+            shadow="0 0 10px rgba(107, 116, 128, 0.5)"
           />
           <SmoothScrollWrapper>
-            <div className="flex flex-col min-h-screen">
+            <div className="flex flex-col min-h-screen overflow-x-hidden">
               <Navbar />
-              <main className="max-w-3xl mx-auto px-5 py-10 grow">{children}</main>
+              <main className="max-w-3xl mx-auto px-5 py-10 grow w-full">{children}</main>
               <Footer />
             </div>
             <GoToTop />

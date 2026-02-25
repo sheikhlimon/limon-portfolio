@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { usePathname } from 'next/navigation'
 import dynamic from 'next/dynamic'
+import { BookOpen, Folder, FileText, Github } from 'lucide-react'
 import LogoTypewriter from './LogoTypewriter'
 
 const ThemeToggle = dynamic(() => import('../app/components/ThemeToggle'), {
@@ -18,51 +19,28 @@ export default function Navbar() {
   const navItems = useMemo(
     () => [
       {
-        name: 'Logs',
-        href: '/logs',
-        icon: (
-          <svg
-            className="w-5 h-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-          </svg>
-        ),
+        name: 'Blog',
+        href: '/posts',
+        icon: BookOpen,
+        showLabel: true,
       },
       {
         name: 'Projects',
         href: '/projects',
-        icon: (
-          <svg
-            className="w-5 h-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
-          </svg>
-        ),
+        icon: Folder,
+        showLabel: true,
       },
       {
         name: 'Resume',
         href: 'https://drive.google.com/file/d/1kpyed0ei3YN30LM5Wpvp5n_xhQsnx0Ou/view?usp=drive_link',
-        icon: (
-          <svg
-            className="w-5 h-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-            <polyline points="14 2 14 8 20 8" />
-          </svg>
-        ),
+        icon: FileText,
+        showLabel: true,
+      },
+      {
+        name: 'GitHub',
+        href: 'https://github.com/sheikhlimon',
+        icon: Github,
+        showLabel: false,
       },
     ],
     []
@@ -104,7 +82,7 @@ export default function Navbar() {
       <div className="flex items-center">
         <a
           href={pathname === '/' ? '#about' : '/'}
-          className="hover:opacity-80 transition-opacity"
+          className="hover:opacity-80 transition-opacity duration-300"
           aria-label="Sheikh Limon - Home"
         >
           <LogoTypewriter />
@@ -113,26 +91,43 @@ export default function Navbar() {
 
       {/* Navigation Items */}
       <div className="flex items-center gap-5 sm:gap-6">
-        {navItems.map((item) => (
-          <a
-            key={item.name}
-            href={item.href}
-            target={item.href.startsWith('http') ? '_blank' : undefined}
-            rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-            className={`flex items-center gap-2 text-sm transition-colors ${
-              (item.href.startsWith('/') && pathname === item.href) ||
-              (item.href.startsWith('#') && currentSection === item.href.substring(1))
-                ? 'font-bold text-gray-900 dark:text-white'
-                : 'font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-            }`}
-          >
-            {item.icon}
-            <span className="hidden sm:inline">{item.name}</span>
-          </a>
-        ))}
+        {navItems.map((item) => {
+          const Icon = item.icon
+          const isActive = (item.href.startsWith('/') && pathname === item.href) ||
+            (item.href.startsWith('#') && currentSection === item.href.substring(1))
+
+          return (
+            <a
+              key={item.name}
+              href={item.href}
+              target={item.href.startsWith('http') ? '_blank' : undefined}
+              rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              className={`group relative text-base transition-all duration-300 ${
+                isActive
+                  ? 'font-bold text-gray-900 dark:text-white'
+                  : 'font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+              }`}
+            >
+              {item.showLabel === false ? (
+                <Icon className={`w-5 h-5 transition-transform duration-300 group-hover:scale-110 ${isActive ? 'text-gray-900 dark:text-white' : ''}`} />
+              ) : (
+                <>
+                  <span className="hidden sm:inline">{item.name}</span>
+                  <Icon className={`sm:hidden w-5 h-5 transition-transform duration-300 group-hover:scale-110 ${isActive ? 'text-gray-900 dark:text-white' : ''}`} />
+                </>
+              )}
+              {/* Underline animation for desktop */}
+              {item.showLabel && (
+                <span className={`absolute -bottom-1 left-0 h-px bg-gray-900 dark:bg-white transition-all duration-300 ${
+                  isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                }`} />
+              )}
+            </a>
+          )
+        })}
 
         {/* Theme Toggle */}
-        <div className="sm:ml-6">
+        <div>
           <ThemeToggle />
         </div>
       </div>

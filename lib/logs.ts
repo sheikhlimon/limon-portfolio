@@ -4,12 +4,15 @@ import matter from 'gray-matter'
 
 const logsDirectory = path.join(process.cwd(), 'logs')
 
+export type LogType = 'log' | 'blog'
+
 export interface Log {
   title: string
   date: string
   year: string
   slug: string
   content: string
+  type: LogType
 }
 
 export function getLogs(): Log[] {
@@ -31,6 +34,7 @@ export function getLogs(): Log[] {
         year: data.year || '',
         slug: fileName.replace(/\.md$/, ''),
         content: fileContents,
+        type: (data.type as LogType) || 'log',
       }
     })
 

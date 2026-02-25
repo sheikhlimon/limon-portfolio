@@ -25,15 +25,15 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
 
   if (!highlighted) {
     return (
-      <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4">
-        <pre className="font-mono text-sm"><code>{code}</code></pre>
+      <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 my-4 overflow-x-auto min-w-0 w-full max-w-full">
+        <pre className="font-mono text-sm whitespace-pre overflow-x-auto"><code>{code}</code></pre>
       </div>
     )
   }
 
   return (
     <div
-      className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4"
+      className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 my-4 overflow-x-auto min-w-0 w-full max-w-full"
       dangerouslySetInnerHTML={{ __html: highlighted }}
     />
   )

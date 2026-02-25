@@ -12,13 +12,13 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={handleToggle}
-      className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 group"
+      className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 group"
       aria-label="Toggle theme"
       title="Toggle theme"
     >
       {theme === 'dark' ? (
         <svg
-          className="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-yellow-500 transition-all duration-300"
+          className="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-yellow-500 transition-all duration-500 group-hover:rotate-180"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -36,7 +36,7 @@ export default function ThemeToggle() {
         </svg>
       ) : (
         <svg
-          className="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-indigo-600 transition-all duration-300"
+          className="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-indigo-600 transition-all duration-500 group-hover:-rotate-90"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"

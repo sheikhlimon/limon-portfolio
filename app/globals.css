@@ -123,6 +123,13 @@
   body {
     @apply bg-background text-foreground;
   }
+  html {
+    overflow-x: hidden;
+  }
+  body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
 }
 
 /* Twinkling star animation */
@@ -136,6 +143,40 @@
     transform: scale(1.2);
     opacity: 1;
   }
+}
+
+/* Progress bar animation */
+@keyframes progress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.animate-progress {
+  animation: progress 1s ease-in-out;
+}
+
+/* NextTopLoader shiki-style customization */
+#nprogress .bar {
+  background: linear-gradient(
+    90deg,
+    #9ca3af 0%,
+    #6b7280 50%,
+    #9ca3af 100%
+  ) !important;
+  box-shadow: 0 0 10px rgba(107, 116, 128, 0.5) !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px rgba(107, 116, 128, 0.7), 0 0 5px rgba(107, 116, 128, 0.5) !important;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: #6b7280 !important;
+  border-left-color: #6b7280 !important;
 }
 
 /* Markdown prose link styling */
@@ -158,6 +199,26 @@
 
 .prose strong {
   font-weight: 700;
+}
+
+/* Markdown prose overflow handling for mobile */
+.prose {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.prose > * {
+  max-width: 100%;
+}
+
+.prose img,
+.prose video,
+.prose iframe,
+.prose table {
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 /* Markdown headings */
@@ -219,11 +280,15 @@
   overflow-x: auto;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .prose pre code {
   background-color: transparent;
   padding: 0;
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 /* Override shiki theme backgrounds */
@@ -232,25 +297,23 @@
   background: transparent !important;
 }
 
-
-/* Top loader shimmer effect */
-#nprogress .bar {
-  background: linear-gradient(
-    90deg,
-    #6366f1 0%,
-    #818cf8 50%,
-    #6366f1 100%
-  ) !important;
-  background-size: 200% 100% !important;
-  animation: shimmer 1.5s infinite !important;
+/* Shiki code block overflow handling */
+.shiki {
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  min-width: 0 !important;
 }
 
-@keyframes shimmer {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
+.shiki code {
+  display: block !important;
+  white-space: pre !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+
+/* Prose pre with shiki */
+.prose pre:has(.shiki) {
+  overflow-x: auto;
+  max-width: 100%;
 }
 

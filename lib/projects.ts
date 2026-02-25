@@ -12,7 +12,7 @@ export const projects: Project[] = [
   {
     title: 'InfraScope',
     description: 'Infrastructure monitoring and management platform for Linux systems. Track system status, trigger scans, and maintain audit logs from one place.',
-    techStack: ['Next.js 15', 'Express.js', 'PostgreSQL', 'Prisma', 'JWT', 'Turborepo'],
+    techStack: ['Next.js', 'Express.js', 'PostgreSQL', 'Prisma', 'JWT', 'Turborepo'],
     features: [
       'JWT auth with role-based access (Admin/User views)',
       'Real-time dashboard with stats and activity timeline',
