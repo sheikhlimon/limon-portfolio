@@ -4,12 +4,11 @@
 Clean, modern, minimalist developer portfolio with subtle sci-fi aesthetic. Less is more.
 
 ## Typography
-- **Sans-serif**: DM Sans (body text, readability)
-- **Serif**: DM Serif Display (headings, brand, editorial feel)
-- **Monospace**: JetBrains Mono (code, navbar)
-- **Hierarchy**: `font-serif` for headings/titles, `font-sans` for body content, `font-mono` for code/UI
+- **Sans-serif**: Space Grotesk (body text, headings, brand name)
+- **Monospace**: Space Mono (small UI labels, "Find me on", section titles, code)
+- **Hierarchy**: `font-mono` for small UI elements only, `font-sans` for headings/body
 - **Brand name**: Two-tone styling — "Sheikh" (gray-900/white), "Limon" (gray-400/500)
-- **Editorial vibe**: Serif for dramatic headlines, sans for readability, mono as accent
+- **Tech vibe**: Grotesk for main content, mono as accent for labels
 
 ## Colors (OKLCH - defined in globals.css)
 Use CSS variables, not raw tailwind colors:

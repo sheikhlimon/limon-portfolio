@@ -15,7 +15,7 @@ export default function Hero() {
   return (
     <section id="about" className="space-y-6 pt-8">
       <motion.h1
-        className="text-5xl font-serif tracking-tight"
+        className="text-5xl font-bold tracking-tight"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
@@ -30,10 +30,10 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
       >
-        <p className="font-semibold text-gray-900 dark:text-white text-lg font-sans">
+        <p className="font-semibold text-gray-900 dark:text-white text-lg">
           {TITLE}
         </p>
-        <p className="text-gray-600 dark:text-gray-400 text-base font-sans">
+        <p className="text-gray-600 dark:text-gray-400 text-base">
           {TAGLINE}
         </p>
       </motion.div>
@@ -87,7 +87,7 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.9, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
       >
-        <h3 className="text-xl font-medium text-gray-900 dark:text-white">Find me on</h3>
+        <h3 className="text-xl font-medium text-gray-900 dark:text-white font-mono">Find me on</h3>
         <div className="space-y-4">
           <div className="flex items-center gap-6">
             {SOCIAL_LINKS.map((link, index) => (
