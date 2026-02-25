@@ -71,7 +71,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     <div className="w-full max-w-full overflow-x-hidden">
       <div className="space-y-6">
         <div className="space-y-2">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white break-words" style={{ fontFamily: 'var(--font-cursive), cursive' }}>
+          <h1 className="text-2xl font-bold font-mono text-gray-900 dark:text-white break-words">
             {data.title || 'Untitled'}
           </h1>
           <p className="text-sm text-gray-600 dark:text-gray-400 font-mono">

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Great_Vibes } from 'next/font/google'
+import { Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from 'next-themes'
 import NextTopLoader from 'nextjs-toploader'
@@ -14,11 +14,10 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
-const greatVibes = Great_Vibes({
-  weight: '400',
+const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-cursive',
+  variable: '--font-mono',
 })
 
 export const metadata: Metadata = {
@@ -53,7 +52,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${greatVibes.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <body
         suppressHydrationWarning
         className="antialiased -bg-linear-0-to-br from-slate-50 to-slate-100 dark:from-black dark:via-zinc-950 dark:to-black text-gray-900 dark:text-white transition-colors duration-300 min-h-screen flex flex-col relative overflow-x-hidden font-sans"
