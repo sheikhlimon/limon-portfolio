@@ -18,22 +18,22 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const Icon = iconMap[project.icon]
 
   return (
-    <div suppressHydrationWarning className="group border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg p-4 hover:border-indigo-400/50 dark:hover:border-indigo-500/50 hover:shadow-lg hover:shadow-indigo-500/10 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1">
+    <div suppressHydrationWarning className="group border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg p-4 hover:border-gray-400/50 dark:hover:border-gray-500/50 hover:shadow-lg hover:shadow-gray-500/10 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1">
       <div className="flex items-center justify-between mb-3 gap-2">
         <a
           href={project.live || project.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xl font-semibold group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300 flex items-center gap-2"
+          className="text-xl font-semibold group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-300 flex items-center gap-2"
         >
-          <Icon className="w-4 h-4 flex-shrink-0 transition-transform duration-300 group-hover:scale-110" />
+          <Icon className="w-4 h-4 flex-shrink-0 transition-opacity duration-300 group-hover:opacity-80" />
           <span className="break-words">{project.title}</span>
         </a>
         <a
           href={project.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs px-2 py-1 border border-zinc-400/70 dark:border-zinc-500/50 rounded hover:bg-indigo-50 dark:hover:bg-indigo-950/30 hover:border-indigo-400/50 dark:hover:border-indigo-500/50 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all duration-300 flex-shrink-0"
+          className="text-xs px-2 py-1 border border-zinc-400/70 dark:border-zinc-500/50 rounded hover:bg-gray-100 dark:hover:bg-gray-800 hover:border-gray-400/50 dark:hover:border-gray-500/50 hover:text-gray-900 dark:hover:text-white transition-all duration-300 flex-shrink-0"
           onClick={(e) => e.stopPropagation()}
         >
           GitHub →

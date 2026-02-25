@@ -97,13 +97,13 @@ export default function Hero() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1 + index * 0.1, duration: 0.3 }}
-                className={`group flex items-center gap-2 px-3 py-2 border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:border-indigo-400/50 dark:hover:border-indigo-500/50 hover:shadow-lg hover:shadow-indigo-500/10 hover:scale-105 transition-all duration-300 ${
+                className={`group flex items-center gap-2 px-3 py-2 border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:border-gray-400/50 dark:hover:border-gray-500/50 transition-colors duration-300 ${
                   link.name === 'LinkedIn' ? 'hover:text-blue-600 dark:hover:text-blue-400' : ''
                 }`}
                 aria-label={link.name}
                 title={link.name}
               >
-                <svg className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="currentColor">
+                <svg className="w-4 h-4 transition-opacity duration-300 group-hover:opacity-80" viewBox="0 0 24 24" fill="currentColor">
                   <path d={link.path} />
                 </svg>
                 <span className="transition-colors">{link.name}</span>
@@ -119,16 +119,14 @@ export default function Hero() {
           >
             <p className="text-gray-700 dark:text-gray-300">
               Or mail me at{' '}
-              <span className="relative inline-block group">
-                <motion.button
+              <span className="relative inline-block">
+                <button
                   onClick={copyEmail}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 font-mono text-sm rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 cursor-pointer"
+                  className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 font-mono text-sm rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300 cursor-pointer"
                 >
                   sheikhlimondev@gmail.com
-                </motion.button>
-                <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300">
+                </button>
+                <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs rounded whitespace-nowrap opacity-0 hover:opacity-100 pointer-events-none transition-opacity duration-300">
                   {copied ? 'Copied!' : 'Click to copy'}
                 </span>
               </span>

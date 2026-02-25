@@ -25,7 +25,7 @@ export default function RecentLogs() {
           <div key={log.slug} className="group">
             <Link
               href={`/posts/${log.slug}`}
-              className="block py-2 border-b border-gray-200 dark:border-gray-800 hover:border-indigo-400/50 dark:hover:border-indigo-500/50 transition-colors duration-300"
+              className="block py-2 border-b border-gray-200 dark:border-gray-800 hover:border-gray-400/50 dark:hover:border-gray-500/50 transition-colors duration-300"
             >
               <div className="flex items-baseline justify-between gap-4">
                 <h3 className="text-base text-gray-900 dark:text-white group-hover:underline transition-all duration-300 group-hover:translate-x-1">
