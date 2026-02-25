@@ -201,12 +201,16 @@
   font-weight: 700;
 }
 
-/* Markdown prose with monospace headings for shiki vibe */
+/* Markdown prose - sans for readability, mono for headings/code */
+.prose {
+  font-family: var(--font-sans), sans-serif;
+}
+
 .prose h1,
 .prose h2,
 .prose h3,
 .prose h4 {
-  font-family: 'Input Mono', 'DM Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  font-family: var(--font-mono), monospace;
   font-weight: 600;
   letter-spacing: -0.02em;
 }
