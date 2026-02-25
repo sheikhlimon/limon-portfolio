@@ -10,7 +10,7 @@
     'Space Grotesk', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', 'Noto Color Emoji';
   --font-mono:
-    'Space Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas,
+    'Fira Code', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -276,17 +276,17 @@
 
 /* Markdown code blocks and inline code */
 .prose code {
-  font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  font-family: 'Fira Code', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
   font-size: 0.875rem;
   background-color: rgb(243 244 246);
   padding: 0.125rem 0.375rem;
   border-radius: 0.25rem;
-  color: rgb(75 85 99);
+  color: rgb(31 41 55);
 }
 
 .dark .prose code {
   background-color: rgb(31 41 55);
-  color: rgb(209 213 219);
+  color: rgb(229 231 235);
 }
 
 .prose pre {

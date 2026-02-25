@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Space_Grotesk, Space_Mono } from 'next/font/google'
+import { Space_Grotesk, Fira_Code } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from 'next-themes'
 import NextTopLoader from 'nextjs-toploader'
@@ -14,11 +14,10 @@ const sans = Space_Grotesk({
   variable: '--font-sans',
 })
 
-const mono = Space_Mono({
+const mono = Fira_Code({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-mono',
-  weight: ['400', '700'],
 })
 
 export const metadata: Metadata = {
