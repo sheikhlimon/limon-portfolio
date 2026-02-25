@@ -65,7 +65,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
             .sort(([a], [b]) => b.localeCompare(a))
             .map(([year, yearPosts]) => (
               <div key={year} className="w-full space-y-10">
-                <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-6">
+                <h2 className="text-lg font-mono font-bold text-gray-900 dark:text-white mb-8 mt-8">
                   {year}
                 </h2>
                 <div className="space-y-3">
