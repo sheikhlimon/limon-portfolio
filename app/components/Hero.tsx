@@ -30,10 +30,10 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
       >
-        <p className="font-semibold text-gray-900 dark:text-white text-lg">
+        <p className="font-semibold text-gray-900 dark:text-white text-xl">
           {TITLE}
         </p>
-        <p className="text-gray-600 dark:text-gray-400 text-base">
+        <p className="text-gray-600 dark:text-gray-400 text-lg">
           {TAGLINE}
         </p>
       </motion.div>
