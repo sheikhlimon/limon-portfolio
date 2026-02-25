@@ -95,7 +95,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
                 if (isInline && !language) {
                   return (
-                    <code className="bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-gray-700 dark:text-gray-300 font-mono text-sm break-all inline-block max-w-full" {...props}>
+                    <code className="bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-gray-600 dark:text-gray-400 font-mono text-sm break-all inline-block max-w-full" {...props}>
                       {children}
                     </code>
                   )
