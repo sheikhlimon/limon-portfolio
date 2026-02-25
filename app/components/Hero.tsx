@@ -13,9 +13,10 @@ export default function Hero() {
     setTimeout(() => setCopied(false), 2000)
   }
   return (
-    <section id="about" className="space-y-6 pt-8">
+    <section id="about" className="space-y-8 pt-8">
       <motion.h1
-        className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white"
+        className="text-5xl font-bold text-gray-900 dark:text-white"
+        style={{ fontFamily: 'var(--font-cursive), cursive' }}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
@@ -24,7 +25,7 @@ export default function Hero() {
       </motion.h1>
 
       <motion.div
-        className="space-y-2"
+        className="space-y-3"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}

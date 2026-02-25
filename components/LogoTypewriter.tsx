@@ -71,8 +71,8 @@ const LogoTypewriter = () => {
   return (
     <div className="flex items-center justify-center whitespace-nowrap">
       <span
-        className="text-base font-bold text-gray-900 dark:text-white tracking-wide"
-        style={{ fontFamily: "'JetBrains Mono', 'Fira Code', 'SF Mono', monospace" }}
+        className="text-xl font-bold text-gray-900 dark:text-white tracking-wide"
+        style={{ fontFamily: 'var(--font-cursive), cursive' }}
       >
         {displayText}
       </span>
