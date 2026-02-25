@@ -102,7 +102,7 @@ export default function Navbar() {
               href={item.href}
               target={item.href.startsWith('http') ? '_blank' : undefined}
               rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className={`group relative text-base transition-all duration-300 ${
+              className={`group relative font-mono text-sm transition-all duration-300 ${
                 isActive
                   ? 'font-bold text-gray-900 dark:text-white'
                   : 'font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'

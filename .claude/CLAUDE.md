@@ -4,9 +4,10 @@
 Clean, modern, minimalist developer portfolio with subtle sci-fi aesthetic. Less is more.
 
 ## Typography
-- **Sans-serif**: Inter (primary UI)
-- **Monospace**: Input Mono → DM Mono → JetBrains Mono (code, logo)
-- **Hierarchy**: `text-4xl font-bold` (h1), `text-2xl` (h2), `text-base` (body), `text-sm` (meta)
+- **Sans-serif**: Inter (body text, readability)
+- **Monospace**: Input Mono → DM Mono → JetBrains Mono (code, navbar, tabs, headings)
+- **Hierarchy**: `font-mono` for UI elements (navbar, tabs, titles), `font-sans` for body content
+- **Shiki vibe**: Monospace for developer/terminal aesthetic on UI elements
 
 ## Colors (OKLCH - defined in globals.css)
 Use CSS variables, not raw tailwind colors:

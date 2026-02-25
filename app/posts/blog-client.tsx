@@ -45,7 +45,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`group relative text-xl sm:text-3xl transition-all duration-300 text-left max-w-full truncate cursor-pointer ${
+            className={`group relative font-mono text-lg sm:text-2xl transition-all duration-300 text-left max-w-full truncate cursor-pointer ${
               activeTab === tab.id
                 ? 'font-bold text-gray-900 dark:text-white'
                 : 'font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
