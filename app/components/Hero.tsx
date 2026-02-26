@@ -39,7 +39,7 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
-        className="text-gray-600 dark:text-gray-300 max-w-2xl space-y-3"
+        className="text-gray-700 dark:text-gray-300 max-w-2xl space-y-3"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
