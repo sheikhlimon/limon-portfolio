@@ -18,6 +18,7 @@ export interface Post {
   slug: string
   readingTime: string
   type: 'log' | 'blog'
+  externalUrl?: string
 }
 
 function calculateReadingTime(content: string): string {
@@ -53,8 +54,9 @@ function getPosts(): Post[] {
         date: data.date || '',
         year: data.year || '',
         slug: fileName.replace(/\.md$/, ''),
-        readingTime: calculateReadingTime(content),
+        readingTime: data.readingTime || (data.externalUrl ? '' : calculateReadingTime(content)),
         type: (data.type as 'log' | 'blog') || 'log',
+        externalUrl: data.externalUrl || undefined,
       }
     })
 

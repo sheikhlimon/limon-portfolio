@@ -72,14 +72,25 @@ export default function BlogClient({ posts }: BlogClientProps) {
                   {yearPosts.map((post, index) => (
                     <div key={post.slug} className="group">
                       <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-6 min-w-0">
-                        <Link
-                          href={`/posts/${post.slug}`}
-                          className="text-base text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:underline break-words max-w-full transition-all duration-300 group-hover:translate-x-1"
-                        >
-                          {post.title}
-                        </Link>
+                        {post.externalUrl ? (
+                          <a
+                            href={post.externalUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-base text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:underline break-words max-w-full transition-all duration-300 group-hover:translate-x-1"
+                          >
+                            {post.title}
+                          </a>
+                        ) : (
+                          <Link
+                            href={`/posts/${post.slug}`}
+                            className="text-base text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:underline break-words max-w-full transition-all duration-300 group-hover:translate-x-1"
+                          >
+                            {post.title}
+                          </Link>
+                        )}
                         <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap sm:whitespace-nowrap">
-                          {post.date} · {post.readingTime}
+                          {post.date}{post.readingTime && ` · ${post.readingTime}`}
                         </span>
                       </div>
                       {index < yearPosts.length - 1 && (

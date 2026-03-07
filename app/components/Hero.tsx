@@ -89,7 +89,7 @@ export default function Hero() {
       >
         <h3 className="text-xl font-medium text-gray-900 dark:text-white font-mono">Find me on</h3>
         <div className="space-y-4">
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-5 sm:gap-6">
             {SOCIAL_LINKS.map((link, index) => (
               <motion.a
                 key={link.name}
@@ -98,16 +98,17 @@ export default function Hero() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1 + index * 0.1, duration: 0.3 }}
-                className={`group flex items-center gap-2 px-3 py-2 border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:border-gray-400/50 dark:hover:border-gray-500/50 transition-colors duration-300 ${
-                  link.name === 'LinkedIn' ? 'hover:text-blue-600 dark:hover:text-blue-400' : ''
-                }`}
+                className="group relative font-mono text-sm transition-all duration-300 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                 aria-label={link.name}
                 title={link.name}
               >
-                <svg className="w-4 h-4 transition-opacity duration-300 group-hover:opacity-80" viewBox="0 0 24 24" fill="currentColor">
-                  <path d={link.path} />
-                </svg>
-                <span className="transition-colors">{link.name}</span>
+                <span className="flex items-center gap-2">
+                  <svg className="w-4 h-4 transition-opacity duration-300 group-hover:opacity-80" viewBox="0 0 24 24" fill="currentColor">
+                    <path d={link.path} />
+                  </svg>
+                  <span className="transition-colors">{link.name}</span>
+                </span>
+                <span className="absolute -bottom-1 left-0 h-px bg-gray-900 dark:bg-white transition-all duration-300 w-0 group-hover:w-full" />
               </motion.a>
             ))}
           </div>
