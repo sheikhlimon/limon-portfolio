@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { BIO, SOCIAL_LINKS, TITLE, TAGLINE } from '../../lib/constants'
+import { BIO, SOCIAL_LINKS } from '../../lib/constants'
 
 export default function Hero() {
   const [copied, setCopied] = useState(false)
@@ -24,22 +24,9 @@ export default function Hero() {
         <span className="text-gray-900 dark:text-white">Limon</span>
       </motion.h1>
 
-      <motion.div
-        className="space-y-2"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
-      >
-        <p className="font-semibold text-gray-900 dark:text-white text-xl">
-          {TITLE}
-        </p>
-        <p className="text-gray-600 dark:text-gray-400 text-lg">
-          {TAGLINE}
-        </p>
-      </motion.div>
 
       <motion.div
-        className="text-gray-700 dark:text-gray-300 max-w-2xl space-y-3"
+        className="text-gray-700 dark:text-gray-300 max-w-2xl space-y-4 text-lg leading-relaxed"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
@@ -47,7 +34,7 @@ export default function Hero() {
         {BIO.map((line, lineIndex) => (
           <motion.p
             key={lineIndex}
-            className={lineIndex === 2 ? '-mt-3' : ''}
+            className=""
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5 + lineIndex * 0.1, duration: 0.5 }}
@@ -59,12 +46,12 @@ export default function Hero() {
                     href={item.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-bold text-gray-900 dark:text-white hover:underline transition-all duration-300"
+                    className="text-gray-900 dark:text-white underline decoration-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-300"
                   >
                     {item.text}
                   </a>
                 ) : item.bold ? (
-                  <span className="font-bold text-gray-900 dark:text-white">
+                  <span className="font-bold text-gray-700 dark:text-gray-200">
                     {item.text}
                   </span>
                 ) : item.italic ? (
@@ -80,6 +67,30 @@ export default function Hero() {
         ))}
       </motion.div>
 
+      <motion.div
+        className="flex flex-wrap items-center gap-2 text-lg"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
+      >
+        <a
+          href="https://github.com/block/goose/pulls?q=is%3Apr+is%3Aclosed+author%3Asheikhlimon"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-gray-700 dark:text-gray-300 underline decoration-gray-400 hover:text-gray-900 dark:hover:text-white transition-all duration-300"
+        >
+          goose contributions
+        </a>
+        <span className="text-gray-400">·</span>
+        <a
+          href="https://github.com/podman-desktop/podman-desktop/pulls?q=is%3Apr+is%3Aclosed+author%3Asheikhlimon"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-gray-700 dark:text-gray-300 underline decoration-gray-400 hover:text-gray-900 dark:hover:text-white transition-all duration-300"
+        >
+          Podman Desktop contributions
+        </a>
+      </motion.div>
 
       <motion.div
         className="space-y-4"
@@ -89,7 +100,7 @@ export default function Hero() {
       >
         <h3 className="text-xl font-medium text-gray-900 dark:text-white font-mono">Find me on</h3>
         <div className="space-y-4">
-          <div className="flex flex-wrap items-center gap-5 sm:gap-6">
+          <div className="flex flex-wrap items-center gap-5 sm:gap-6 text-lg">
             {SOCIAL_LINKS.map((link, index) => (
               <motion.a
                 key={link.name}
@@ -98,7 +109,7 @@ export default function Hero() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1 + index * 0.1, duration: 0.3 }}
-                className="group relative font-mono text-sm transition-all duration-300 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                className="group relative font-mono text-lg transition-all duration-300 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
                 aria-label={link.name}
                 title={link.name}
               >
@@ -113,8 +124,8 @@ export default function Hero() {
             ))}
           </div>
 
-          <motion.div 
-            className="pt-4"
+          <motion.div
+            className="pt-4 text-lg"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.4, duration: 0.5 }}
@@ -124,7 +135,7 @@ export default function Hero() {
               <span className="relative inline-block">
                 <button
                   onClick={copyEmail}
-                  className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 font-mono text-sm rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300 cursor-pointer"
+                  className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-mono text-sm rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300 cursor-pointer"
                 >
                   sheikhlimondev@gmail.com
                 </button>

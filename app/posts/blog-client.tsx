@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import type { Post } from './page'
@@ -27,7 +28,11 @@ interface BlogClientProps {
 }
 
 export default function BlogClient({ posts }: BlogClientProps) {
-  const [activeTab, setActiveTab] = useState<TabType>('blog')
+  const searchParams = useSearchParams()
+  const initialTab = searchParams.get('tab') as TabType | null
+  const [activeTab, setActiveTab] = useState<TabType>(
+    initialTab && (initialTab === 'blog' || initialTab === 'log') ? initialTab : 'blog'
+  )
 
   const filteredPosts = posts.filter(post => post.type === activeTab)
 
@@ -77,19 +82,19 @@ export default function BlogClient({ posts }: BlogClientProps) {
                             href={post.externalUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-base text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:underline break-words max-w-full transition-all duration-300 group-hover:translate-x-1"
+                            className="text-lg text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:underline break-words max-w-full transition-all duration-300 group-hover:translate-x-1 font-normal"
                           >
                             {post.title}
                           </a>
                         ) : (
                           <Link
                             href={`/posts/${post.slug}`}
-                            className="text-base text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:underline break-words max-w-full transition-all duration-300 group-hover:translate-x-1"
+                            className="text-lg text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:underline break-words max-w-full transition-all duration-300 group-hover:translate-x-1 font-normal"
                           >
                             {post.title}
                           </Link>
                         )}
-                        <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap sm:whitespace-nowrap">
+                        <span className="text-base text-gray-500 dark:text-gray-400 whitespace-nowrap sm:whitespace-nowrap">
                           {post.date}{post.readingTime && ` · ${post.readingTime}`}
                         </span>
                       </div>

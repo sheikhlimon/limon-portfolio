@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { usePathname } from 'next/navigation'
 import dynamic from 'next/dynamic'
-import { BookOpen, Folder, FileText, Github } from 'lucide-react'
+import { Newspaper, Folder, FileText, Github, ScrollText } from 'lucide-react'
 import LogoTypewriter from './LogoTypewriter'
 
 const ThemeToggle = dynamic(() => import('../app/components/ThemeToggle'), {
@@ -20,8 +20,14 @@ export default function Navbar() {
     () => [
       {
         name: 'Blog',
-        href: '/posts',
-        icon: BookOpen,
+        href: '/posts?tab=blog',
+        icon: Newspaper,
+        showLabel: true,
+      },
+      {
+        name: 'Logs',
+        href: '/posts?tab=log',
+        icon: ScrollText,
         showLabel: true,
       },
       {
@@ -102,7 +108,7 @@ export default function Navbar() {
               href={item.href}
               target={item.href.startsWith('http') ? '_blank' : undefined}
               rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className={`group relative font-mono text-sm transition-all duration-300 ${
+              className={`group relative font-mono text-base transition-all duration-300 ${
                 isActive
                   ? 'font-bold text-gray-900 dark:text-white'
                   : 'font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'

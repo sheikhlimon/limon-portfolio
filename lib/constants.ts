@@ -1,7 +1,3 @@
-export const TITLE = 'Full-Stack Engineer. AI Infrastructure & Systems.'
-
-export const TAGLINE = 'TypeScript · Node.js · React · MongoDB · PostgreSQL'
-
 type BioItem = {
   text: string
   link?: string
@@ -12,58 +8,38 @@ type BioItem = {
 export const BIO: BioItem[][] = [
   [
     {
-      text: "Full-Stack Engineer with a passion for systems-level reliability. Currently recognized as an ",
-    },
-    {
-      text: 'Open Source Community All-Star',
-      bold: true,
-    },
-    {
-      text: ' for my work on AI infrastructure. I bridge the gap between modern web stacks (TypeScript/React) and the grit of the Unix process model.',
+      text: "I'm Limon — a full-stack engineer who gets unreasonably interested in why things break.",
     },
   ],
   [
     {
-      text: 'Open-source contributor to ',
+      text: "I contribute to AI agent infrastructure at the systems level — the kind of work that's invisible when it works and catastrophic when it doesn't. Credential race conditions, Linux headless failures, cross-platform CLI stability. Real bugs in real codebases used by real people.",
+    },
+  ],
+  [
+    {
+      text: 'goose Community All-Star (Jan 2026)',
+      bold: true,
     },
     {
-      text: 'Goose',
-      bold: true,
+      text: '. Top contributor to ',
+    },
+    {
+      text: 'goose',
       link: 'https://github.com/block/goose',
     },
     {
-      text: ' (Block → Linux Foundation).',
-    },
-  ],
-  [
-    {
-      text: 'Exploring AI agents through contributions to their tooling and infrastructure.',
-    },
-  ],
-  [
-    {
-      text: "Fun fact: If it breaks in production, I want to know ",
+      text: ' (Block/AAIF). Currently active in ',
     },
     {
-      text: 'why',
-      italic: true,
+      text: 'Podman Desktop',
+      link: 'https://github.com/podman-desktop/podman-desktop',
     },
     {
-      text: '.',
+      text: ' (Red Hat).',
     },
   ],
 ]
-
-export const OPENSOURCE_STATS = {
-  repository: {
-    name: 'goose',
-    url: 'https://github.com/block/goose',
-  },
-  prs: {
-    submitted: '45+',
-    merged: '34+',
-  },
-} as const
 
 export const SOCIAL_LINKS = [
   {

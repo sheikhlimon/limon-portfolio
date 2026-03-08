@@ -1,11 +1,11 @@
 import Hero from './components/Hero'
-import RecentLogs from './components/RecentLogs'
+import RecentPosts from './components/RecentPosts'
 
 export default function Home() {
   return (
     <div className="space-y-28">
       <Hero />
-      <RecentLogs />
+      <RecentPosts />
     </div>
   )
 }

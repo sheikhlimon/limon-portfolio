@@ -19,10 +19,9 @@ const LogoTypewriter = () => {
     let timeoutId: NodeJS.Timeout
 
     const getTypingSpeed = (char: string) => {
-      // Different speeds for different characters to feel more natural
-      if (char === ' ') return 150 // Space - quick
-      if (char === '<' || char === '/' || char === '>') return 200 // Symbols - medium
-      return 180 + 50 // Letters - fixed speed to avoid hydration mismatch
+      if (char === ' ') return 300
+      if (char === '<' || char === '/' || char === '>') return 400
+      return 500
     }
 
     const typeNextChar = () => {
@@ -31,30 +30,27 @@ const LogoTypewriter = () => {
         setDisplayText(fullText.slice(0, currentIndex + 1))
         currentIndex++
 
-        // Add pause after "<SL" before typing "/>"
         if (currentChar === 'L') {
-          timeoutId = setTimeout(typeNextChar, 400)
+          timeoutId = setTimeout(typeNextChar, 500)
         } else {
           const speed = getTypingSpeed(currentChar)
           timeoutId = setTimeout(typeNextChar, speed)
         }
       } else {
-        // Pause when complete, then restart with cursor off briefly
         timeoutId = setTimeout(() => {
           setShowCursor(false)
           setTimeout(() => {
             setDisplayText('')
             setShowCursor(true)
             currentIndex = 0
-            timeoutId = setTimeout(typeNextChar, 200)
-          }, 300)
-        }, 3500)
+            timeoutId = setTimeout(typeNextChar, 150)
+          }, 150)
+        }, 1500)
       }
     }
 
-    // Start typing after hydration
     setDisplayText('')
-    timeoutId = setTimeout(typeNextChar, 150)
+    timeoutId = setTimeout(typeNextChar, 500)
 
     return () => clearTimeout(timeoutId)
   }, [isHydrated])
@@ -71,8 +67,7 @@ const LogoTypewriter = () => {
   return (
     <div className="flex items-center justify-center whitespace-nowrap">
       <span
-        className="text-base font-bold text-gray-900 dark:text-white tracking-wide"
-        style={{ fontFamily: 'var(--font-sans), sans-serif' }}
+        className="text-lg text-gray-900 dark:text-white tracking-tight font-mono"
       >
         {displayText}
       </span>

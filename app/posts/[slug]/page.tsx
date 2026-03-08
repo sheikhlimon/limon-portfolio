@@ -74,7 +74,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <h1 className="text-2xl font-bold font-mono text-gray-900 dark:text-white break-words">
             {data.title || 'Untitled'}
           </h1>
-          <p className="text-sm text-gray-600 dark:text-gray-400 font-mono">
+          <p className="text-base text-gray-600 dark:text-gray-400 font-mono">
             {data.date || ''} · {calculateReadingTime(content)}
           </p>
         </div>
@@ -86,7 +86,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               h1: ({...props}) => <h1 className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-4 break-words" {...props} />,
               h2: ({...props}) => <h2 className="text-base font-semibold text-gray-900 dark:text-white mt-8 mb-4 break-words" {...props} />,
               h3: ({...props}) => <h3 className="text-sm font-semibold text-gray-900 dark:text-white mt-6 mb-3 break-words" {...props} />,
-              p: ({...props}) => <p className="my-4 leading-7 text-gray-700 dark:text-gray-300 break-words" {...props} />,
+              p: ({...props}) => <p className="my-4 leading-relaxed text-lg text-gray-700 dark:text-gray-300 break-words" {...props} />,
               pre: ({children}) => <div className="overflow-x-auto my-4 min-w-0 w-full max-w-full">{children}</div>,
               code: ({className, children, ...props}: React.HTMLAttributes<HTMLElement>) => {
                 const match = /language-(\w+)/.exec(className || '')
