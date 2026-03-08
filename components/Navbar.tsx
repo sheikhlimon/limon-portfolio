@@ -95,8 +95,8 @@ export default function Navbar() {
         </a>
       </div>
 
-      {/* Navigation Items */}
-      <div className="flex items-center gap-5 sm:gap-6">
+      {/* Navigation Items and Theme Toggle */}
+      <div className="flex items-center">
         {navItems.map((item) => {
           const Icon = item.icon
           const isActive = (item.href.startsWith('/') && pathname === item.href) ||
@@ -112,7 +112,7 @@ export default function Navbar() {
                 isActive
                   ? 'font-bold text-gray-900 dark:text-white'
                   : 'font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-              }`}
+              } ${item.showLabel === false ? 'mr-2' : 'mr-4 sm:mr-5'}`}
             >
               {item.showLabel === false ? (
                 <Icon className={`w-5 h-5 transition-transform duration-300 group-hover:scale-110 ${isActive ? 'text-gray-900 dark:text-white' : ''}`} />
@@ -132,10 +132,7 @@ export default function Navbar() {
           )
         })}
 
-        {/* Theme Toggle */}
-        <div>
-          <ThemeToggle />
-        </div>
+        <ThemeToggle />
       </div>
     </nav>
   )
