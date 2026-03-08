@@ -30,7 +30,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           <span className="break-words">{project.title}</span>
         </div>
         <span
-          className="text-xs px-2 py-1 border border-zinc-400/70 dark:border-zinc-500/50 rounded hover:bg-gray-100 dark:hover:bg-gray-800 hover:border-gray-400/50 dark:hover:border-gray-500/50 hover:text-gray-900 dark:hover:text-white transition-all duration-300 flex-shrink-0 cursor-pointer"
+          className="text-sm px-2 py-1 border border-zinc-400/70 dark:border-zinc-500/50 rounded hover:bg-gray-100 dark:hover:bg-gray-800 hover:border-gray-400/50 dark:hover:border-gray-500/50 hover:text-gray-900 dark:hover:text-white transition-all duration-300 flex-shrink-0 cursor-pointer"
           onClick={(e) => e.stopPropagation()}
         >
           GitHub →
