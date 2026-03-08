@@ -46,7 +46,7 @@ Use CSS variables, not raw tailwind colors:
 - Client components: `'use client'` at top for interactivity
 - Server components: default for static content
 - Semantic HTML: `<nav>`, `<article>`, etc.
-- **Icons**: Use `lucide-react` package (e.g., `import { Github } from 'lucide-react'`)
+- **Icons**: Use `@phosphor-icons/react` package (e.g., `import { GithubLogo } from '@phosphor-icons/react'`)
 
 ## Don't
 - Don't add emojis (unless explicitly asked)

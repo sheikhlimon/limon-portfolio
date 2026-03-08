@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { ChevronUp } from 'lucide-react'
+import { CaretUp } from '@phosphor-icons/react'
 
 export default function GoToTop() {
   const [isVisible, setIsVisible] = useState(false)
@@ -35,7 +35,7 @@ export default function GoToTop() {
       aria-label="Go to top"
       title="Back to top"
     >
-      <ChevronUp className="w-6 h-6" />
+      <CaretUp className="w-6 h-6" weight="bold" />
     </button>
   )
 }

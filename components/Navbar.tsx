@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { usePathname } from 'next/navigation'
 import dynamic from 'next/dynamic'
-import { Newspaper, Folder, FileText, Github, ScrollText } from 'lucide-react'
+import { Article, Folder, FileText, GithubLogo, Scroll } from '@phosphor-icons/react'
 import LogoTypewriter from './LogoTypewriter'
 
 const ThemeToggle = dynamic(() => import('../app/components/ThemeToggle'), {
@@ -21,13 +21,13 @@ export default function Navbar() {
       {
         name: 'Blog',
         href: '/posts?tab=blog',
-        icon: Newspaper,
+        icon: Article,
         showLabel: true,
       },
       {
         name: 'Logs',
         href: '/posts?tab=log',
-        icon: ScrollText,
+        icon: Scroll,
         showLabel: true,
       },
       {
@@ -45,7 +45,7 @@ export default function Navbar() {
       {
         name: 'GitHub',
         href: 'https://github.com/sheikhlimon',
-        icon: Github,
+        icon: GithubLogo,
         showLabel: false,
       },
     ],

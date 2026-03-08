@@ -5,7 +5,7 @@ export interface Project {
   features: string[]
   github: string
   live?: string
-  icon: 'Globe' | 'Shield' | 'GraduationCap' | 'Server'
+  icon: 'Globe' | 'Shield' | 'GraduationCap' | 'Cube'
 }
 
 export const projects: Project[] = [
@@ -21,7 +21,7 @@ export const projects: Project[] = [
     ],
     github: 'https://github.com/sheikhlimon/infra-scope',
     live: 'https://infra-scope.vercel.app',
-    icon: 'Server',
+    icon: 'Cube',
   },
   {
     title: 'Crypto Guardian',

@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from 'next-themes'
 import NextTopLoader from 'nextjs-toploader'
@@ -7,12 +6,6 @@ import SmoothScrollWrapper from '../components/SmoothScrollWrapper'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import GoToTop from './components/GoToTop'
-
-const sans = Space_Grotesk({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-sans',
-})
 
 export const metadata: Metadata = {
   title: 'Sheikh Limon – Full-Stack Engineer, AI Infrastructure',
@@ -46,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${sans.variable}`}>
+    <html lang="en" suppressHydrationWarning>
       <body
         suppressHydrationWarning
         className="antialiased -bg-linear-0-to-br from-slate-50 to-slate-100 dark:from-black dark:via-zinc-950 dark:to-black text-gray-900 dark:text-white transition-colors duration-300 min-h-screen flex flex-col relative overflow-x-hidden font-sans"

@@ -93,12 +93,12 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
-        className="space-y-4"
+        className="space-y-4 pt-6"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.9, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
       >
-        <h3 className="text-xl font-medium text-gray-900 dark:text-white font-mono">Find me on</h3>
+        <h3 className="text-2xl font-medium text-gray-900 dark:text-white font-mono">Find me on</h3>
         <div className="space-y-4">
           <div className="flex flex-wrap items-center gap-5 sm:gap-6 text-lg">
             {SOCIAL_LINKS.map((link, index) => (
