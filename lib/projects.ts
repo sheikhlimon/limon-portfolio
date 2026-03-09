@@ -24,6 +24,20 @@ export const projects: Project[] = [
     icon: 'Cube',
   },
   {
+    title: 'QuickHire',
+    description: 'Modern job board application for browsing jobs, submitting applications, and managing listings with admin panel',
+    techStack: ['Next.js', 'Express', 'MongoDB', 'Prisma', 'TypeScript', 'Turborepo'],
+    features: [
+      'Job search and filtering by category/location',
+      'Application system with resume and cover letter upload',
+      'Admin panel for creating and managing job listings',
+      'JWT authentication with user signup and login',
+    ],
+    github: 'https://github.com/sheikhlimon/quick-hire',
+    live: 'https://quick-hire-web-delta.vercel.app',
+    icon: 'Globe',
+  },
+  {
     title: 'Crypto Guardian',
     description: 'Real-time crypto fraud detection system with risk scoring and multi-API validation',
     techStack: ['React', 'Node.js', 'Express'],
@@ -55,7 +69,7 @@ export const projects: Project[] = [
     techStack: ['React', 'MediaPipe', 'WebRTC'],
     features: [
       '95%+ gesture accuracy with MediaPipe',
-      '80% faster setup using QR-based pairing',
+      '80% faster setup with QR-based pairing',
       'P2P file transfers without keyboard requirements',
     ],
     github: 'https://github.com/sheikhlimon/gesture-share',
