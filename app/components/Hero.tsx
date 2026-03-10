@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import { GitPullRequest } from '@phosphor-icons/react'
 import { BIO, SOCIAL_LINKS } from '../../lib/constants'
 
 export default function Hero() {
@@ -68,27 +69,19 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
-        className="flex flex-wrap items-center gap-2 text-lg"
+        className="flex flex-wrap items-center gap-2"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
       >
         <a
-          href="https://github.com/block/goose/pulls?q=is%3Apr+is%3Aclosed+author%3Asheikhlimon"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-gray-700 dark:text-gray-300 underline decoration-gray-400 hover:text-gray-900 dark:hover:text-white transition-all duration-300"
+          href="/contributions"
+          className="group inline-flex items-center gap-2 text-lg font-mono text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-all duration-300"
         >
-          goose contributions
-        </a>
-        <span className="text-gray-400">·</span>
-        <a
-          href="https://github.com/podman-desktop/podman-desktop/pulls?q=is%3Apr+is%3Aclosed+author%3Asheikhlimon"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-gray-700 dark:text-gray-300 underline decoration-gray-400 hover:text-gray-900 dark:hover:text-white transition-all duration-300"
-        >
-          Podman Desktop contributions
+          <GitPullRequest className="w-5 h-5 text-purple-500 dark:text-purple-400" />
+          <span className="underline decoration-gray-400 group-hover:decoration-gray-900 dark:group-hover:decoration-white">
+            View all contributions →
+          </span>
         </a>
       </motion.div>
 
