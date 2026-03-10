@@ -2,7 +2,7 @@
 
 import { useSearchParams, useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { GitPullRequest, Star, ArrowLeft, PushPin } from '@phosphor-icons/react'
+import { GitPullRequest, Star, PushPin } from '@phosphor-icons/react'
 
 interface Contribution {
   id: number
@@ -82,18 +82,11 @@ export default function ContributionsClient({ repos, allMerged, allOpen }: Contr
       {selectedRepo ? (
         // Repo detail view
         <motion.div
+          className="-mt-4"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <button
-            onClick={() => router.push('/contributions')}
-            className="group flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors mb-6 cursor-pointer"
-          >
-            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            <span className="font-mono">back to repos</span>
-          </button>
-
           <h1 className="text-2xl sm:text-3xl font-medium text-gray-900 dark:text-white font-mono mb-6">
             {selectedRepo.fullName}
           </h1>
@@ -182,6 +175,7 @@ export default function ContributionsClient({ repos, allMerged, allOpen }: Contr
       ) : (
         // Repo list view
         <motion.div
+          className="-mt-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}

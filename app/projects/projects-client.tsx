@@ -39,9 +39,9 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
     >
-      <div className="max-w-4xl mx-auto px-5 py-12">
+      <div className="max-w-4xl mx-auto px-5 pt-2 pb-12">
         <motion.div
-          className="space-y-8"
+          className="space-y-8 -mt-4"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
