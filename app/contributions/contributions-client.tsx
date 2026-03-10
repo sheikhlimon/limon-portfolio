@@ -49,7 +49,6 @@ export default function ContributionsClient({ repos, allMerged, allOpen }: Contr
   const tabParam = searchParams.get('tab') as TabType | null
 
   const selectedRepo = repoParam ? repos.find(r => r.fullName === repoParam) || null : null
-  const activeTab: TabType = (tabParam === 'open' || tabParam === 'closed') ? tabParam : 'closed'
 
   const repoPRs = selectedRepo
     ? {
@@ -57,6 +56,15 @@ export default function ContributionsClient({ repos, allMerged, allOpen }: Contr
         closed: allMerged.filter(pr => pr.repo === selectedRepo.fullName),
       }
     : null
+
+  // Default to tab with more PRs if no tab param
+  const defaultTab: TabType = (tabParam === 'open' || tabParam === 'closed')
+    ? tabParam
+    : repoPRs && repoPRs.closed.length >= repoPRs.open.length
+      ? 'closed'
+      : 'open'
+
+  const activeTab: TabType = defaultTab
 
   const tabs: { id: TabType; label: string; count: number }[] = selectedRepo && repoPRs
     ? [
@@ -189,7 +197,7 @@ export default function ContributionsClient({ repos, allMerged, allOpen }: Contr
               {repos.map((repo) => (
                 <motion.button
                   key={repo.fullName}
-                  onClick={() => router.push(`/contributions?repo=${encodeURIComponent(repo.fullName)}&tab=closed`)}
+                  onClick={() => router.push(`/contributions?repo=${encodeURIComponent(repo.fullName)}`)}
                   className="w-full text-left group border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg p-5 hover:border-gray-400/50 dark:hover:border-gray-500/50 hover:shadow-lg hover:shadow-gray-500/10 transition-all duration-300 hover:scale-[1.01] cursor-pointer"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
