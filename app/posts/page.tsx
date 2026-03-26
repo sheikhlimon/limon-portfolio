@@ -7,7 +7,7 @@ import BlogClient from './blog-client'
 
 export const metadata: Metadata = {
   title: 'Blog - Sheikh Limon',
-  description: 'Blog posts and logs by Sheikh Limon - Full-Stack Developer',
+  description: 'Blog posts and logs by Sheikh Limon - Backend Developer',
 }
 
 const postsDirectory = path.join(process.cwd(), 'logs')

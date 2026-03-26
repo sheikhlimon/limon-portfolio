@@ -8,7 +8,7 @@ type BioItem = {
 export const BIO: BioItem[][] = [
   [
     {
-      text: "I'm Limon — a full-stack engineer who gets unreasonably interested in why things break.",
+      text: "I'm Limon — an engineer who gets unreasonably interested in why things break.",
     },
   ],
   [
