@@ -2,7 +2,7 @@
 
 import { useSearchParams, useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { GitPullRequest, Star, PushPin } from '@phosphor-icons/react'
+import { GitPullRequest, Star } from '@phosphor-icons/react'
 
 interface Contribution {
   id: number
@@ -22,7 +22,6 @@ export interface Repo {
   description: string
   mergedCount: number
   openCount: number
-  pinned?: boolean
 }
 
 interface ContributionsClientProps {
@@ -210,9 +209,6 @@ export default function ContributionsClient({ repos, allMerged, allOpen }: Contr
                           <h3 className="text-base font-semibold text-gray-900 dark:text-white group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors truncate">
                             {repo.fullName}
                           </h3>
-                          {repo.pinned && (
-                            <PushPin className="w-4 h-4 text-purple-500 dark:text-purple-400" weight="fill" />
-                          )}
                         </div>
                         <span className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 font-mono">
                           <Star className="w-4 h-4 text-yellow-500 dark:text-yellow-400" />

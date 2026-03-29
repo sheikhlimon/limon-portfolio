@@ -121,7 +121,6 @@ async function ContributionsContent() {
             description: info.description || '',
             mergedCount: stats.merged.size,
             openCount: stats.open.size,
-            pinned: false,
           })
         }
       })
@@ -130,22 +129,43 @@ async function ContributionsContent() {
 
   await Promise.all(repoPromises)
 
-  // Pinned repos (server-side, only you can edit)
-  const pinnedRepos = new Set([
-    'block/goose',
-    'podman-desktop/podman-desktop',
-  ])
+  // Track latest activity per repo
+  const repoLatestActivity = new Map<string, Date>()
 
-  // Mark repos as pinned
-  repos.forEach(repo => {
-    repo.pinned = pinnedRepos.has(repo.fullName)
+  filteredMerged.forEach(pr => {
+    const parts = pr.repository_url.split('/')
+    const key = `${parts[parts.length - 2]}/${parts[parts.length - 1]}`
+    const mergedAt = pr.pull_request.merged_at ? new Date(pr.pull_request.merged_at) : null
+    if (mergedAt) {
+      const existing = repoLatestActivity.get(key)
+      if (!existing || mergedAt > existing) {
+        repoLatestActivity.set(key, mergedAt)
+      }
+    }
   })
 
-  // Sort: pinned first, then by stars
+  filteredOpen.forEach(pr => {
+    const parts = pr.repository_url.split('/')
+    const key = `${parts[parts.length - 2]}/${parts[parts.length - 1]}`
+    const createdAt = new Date(pr.created_at)
+    const existing = repoLatestActivity.get(key)
+    if (!existing || createdAt > existing) {
+      repoLatestActivity.set(key, createdAt)
+    }
+  })
+
+  // Sort by most recent activity
   repos.sort((a, b) => {
-    if (a.pinned && !b.pinned) return -1
-    if (!a.pinned && b.pinned) return 1
-    return b.stars - a.stars
+    const aActivity = repoLatestActivity.get(a.fullName)
+    const bActivity = repoLatestActivity.get(b.fullName)
+
+    // Repos with activity come before those without
+    if (!aActivity && !bActivity) return b.stars - a.stars
+    if (!aActivity) return 1
+    if (!bActivity) return -1
+
+    // Sort by most recent activity first
+    return bActivity.getTime() - aActivity.getTime()
   })
 
   return (
