@@ -20,7 +20,7 @@ export default function RecentPosts() {
         </Link>
       </div>
 
-      <div className="max-w-2xl mx-auto space-y-4">
+      <div className="space-y-4">
         {posts.map((post) => (
           <div key={post.slug} className="group">
             <Link
