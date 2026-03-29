@@ -5,19 +5,19 @@
 - **Framework**: Next.js 16 (React 19, TypeScript)
 - **Styling**: Tailwind CSS + next-themes
 - **Content**: MDX, Shiki for code highlighting
-- **Fonts**: Space Grotesk (sans), Fira Code (mono)
+- **Fonts**: Terminus (bitmap terminal font)
 
 ## Setup
 
 ```bash
 # Install dependencies
-npm install
+bun install
 
 # Run dev server
-npm run dev
+bun dev
 
 # Build for production
-npm run build
+bun run build
 ```
 
 ## Structure
@@ -47,11 +47,12 @@ To make this your own, edit these files:
 ## Adding Content
 
 Posts go in `logs/` with frontmatter:
+
 ```yaml
 ---
 title: 'Post Title'
 date: DD MMM YYYY
-type: blog  # or 'log'
+type: blog # or 'log'
 ---
 ```
 
