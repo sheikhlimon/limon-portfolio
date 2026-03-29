@@ -227,12 +227,10 @@ export default function ContributionsClient({ repos, allMerged, allOpen }: Contr
                           <GitPullRequest className="w-4 h-4 text-purple-500 dark:text-purple-400" />
                           {repo.mergedCount} merged
                         </span>
-                        {repo.openCount > 0 && (
-                          <span className="flex items-center gap-1">
-                            <GitPullRequest className="w-4 h-4 text-green-500 dark:text-green-400" />
-                            {repo.openCount} open
-                          </span>
-                        )}
+                        <span className="flex items-center gap-1">
+                          <GitPullRequest className="w-4 h-4 text-green-500 dark:text-green-400" />
+                          {repo.openCount} open
+                        </span>
                       </div>
                     </div>
                   </div>
