@@ -31,7 +31,6 @@ async function fetchPRs(query: string): Promise<GitHubPR[]> {
       headers: {
         Accept: 'application/vnd.github.v3+json',
       },
-      next: { revalidate: 3600 },
     }
   )
 
@@ -51,7 +50,6 @@ async function getRepoInfo(owner: string, repo: string) {
       headers: {
         Accept: 'application/vnd.github.v3+json',
       },
-      next: { revalidate: 3600 },
     }
   )
 
@@ -195,7 +193,7 @@ async function ContributionsContent() {
 
 export default function ContributionsPage() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={null}>
       <ContributionsContent />
     </Suspense>
   )

@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { GitPullRequest } from '@phosphor-icons/react'
+import { GitPullRequest, ArrowRight } from '@phosphor-icons/react'
 import { BIO, SOCIAL_LINKS } from '../../lib/constants'
 
 export default function Hero() {
@@ -80,8 +80,9 @@ export default function Hero() {
         >
           <GitPullRequest className="w-5 h-5 text-purple-500 dark:text-purple-400" />
           <span className="underline decoration-gray-400 group-hover:decoration-gray-900 dark:group-hover:decoration-white">
-            View all contributions →
+            View all open source contributions
           </span>
+          <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
         </a>
       </motion.div>
 
