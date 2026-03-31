@@ -24,10 +24,13 @@ interface GitHubSearchResponse {
   items: GitHubPR[]
 }
 
+export const dynamic = 'force-dynamic'
+
 async function fetchPRs(query: string): Promise<GitHubPR[]> {
   const res = await fetch(
     `https://api.github.com/search/issues?q=author:sheikhlimon+type:pr+${query}&sort=updated&order=desc&per_page=100`,
     {
+      cache: 'no-store',
       headers: {
         Accept: 'application/vnd.github.v3+json',
       },
@@ -44,14 +47,12 @@ async function fetchPRs(query: string): Promise<GitHubPR[]> {
 }
 
 async function getRepoInfo(owner: string, repo: string) {
-  const res = await fetch(
-    `https://api.github.com/repos/${owner}/${repo}`,
-    {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-    }
-  )
+  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
+    cache: 'no-store',
+    headers: {
+      Accept: 'application/vnd.github.v3+json',
+    },
+  })
 
   if (!res.ok) {
     return null
@@ -61,26 +62,22 @@ async function getRepoInfo(owner: string, repo: string) {
 }
 
 async function ContributionsContent() {
-  const [merged, open] = await Promise.all([
-    fetchPRs('is:merged'),
-    fetchPRs('is:open'),
-  ])
+  const [merged, open] = await Promise.all([fetchPRs('is:merged'), fetchPRs('is:open')])
 
   // Filter PRs after November 2025
   const novemberDate = new Date('2025-11-01').getTime()
 
-  const filteredMerged = merged.filter(pr =>
-    pr.pull_request.merged_at && new Date(pr.pull_request.merged_at).getTime() >= novemberDate
+  const filteredMerged = merged.filter(
+    (pr) =>
+      pr.pull_request.merged_at && new Date(pr.pull_request.merged_at).getTime() >= novemberDate
   )
 
-  const filteredOpen = open.filter(pr =>
-    new Date(pr.created_at).getTime() >= novemberDate
-  )
+  const filteredOpen = open.filter((pr) => new Date(pr.created_at).getTime() >= novemberDate)
 
   // Group by repo and count
   const repoStats = new Map<string, { merged: Set<number>; open: Set<number> }>()
 
-  filteredMerged.forEach(pr => {
+  filteredMerged.forEach((pr) => {
     const parts = pr.repository_url.split('/')
     const owner = parts[parts.length - 2]
     const name = parts[parts.length - 1]
@@ -91,7 +88,7 @@ async function ContributionsContent() {
     repoStats.get(key)!.merged.add(pr.id)
   })
 
-  filteredOpen.forEach(pr => {
+  filteredOpen.forEach((pr) => {
     const parts = pr.repository_url.split('/')
     const owner = parts[parts.length - 2]
     const name = parts[parts.length - 1]
@@ -109,7 +106,7 @@ async function ContributionsContent() {
   for (const [fullName, stats] of repoStats.entries()) {
     const [owner, name] = fullName.split('/')
     repoPromises.push(
-      getRepoInfo(owner, name).then(info => {
+      getRepoInfo(owner, name).then((info) => {
         if (info) {
           repos.push({
             owner,
@@ -130,7 +127,7 @@ async function ContributionsContent() {
   // Track latest activity per repo
   const repoLatestActivity = new Map<string, Date>()
 
-  filteredMerged.forEach(pr => {
+  filteredMerged.forEach((pr) => {
     const parts = pr.repository_url.split('/')
     const key = `${parts[parts.length - 2]}/${parts[parts.length - 1]}`
     const mergedAt = pr.pull_request.merged_at ? new Date(pr.pull_request.merged_at) : null
@@ -142,7 +139,7 @@ async function ContributionsContent() {
     }
   })
 
-  filteredOpen.forEach(pr => {
+  filteredOpen.forEach((pr) => {
     const parts = pr.repository_url.split('/')
     const key = `${parts[parts.length - 2]}/${parts[parts.length - 1]}`
     const createdAt = new Date(pr.created_at)
@@ -169,7 +166,7 @@ async function ContributionsContent() {
   return (
     <ContributionsClient
       repos={repos}
-      allMerged={merged.map(pr => ({
+      allMerged={merged.map((pr) => ({
         id: pr.id,
         title: pr.title,
         number: pr.number,
@@ -178,7 +175,7 @@ async function ContributionsContent() {
         mergedAt: pr.pull_request.merged_at || null,
         description: pr.body?.slice(0, 200) || null,
       }))}
-      allOpen={open.map(pr => ({
+      allOpen={open.map((pr) => ({
         id: pr.id,
         title: pr.title,
         number: pr.number,
