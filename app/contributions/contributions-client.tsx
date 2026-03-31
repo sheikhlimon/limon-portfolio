@@ -34,49 +34,63 @@ type TabType = 'open' | 'closed'
 
 function formatDate(dateStr: string | null): string {
   if (!dateStr) return ''
-  return new Date(dateStr).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  })
+  const date = new Date(dateStr)
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ]
+  return `${months[date.getUTCMonth()]} ${date.getUTCDate()}, ${date.getUTCFullYear()}`
 }
 
-export default function ContributionsClient({ repos, allMerged, allOpen }: ContributionsClientProps) {
+export default function ContributionsClient({
+  repos,
+  allMerged,
+  allOpen,
+}: ContributionsClientProps) {
   const searchParams = useSearchParams()
   const router = useRouter()
   const repoParam = searchParams.get('repo')
   const tabParam = searchParams.get('tab') as TabType | null
 
-  const selectedRepo = repoParam ? repos.find(r => r.fullName === repoParam) || null : null
+  const selectedRepo = repoParam ? repos.find((r) => r.fullName === repoParam) || null : null
 
   const repoPRs = selectedRepo
     ? {
-        open: allOpen.filter(pr => pr.repo === selectedRepo.fullName),
-        closed: allMerged.filter(pr => pr.repo === selectedRepo.fullName),
+        open: allOpen.filter((pr) => pr.repo === selectedRepo.fullName),
+        closed: allMerged.filter((pr) => pr.repo === selectedRepo.fullName),
       }
     : null
 
   // Default to tab with more PRs if no tab param
-  const defaultTab: TabType = (tabParam === 'open' || tabParam === 'closed')
-    ? tabParam
-    : repoPRs && repoPRs.closed.length >= repoPRs.open.length
-      ? 'closed'
-      : 'open'
+  const defaultTab: TabType =
+    tabParam === 'open' || tabParam === 'closed'
+      ? tabParam
+      : repoPRs && repoPRs.closed.length >= repoPRs.open.length
+        ? 'closed'
+        : 'open'
 
   const activeTab: TabType = defaultTab
 
-  const tabs: { id: TabType; label: string; count: number }[] = selectedRepo && repoPRs
-    ? [
-        { id: 'open', label: 'Open', count: repoPRs.open.length },
-        { id: 'closed', label: 'Closed', count: repoPRs.closed.length },
-      ]
-    : []
+  const tabs: { id: TabType; label: string; count: number }[] =
+    selectedRepo && repoPRs
+      ? [
+          { id: 'open', label: 'Open', count: repoPRs.open.length },
+          { id: 'closed', label: 'Closed', count: repoPRs.closed.length },
+        ]
+      : []
 
-  const contributions = selectedRepo && repoPRs
-    ? activeTab === 'open'
-      ? repoPRs.open
-      : repoPRs.closed
-    : []
+  const contributions =
+    selectedRepo && repoPRs ? (activeTab === 'open' ? repoPRs.open : repoPRs.closed) : []
 
   const setTab = (tab: TabType) => {
     if (selectedRepo) {
@@ -196,7 +210,9 @@ export default function ContributionsClient({ repos, allMerged, allOpen }: Contr
               {repos.map((repo) => (
                 <motion.button
                   key={repo.fullName}
-                  onClick={() => router.push(`/contributions?repo=${encodeURIComponent(repo.fullName)}`)}
+                  onClick={() =>
+                    router.push(`/contributions?repo=${encodeURIComponent(repo.fullName)}`)
+                  }
                   className="w-full text-left group border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg p-5 hover:border-gray-400/50 dark:hover:border-gray-500/50 hover:shadow-lg hover:shadow-gray-500/10 transition-all duration-300 hover:scale-[1.01] cursor-pointer"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
