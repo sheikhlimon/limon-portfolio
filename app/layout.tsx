@@ -8,12 +8,12 @@ import Footer from '../components/Footer'
 import GoToTop from './components/GoToTop'
 
 export const metadata: Metadata = {
-  title: 'Sheikh Limon – Backend Engineer, AI Infrastructure',
-  description: 'Backend Engineer building AI Infrastructure & Systems. Open Source Contributor.',
+  title: 'Sheikh Limon – Full-Stack Developer',
+  description:
+    'Full-Stack Developer building reliable real-world systems. Open Source Contributor.',
   keywords: [
-    'Backend Engineer',
-    'AI Infrastructure',
-    'Systems',
+    'Full-Stack Developer',
+    'Software Engineer',
     'React',
     'Node.js',
     'TypeScript',

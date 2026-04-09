@@ -8,35 +8,26 @@ type BioItem = {
 export const BIO: BioItem[][] = [
   [
     {
-      text: "I'm Limon — an engineer who gets unreasonably interested in why things break.",
+      text: 'Full-stack developer with a strong focus on reliability and real-world systems. I build applications using React/Next.js and Node.js, and contribute to open source projects where I work on debugging issues, improving stability, and fixing production-level problems.',
     },
   ],
   [
     {
-      text: "I contribute to AI agent infrastructure at the systems level — the kind of work that's invisible when it works and catastrophic when it doesn't. Credential race conditions, Linux headless failures, cross-platform CLI stability. Real bugs in real codebases used by real people.",
-    },
-  ],
-  [
-    {
-      text: 'goose Community All-Star (Jan 2026)',
-      bold: true,
-    },
-    {
-      text: '. Top contributor to ',
+      text: 'Contributor to ',
     },
     {
       text: 'goose',
       link: 'https://github.com/block/goose',
     },
     {
-      text: ' (Block/AAIF). Currently active in ',
+      text: ' (AAIF) and ',
     },
     {
       text: 'Podman Desktop',
       link: 'https://github.com/podman-desktop/podman-desktop',
     },
     {
-      text: ' (Red Hat).',
+      text: ' (Red Hat). ',
     },
   ],
 ]

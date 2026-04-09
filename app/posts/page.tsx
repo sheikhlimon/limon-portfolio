@@ -7,7 +7,7 @@ import BlogClient from './blog-client'
 
 export const metadata: Metadata = {
   title: 'Blog - Sheikh Limon',
-  description: 'Blog posts and logs by Sheikh Limon - Backend Developer',
+  description: 'Blog posts and logs by Sheikh Limon - Full-Stack Developer',
 }
 
 const postsDirectory = path.join(process.cwd(), 'logs')
@@ -32,7 +32,7 @@ function calculateReadingTime(content: string): string {
     .trim()
 
   const wordsPerMinute = 130
-  const words = plainText.split(/\s+/).filter(w => w.length > 0).length
+  const words = plainText.split(/\s+/).filter((w) => w.length > 0).length
   const minutes = Math.ceil(words / wordsPerMinute)
   return `${minutes} min`
 }
@@ -77,7 +77,10 @@ function PostsSkeleton() {
         <div className="h-6 w-16 bg-gray-200 dark:bg-gray-800 rounded animate-pulse mb-8" />
         <div className="space-y-3">
           {[...Array(3)].map((_, i) => (
-            <div key={i} className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-6">
+            <div
+              key={i}
+              className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-6"
+            >
               <div className="h-6 w-64 bg-gray-200 dark:bg-gray-800 rounded animate-pulse" />
               <div className="h-5 w-24 bg-gray-200 dark:bg-gray-800 rounded animate-pulse" />
             </div>
