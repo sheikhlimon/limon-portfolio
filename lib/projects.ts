@@ -11,7 +11,8 @@ export interface Project {
 export const projects: Project[] = [
   {
     title: 'InfraScope',
-    description: 'Infrastructure monitoring and management platform for Linux systems. Track system status, trigger scans, and maintain audit logs from one place.',
+    description:
+      'Infrastructure monitoring and management platform for Linux systems. Track system status, trigger scans, and maintain audit logs from one place.',
     techStack: ['Next.js', 'Express.js', 'PostgreSQL', 'Prisma', 'JWT', 'Turborepo'],
     features: [
       'JWT auth with role-based access (Admin/User views)',
@@ -24,22 +25,9 @@ export const projects: Project[] = [
     icon: 'Cube',
   },
   {
-    title: 'QuickHire',
-    description: 'Modern job board application for browsing jobs, submitting applications, and managing listings with admin panel',
-    techStack: ['Next.js', 'Express', 'MongoDB', 'Prisma', 'TypeScript', 'Turborepo'],
-    features: [
-      'Job search and filtering by category/location',
-      'Application system with resume and cover letter upload',
-      'Admin panel for creating and managing job listings',
-      'JWT authentication with user signup and login',
-    ],
-    github: 'https://github.com/sheikhlimon/quick-hire',
-    live: 'https://quick-hire-web-delta.vercel.app',
-    icon: 'Globe',
-  },
-  {
     title: 'Crypto Guardian',
-    description: 'Real-time crypto fraud detection system with risk scoring and multi-API validation',
+    description:
+      'Real-time crypto fraud detection system with risk scoring and multi-API validation',
     techStack: ['React', 'Node.js', 'Express'],
     features: [
       'Fast risk scoring (< 500ms) per wallet address',
@@ -52,7 +40,8 @@ export const projects: Project[] = [
   },
   {
     title: 'College Booking App',
-    description: 'Discover, compare, and apply to colleges with ease. Search for colleges, view details, add reviews, and submit admission applications online.',
+    description:
+      'Discover, compare, and apply to colleges with ease. Search for colleges, view details, add reviews, and submit admission applications online.',
     techStack: ['React', 'TypeScript', 'Node.js', 'Express', 'MongoDB', 'Firebase'],
     features: [
       'College search with filtering and detailed admission information',
@@ -62,6 +51,21 @@ export const projects: Project[] = [
     github: 'https://github.com/sheikhlimon/college-booking-app',
     live: 'https://college-booking-app-nine.vercel.app',
     icon: 'GraduationCap',
+  },
+  {
+    title: 'QuickHire',
+    description:
+      'Modern job board application for browsing jobs, submitting applications, and managing listings with admin panel',
+    techStack: ['Next.js', 'Express', 'MongoDB', 'Prisma', 'TypeScript', 'Turborepo'],
+    features: [
+      'Job search and filtering by category/location',
+      'Application system with resume and cover letter upload',
+      'Admin panel for creating and managing job listings',
+      'JWT authentication with user signup and login',
+    ],
+    github: 'https://github.com/sheikhlimon/quick-hire',
+    live: 'https://quick-hire-web-delta.vercel.app',
+    icon: 'Globe',
   },
   {
     title: 'Gesture Share',
