@@ -1,6 +1,6 @@
 'use client'
 
-import { Globe, Shield, GraduationCap, Cube } from '@phosphor-icons/react'
+import { Globe, Shield, GraduationCap, Cube, Terminal } from '@phosphor-icons/react'
 import { Project } from '../../lib/projects'
 
 interface ProjectCardProps {
@@ -12,6 +12,7 @@ const iconMap = {
   Shield,
   GraduationCap,
   Cube,
+  Terminal,
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {

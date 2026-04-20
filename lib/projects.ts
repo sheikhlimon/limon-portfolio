@@ -5,7 +5,7 @@ export interface Project {
   features: string[]
   github: string
   live?: string
-  icon: 'Globe' | 'Shield' | 'GraduationCap' | 'Cube'
+  icon: 'Globe' | 'Shield' | 'GraduationCap' | 'Cube' | 'Terminal'
 }
 
 export const projects: Project[] = [
@@ -79,5 +79,20 @@ export const projects: Project[] = [
     github: 'https://github.com/sheikhlimon/gesture-share',
     live: 'https://gesture-share.vercel.app',
     icon: 'Globe',
+  },
+  {
+    title: 'AI Agent Profile Builder',
+    description:
+      'Visual drag-and-drop interface for building AI agent profiles. Pick components from a library, arrange them on a canvas, and preview your agent in real time.',
+    techStack: ['React', 'TypeScript', 'Zustand', '@dnd-kit', 'Tailwind CSS', 'Vite', 'Bun'],
+    features: [
+      'Drag-and-drop assembly with live agent preview',
+      'Saved agents persisted locally via Zustand',
+      'Responsive — desktop drag-and-drop, mobile tap-to-select',
+      'Terminal-inspired UI with dark theme',
+    ],
+    github: 'https://github.com/sheikhlimon/agent-builder',
+    live: 'https://agent-builder-omega.vercel.app',
+    icon: 'Terminal',
   },
 ]
