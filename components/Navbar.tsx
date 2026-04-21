@@ -99,7 +99,9 @@ export default function Navbar() {
       <div className="flex items-center">
         {navItems.map((item) => {
           const Icon = item.icon
-          const isActive = (item.href.startsWith('/') && pathname === item.href) ||
+          const hrefPath = item.href.split('?')[0]
+          const isActive =
+            (item.href.startsWith('/') && pathname === hrefPath) ||
             (item.href.startsWith('#') && currentSection === item.href.substring(1))
 
           return (
@@ -115,18 +117,24 @@ export default function Navbar() {
               } ${item.showLabel === false ? 'mr-2' : 'mr-4 sm:mr-5'}`}
             >
               {item.showLabel === false ? (
-                <Icon className={`w-5 h-5 transition-transform duration-300 group-hover:scale-110 ${isActive ? 'text-gray-900 dark:text-white' : ''}`} />
+                <Icon
+                  className={`w-5 h-5 transition-transform duration-300 group-hover:scale-110 ${isActive ? 'text-gray-900 dark:text-white' : ''}`}
+                />
               ) : (
                 <>
                   <span className="hidden sm:inline">{item.name}</span>
-                  <Icon className={`sm:hidden w-5 h-5 transition-transform duration-300 group-hover:scale-110 ${isActive ? 'text-gray-900 dark:text-white' : ''}`} />
+                  <Icon
+                    className={`sm:hidden w-5 h-5 transition-transform duration-300 group-hover:scale-110 ${isActive ? 'text-gray-900 dark:text-white' : ''}`}
+                  />
                 </>
               )}
               {/* Underline animation for desktop */}
               {item.showLabel && (
-                <span className={`absolute -bottom-1 left-0 h-px bg-gray-900 dark:bg-white transition-all duration-300 ${
-                  isActive ? 'w-full' : 'w-0 group-hover:w-full'
-                }`} />
+                <span
+                  className={`absolute -bottom-1 left-0 h-px bg-gray-900 dark:bg-white transition-all duration-300 ${
+                    isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}
+                />
               )}
             </a>
           )
