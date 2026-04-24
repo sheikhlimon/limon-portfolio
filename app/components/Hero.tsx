@@ -34,14 +34,14 @@ export default function Hero() {
       >
         {BIO.map((line, lineIndex) => (
           <motion.p
-            key={lineIndex}
+            key={line.map((i) => i.text).join("")}
             className=""
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5 + lineIndex * 0.1, duration: 0.5 }}
           >
-            {line.map((item, itemIndex) => (
-              <span key={itemIndex}>
+            {line.map((item) => (
+              <span key={item.text + (item.link ?? "")}>
                 {item.link ? (
                   <a
                     href={item.link}

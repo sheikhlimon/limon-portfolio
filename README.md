@@ -50,7 +50,7 @@ Posts go in `logs/` with frontmatter:
 
 ```yaml
 ---
-title: 'Post Title'
+title: "Post Title"
 date: DD MMM YYYY
 type: blog # or 'log'
 ---

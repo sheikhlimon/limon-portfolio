@@ -37,7 +37,7 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
 
   return (
     <div
-      className="border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg p-4 my-4 overflow-hidden min-w-0 w-full max-w-full bg-gray-50 dark:bg-gray-900"
+      className="border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg my-4 overflow-hidden min-w-0 w-full max-w-full"
       dangerouslySetInnerHTML={{ __html: highlighted }}
     />
   )

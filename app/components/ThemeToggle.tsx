@@ -1,12 +1,12 @@
-'use client'
+"use client"
 
-import { useTheme } from 'next-themes'
+import { useTheme } from "next-themes"
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme()
 
   const handleToggle = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
+    setTheme(theme === "dark" ? "light" : "dark")
   }
 
   return (
@@ -16,7 +16,7 @@ export default function ThemeToggle() {
       aria-label="Toggle theme"
       title="Toggle theme"
     >
-      {theme === 'dark' ? (
+      {theme === "dark" ? (
         <svg
           className="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-yellow-500 transition-all duration-500 group-hover:rotate-180"
           viewBox="0 0 24 24"

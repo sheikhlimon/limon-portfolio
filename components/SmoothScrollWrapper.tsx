@@ -1,14 +1,14 @@
-'use client'
+"use client"
 
-import { useEffect, useRef } from 'react'
-import Lenis from 'lenis'
+import { useEffect, useRef } from "react"
+import Lenis from "lenis"
 
 export default function SmoothScrollWrapper({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null)
 
   useEffect(() => {
     // Only run on client side
-    if (typeof window === 'undefined') return
+    if (typeof window === "undefined") return
 
     try {
       const lenis = new Lenis()
@@ -22,7 +22,7 @@ export default function SmoothScrollWrapper({ children }: { children: React.Reac
       }
       requestAnimationFrame(raf)
     } catch (error) {
-      console.error('Failed to initialize Lenis smooth scrolling:', error)
+      console.error("Failed to initialize Lenis smooth scrolling:", error)
     }
 
     return () => {

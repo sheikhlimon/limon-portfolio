@@ -76,9 +76,9 @@ function PostsSkeleton() {
       <div className="space-y-10">
         <div className="h-6 w-16 bg-gray-200 dark:bg-gray-800 rounded animate-pulse mb-8" />
         <div className="space-y-3">
-          {[...Array(3)].map((_, i) => (
+          {["skeleton-1", "skeleton-2", "skeleton-3"].map((key) => (
             <div
-              key={i}
+              key={key}
               className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-6"
             >
               <div className="h-6 w-64 bg-gray-200 dark:bg-gray-800 rounded animate-pulse" />

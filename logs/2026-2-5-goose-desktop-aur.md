@@ -1,5 +1,5 @@
 ---
-title: 'Arch Package Maintenance: Debugging Broken CSS in Tarball Builds'
+title: "Arch Package Maintenance: Debugging Broken CSS in Tarball Builds"
 date: 5 Feb 2026
 year: 2026
 ---

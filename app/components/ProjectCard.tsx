@@ -1,7 +1,7 @@
-'use client'
+"use client"
 
-import { Globe, Shield, GraduationCap, Cube, Terminal } from '@phosphor-icons/react'
-import { Project } from '../../lib/projects'
+import { Globe, Shield, GraduationCap, Cube, Terminal } from "@phosphor-icons/react"
+import { Project } from "../../lib/projects"
 
 interface ProjectCardProps {
   project: Project

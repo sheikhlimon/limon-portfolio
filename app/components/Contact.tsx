@@ -1,4 +1,4 @@
-import { SOCIAL_LINKS } from '../../lib/constants'
+import { SOCIAL_LINKS } from "../../lib/constants"
 
 export default function Contact() {
   return (
@@ -11,18 +11,18 @@ export default function Contact() {
             href={link.href}
             target="_blank"
             className={`p-3 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 group ${
-              link.name === 'LinkedIn'
-                ? 'group-hover:text-blue-600 dark:group-hover:text-blue-400'
-                : 'group-hover:text-gray-900 dark:group-hover:text-white'
+              link.name === "LinkedIn"
+                ? "group-hover:text-blue-600 dark:group-hover:text-blue-400"
+                : "group-hover:text-gray-900 dark:group-hover:text-white"
             }`}
             aria-label={link.name}
             title={link.name}
           >
             <svg
               className={`w-6 h-6 text-gray-600 dark:text-gray-400 transition-colors ${
-                link.name === 'LinkedIn'
-                  ? 'group-hover:text-blue-600 dark:group-hover:text-blue-400'
-                  : 'group-hover:text-gray-900 dark:group-hover:text-white'
+                link.name === "LinkedIn"
+                  ? "group-hover:text-blue-600 dark:group-hover:text-blue-400"
+                  : "group-hover:text-gray-900 dark:group-hover:text-white"
               }`}
               viewBox="0 0 24 24"
               fill="currentColor"

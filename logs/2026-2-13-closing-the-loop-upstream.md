@@ -1,5 +1,5 @@
 ---
-title: 'Closing the Loop: The Lifecycle of a Patch from AUR to Upstream'
+title: "Closing the Loop: The Lifecycle of a Patch from AUR to Upstream"
 date: 13 Feb 2026
 year: 2026
 ---

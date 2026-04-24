@@ -1,8 +1,8 @@
-'use client'
+"use client"
 
-import { useSearchParams, useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
-import { GitPullRequest, Star } from '@phosphor-icons/react'
+import { useSearchParams, useRouter } from "next/navigation"
+import { motion } from "framer-motion"
+import { GitPullRequest, Star } from "@phosphor-icons/react"
 
 interface Contribution {
   id: number
@@ -30,24 +30,24 @@ interface ContributionsClientProps {
   allOpen: Contribution[]
 }
 
-type TabType = 'open' | 'closed'
+type TabType = "open" | "closed"
 
 function formatDate(dateStr: string | null): string {
-  if (!dateStr) return ''
+  if (!dateStr) return ""
   const date = new Date(dateStr)
   const months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ]
   return `${months[date.getUTCMonth()]} ${date.getUTCDate()}, ${date.getUTCFullYear()}`
 }
@@ -59,8 +59,8 @@ export default function ContributionsClient({
 }: ContributionsClientProps) {
   const searchParams = useSearchParams()
   const router = useRouter()
-  const repoParam = searchParams.get('repo')
-  const tabParam = searchParams.get('tab') as TabType | null
+  const repoParam = searchParams.get("repo")
+  const tabParam = searchParams.get("tab") as TabType | null
 
   const selectedRepo = repoParam ? repos.find((r) => r.fullName === repoParam) || null : null
 
@@ -73,24 +73,24 @@ export default function ContributionsClient({
 
   // Default to tab with more PRs if no tab param
   const defaultTab: TabType =
-    tabParam === 'open' || tabParam === 'closed'
+    tabParam === "open" || tabParam === "closed"
       ? tabParam
       : repoPRs && repoPRs.closed.length >= repoPRs.open.length
-        ? 'closed'
-        : 'open'
+        ? "closed"
+        : "open"
 
   const activeTab: TabType = defaultTab
 
   const tabs: { id: TabType; label: string; count: number }[] =
     selectedRepo && repoPRs
       ? [
-          { id: 'open', label: 'Open', count: repoPRs.open.length },
-          { id: 'closed', label: 'Closed', count: repoPRs.closed.length },
+          { id: "open", label: "Open", count: repoPRs.open.length },
+          { id: "closed", label: "Closed", count: repoPRs.closed.length },
         ]
       : []
 
   const contributions =
-    selectedRepo && repoPRs ? (activeTab === 'open' ? repoPRs.open : repoPRs.closed) : []
+    selectedRepo && repoPRs ? (activeTab === "open" ? repoPRs.open : repoPRs.closed) : []
 
   const setTab = (tab: TabType) => {
     if (selectedRepo) {
@@ -119,8 +119,8 @@ export default function ContributionsClient({
                 onClick={() => setTab(tab.id)}
                 className={`group relative font-mono text-xl sm:text-2xl transition-all duration-300 text-left max-w-full truncate cursor-pointer ${
                   activeTab === tab.id
-                    ? 'font-bold text-gray-900 dark:text-white'
-                    : 'font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                    ? "font-bold text-gray-900 dark:text-white"
+                    : "font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                 }`}
               >
                 <span className="flex items-center gap-2">
@@ -129,7 +129,7 @@ export default function ContributionsClient({
                 </span>
                 <span
                   className={`absolute -bottom-1 left-0 h-px bg-gray-900 dark:bg-white transition-all duration-300 ${
-                    activeTab === tab.id ? 'w-full' : 'w-0 group-hover:w-full'
+                    activeTab === tab.id ? "w-full" : "w-0 group-hover:w-full"
                   }`}
                 />
               </button>
@@ -149,9 +149,9 @@ export default function ContributionsClient({
                   <div className="flex items-start gap-3">
                     <GitPullRequest
                       className={`w-5 h-5 flex-shrink-0 mt-0.5 ${
-                        activeTab === 'open'
-                          ? 'text-green-500 dark:text-green-400'
-                          : 'text-purple-500 dark:text-purple-400'
+                        activeTab === "open"
+                          ? "text-green-500 dark:text-green-400"
+                          : "text-purple-500 dark:text-purple-400"
                       }`}
                     />
 

@@ -1,35 +1,35 @@
-import type { Metadata } from 'next'
-import './globals.css'
-import { ThemeProvider } from 'next-themes'
-import NextTopLoader from 'nextjs-toploader'
-import SmoothScrollWrapper from '../components/SmoothScrollWrapper'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import GoToTop from './components/GoToTop'
+import type { Metadata } from "next"
+import "./globals.css"
+import { ThemeProvider } from "next-themes"
+import NextTopLoader from "nextjs-toploader"
+import SmoothScrollWrapper from "../components/SmoothScrollWrapper"
+import Navbar from "../components/Navbar"
+import Footer from "../components/Footer"
+import GoToTop from "./components/GoToTop"
 
 export const metadata: Metadata = {
-  title: 'Sheikh Limon – Full-Stack Developer',
+  title: "Sheikh Limon – Full-Stack Developer",
   description:
-    'Full-Stack Developer building reliable real-world systems. Open Source Contributor.',
+    "Full-Stack Developer building reliable real-world systems. Open Source Contributor.",
   keywords: [
-    'Full-Stack Developer',
-    'Software Engineer',
-    'React',
-    'Node.js',
-    'TypeScript',
-    'Open Source',
-    'Portfolio',
-    'Sheikh Limon',
-    'sheikhlimon',
-    'limon',
+    "Full-Stack Developer",
+    "Software Engineer",
+    "React",
+    "Node.js",
+    "TypeScript",
+    "Open Source",
+    "Portfolio",
+    "Sheikh Limon",
+    "sheikhlimon",
+    "limon",
   ],
   icons: {
-    icon: '/favicon.svg',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png',
+    icon: "/favicon.svg",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
   },
   other: {
-    'format-detection': 'telephone=no, date=no, email=no, address=no',
+    "format-detection": "telephone=no, date=no, email=no, address=no",
   },
 }
 
@@ -93,7 +93,7 @@ export default function RootLayout({
             const pos = positions[i % positions.length]
             return (
               <div
-                key={`small-${i}`}
+                key={`small-${pos.x}-${pos.y}`}
                 className="absolute w-px h-px bg-zinc-400/50 dark:bg-white/40 rounded-full"
                 style={{
                   left: `${pos.x}%`,
@@ -122,16 +122,16 @@ export default function RootLayout({
             const pos = positions[i % positions.length]
             return (
               <div
-                key={`medium-${i}`}
+                key={`medium-${pos.x}-${pos.y}`}
                 className="absolute bg-zinc-400/35 dark:bg-white/30 rounded-full"
                 style={{
                   left: `${pos.x}%`,
                   top: `${pos.y}%`,
-                  width: '2px',
-                  height: '2px',
+                  width: "2px",
+                  height: "2px",
                   opacity: 0.2 + (i % 2) * 0.15,
                   animation: `twinkle ${5 + (i % 3)}s ease-in-out ${(i % 2) * 2}s infinite`,
-                  boxShadow: '0 0 2px rgba(255, 255, 255, 0.1)',
+                  boxShadow: "0 0 2px rgba(255, 255, 255, 0.1)",
                 }}
               />
             )

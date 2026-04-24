@@ -1,8 +1,8 @@
-'use client'
+"use client"
 
-import { motion } from 'framer-motion'
-import ProjectCard from '../components/ProjectCard'
-import { projects } from '../../lib/projects'
+import { motion } from "framer-motion"
+import ProjectCard from "../components/ProjectCard"
+import { projects } from "../../lib/projects"
 
 const containerVariants = {
   hidden: { opacity: 0 },

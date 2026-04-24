@@ -1,5 +1,5 @@
-import Link from 'next/link'
-import { getLogs } from '../../lib/logs'
+import Link from "next/link"
+import { getLogs } from "../../lib/logs"
 
 export default function RecentPosts() {
   const posts = getLogs().slice(0, 3)
