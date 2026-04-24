@@ -1,12 +1,12 @@
-'use client'
+"use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react"
 
 const LogoTypewriter = () => {
-  const [displayText, setDisplayText] = useState('<SL />') // Match server render
+  const [displayText, setDisplayText] = useState("<SL />") // Match server render
   const [showCursor, setShowCursor] = useState(true)
   const [isHydrated, setIsHydrated] = useState(false)
-  const fullText = '<SL />'
+  const fullText = "<SL />"
 
   useEffect(() => {
     setIsHydrated(true)
@@ -19,8 +19,8 @@ const LogoTypewriter = () => {
     let timeoutId: NodeJS.Timeout
 
     const getTypingSpeed = (char: string) => {
-      if (char === ' ') return 400
-      if (char === '<' || char === '/' || char === '>') return 500
+      if (char === " ") return 400
+      if (char === "<" || char === "/" || char === ">") return 500
       return 700
     }
 
@@ -30,7 +30,7 @@ const LogoTypewriter = () => {
         setDisplayText(fullText.slice(0, currentIndex + 1))
         currentIndex++
 
-        if (currentChar === 'L') {
+        if (currentChar === "L") {
           timeoutId = setTimeout(typeNextChar, 700)
         } else {
           const speed = getTypingSpeed(currentChar)
@@ -40,7 +40,7 @@ const LogoTypewriter = () => {
         timeoutId = setTimeout(() => {
           setShowCursor(false)
           setTimeout(() => {
-            setDisplayText('')
+            setDisplayText("")
             setShowCursor(true)
             currentIndex = 0
             timeoutId = setTimeout(typeNextChar, 300)
@@ -49,7 +49,7 @@ const LogoTypewriter = () => {
       }
     }
 
-    setDisplayText('')
+    setDisplayText("")
     timeoutId = setTimeout(typeNextChar, 800)
 
     return () => clearTimeout(timeoutId)
@@ -66,15 +66,13 @@ const LogoTypewriter = () => {
 
   return (
     <div className="flex items-center whitespace-nowrap leading-none">
-      <span
-        className="text-xl text-gray-900 dark:text-white tracking-tight font-mono font-bold"
-      >
+      <span className="text-xl text-gray-900 dark:text-white tracking-tight font-mono font-bold">
         {displayText}
       </span>
       {/* Terminal underline cursor */}
       <span
         className={`inline-block w-[8px] h-[2px] bg-gray-900 dark:bg-white self-end mb-[2px] ${
-          showCursor ? 'opacity-100' : 'opacity-0'
+          showCursor ? "opacity-100" : "opacity-0"
         } transition-opacity duration-100`}
       />
     </div>

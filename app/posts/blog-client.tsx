@@ -1,26 +1,29 @@
-'use client'
+"use client"
 
-import { useState } from 'react'
-import { useSearchParams } from 'next/navigation'
-import { motion } from 'framer-motion'
-import Link from 'next/link'
-import type { Post } from './page'
+import { useState } from "react"
+import { useSearchParams } from "next/navigation"
+import { motion } from "framer-motion"
+import Link from "next/link"
+import type { Post } from "./page"
 
-type TabType = 'blog' | 'log'
+type TabType = "blog" | "log"
 
 function groupPostsByYear(posts: Post[]) {
-  return posts.reduce((acc, post) => {
-    if (!acc[post.year]) {
-      acc[post.year] = []
-    }
-    acc[post.year].push(post)
-    return acc
-  }, {} as Record<string, Post[]>)
+  return posts.reduce(
+    (acc, post) => {
+      if (!acc[post.year]) {
+        acc[post.year] = []
+      }
+      acc[post.year].push(post)
+      return acc
+    },
+    {} as Record<string, Post[]>
+  )
 }
 
 const tabs = [
-  { id: 'blog' as TabType, label: 'Blog' },
-  { id: 'log' as TabType, label: 'Logs' },
+  { id: "blog" as TabType, label: "Blog" },
+  { id: "log" as TabType, label: "Logs" },
 ]
 
 interface BlogClientProps {
@@ -29,12 +32,12 @@ interface BlogClientProps {
 
 export default function BlogClient({ posts }: BlogClientProps) {
   const searchParams = useSearchParams()
-  const initialTab = searchParams.get('tab') as TabType | null
+  const initialTab = searchParams.get("tab") as TabType | null
   const [activeTab, setActiveTab] = useState<TabType>(
-    initialTab && (initialTab === 'blog' || initialTab === 'log') ? initialTab : 'blog'
+    initialTab && (initialTab === "blog" || initialTab === "log") ? initialTab : "blog"
   )
 
-  const filteredPosts = posts.filter(post => post.type === activeTab)
+  const filteredPosts = posts.filter((post) => post.type === activeTab)
 
   const groupedPosts = groupPostsByYear(filteredPosts)
 
@@ -52,14 +55,16 @@ export default function BlogClient({ posts }: BlogClientProps) {
             onClick={() => setActiveTab(tab.id)}
             className={`group relative font-mono text-xl sm:text-2xl transition-all duration-300 text-left max-w-full truncate cursor-pointer ${
               activeTab === tab.id
-                ? 'font-bold text-gray-900 dark:text-white'
-                : 'font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                ? "font-bold text-gray-900 dark:text-white"
+                : "font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
             }`}
           >
             {tab.label}
-            <span className={`absolute -bottom-1 left-0 h-px bg-gray-900 dark:bg-white transition-all duration-300 ${
-              activeTab === tab.id ? 'w-full' : 'w-0 group-hover:w-full'
-            }`} />
+            <span
+              className={`absolute -bottom-1 left-0 h-px bg-gray-900 dark:bg-white transition-all duration-300 ${
+                activeTab === tab.id ? "w-full" : "w-0 group-hover:w-full"
+              }`}
+            />
           </button>
         ))}
       </div>
@@ -67,7 +72,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
       {filteredPosts.length > 0 ? (
         <div className="w-full max-w-full">
           {Object.entries(groupedPosts)
-            .sort(([a], [b]) => b.localeCompare(a))
+            .toSorted(([a], [b]) => b.localeCompare(a))
             .map(([year, yearPosts]) => (
               <div key={year} className="w-full space-y-10">
                 <h2 className="text-lg font-mono font-bold text-gray-900 dark:text-white mb-8 mt-8">
@@ -95,7 +100,8 @@ export default function BlogClient({ posts }: BlogClientProps) {
                           </Link>
                         )}
                         <span className="text-base text-gray-500 dark:text-gray-400 whitespace-nowrap sm:whitespace-nowrap">
-                          {post.date}{post.readingTime && ` · ${post.readingTime}`}
+                          {post.date}
+                          {post.readingTime && ` · ${post.readingTime}`}
                         </span>
                       </div>
                       {index < yearPosts.length - 1 && (
@@ -112,6 +118,6 @@ export default function BlogClient({ posts }: BlogClientProps) {
           No {activeTab}s yet.
         </div>
       )}
-      </motion.div>
+    </motion.div>
   )
 }

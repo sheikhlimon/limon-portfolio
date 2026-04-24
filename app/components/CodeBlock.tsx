@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react"
 
 interface CodeBlockProps {
   code: string
@@ -8,16 +8,16 @@ interface CodeBlockProps {
 }
 
 export default function CodeBlock({ code, language }: CodeBlockProps) {
-  const [highlighted, setHighlighted] = useState<string>('')
+  const [highlighted, setHighlighted] = useState<string>("")
 
   useEffect(() => {
     async function highlight() {
-      const { codeToHtml } = await import('shiki')
+      const { codeToHtml } = await import("shiki")
       const html = await codeToHtml(code, {
-        lang: language as 'bash' | 'diff' | 'rust' | 'text' | 'typescript' | 'javascript',
+        lang: language as "bash" | "diff" | "rust" | "text" | "typescript" | "javascript",
         themes: {
-          light: 'one-light',
-          dark: 'one-dark-pro',
+          light: "one-light",
+          dark: "one-dark-pro",
         },
       })
       setHighlighted(html)
@@ -28,7 +28,9 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
   if (!highlighted) {
     return (
       <div className="border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg p-0 my-4 overflow-hidden min-w-0 w-full max-w-full bg-gray-50 dark:bg-gray-900">
-        <pre className="font-mono text-sm whitespace-pre overflow-x-auto p-4"><code className="text-gray-700 dark:text-gray-300">{code}</code></pre>
+        <pre className="font-mono text-sm whitespace-pre overflow-x-auto p-4">
+          <code className="text-gray-700 dark:text-gray-300">{code}</code>
+        </pre>
       </div>
     )
   }
