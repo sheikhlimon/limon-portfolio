@@ -5,7 +5,7 @@ export interface Project {
   features: string[]
   github: string
   live?: string
-  icon: "Globe" | "Shield" | "GraduationCap" | "Cube" | "Terminal"
+  icon: "Globe" | "Shield" | "GraduationCap" | "Cube" | "Terminal" | "Briefcase"
 }
 
 export const projects: Project[] = [
@@ -39,20 +39,6 @@ export const projects: Project[] = [
     icon: "Shield",
   },
   {
-    title: "College Booking App",
-    description:
-      "Discover, compare, and apply to colleges with ease. Search for colleges, view details, add reviews, and submit admission applications online.",
-    techStack: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "Firebase"],
-    features: [
-      "College search with filtering and detailed admission information",
-      "Online admission system with review and rating functionality",
-      "Email/password and Google OAuth authentication",
-    ],
-    github: "https://github.com/sheikhlimon/college-booking-app",
-    live: "https://college-booking-app-nine.vercel.app",
-    icon: "GraduationCap",
-  },
-  {
     title: "QuickHire",
     description:
       "Modern job board application for browsing jobs, submitting applications, and managing listings with admin panel",
@@ -65,7 +51,21 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/sheikhlimon/quick-hire",
     live: "https://quick-hire-web-delta.vercel.app",
-    icon: "Globe",
+    icon: "Briefcase",
+  },
+  {
+    title: "College Booking App",
+    description:
+      "Discover, compare, and apply to colleges with ease. Search for colleges, view details, add reviews, and submit admission applications online.",
+    techStack: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "Firebase"],
+    features: [
+      "College search with filtering and detailed admission information",
+      "Online admission system with review and rating functionality",
+      "Email/password and Google OAuth authentication",
+    ],
+    github: "https://github.com/sheikhlimon/college-booking-app",
+    live: "https://college-booking-app-nine.vercel.app",
+    icon: "GraduationCap",
   },
   {
     title: "Gesture Share",

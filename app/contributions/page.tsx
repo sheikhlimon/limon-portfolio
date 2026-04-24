@@ -26,14 +26,21 @@ interface GitHubSearchResponse {
 
 export const dynamic = "force-dynamic"
 
+async function githubHeaders() {
+  const headers: HeadersInit = { Accept: "application/vnd.github.v3+json" }
+  const token = process.env.GITHUB_TOKEN
+  if (token) {
+    headers.Authorization = `Bearer ${token}`
+  }
+  return headers
+}
+
 async function fetchPRs(query: string): Promise<GitHubPR[]> {
   const res = await fetch(
     `https://api.github.com/search/issues?q=author:sheikhlimon+type:pr+${query}&sort=updated&order=desc&per_page=100`,
     {
       cache: "no-store",
-      headers: {
-        Accept: "application/vnd.github.v3+json",
-      },
+      headers: await githubHeaders(),
     }
   )
 
@@ -49,9 +56,7 @@ async function fetchPRs(query: string): Promise<GitHubPR[]> {
 async function getRepoInfo(owner: string, repo: string) {
   const res = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
     cache: "no-store",
-    headers: {
-      Accept: "application/vnd.github.v3+json",
-    },
+    headers: await githubHeaders(),
   })
 
   if (!res.ok) {

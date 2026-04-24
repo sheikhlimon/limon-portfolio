@@ -1,9 +1,9 @@
 "use client"
 
-import { useState, useEffect, Suspense } from "react"
-import { usePathname, useSearchParams } from "next/navigation"
+import { useState, useEffect } from "react"
+import { usePathname } from "next/navigation"
 import dynamic from "next/dynamic"
-import { Article, Folder, FileText, GithubLogo, Scroll } from "@phosphor-icons/react"
+import { Article, Folder, FileText, GithubLogo } from "@phosphor-icons/react"
 import LogoTypewriter from "./LogoTypewriter"
 
 const ThemeToggle = dynamic(() => import("../app/components/ThemeToggle"), {
@@ -14,14 +14,8 @@ const ThemeToggle = dynamic(() => import("../app/components/ThemeToggle"), {
 const navItems = [
   {
     name: "Blog",
-    href: "/posts?tab=blog",
+    href: "/posts",
     icon: Article,
-    showLabel: true,
-  },
-  {
-    name: "Logs",
-    href: "/posts?tab=log",
-    icon: Scroll,
     showLabel: true,
   },
   {
@@ -32,7 +26,7 @@ const navItems = [
   },
   {
     name: "Resume",
-    href: "https://drive.google.com/file/d/1kpyed0ei3YN30LM5Wpvp5n_xhQsnx0Ou/view?usp=drive_link",
+    href: "/resume",
     icon: FileText,
     showLabel: true,
   },
@@ -43,61 +37,6 @@ const navItems = [
     showLabel: false,
   },
 ]
-
-function NavLinks({ pathname, activeSection }: { pathname: string; activeSection: string }) {
-  const searchParams = useSearchParams()
-
-  return (
-    <>
-      {navItems.map((item) => {
-        const Icon = item.icon
-        const hrefPath = item.href.split("?")[0]
-        const hrefTab = item.href.includes("?tab=")
-          ? new URLSearchParams(item.href.split("?")[1]).get("tab")
-          : null
-        const isActive =
-          (item.href.startsWith("/") &&
-            pathname === hrefPath &&
-            (hrefTab === null || searchParams.get("tab") === hrefTab)) ||
-          (item.href.startsWith("#") && activeSection === item.href.substring(1))
-
-        return (
-          <a
-            key={item.name}
-            href={item.href}
-            target={item.href.startsWith("http") ? "_blank" : undefined}
-            rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-            className={`group relative font-mono text-base transition-all duration-300 ${
-              isActive
-                ? "font-bold text-gray-900 dark:text-white"
-                : "font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-            } ${item.showLabel === false ? "mr-2" : "mr-4 sm:mr-5"}`}
-          >
-            {item.showLabel === false ? (
-              <Icon
-                className={`w-5 h-5 transition-transform duration-300 group-hover:scale-110 ${isActive ? "text-gray-900 dark:text-white" : ""}`}
-              />
-            ) : (
-              <>
-                <span className="hidden sm:inline">{item.name}</span>
-                <Icon
-                  className={`sm:hidden w-5 h-5 transition-transform duration-300 group-hover:scale-110 ${isActive ? "text-gray-900 dark:text-white" : ""}`}
-                />
-              </>
-            )}
-            {item.showLabel && (
-              <span
-                className={`absolute -bottom-1 left-0 h-px bg-gray-900 dark:bg-white transition-all duration-300 ${
-                  isActive ? "w-full" : "w-0 group-hover:w-full"
-                }`}
-              />
-            )}
-          </a>
-        )
-      })}
-    </>
-  )
-}
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -141,9 +80,48 @@ export default function Navbar() {
       </div>
 
       <div className="flex items-center">
-        <Suspense fallback={null}>
-          <NavLinks pathname={pathname} activeSection={activeSection} />
-        </Suspense>
+        {navItems.map((item) => {
+          const Icon = item.icon
+          const hrefPath = item.href.split("?")[0]
+          const isActive =
+            (item.href.startsWith("/") && pathname === hrefPath) ||
+            (item.href.startsWith("#") && activeSection === item.href.substring(1))
+
+          return (
+            <a
+              key={item.name}
+              href={item.href}
+              target={item.href.startsWith("http") ? "_blank" : undefined}
+              rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              className={`group relative font-mono text-base font-medium transition-all duration-300 ${
+                isActive
+                  ? "text-gray-900 dark:text-white"
+                  : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+              } ${item.showLabel === false ? "mr-2" : "mr-4 sm:mr-5"}`}
+            >
+              {item.showLabel === false ? (
+                <Icon
+                  className={`w-5 h-5 transition-transform duration-300 group-hover:scale-110 ${isActive ? "text-gray-900 dark:text-white" : ""}`}
+                />
+              ) : (
+                <>
+                  <span className="hidden sm:inline">{item.name}</span>
+                  <Icon
+                    className={`sm:hidden w-5 h-5 transition-transform duration-300 group-hover:scale-110 ${isActive ? "text-gray-900 dark:text-white" : ""}`}
+                  />
+                </>
+              )}
+              {item.showLabel && (
+                <span
+                  className={`absolute -bottom-1 left-0 h-px bg-gray-900 dark:bg-white transition-all duration-300 ${
+                    isActive ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
+                />
+              )}
+            </a>
+          )
+        })}
+
         <ThemeToggle />
       </div>
     </nav>
