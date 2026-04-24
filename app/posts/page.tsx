@@ -1,16 +1,16 @@
-import { Metadata } from 'next'
-import { Suspense } from 'react'
-import fs from 'fs'
-import path from 'path'
-import matter from 'gray-matter'
-import BlogClient from './blog-client'
+import { Metadata } from "next"
+import { Suspense } from "react"
+import fs from "fs"
+import path from "path"
+import matter from "gray-matter"
+import BlogClient from "./blog-client"
 
 export const metadata: Metadata = {
-  title: 'Blog - Sheikh Limon',
-  description: 'Blog posts and logs by Sheikh Limon - Full-Stack Developer',
+  title: "Blog - Sheikh Limon",
+  description: "Blog posts and logs by Sheikh Limon - Full-Stack Developer",
 }
 
-const postsDirectory = path.join(process.cwd(), 'logs')
+const postsDirectory = path.join(process.cwd(), "logs")
 
 export interface Post {
   title: string
@@ -18,17 +18,17 @@ export interface Post {
   year: string
   slug: string
   readingTime: string
-  type: 'log' | 'blog'
+  type: "log" | "blog"
   externalUrl?: string
 }
 
 function calculateReadingTime(content: string): string {
   const plainText = content
-    .replace(/```[\s\S]*?```/g, '')
-    .replace(/`[^`]+`/g, '')
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-    .replace(/[#*_~\[\]()]/g, '')
-    .replace(/\s+/g, ' ')
+    .replace(/```[\s\S]*?```/g, "")
+    .replace(/`[^`]+`/g, "")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/[#*_~[\]()]/g, "")
+    .replace(/\s+/g, " ")
     .trim()
 
   const wordsPerMinute = 130
@@ -44,24 +44,24 @@ function getPosts(): Post[] {
 
   const fileNames = fs.readdirSync(postsDirectory)
   const allPosts = fileNames
-    .filter((name) => name.endsWith('.md'))
+    .filter((name) => name.endsWith(".md"))
     .map((fileName) => {
       const fullPath = path.join(postsDirectory, fileName)
-      const fileContents = fs.readFileSync(fullPath, 'utf8')
+      const fileContents = fs.readFileSync(fullPath, "utf8")
       const { data, content } = matter(fileContents)
 
       return {
-        title: data.title || '',
-        date: data.date || '',
-        year: data.year || '',
-        slug: fileName.replace(/\.md$/, ''),
-        readingTime: data.readingTime || (data.externalUrl ? '' : calculateReadingTime(content)),
-        type: (data.type as 'log' | 'blog') || 'log',
+        title: data.title || "",
+        date: data.date || "",
+        year: data.year || "",
+        slug: fileName.replace(/\.md$/, ""),
+        readingTime: data.readingTime || (data.externalUrl ? "" : calculateReadingTime(content)),
+        type: (data.type as "log" | "blog") || "log",
         externalUrl: data.externalUrl || undefined,
       }
     })
 
-  return allPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  return allPosts.toSorted((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }
 
 function PostsSkeleton() {
