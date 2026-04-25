@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { useSearchParams } from "next/navigation"
+import { useState, useCallback } from "react"
+import { useSearchParams, useRouter, usePathname } from "next/navigation"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import type { Post } from "./page"
@@ -32,9 +32,19 @@ interface BlogClientProps {
 
 export default function BlogClient({ posts }: BlogClientProps) {
   const searchParams = useSearchParams()
-  const initialTab = searchParams.get("tab") as TabType | null
+  const router = useRouter()
+  const pathname = usePathname()
+  const paramTab = searchParams.get("tab")
   const [activeTab, setActiveTab] = useState<TabType>(
-    initialTab && (initialTab === "blog" || initialTab === "log") ? initialTab : "blog"
+    paramTab === "blog" || paramTab === "log" ? paramTab : "blog"
+  )
+
+  const handleTabChange = useCallback(
+    (tab: TabType) => {
+      setActiveTab(tab)
+      router.replace(`${pathname}?tab=${tab}`, { scroll: false })
+    },
+    [router, pathname]
   )
 
   const filteredPosts = posts.filter((post) => post.type === activeTab)
@@ -52,7 +62,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
         {tabs.map((tab) => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
+            onClick={() => handleTabChange(tab.id)}
             className={`group relative font-mono text-xl sm:text-2xl transition-all duration-300 text-left max-w-full truncate cursor-pointer ${
               activeTab === tab.id
                 ? "font-bold text-gray-900 dark:text-white"
