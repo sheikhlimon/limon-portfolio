@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback } from "react"
+import { useState, useCallback, useMemo } from "react"
 import { useSearchParams, useRouter, usePathname } from "next/navigation"
 import { motion } from "framer-motion"
 import Link from "next/link"
@@ -35,19 +35,43 @@ export default function BlogClient({ posts }: BlogClientProps) {
   const router = useRouter()
   const pathname = usePathname()
   const paramTab = searchParams.get("tab")
+  const paramTag = searchParams.get("tag")
   const [activeTab, setActiveTab] = useState<TabType>(
     paramTab === "blog" || paramTab === "log" ? paramTab : "blog"
   )
+  const [activeTag, setActiveTag] = useState<string | null>(paramTag || null)
 
   const handleTabChange = useCallback(
     (tab: TabType) => {
       setActiveTab(tab)
+      setActiveTag(null)
       router.replace(`${pathname}?tab=${tab}`, { scroll: false })
     },
     [router, pathname]
   )
 
-  const filteredPosts = posts.filter((post) => post.type === activeTab)
+  const handleTagChange = useCallback(
+    (tag: string | null) => {
+      setActiveTag(tag)
+      const params = new URLSearchParams()
+      params.set("tab", activeTab)
+      if (tag) params.set("tag", tag)
+      router.replace(`${pathname}?${params.toString()}`, { scroll: false })
+    },
+    [router, pathname, activeTab]
+  )
+
+  const tabFiltered = posts.filter((post) => post.type === activeTab)
+
+  const allTags = useMemo(() => {
+    const tagSet = new Set<string>()
+    tabFiltered.forEach((post) => post.tags.forEach((tag) => tagSet.add(tag)))
+    return Array.from(tagSet).toSorted()
+  }, [tabFiltered])
+
+  const filteredPosts = activeTag
+    ? tabFiltered.filter((post) => post.tags.includes(activeTag))
+    : tabFiltered
 
   const groupedPosts = groupPostsByYear(filteredPosts)
 
@@ -58,7 +82,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
     >
-      <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-6 mb-10 w-full overflow-hidden">
+      <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-6 mb-8 w-full overflow-hidden">
         {tabs.map((tab) => (
           <button
             key={tab.id}
@@ -78,6 +102,34 @@ export default function BlogClient({ posts }: BlogClientProps) {
           </button>
         ))}
       </div>
+
+      {allTags.length > 0 && (
+        <div className="flex flex-wrap gap-2 mb-8">
+          <button
+            onClick={() => handleTagChange(null)}
+            className={`font-mono text-xs px-3 py-1 rounded border transition-colors duration-200 cursor-pointer ${
+              activeTag === null
+                ? "bg-gray-900 dark:bg-white text-white dark:text-gray-900 border-gray-900 dark:border-white"
+                : "bg-transparent text-gray-600 dark:text-gray-400 border-gray-300 dark:border-gray-700 hover:border-gray-900 dark:hover:border-white hover:text-gray-900 dark:hover:text-white"
+            }`}
+          >
+            All
+          </button>
+          {allTags.map((tag) => (
+            <button
+              key={tag}
+              onClick={() => handleTagChange(activeTag === tag ? null : tag)}
+              className={`font-mono text-xs px-3 py-1 rounded border transition-colors duration-200 cursor-pointer ${
+                activeTag === tag
+                  ? "bg-gray-900 dark:bg-white text-white dark:text-gray-900 border-gray-900 dark:border-white"
+                  : "bg-transparent text-gray-600 dark:text-gray-400 border-gray-300 dark:border-gray-700 hover:border-gray-900 dark:hover:border-white hover:text-gray-900 dark:hover:text-white"
+              }`}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+      )}
 
       {filteredPosts.length > 0 ? (
         <div className="w-full max-w-full">

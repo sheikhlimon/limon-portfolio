@@ -20,6 +20,7 @@ export interface Post {
   readingTime: string
   type: "log" | "blog"
   externalUrl?: string
+  tags: string[]
 }
 
 function calculateReadingTime(content: string): string {
@@ -58,10 +59,14 @@ function getPosts(): Post[] {
         readingTime: data.readingTime || (data.externalUrl ? "" : calculateReadingTime(content)),
         type: (data.type as "log" | "blog") || "log",
         externalUrl: data.externalUrl || undefined,
+        tags: Array.isArray(data.tags) ? data.tags : [],
       }
     })
 
-  return allPosts.toSorted((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  return allPosts.toSorted((a, b) => {
+    const dateDiff = new Date(b.date).getTime() - new Date(a.date).getTime()
+    return dateDiff !== 0 ? dateDiff : b.slug.localeCompare(a.slug)
+  })
 }
 
 function PostsSkeleton() {
