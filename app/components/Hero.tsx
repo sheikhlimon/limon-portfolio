@@ -124,7 +124,7 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.4, duration: 0.5 }}
           >
-            <p className="text-gray-700 dark:text-gray-300 flex flex-wrap items-baseline gap-x-1">
+            <p className="text-base text-gray-700 dark:text-gray-300 flex flex-wrap items-baseline gap-x-1">
               <span>Or mail me at</span>
               <span className="relative inline-block">
                 <button
