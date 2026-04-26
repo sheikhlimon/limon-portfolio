@@ -2,6 +2,7 @@
 title: "Automating AUR Maintenance: From Manual Chores to One Command"
 date: 3 Feb 2026
 year: 2026
+tags: ["packaging"]
 ---
 
 ## Project Context

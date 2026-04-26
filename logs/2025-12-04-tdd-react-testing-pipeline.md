@@ -3,6 +3,7 @@ title: "TDD + React Testing Pipeline — A Simple Example for Beginners"
 date: 4 Dec 2025
 year: 2025
 type: blog
+tags: ["testing"]
 externalUrl: "https://dev.to/sheikhlimon/tdd-react-testing-pipeline-a-simple-example-for-beginners-17n9"
 readingTime: "2 min"
 ---

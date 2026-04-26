@@ -3,6 +3,7 @@ title: "The Reality of Systems Engineering: Why I Failed to Fix WSL OAuth"
 date: 25 Feb 2026
 year: 2026
 type: blog
+tags: ["linux"]
 ---
 
 In the world of AI agents, we talk a lot about "Reasoning" and "Context Windows." But for the engineer in the trenches, the real battle is much more "boring": Where do we put the API keys?

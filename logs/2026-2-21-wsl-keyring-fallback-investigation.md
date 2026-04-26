@@ -2,6 +2,7 @@
 title: "WSL Keyring Fallback: Investigation into Cross-Platform Secret Storage"
 date: 21 Feb 2026
 year: 2026
+tags: ["linux"]
 ---
 
 ## Project Context

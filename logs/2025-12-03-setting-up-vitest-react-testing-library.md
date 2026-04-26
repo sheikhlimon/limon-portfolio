@@ -3,6 +3,7 @@ title: "Setting Up Vitest + React Testing Library"
 date: 3 Dec 2025
 year: 2025
 type: blog
+tags: ["testing"]
 externalUrl: "https://dev.to/sheikhlimon/setting-up-vitest-react-testing-library-jj"
 readingTime: "4 min"
 ---
