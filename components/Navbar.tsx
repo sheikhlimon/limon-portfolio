@@ -68,8 +68,8 @@ export default function Navbar() {
   }, [pathname])
 
   return (
-    <nav className="flex items-center justify-between px-4 sm:px-6 py-4 w-full">
-      <div className="flex items-center">
+    <nav className="flex items-center justify-between px-4 sm:px-6 h-16 w-full">
+      <div className="flex items-center min-w-20">
         <a
           href={pathname === "/" ? "#about" : "/"}
           className="hover:opacity-80 transition-opacity duration-300"
@@ -79,7 +79,7 @@ export default function Navbar() {
         </a>
       </div>
 
-      <div className="flex items-center">
+      <div className="flex items-center gap-3 sm:gap-5">
         {navItems.map((item) => {
           const Icon = item.icon
           const hrefPath = item.href.split("?")[0]
@@ -93,27 +93,23 @@ export default function Navbar() {
               href={item.href}
               target={item.href.startsWith("http") ? "_blank" : undefined}
               rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className={`group relative font-mono text-base font-medium transition-all duration-300 ${
+              className={`group relative inline-flex items-center font-mono text-base font-medium py-1 transition-colors duration-200 ${
                 isActive
                   ? "text-gray-900 dark:text-white"
                   : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-              } ${item.showLabel === false ? "mr-2" : "mr-4 sm:mr-5"}`}
+              }`}
             >
               {item.showLabel === false ? (
-                <Icon
-                  className={`w-5 h-5 transition-transform duration-300 group-hover:scale-110 ${isActive ? "text-gray-900 dark:text-white" : ""}`}
-                />
+                <Icon className="w-5 h-5" />
               ) : (
                 <>
                   <span className="hidden sm:inline">{item.name}</span>
-                  <Icon
-                    className={`sm:hidden w-5 h-5 transition-transform duration-300 group-hover:scale-110 ${isActive ? "text-gray-900 dark:text-white" : ""}`}
-                  />
+                  <Icon className="sm:hidden w-5 h-5" />
                 </>
               )}
               {item.showLabel && (
                 <span
-                  className={`absolute -bottom-1 left-0 h-px bg-gray-900 dark:bg-white transition-all duration-300 ${
+                  className={`absolute bottom-0 left-0 h-px bg-gray-900 dark:bg-white transition-all duration-300 ${
                     isActive ? "w-full" : "w-0 group-hover:w-full"
                   }`}
                 />
