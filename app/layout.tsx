@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import "./globals.css"
 import { ThemeProvider } from "next-themes"
-import NextTopLoader from "nextjs-toploader"
 import SmoothScrollWrapper from "../components/SmoothScrollWrapper"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
@@ -144,14 +143,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <NextTopLoader
-            color="#6b7280"
-            initialPosition={0.08}
-            crawl={false}
-            height={2}
-            showSpinner={false}
-            shadow="0 0 10px rgba(107, 116, 128, 0.5)"
-          />
           <SmoothScrollWrapper>
             <div className="flex flex-col min-h-screen overflow-x-hidden">
               <Navbar />

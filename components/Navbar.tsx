@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Link from "next/link"
 import { usePathname } from "next/navigation"
 import dynamic from "next/dynamic"
 import { Article, Folder, FileText, GithubLogo } from "@phosphor-icons/react"
@@ -70,13 +71,13 @@ export default function Navbar() {
   return (
     <nav className="flex items-center justify-between px-4 sm:px-6 h-16 w-full">
       <div className="flex items-center min-w-20">
-        <a
+        <Link
           href={pathname === "/" ? "#about" : "/"}
           className="hover:opacity-80 transition-opacity duration-300"
           aria-label="Sheikh Limon - Home"
         >
           <LogoTypewriter />
-        </a>
+        </Link>
       </div>
 
       <div className="flex items-center gap-3 sm:gap-5">
@@ -87,12 +88,15 @@ export default function Navbar() {
             (item.href.startsWith("/") && pathname === hrefPath) ||
             (item.href.startsWith("#") && activeSection === item.href.substring(1))
 
+          const isExternal = item.href.startsWith("http")
+          const LinkTag = isExternal ? "a" : Link
+
           return (
-            <a
+            <LinkTag
               key={item.name}
               href={item.href}
-              target={item.href.startsWith("http") ? "_blank" : undefined}
-              rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              target={isExternal ? "_blank" : undefined}
+              rel={isExternal ? "noopener noreferrer" : undefined}
               className={`group relative inline-flex items-center font-mono text-base font-medium py-1 transition-colors duration-200 ${
                 isActive
                   ? "text-gray-900 dark:text-white"
@@ -114,7 +118,7 @@ export default function Navbar() {
                   }`}
                 />
               )}
-            </a>
+            </LinkTag>
           )
         })}
 
