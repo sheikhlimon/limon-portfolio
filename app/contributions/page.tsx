@@ -39,7 +39,6 @@ async function fetchPRs(query: string): Promise<GitHubPR[]> {
   const res = await fetch(
     `https://api.github.com/search/issues?q=author:sheikhlimon+type:pr+${query}&sort=updated&order=desc&per_page=100`,
     {
-      cache: "no-store",
       headers: await githubHeaders(),
     }
   )
@@ -55,7 +54,6 @@ async function fetchPRs(query: string): Promise<GitHubPR[]> {
 
 async function getRepoInfo(owner: string, repo: string) {
   const res = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
-    cache: "no-store",
     headers: await githubHeaders(),
   })
 
