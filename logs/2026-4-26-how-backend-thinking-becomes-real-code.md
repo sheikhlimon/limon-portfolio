@@ -19,33 +19,23 @@ Instead of resource, action, and logic, you start seeing layers:
 - Service
 - Data
 
-At first this looks like a completely new concept, but it is not. It is just your original model translated into code.
+At first this looks like a new concept, but it is just the same model expressed in code.
+
+## Route
 
 A route represents the entry point. It connects a URL and an HTTP method to your system. When a request comes in, the route decides where it should go.
 
+```js
+router.post("/api/bookings", bookingController.create)
+```
+
+That is it. The route does nothing else. It just maps a URL to a function.
+
+## Controller
+
 A controller sits right after the route. It handles the request and response. This is where you deal with input, basic validation, and shaping the output. It should stay thin and not contain heavy logic.
 
-The service is where the real work happens. All business rules live here. This is where you check conditions, perform calculations, and decide what should happen.
-
-The data layer is where information is stored or fetched. This could be a database or an external API. The service talks to this layer when it needs data.
-
-If you connect this back to the earlier model, the mapping becomes clear:
-
-- Resource becomes the route
-- Action becomes the HTTP method
-- Validation happens in the controller
-- Business logic lives in the service
-- Data is handled by the database or external APIs
-
-Seeing this connection makes the structure easier to understand. You are not learning something new, you are organizing what you already know.
-
-Take a simple example like creating a booking.
-
 ```js
-// Route — entry point
-router.post("/api/bookings", bookingController.create)
-
-// Controller — handles request/response
 async function create(req, res) {
   const { flightId, userId } = req.body
 
@@ -56,8 +46,15 @@ async function create(req, res) {
   const booking = await bookingService.create({ flightId, userId })
   res.status(201).json(booking)
 }
+```
 
-// Service — business logic
+Notice how the controller does not know anything about flights or availability. It just checks that the input exists and passes it along.
+
+## Service
+
+The service is where the real work happens. All business rules live here. This is where you check conditions, perform calculations, and decide what should happen.
+
+```js
 async function create({ flightId, userId }) {
   const flight = await flightRepo.findById(flightId)
   if (!flight) throw new Error("Flight not found")
@@ -66,21 +63,36 @@ async function create({ flightId, userId }) {
 
   return bookingRepo.create({ flightId, userId, status: "confirmed" })
 }
+```
 
-// Data layer — storage
+This is the logic layer. It does not care about HTTP requests or responses. It only cares about the rules.
+
+## Data layer
+
+The data layer is where information is stored or fetched. This could be a database or an external API. The service talks to this layer when it needs data.
+
+```js
 async function create(data) {
   return db.query("INSERT INTO bookings SET ?", data)
 }
 ```
 
-A request comes in to create a booking. The route receives it and passes it to the controller. The controller checks that the required data is present and then calls the service.
+Simple and focused. It only knows how to talk to the database.
 
-The service handles the main logic. It checks if the flight exists, verifies availability, and prepares the booking data. Once everything is valid, it sends the data to the database layer.
+## How it all connects
 
-The database stores the booking and returns the result. That result flows back through the service and controller, and finally becomes the response sent to the client.
+If you connect this back to the earlier model, the mapping becomes clear:
 
-Each layer has a clear responsibility. The route directs traffic, the controller handles input and output, the service contains the logic, and the data layer handles storage.
+- Resource becomes the route
+- Action becomes the HTTP method
+- Validation happens in the controller
+- Business logic lives in the service
+- Data is handled by the database or external APIs
 
-This separation is what keeps backend systems maintainable. Without it, everything ends up mixed together, and even small changes become difficult.
+A request flows through all four layers. The route receives it, the controller validates input, the service applies logic, and the data layer handles storage. The result flows back the same way.
 
-Once you start structuring your code this way, your original mental model becomes much more powerful. You are no longer just thinking correctly, you are building systems that can grow without breaking.
+Each layer has one responsibility. The route directs traffic, the controller handles input and output, the service contains the rules, and the data layer handles storage.
+
+This separation is what keeps systems manageable. If booking rules change, you only touch the service. If input format changes, you only touch the controller. You are not digging through one large function trying to understand everything at once.
+
+Once you start structuring your code this way, the original mental model becomes practical. You are not just thinking in abstractions anymore, you are building systems that can grow without breaking.
