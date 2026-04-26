@@ -24,7 +24,7 @@ interface GitHubSearchResponse {
   items: GitHubPR[]
 }
 
-export const dynamic = "force-dynamic"
+export const revalidate = 3600
 
 async function githubHeaders() {
   const headers: HeadersInit = { Accept: "application/vnd.github.v3+json" }
