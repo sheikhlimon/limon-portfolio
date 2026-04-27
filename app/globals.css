@@ -335,27 +335,18 @@
 }
 
 /* Shiki dual-theme: transparent background, syntax colors via CSS variables */
-.shiki {
+.shiki,
+.shiki code,
+.shiki span {
   background: transparent !important;
-  margin: 0 !important;
+}
+
+.shiki {
+  padding: 0 1rem !important;
+  overflow-x: auto !important;
 }
 
 .dark .shiki,
 .dark .shiki span {
   color: var(--shiki-dark) !important;
-  background-color: transparent !important;
-}
-
-.shiki code {
-  display: block;
-  white-space: pre;
-  overflow-x: auto;
-  padding: 1rem;
-}
-
-/* Prose pre with shiki */
-.prose pre:has(.shiki) {
-  overflow-x: auto;
-  max-width: 100%;
-  margin: 1rem 0;
 }
