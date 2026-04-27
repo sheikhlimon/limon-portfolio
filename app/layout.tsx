@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     "format-detection": "telephone=no, date=no, email=no, address=no",
   },
   verification: {
-    google: "u0qRSXccsRQuHKAXTzZCbplb91-gcbmrTgO8EFhGzyA",
+    google: "86ieBIS8IJChm-PeOEiavOA3EVJHei89AybHeVR0shQ",
   },
 }
 
