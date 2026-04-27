@@ -6,11 +6,9 @@ Clean, modern, minimalist developer portfolio with subtle sci-fi aesthetic. Less
 
 ## Typography
 
-- **Sans-serif**: Space Grotesk (everything — body, headings, brand, logo)
-- **Monospace**: Fira Code (code blocks, small UI labels)
+- **Font**: Terminus (bitmap terminal font — body, headings, brand, logo)
 - **Hierarchy**: `font-sans` for main content, `font-mono` for code/tiny accents
 - **Brand name**: Two-tone styling — "Sheikh" (gray-400/500), "Limon" (gray-900/white)
-- **Clean vibe**: Unified sans-serif with Fira Code for code only
 
 ## Colors (OKLCH - defined in globals.css)
 
