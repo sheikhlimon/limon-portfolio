@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   other: {
     "format-detection": "telephone=no, date=no, email=no, address=no",
   },
+  verification: {
+    google: "u0qRSXccsRQuHKAXTzZCbplb91-gcbmrTgO8EFhGzyA",
+  },
 }
 
 export default function RootLayout({
