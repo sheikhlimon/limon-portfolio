@@ -1,6 +1,16 @@
 import type { Metadata } from "next"
+import localFont from "next/font/local"
 import "./globals.css"
 import { SITE_CONFIG } from "../lib/constants"
+
+const terminus = localFont({
+  src: [
+    { path: "../public/fonts/TerminusTTF.ttf", weight: "400", style: "normal" },
+    { path: "../public/fonts/TerminusTTF-Bold.ttf", weight: "700", style: "normal" },
+  ],
+  display: "swap",
+  variable: "--font-terminus",
+})
 import { ThemeProvider } from "next-themes"
 import SmoothScrollWrapper from "../components/SmoothScrollWrapper"
 import Navbar from "../components/Navbar"
@@ -33,7 +43,7 @@ export default function RootLayout({
     <html lang={SITE_CONFIG.lang} suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className="antialiased -bg-linear-0-to-br from-slate-50 to-slate-100 dark:from-black dark:via-zinc-950 dark:to-black text-gray-900 dark:text-white transition-colors duration-300 min-h-screen flex flex-col relative overflow-x-hidden font-sans"
+        className={`${terminus.variable} antialiased -bg-linear-0-to-br from-slate-50 to-slate-100 dark:from-black dark:via-zinc-950 dark:to-black text-gray-900 dark:text-white transition-colors duration-300 min-h-screen flex flex-col relative overflow-x-hidden font-sans`}
       >
         {/* Starry background */}
         <div className="fixed inset-0 pointer-events-none">
