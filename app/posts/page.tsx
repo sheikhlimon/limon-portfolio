@@ -4,10 +4,11 @@ import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
 import BlogClient from "./blog-client"
+import { SITE_CONFIG } from "../../lib/constants"
 
 export const metadata: Metadata = {
-  title: "Blog - Sheikh Limon",
-  description: "Blog posts and logs by Sheikh Limon - Full-Stack Developer",
+  title: `Blog - ${SITE_CONFIG.name}`,
+  description: `Blog posts and logs by ${SITE_CONFIG.name} - ${SITE_CONFIG.title}`,
 }
 
 const postsDirectory = path.join(process.cwd(), "logs")

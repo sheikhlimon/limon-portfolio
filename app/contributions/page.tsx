@@ -1,6 +1,7 @@
 import { Suspense } from "react"
 import ContributionsClient from "./contributions-client"
 import { Repo } from "./contributions-client"
+import { SITE_CONFIG } from "../../lib/constants"
 
 interface GitHubPR {
   id: number
@@ -37,7 +38,7 @@ async function githubHeaders() {
 
 async function fetchPRs(query: string): Promise<GitHubPR[]> {
   const res = await fetch(
-    `https://api.github.com/search/issues?q=author:sheikhlimon+type:pr+${query}&sort=updated&order=desc&per_page=100`,
+    `https://api.github.com/search/issues?q=author:${SITE_CONFIG.githubUsername}+type:pr+${query}&sort=updated&order=desc&per_page=100`,
     {
       headers: await githubHeaders(),
     }
