@@ -16,8 +16,8 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
       const html = await codeToHtml(code, {
         lang: language as "bash" | "diff" | "rust" | "text" | "typescript" | "javascript",
         themes: {
-          light: "one-light",
-          dark: "one-dark-pro",
+          light: "catppuccin-latte",
+          dark: "catppuccin-mocha",
         },
       })
       setHighlighted(html)

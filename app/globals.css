@@ -337,7 +337,7 @@
 /* Override shiki theme backgrounds */
 .shiki,
 .shiki code {
-  padding: 0 !important;
+  background: transparent !important;
 }
 
 /* Shiki code block overflow handling */
@@ -352,7 +352,6 @@
   white-space: pre !important;
   max-width: 100% !important;
   min-width: 0 !important;
-  padding: 1rem !important;
 }
 
 /* Prose pre with shiki */
