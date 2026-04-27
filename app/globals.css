@@ -334,24 +334,23 @@
   overflow-x: auto;
 }
 
-/* Override shiki theme backgrounds */
-.shiki,
-.shiki code {
-  background: transparent !important;
-}
-
-/* Shiki code block overflow handling */
+/* Shiki dual-theme: transparent background, syntax colors via CSS variables */
 .shiki {
-  max-width: 100% !important;
-  overflow-x: auto !important;
-  min-width: 0 !important;
+  background: transparent !important;
+  margin: 0 !important;
+}
+
+.dark .shiki,
+.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: transparent !important;
 }
 
 .shiki code {
-  display: block !important;
-  white-space: pre !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
+  display: block;
+  white-space: pre;
+  overflow-x: auto;
+  padding: 1rem;
 }
 
 /* Prose pre with shiki */
