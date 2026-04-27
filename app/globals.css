@@ -337,7 +337,6 @@
 /* Override shiki theme backgrounds */
 .shiki,
 .shiki code {
-  background: transparent !important;
   padding: 0 !important;
 }
 
