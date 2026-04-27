@@ -4,13 +4,13 @@ import { motion } from "framer-motion"
 import { useState } from "react"
 import Link from "next/link"
 import { GitPullRequest, ArrowRight } from "@phosphor-icons/react"
-import { BIO, SOCIAL_LINKS } from "../../lib/constants"
+import { BIO, SOCIAL_LINKS, SITE_CONFIG } from "../../lib/constants"
 
 export default function Hero() {
   const [copied, setCopied] = useState(false)
 
   const copyEmail = () => {
-    navigator.clipboard.writeText("sheikhlimondev@gmail.com")
+    navigator.clipboard.writeText(SITE_CONFIG.email)
     setCopied(true)
     setTimeout(() => setCopied(false), 1000)
   }
@@ -22,8 +22,8 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
       >
-        <span className="text-gray-400 dark:text-gray-500">Sheikh</span>{" "}
-        <span className="text-gray-900 dark:text-white">Limon</span>
+        <span className="text-gray-400 dark:text-gray-500">{SITE_CONFIG.firstName}</span>{" "}
+        <span className="text-gray-900 dark:text-white">{SITE_CONFIG.lastName}</span>
       </motion.h1>
 
       <motion.div
@@ -131,7 +131,7 @@ export default function Hero() {
                   onClick={copyEmail}
                   className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-mono text-sm rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300 cursor-pointer"
                 >
-                  {copied ? "Copied!" : "sheikhlimondev@gmail.com"}
+                  {copied ? "Copied!" : SITE_CONFIG.email}
                 </button>
                 <span
                   className={`absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs rounded whitespace-nowrap pointer-events-none transition-opacity duration-300 ${copied ? "opacity-100" : "opacity-0"}`}

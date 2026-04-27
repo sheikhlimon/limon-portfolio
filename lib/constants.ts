@@ -1,3 +1,28 @@
+export const SITE_CONFIG = {
+  name: "Sheikh Limon",
+  firstName: "Sheikh",
+  lastName: "Limon",
+  title: "Full-Stack Developer",
+  email: "sheikhlimondev@gmail.com",
+  githubUsername: "sheikhlimon",
+  siteTitle: "Sheikh Limon – Full-Stack Developer",
+  siteDescription:
+    "Full-Stack Developer building reliable real-world systems. Open Source Contributor.",
+  siteKeywords: [
+    "Full-Stack Developer",
+    "Software Engineer",
+    "React",
+    "Node.js",
+    "TypeScript",
+    "Open Source",
+    "Portfolio",
+    "Sheikh Limon",
+    "sheikhlimon",
+    "limon",
+  ],
+  lang: "en",
+}
+
 type BioItem = {
   text: string
   link?: string

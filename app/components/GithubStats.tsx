@@ -1,5 +1,7 @@
+import { SITE_CONFIG } from "../../lib/constants"
+
 export default async function GithubStats() {
-  const res = await fetch("https://api.github.com/users/sheikhlimon", {
+  const res = await fetch(`https://api.github.com/users/${SITE_CONFIG.githubUsername}`, {
     next: { revalidate: 3600 }, // cache 1 hour
   })
   const data = await res.json()

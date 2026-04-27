@@ -38,11 +38,11 @@ public/             # Static assets
 
 To make this your own, edit these files:
 
-- `lib/constants.ts` — name, title, tagline, bio, social links, open source stats
-- `app/layout.tsx` — metadata (title, description, keywords)
-- `app/posts/page.tsx` — page metadata
-- `package.json` — project name
+- `lib/constants.ts` — name, email, GitHub username, bio, social links, site metadata
+- `lib/projects.ts` — your projects with GitHub/live URLs
+- `.env.example` → `.env.local` — GitHub token for contributions API (optional)
 - `public/favicon.svg` — your logo
+- `package.json` — project name
 
 ## Adding Content
 

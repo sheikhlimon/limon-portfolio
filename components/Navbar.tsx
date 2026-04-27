@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 import dynamic from "next/dynamic"
 import { Article, Folder, FileText, GithubLogo } from "@phosphor-icons/react"
 import LogoTypewriter from "./LogoTypewriter"
+import { SITE_CONFIG } from "../lib/constants"
 
 const ThemeToggle = dynamic(() => import("../app/components/ThemeToggle"), {
   ssr: false,
@@ -33,7 +34,7 @@ const navItems = [
   },
   {
     name: "GitHub",
-    href: "https://github.com/sheikhlimon",
+    href: `https://github.com/${SITE_CONFIG.githubUsername}`,
     icon: GithubLogo,
     showLabel: false,
   },
@@ -74,7 +75,7 @@ export default function Navbar() {
         <Link
           href={pathname === "/" ? "#about" : "/"}
           className="hover:opacity-80 transition-opacity duration-300"
-          aria-label="Sheikh Limon - Home"
+          aria-label={`${SITE_CONFIG.name} - Home`}
         >
           <LogoTypewriter />
         </Link>

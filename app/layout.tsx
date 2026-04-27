@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import "./globals.css"
+import { SITE_CONFIG } from "../lib/constants"
 import { ThemeProvider } from "next-themes"
 import SmoothScrollWrapper from "../components/SmoothScrollWrapper"
 import Navbar from "../components/Navbar"
@@ -7,21 +8,9 @@ import Footer from "../components/Footer"
 import GoToTop from "./components/GoToTop"
 
 export const metadata: Metadata = {
-  title: "Sheikh Limon – Full-Stack Developer",
-  description:
-    "Full-Stack Developer building reliable real-world systems. Open Source Contributor.",
-  keywords: [
-    "Full-Stack Developer",
-    "Software Engineer",
-    "React",
-    "Node.js",
-    "TypeScript",
-    "Open Source",
-    "Portfolio",
-    "Sheikh Limon",
-    "sheikhlimon",
-    "limon",
-  ],
+  title: SITE_CONFIG.siteTitle,
+  description: SITE_CONFIG.siteDescription,
+  keywords: SITE_CONFIG.siteKeywords,
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon-16x16.png",
@@ -38,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={SITE_CONFIG.lang} suppressHydrationWarning>
       <body
         suppressHydrationWarning
         className="antialiased -bg-linear-0-to-br from-slate-50 to-slate-100 dark:from-black dark:via-zinc-950 dark:to-black text-gray-900 dark:text-white transition-colors duration-300 min-h-screen flex flex-col relative overflow-x-hidden font-sans"
