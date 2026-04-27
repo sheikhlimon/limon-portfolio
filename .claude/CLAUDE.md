@@ -55,6 +55,11 @@ Use CSS variables, not raw tailwind colors:
 - Semantic HTML: `<nav>`, `<article>`, etc.
 - **Icons**: Use `@phosphor-icons/react` package (e.g., `import { GithubLogo } from '@phosphor-icons/react'`)
 
+## Configuration
+
+- All personal config lives in `lib/constants.ts` (SITE_CONFIG, BIO, SOCIAL_LINKS)
+- When adding a new page, add its URL to `app/sitemap.ts`
+
 ## Don't
 
 - Don't add emojis (unless explicitly asked)
