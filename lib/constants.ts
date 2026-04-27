@@ -21,6 +21,15 @@ export const SITE_CONFIG = {
     "limon",
   ],
   lang: "en",
+  contributions: {
+    excludedRepos: [
+      "sheikhlimon/limon-portfolio",
+      "mukulboro/ai-agent-builder",
+      "recodehive/recode-website",
+      "firstcontributions/first-contributions",
+      "sheikhlimon/dotfiles-old",
+    ],
+  },
 }
 
 type BioItem = {

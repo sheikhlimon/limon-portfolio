@@ -68,15 +68,16 @@ async function getRepoInfo(owner: string, repo: string) {
 async function ContributionsContent() {
   const [merged, open] = await Promise.all([fetchPRs("is:merged"), fetchPRs("is:open")])
 
-  // Filter PRs after November 2025
-  const novemberDate = new Date("2025-11-01").getTime()
+  const { excludedRepos } = SITE_CONFIG.contributions
 
-  const filteredMerged = merged.filter(
-    (pr) =>
-      pr.pull_request.merged_at && new Date(pr.pull_request.merged_at).getTime() >= novemberDate
-  )
+  const isExcluded = (pr: GitHubPR) => {
+    const parts = pr.repository_url.split("/")
+    return excludedRepos.includes(`${parts[parts.length - 2]}/${parts[parts.length - 1]}`)
+  }
 
-  const filteredOpen = open.filter((pr) => new Date(pr.created_at).getTime() >= novemberDate)
+  const filteredMerged = merged.filter((pr) => !isExcluded(pr) && pr.pull_request.merged_at)
+
+  const filteredOpen = open.filter((pr) => !isExcluded(pr))
 
   // Group by repo and count
   const repoStats = new Map<string, { merged: Set<number>; open: Set<number> }>()

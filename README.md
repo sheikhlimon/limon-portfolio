@@ -38,7 +38,7 @@ public/             # Static assets
 
 To make this your own, edit these files:
 
-- `lib/constants.ts` — name, email, GitHub username, bio, social links, site metadata
+- `lib/constants.ts` — name, email, GitHub username, bio, social links, site metadata, contributions config (excluded repos)
 - `lib/projects.ts` — your projects with GitHub/live URLs
 - `.env.example` → `.env.local` — GitHub token for contributions API (optional)
 - `public/favicon.svg` — your logo
