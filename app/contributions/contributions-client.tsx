@@ -254,8 +254,11 @@ export default function ContributionsClient({
               ))}
             </div>
           ) : (
-            <div className="text-gray-500 dark:text-gray-400 py-12 text-center">
-              No contributions found since November 2025.
+            <div className="text-gray-500 dark:text-gray-400 py-12 text-center font-mono space-y-2">
+              <p>GitHub's API is having a moment.</p>
+              <p className="text-sm text-gray-400 dark:text-gray-500">
+                Contributions are there, GitHub just can't find them right now.
+              </p>
             </div>
           )}
         </motion.div>
