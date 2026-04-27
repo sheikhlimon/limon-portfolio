@@ -38,8 +38,9 @@ export function getLogs(): Log[] {
       }
     })
 
-  // Sort by date (newest first)
+  // Sort by date (newest first), tiebreak by slug for deterministic order
   return allLogs.toSorted((a, b) => {
-    return new Date(b.date).getTime() - new Date(a.date).getTime()
+    const dateDiff = new Date(b.date).getTime() - new Date(a.date).getTime()
+    return dateDiff !== 0 ? dateDiff : b.slug.localeCompare(a.slug)
   })
 }
