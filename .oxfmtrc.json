@@ -7,5 +7,5 @@
   "printWidth": 100,
   "endOfLine": "lf",
   "sortPackageJson": false,
-  "ignorePatterns": []
+  "ignorePatterns": ["dist", ".next"]
 }
