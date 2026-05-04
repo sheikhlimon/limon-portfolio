@@ -23,19 +23,37 @@ export default function RecentPosts() {
       <div className="space-y-4">
         {posts.map((post) => (
           <div key={post.slug} className="group">
-            <Link
-              href={`/posts/${post.slug}`}
-              className="block py-2 border-b border-gray-200 dark:border-gray-800 hover:border-gray-400/50 dark:hover:border-gray-500/50 transition-colors duration-300"
-            >
-              <div className="flex items-baseline justify-between gap-4">
-                <h3 className="text-lg text-gray-700 dark:text-gray-300 group-hover:underline transition-all duration-300 group-hover:translate-x-1 font-normal">
-                  {post.title}
-                </h3>
-                <span className="text-base text-gray-600 dark:text-gray-400 whitespace-nowrap">
-                  {post.date}
-                </span>
-              </div>
-            </Link>
+            {post.externalUrl ? (
+              <a
+                href={post.externalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block py-2 border-b border-gray-200 dark:border-gray-800 hover:border-gray-400/50 dark:hover:border-gray-500/50 transition-colors duration-300"
+              >
+                <div className="flex items-baseline justify-between gap-4">
+                  <h3 className="text-lg text-gray-700 dark:text-gray-300 group-hover:underline transition-all duration-300 group-hover:translate-x-1 font-normal">
+                    {post.title}
+                  </h3>
+                  <span className="text-base text-gray-600 dark:text-gray-400 whitespace-nowrap">
+                    {post.date}
+                  </span>
+                </div>
+              </a>
+            ) : (
+              <Link
+                href={`/posts/${post.slug}`}
+                className="block py-2 border-b border-gray-200 dark:border-gray-800 hover:border-gray-400/50 dark:hover:border-gray-500/50 transition-colors duration-300"
+              >
+                <div className="flex items-baseline justify-between gap-4">
+                  <h3 className="text-lg text-gray-700 dark:text-gray-300 group-hover:underline transition-all duration-300 group-hover:translate-x-1 font-normal">
+                    {post.title}
+                  </h3>
+                  <span className="text-base text-gray-600 dark:text-gray-400 whitespace-nowrap">
+                    {post.date}
+                  </span>
+                </div>
+              </Link>
+            )}
           </div>
         ))}
       </div>

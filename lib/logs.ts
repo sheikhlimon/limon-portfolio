@@ -13,6 +13,7 @@ export interface Log {
   slug: string
   content: string
   type: LogType
+  externalUrl?: string
 }
 
 export function getLogs(): Log[] {
@@ -35,6 +36,7 @@ export function getLogs(): Log[] {
         slug: fileName.replace(/\.md$/, ""),
         content: fileContents,
         type: (data.type as LogType) || "log",
+        externalUrl: data.externalUrl || undefined,
       }
     })
 
