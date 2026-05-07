@@ -28,6 +28,7 @@ export const SITE_CONFIG = {
       "recodehive/recode-website",
       "firstcontributions/first-contributions",
       "sheikhlimon/dotfiles-old",
+      "sheikhlimon/daily-tasks-app",
     ],
   },
 }
