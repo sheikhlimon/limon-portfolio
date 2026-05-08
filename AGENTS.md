@@ -55,6 +55,26 @@ Use CSS variables, not raw tailwind colors:
 - Semantic HTML: `<nav>`, `<article>`, etc.
 - **Icons**: Use `@phosphor-icons/react` package (e.g., `import { GithubLogo } from '@phosphor-icons/react'`)
 
+## Blog / Log Posts
+
+- **Location**: `logs/` directory as `.md` files
+- **Naming**: `YYYY-M-D-slug.md` (e.g. `2026-5-8-my-post.md`)
+- **Frontmatter**:
+  ```yaml
+  ---
+  title: "Post Title"
+  date: 8 May 2026
+  year: 2026
+  type: blog
+  tags: ["one-tag"]
+  ---
+  ```
+- `type` is either `blog` or `log`
+- `tags` is a single-item array — one tag per post
+- For external posts, add `externalUrl: "https://..."`
+- Content is plain Markdown (no MDX)
+- Posts are auto-sorted by date, reading time is auto-calculated
+
 ## Configuration
 
 - All personal config lives in `lib/constants.ts` (SITE_CONFIG, BIO, SOCIAL_LINKS)
