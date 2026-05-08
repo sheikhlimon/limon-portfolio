@@ -120,3 +120,5 @@ Once you start thinking in terms of resource, action, and logic, backend develop
 You stop guessing what to build and start structuring it.
 
 And when things are structured, they become much easier to design, extend, and maintain.
+
+**Next**: [How Backend Thinking Becomes Real Code](/posts/2026-4-26-how-backend-thinking-becomes-real-code) — how this mental model translates into actual code layers.

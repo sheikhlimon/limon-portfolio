@@ -6,6 +6,10 @@ type: blog
 tags: ["backend"]
 ---
 
+This is part 3 of a series on reading backend code. [Start from part 1](/posts/2026-4-26-how-backend-engineers-actually-think).
+
+---
+
 When I first looked at real backend code, it felt impossible to read.
 
 Something like this:

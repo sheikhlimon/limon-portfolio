@@ -96,3 +96,5 @@ Each layer has one responsibility. The route directs traffic, the controller han
 This separation is what keeps systems manageable. If booking rules change, you only touch the service. If input format changes, you only touch the controller. You are not digging through one large function trying to understand everything at once.
 
 Once you start structuring your code this way, the original mental model becomes practical. You are not just thinking in abstractions anymore, you are building systems that can grow without breaking.
+
+**Next**: [Most Backend Code Is Just: Action, Data, Condition, Result](/posts/2026-5-8-backend-code-action-data-condition-result) — a simpler way to read and understand any backend code at a glance.
