@@ -3,13 +3,24 @@ import localFont from "next/font/local"
 import "./globals.css"
 import { SITE_CONFIG } from "../lib/constants"
 
-const terminus = localFont({
+const caskaydia = localFont({
   src: [
-    { path: "../public/fonts/TerminusTTF.ttf", weight: "400", style: "normal" },
-    { path: "../public/fonts/TerminusTTF-Bold.ttf", weight: "700", style: "normal" },
+    { path: "../public/fonts/CaskaydiaMonoNerdFont-Regular.ttf", weight: "400", style: "normal" },
+    { path: "../public/fonts/CaskaydiaMonoNerdFont-Bold.ttf", weight: "700", style: "normal" },
   ],
   display: "swap",
-  variable: "--font-terminus",
+  variable: "--font-caskaydia",
+})
+
+const dmSans = localFont({
+  src: [
+    { path: "../public/fonts/DMSans-Regular.ttf", weight: "400", style: "normal" },
+    { path: "../public/fonts/DMSans-Medium.ttf", weight: "500", style: "normal" },
+    { path: "../public/fonts/DMSans-SemiBold.ttf", weight: "600", style: "normal" },
+    { path: "../public/fonts/DMSans-Bold.ttf", weight: "700", style: "normal" },
+  ],
+  display: "swap",
+  variable: "--font-dm-sans",
 })
 import { ThemeProvider } from "next-themes"
 import SmoothScrollWrapper from "../components/SmoothScrollWrapper"
@@ -43,7 +54,7 @@ export default function RootLayout({
     <html lang={SITE_CONFIG.lang} suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className={`${terminus.variable} antialiased -bg-linear-0-to-br from-slate-50 to-slate-100 dark:from-black dark:via-zinc-950 dark:to-black text-gray-900 dark:text-white transition-colors duration-300 min-h-screen flex flex-col relative overflow-x-hidden font-sans`}
+        className={`${caskaydia.variable} ${dmSans.variable} antialiased -bg-linear-0-to-br from-slate-50 to-slate-100 dark:from-black dark:via-zinc-950 dark:to-black text-gray-900 dark:text-white transition-colors duration-300 min-h-screen flex flex-col relative overflow-x-hidden font-sans`}
       >
         {/* Starry background */}
         <div className="fixed inset-0 pointer-events-none">
