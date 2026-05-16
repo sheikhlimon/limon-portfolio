@@ -87,7 +87,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
           <button
             key={tab.id}
             onClick={() => handleTabChange(tab.id)}
-            className={`group relative font-mono text-xl sm:text-2xl transition-all duration-300 text-left max-w-full truncate cursor-pointer ${
+            className={`group relative font-display text-xl sm:text-2xl transition-all duration-300 text-left max-w-full truncate cursor-pointer ${
               activeTab === tab.id
                 ? "font-bold text-gray-900 dark:text-white"
                 : "font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
@@ -107,7 +107,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
         <div className="flex flex-wrap gap-2 mb-8">
           <button
             onClick={() => handleTagChange(null)}
-            className={`font-mono text-xs px-3 py-1 rounded border transition-colors duration-200 cursor-pointer ${
+            className={`font-display text-xs px-3 py-1 rounded border transition-colors duration-200 cursor-pointer ${
               activeTag === null
                 ? "bg-gray-900 dark:bg-white text-white dark:text-gray-900 border-gray-900 dark:border-white"
                 : "bg-transparent text-gray-600 dark:text-gray-400 border-gray-300 dark:border-gray-700 hover:border-gray-900 dark:hover:border-white hover:text-gray-900 dark:hover:text-white"
@@ -119,7 +119,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
             <button
               key={tag}
               onClick={() => handleTagChange(activeTag === tag ? null : tag)}
-              className={`font-mono text-xs px-3 py-1 rounded border transition-colors duration-200 cursor-pointer ${
+              className={`font-display text-xs px-3 py-1 rounded border transition-colors duration-200 cursor-pointer ${
                 activeTag === tag
                   ? "bg-gray-900 dark:bg-white text-white dark:text-gray-900 border-gray-900 dark:border-white"
                   : "bg-transparent text-gray-600 dark:text-gray-400 border-gray-300 dark:border-gray-700 hover:border-gray-900 dark:hover:border-white hover:text-gray-900 dark:hover:text-white"
@@ -137,7 +137,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
             .toSorted(([a], [b]) => b.localeCompare(a))
             .map(([year, yearPosts]) => (
               <div key={year} className="w-full space-y-10">
-                <h2 className="text-lg font-mono font-bold text-gray-900 dark:text-white mb-8 mt-8">
+                <h2 className="text-lg font-display font-bold text-gray-900 dark:text-white mb-8 mt-8">
                   {year}
                 </h2>
                 <div className="space-y-3">

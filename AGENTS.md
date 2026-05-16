@@ -6,10 +6,10 @@ Clean, modern, minimalist developer portfolio with subtle sci-fi aesthetic. Less
 
 ## Typography
 
-- **Primary font**: CaskaydiaMono Nerd Font (mono — homepage, navbar, bio, brand, logo)
-- **Blog font**: DM Sans (sans-serif — blog/log prose, headings, paragraphs)
+- **Body font**: DM Sans (sans-serif — bio, project descriptions, resume body, blog prose)
+- **Display font**: CaskaydiaMono Nerd Font (mono — nav, titles, headings, brand, logo, social links)
 - **Code font**: CaskaydiaMono Nerd Font (code blocks and inline code)
-- **Hierarchy**: `font-sans` (Caskaydia) for main content, `font-body` (DM Sans) for blog, `font-mono` for code
+- **Hierarchy**: `font-sans` (DM Sans) for body text, `font-display` (CaskaydiaMono) for headings/nav, `font-mono` for code
 - **Brand name**: Two-tone styling — "Sheikh" (gray-400/500), "Limon" (gray-900/white)
 
 ## Colors (OKLCH - defined in globals.css)

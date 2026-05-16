@@ -127,7 +127,7 @@ export default function ResumeClient() {
           <span className="text-gray-900 dark:text-white font-medium">Linux Foundation</span>. Goose
           Community All-Star (January 2026).
         </p>
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm font-mono text-gray-500 dark:text-gray-400 mt-3">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm font-display text-gray-500 dark:text-gray-400 mt-3">
           <span>Dhaka, Bangladesh</span>
           <span className="text-gray-300 dark:text-gray-600">·</span>
           <span>Open to remote</span>
@@ -163,7 +163,7 @@ export default function ResumeClient() {
           <div className="mt-5 space-y-5">
             {techCategories.map((category) => (
               <div key={category.label}>
-                <h3 className="font-mono text-xs uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-2">
+                <h3 className="font-display text-xs uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-2">
                   {category.label}
                 </h3>
                 <div className="flex flex-wrap gap-x-5 gap-y-2">
@@ -194,25 +194,25 @@ export default function ResumeClient() {
                 <div>
                   <div className="flex items-center gap-2 flex-wrap">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
-                    <h3 className="font-mono font-medium text-gray-900 dark:text-white">
+                    <h3 className="font-display font-medium text-gray-900 dark:text-white">
                       {entry.org}
                     </h3>
                     <span className="text-gray-500 dark:text-gray-400 text-sm">
                       — {entry.project}
                     </span>
                     {entry.badge && (
-                      <span className="text-xs font-mono px-1.5 py-0.5 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-400 rounded">
+                      <span className="text-xs font-display px-1.5 py-0.5 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-400 rounded">
                         {entry.badge}
                       </span>
                     )}
                   </div>
-                  <p className="text-sm text-gray-400 dark:text-gray-500 font-mono mt-1 ml-3.5">
+                  <p className="text-sm text-gray-400 dark:text-gray-500 font-display mt-1 ml-3.5">
                     {entry.period}
                   </p>
                 </div>
                 <Link
                   href={`/contributions?repo=${encodeURIComponent(entry.repo)}`}
-                  className="inline-flex items-center gap-1 text-sm font-mono text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors shrink-0"
+                  className="inline-flex items-center gap-1 text-sm font-display text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors shrink-0"
                 >
                   View contributions
                   <ArrowUpRight className="w-3 h-3" />
@@ -229,9 +229,9 @@ export default function ResumeClient() {
 function SectionDivider({ number, label }: { number: string; label: string }) {
   return (
     <div className="flex items-center gap-3">
-      <span className="font-mono text-xs text-gray-300 dark:text-gray-700">{number}</span>
+      <span className="font-display text-xs text-gray-300 dark:text-gray-700">{number}</span>
       <div className="h-px flex-1 bg-gray-200 dark:bg-gray-800" />
-      <h2 className="font-mono text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400">
+      <h2 className="font-display text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400">
         {label}
       </h2>
     </div>

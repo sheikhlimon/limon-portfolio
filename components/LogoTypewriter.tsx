@@ -66,7 +66,7 @@ const LogoTypewriter = () => {
 
   return (
     <div className="flex items-center whitespace-nowrap leading-none">
-      <span className="text-xl text-gray-900 dark:text-white tracking-tight font-mono font-bold">
+      <span className="text-xl text-gray-900 dark:text-white tracking-tight font-display font-bold">
         {displayText}
       </span>
       {/* Terminal underline cursor */}

@@ -72,7 +72,7 @@ export default function Hero() {
       >
         <Link
           href="/contributions"
-          className="group inline-flex items-center gap-2 text-lg font-mono text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-all duration-300"
+          className="group inline-flex items-center gap-2 text-lg font-display text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-all duration-300"
         >
           <GitPullRequest className="w-5 h-5 text-purple-500 dark:text-purple-400" />
           <span className="underline decoration-gray-400 group-hover:decoration-gray-900 dark:group-hover:decoration-white">
@@ -88,7 +88,9 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.9, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
       >
-        <h3 className="text-2xl font-medium text-gray-900 dark:text-white font-mono">Find me on</h3>
+        <h3 className="text-2xl font-medium text-gray-900 dark:text-white font-display">
+          Find me on
+        </h3>
         <div className="space-y-4">
           <div className="flex flex-wrap items-center gap-5 sm:gap-6 text-lg">
             {SOCIAL_LINKS.map((link, index) => (
@@ -99,7 +101,7 @@ export default function Hero() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1 + index * 0.1, duration: 0.3 }}
-                className="group relative font-mono text-lg transition-all duration-300 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                className="group relative font-display text-lg transition-all duration-300 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
                 aria-label={link.name}
                 title={link.name}
               >

@@ -108,7 +108,7 @@ export default function ContributionsClient({
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <h1 className="text-2xl sm:text-3xl font-medium text-gray-900 dark:text-white font-mono mb-6">
+          <h1 className="text-2xl sm:text-3xl font-medium text-gray-900 dark:text-white font-display mb-6">
             {selectedRepo.fullName}
           </h1>
 
@@ -117,7 +117,7 @@ export default function ContributionsClient({
               <button
                 key={tab.id}
                 onClick={() => setTab(tab.id)}
-                className={`group relative font-mono text-xl sm:text-2xl transition-all duration-300 text-left max-w-full truncate cursor-pointer ${
+                className={`group relative font-display text-xl sm:text-2xl transition-all duration-300 text-left max-w-full truncate cursor-pointer ${
                   activeTab === tab.id
                     ? "font-bold text-gray-900 dark:text-white"
                     : "font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
@@ -160,13 +160,13 @@ export default function ContributionsClient({
                         <h3 className="text-base font-semibold text-gray-900 dark:text-white group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors truncate">
                           {contribution.title}
                         </h3>
-                        <span className="text-sm text-gray-500 dark:text-gray-400 font-mono flex-shrink-0">
+                        <span className="text-sm text-gray-500 dark:text-gray-400 font-display flex-shrink-0">
                           #{contribution.number}
                         </span>
                       </div>
 
                       <div className="flex flex-wrap items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                        <span className="font-mono text-gray-700 dark:text-gray-300">
+                        <span className="font-display text-gray-700 dark:text-gray-300">
                           {contribution.repo}
                         </span>
                         {contribution.mergedAt && (
@@ -201,7 +201,7 @@ export default function ContributionsClient({
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-2xl sm:text-3xl font-medium text-gray-900 dark:text-white font-mono mb-8">
+          <h1 className="text-2xl sm:text-3xl font-medium text-gray-900 dark:text-white font-display mb-8">
             Open Source Contributions
           </h1>
 
@@ -226,7 +226,7 @@ export default function ContributionsClient({
                             {repo.fullName}
                           </h3>
                         </div>
-                        <span className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 font-mono">
+                        <span className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 font-display">
                           <Star className="w-4 h-4 text-yellow-500 dark:text-yellow-400" />
                           {repo.stars.toLocaleString()}
                         </span>
@@ -238,7 +238,7 @@ export default function ContributionsClient({
                         </p>
                       )}
 
-                      <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400 font-mono">
+                      <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400 font-display">
                         <span className="flex items-center gap-1">
                           <GitPullRequest className="w-4 h-4 text-purple-500 dark:text-purple-400" />
                           {repo.mergedCount} merged
@@ -254,7 +254,7 @@ export default function ContributionsClient({
               ))}
             </div>
           ) : (
-            <div className="text-gray-500 dark:text-gray-400 py-12 text-center font-mono space-y-2">
+            <div className="text-gray-500 dark:text-gray-400 py-12 text-center font-display space-y-2">
               <p>GitHub's API is having a moment.</p>
               <p className="text-sm text-gray-400 dark:text-gray-500">
                 Contributions are there, GitHub just can't find them right now.

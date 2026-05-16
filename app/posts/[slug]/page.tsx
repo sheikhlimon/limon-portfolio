@@ -75,10 +75,10 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     <div className="w-full max-w-full overflow-x-hidden">
       <div className="space-y-6">
         <div className="space-y-2">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white break-words font-body">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white break-words">
             {data.title || "Untitled"}
           </h1>
-          <p className="text-base text-gray-600 dark:text-gray-400 font-body">
+          <p className="text-base text-gray-600 dark:text-gray-400">
             {data.date || ""} · {calculateReadingTime(content)}
           </p>
         </div>
@@ -89,25 +89,25 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             components={{
               h1: ({ ...props }) => (
                 <h1
-                  className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-4 break-words font-body"
+                  className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-4 break-words"
                   {...props}
                 />
               ),
               h2: ({ ...props }) => (
                 <h2
-                  className="text-base font-semibold text-gray-900 dark:text-white mt-8 mb-4 break-words font-body"
+                  className="text-base font-semibold text-gray-900 dark:text-white mt-8 mb-4 break-words"
                   {...props}
                 />
               ),
               h3: ({ ...props }) => (
                 <h3
-                  className="text-sm font-semibold text-gray-900 dark:text-white mt-6 mb-3 break-words font-body"
+                  className="text-sm font-semibold text-gray-900 dark:text-white mt-6 mb-3 break-words"
                   {...props}
                 />
               ),
               p: ({ ...props }) => (
                 <p
-                  className="my-4 leading-relaxed text-lg text-gray-700 dark:text-gray-300 break-words font-body"
+                  className="my-4 leading-relaxed text-lg text-gray-700 dark:text-gray-300 break-words"
                   {...props}
                 />
               ),

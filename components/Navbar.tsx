@@ -98,7 +98,7 @@ export default function Navbar() {
               href={item.href}
               target={isExternal ? "_blank" : undefined}
               rel={isExternal ? "noopener noreferrer" : undefined}
-              className={`group relative inline-flex items-center font-mono text-base font-medium py-1 transition-colors duration-200 ${
+              className={`group relative inline-flex items-center font-display text-base font-medium py-1 transition-colors duration-200 ${
                 isActive
                   ? "text-gray-900 dark:text-white"
                   : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
