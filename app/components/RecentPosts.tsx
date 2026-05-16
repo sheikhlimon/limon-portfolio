@@ -11,10 +11,12 @@ export default function RecentPosts() {
   return (
     <section id="recent-posts" className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-semibold font-display">Recent Posts</h2>
+        <h2 className="text-2xl font-medium text-gray-900 dark:text-white font-display">
+          Recent Posts
+        </h2>
         <Link
           href="/posts"
-          className="text-base text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:translate-x-1 transition-all duration-300"
+          className="text-base text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:translate-x-1 transition-all duration-300 font-display"
         >
           View all →
         </Link>
@@ -31,7 +33,7 @@ export default function RecentPosts() {
                 className="block py-2 border-b border-gray-200 dark:border-gray-800 hover:border-gray-400/50 dark:hover:border-gray-500/50 transition-colors duration-300"
               >
                 <div className="flex items-baseline justify-between gap-4">
-                  <h3 className="text-lg text-gray-700 dark:text-gray-300 group-hover:underline transition-all duration-300 group-hover:translate-x-1 font-normal font-display">
+                  <h3 className="text-lg text-gray-700 dark:text-gray-300 group-hover:underline transition-all duration-300 group-hover:translate-x-1 font-normal">
                     {post.title}
                   </h3>
                   <span className="text-base text-gray-600 dark:text-gray-400 whitespace-nowrap">
@@ -45,7 +47,7 @@ export default function RecentPosts() {
                 className="block py-2 border-b border-gray-200 dark:border-gray-800 hover:border-gray-400/50 dark:hover:border-gray-500/50 transition-colors duration-300"
               >
                 <div className="flex items-baseline justify-between gap-4">
-                  <h3 className="text-lg text-gray-700 dark:text-gray-300 group-hover:underline transition-all duration-300 group-hover:translate-x-1 font-normal font-display">
+                  <h3 className="text-lg text-gray-700 dark:text-gray-300 group-hover:underline transition-all duration-300 group-hover:translate-x-1 font-normal">
                     {post.title}
                   </h3>
                   <span className="text-base text-gray-600 dark:text-gray-400 whitespace-nowrap">

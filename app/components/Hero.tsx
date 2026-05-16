@@ -126,9 +126,9 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.4, duration: 0.5 }}
           >
-            <p className="text-base text-gray-700 dark:text-gray-300 flex flex-nowrap items-baseline gap-x-1 font-display">
+            <p className="text-base text-gray-700 dark:text-gray-300 flex flex-wrap items-baseline gap-x-1 font-display">
               <span>Or mail me at</span>
-              <span className="relative inline-block">
+              <span className="relative inline-block font-sans">
                 <button
                   onClick={copyEmail}
                   className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300 cursor-pointer"
