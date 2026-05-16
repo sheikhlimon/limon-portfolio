@@ -5,7 +5,7 @@
 - **Framework**: Next.js 16 (React 19, TypeScript)
 - **Styling**: Tailwind CSS + next-themes
 - **Content**: MDX, Shiki for code highlighting
-- **Fonts**: CaskaydiaMono Nerd Font (primary) + DM Sans (blog)
+- **Fonts**: DM Sans (body) + CaskaydiaMono Nerd Font (display/code)
 
 ## Setup
 
