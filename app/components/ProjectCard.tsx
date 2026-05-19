@@ -15,6 +15,8 @@ import { Project } from "../../lib/projects"
 
 interface ProjectCardProps {
   project: Project
+  variant?: "default" | "featured"
+  loading?: "eager" | "lazy"
 }
 
 const iconMap = {
@@ -26,8 +28,13 @@ const iconMap = {
   Briefcase,
 }
 
-export default function ProjectCard({ project }: ProjectCardProps) {
+export default function ProjectCard({
+  project,
+  variant = "default",
+  loading = "lazy",
+}: ProjectCardProps) {
   const Icon = iconMap[project.icon]
+  const isFeatured = variant === "featured"
 
   return (
     <div className="group flex flex-col h-full border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg overflow-hidden hover:shadow-lg hover:shadow-gray-500/10 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1">
@@ -38,6 +45,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             alt={project.title}
             fill
             className="object-cover scale-105 transition-transform duration-300 group-hover:scale-100"
+            loading={loading}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </div>
@@ -47,17 +55,19 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </div>
       )}
 
-      <div className="p-4 flex flex-col flex-1 space-y-3">
+      <div className={`flex flex-col flex-1 ${isFeatured ? "p-4 space-y-2" : "p-4 space-y-3"}`}>
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white font-display flex items-center gap-2">
           <Icon className="w-4 h-4 flex-shrink-0" />
           <span className="break-words">{project.title}</span>
         </h3>
 
-        <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+        <p
+          className={`text-sm text-gray-600 dark:text-gray-400 flex-1 ${isFeatured ? "" : "line-clamp-2"}`}
+        >
           {project.description}
         </p>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4 pt-1">
           {project.live && (
             <a
               href={project.live}
@@ -80,16 +90,18 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </a>
         </div>
 
-        <div className="flex flex-wrap gap-2">
-          {project.techStack.map((tech) => (
-            <span
-              key={tech}
-              className="flex items-center gap-1 px-2 py-1 text-sm border border-zinc-400/70 dark:border-zinc-500/50 rounded"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
+        {!isFeatured && (
+          <div className="flex flex-wrap gap-2">
+            {project.techStack.map((tech) => (
+              <span
+                key={tech}
+                className="flex items-center gap-1 px-2 py-1 text-sm border border-zinc-400/70 dark:border-zinc-500/50 rounded"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )
