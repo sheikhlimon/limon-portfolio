@@ -32,12 +32,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   return (
     <div className="group flex flex-col h-full border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg overflow-hidden hover:shadow-lg hover:shadow-gray-500/10 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1">
       {project.image ? (
-        <div className="relative aspect-video w-full bg-gray-100 dark:bg-gray-800">
+        <div className="relative aspect-video w-full bg-gray-100 dark:bg-gray-800 overflow-hidden">
           <Image
             src={project.image}
             alt={project.title}
             fill
-            className="object-cover"
+            className="object-cover scale-105 transition-transform duration-300 group-hover:scale-100"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </div>
