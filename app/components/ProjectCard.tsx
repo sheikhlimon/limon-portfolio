@@ -63,7 +63,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-sans text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
+              className="inline-flex items-center gap-1.5 text-base font-sans text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
             >
               <ArrowUpRight className="w-4 h-4" />
               Live
@@ -73,7 +73,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-sm font-sans text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
+            className="inline-flex items-center gap-1.5 text-base font-sans text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
           >
             <GithubLogo className="w-4 h-4" />
             GitHub
