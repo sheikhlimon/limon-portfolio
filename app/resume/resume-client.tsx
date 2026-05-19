@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { ArrowUpRight } from "@phosphor-icons/react"
+import { ArrowUpRight, DownloadSimple } from "@phosphor-icons/react"
 import {
   SiReact,
   SiNextdotjs,
@@ -120,6 +120,14 @@ export default function ResumeClient() {
           <span className="text-gray-400 dark:text-gray-500">Sheikh</span>{" "}
           <span className="text-gray-900 dark:text-white">Limon</span>
         </h1>
+        <a
+          href="/Sheikh_Limon_FullStack_Developer.pdf"
+          download
+          className="inline-flex items-center gap-1.5 text-sm font-sans text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 mt-2"
+        >
+          <DownloadSimple className="w-4 h-4" />
+          Download PDF
+        </a>
         <p className="text-gray-700 dark:text-gray-300 max-w-2xl mt-4">
           Full-Stack Developer with 1+ years building web applications from scratch. Contributor to
           production codebases at{" "}
