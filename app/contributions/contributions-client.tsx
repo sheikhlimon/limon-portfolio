@@ -99,7 +99,7 @@ export default function ContributionsClient({
   }
 
   return (
-    <div className="pt-2 pb-12 w-full max-w-full">
+    <div className="max-w-3xl mx-auto pt-2 pb-12 w-full">
       {selectedRepo ? (
         // Repo detail view
         <motion.div

@@ -9,7 +9,7 @@ export default function RecentPosts() {
   }
 
   return (
-    <section id="recent-posts" className="space-y-6">
+    <section id="recent-posts" className="max-w-3xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-medium text-gray-900 dark:text-white font-display">
           Recent Posts

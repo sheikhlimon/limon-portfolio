@@ -39,7 +39,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
     >
-      <div className="max-w-4xl mx-auto px-5 pt-2 pb-12">
+      <div className="max-w-5xl mx-auto px-5 pt-2 pb-12">
         <motion.div
           className="space-y-8 -mt-4"
           variants={containerVariants}
@@ -55,7 +55,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
             Projects
           </motion.h1>
 
-          <div className="space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project) => (
               <motion.div key={project.title} variants={itemVariants}>
                 <ProjectCard project={project} />

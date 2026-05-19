@@ -159,7 +159,7 @@ export default function RootLayout({
           <SmoothScrollWrapper>
             <div className="flex flex-col min-h-screen overflow-x-hidden">
               <Navbar />
-              <main className="max-w-3xl mx-auto px-5 pt-6 pb-10 grow w-full">{children}</main>
+              <main className="mx-auto px-5 pt-6 pb-10 grow w-full">{children}</main>
               <Footer />
             </div>
             <GoToTop />

@@ -1,6 +1,16 @@
 "use client"
 
-import { Globe, Shield, GraduationCap, Cube, Terminal, Briefcase } from "@phosphor-icons/react"
+import Image from "next/image"
+import {
+  Globe,
+  Shield,
+  GraduationCap,
+  Cube,
+  Terminal,
+  Briefcase,
+  ArrowUpRight,
+  GithubLogo,
+} from "@phosphor-icons/react"
 import { Project } from "../../lib/projects"
 
 interface ProjectCardProps {
@@ -20,21 +30,55 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const Icon = iconMap[project.icon]
 
   return (
-    <a
-      href={project.live}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group block border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg p-4 hover:border-gray-400/50 dark:hover:border-gray-500/50 hover:shadow-lg hover:shadow-gray-500/10 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1"
-    >
-      <div className="flex items-center mb-3 gap-2">
-        <div className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-300 flex items-center gap-2">
-          <Icon className="w-4 h-4 flex-shrink-0 transition-opacity duration-300 group-hover:opacity-80" />
-          <span className="break-words">{project.title}</span>
+    <div className="group flex flex-col h-full border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg overflow-hidden hover:shadow-lg hover:shadow-gray-500/10 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1">
+      {project.image ? (
+        <div className="relative aspect-video w-full bg-gray-100 dark:bg-gray-800">
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
         </div>
-      </div>
+      ) : (
+        <div className="aspect-video w-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center">
+          <Icon className="w-12 h-12 text-gray-400 dark:text-gray-500" weight="duotone" />
+        </div>
+      )}
 
-      <div className="space-y-3 text-gray-700 dark:text-gray-300">
-        <p className="text-base">{project.description}</p>
+      <div className="p-4 flex flex-col flex-1 space-y-3">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white font-display flex items-center gap-2">
+          <Icon className="w-4 h-4 flex-shrink-0" />
+          <span className="break-words">{project.title}</span>
+        </h3>
+
+        <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+          {project.description}
+        </p>
+
+        <div className="flex items-center gap-3">
+          {project.live && (
+            <a
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm font-sans text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
+            >
+              <ArrowUpRight className="w-4 h-4" />
+              Live
+            </a>
+          )}
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-sm font-sans text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
+          >
+            <GithubLogo className="w-4 h-4" />
+            GitHub
+          </a>
+        </div>
 
         <div className="flex flex-wrap gap-2">
           {project.techStack.map((tech) => (
@@ -46,13 +90,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             </span>
           ))}
         </div>
-
-        <ul className="text-base space-y-1">
-          {project.features.map((feature) => (
-            <li key={feature}>• {feature}</li>
-          ))}
-        </ul>
       </div>
-    </a>
+    </div>
   )
 }

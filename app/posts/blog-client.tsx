@@ -77,7 +77,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
 
   return (
     <motion.div
-      className="pt-2 pb-12 w-full max-w-full"
+      className="max-w-3xl mx-auto pt-2 pb-12 w-full"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}

@@ -5,6 +5,7 @@ export interface Project {
   features: string[]
   github: string
   live?: string
+  image?: string
   icon: "Globe" | "Shield" | "GraduationCap" | "Cube" | "Terminal" | "Briefcase"
 }
 
@@ -22,6 +23,7 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/sheikhlimon/infra-scope",
     live: "https://infra-scope.vercel.app",
+    image: "/infra-scope.png",
     icon: "Cube",
   },
   {
@@ -36,6 +38,7 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/sheikhlimon/crypto-guardian",
     live: "https://crypto-guardian-frontend.vercel.app",
+    image: "/crypto-guardian.png",
     icon: "Shield",
   },
   {
@@ -51,6 +54,7 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/sheikhlimon/quick-hire",
     live: "https://quick-hire-web-delta.vercel.app",
+    image: "/quick-hire.png",
     icon: "Briefcase",
   },
   {
@@ -65,6 +69,7 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/sheikhlimon/college-booking-app",
     live: "https://college-booking-app-nine.vercel.app",
+    image: "/college-booking.png",
     icon: "GraduationCap",
   },
   {
@@ -78,6 +83,7 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/sheikhlimon/gesture-share",
     live: "https://gesture-share.vercel.app",
+    image: "/gesture-share.png",
     icon: "Globe",
   },
   {
@@ -93,6 +99,7 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/sheikhlimon/agent-builder",
     live: "https://agent-builder-omega.vercel.app",
+    image: "/ai-agent-builder.png",
     icon: "Terminal",
   },
 ]

@@ -72,7 +72,7 @@ function getPosts(): Post[] {
 
 function PostsSkeleton() {
   return (
-    <div className="pt-2 pb-12 w-full max-w-full">
+    <div className="max-w-3xl mx-auto pt-2 pb-12 w-full">
       {/* Tab skeleton */}
       <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-6 mb-10">
         <div className="h-8 w-20 bg-gray-200 dark:bg-gray-800 rounded animate-pulse" />

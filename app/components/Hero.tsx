@@ -15,7 +15,7 @@ export default function Hero() {
     setTimeout(() => setCopied(false), 1000)
   }
   return (
-    <section id="about" className="space-y-6 pt-2 sm:pt-8">
+    <section id="about" className="max-w-3xl mx-auto space-y-6 pt-2 sm:pt-8">
       <motion.h1
         className="text-5xl font-bold tracking-tight"
         initial={{ opacity: 0, y: -20 }}
@@ -101,7 +101,7 @@ export default function Hero() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1 + index * 0.1, duration: 0.3 }}
-                className="group relative font-display text-lg transition-all duration-300 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                className="group relative font-sans text-lg transition-all duration-300 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
                 aria-label={link.name}
                 title={link.name}
               >
