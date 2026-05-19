@@ -116,18 +116,20 @@ export default function ResumeClient() {
     >
       {/* Header */}
       <motion.div variants={sectionVariants} initial="hidden" animate="visible" className="mb-12">
-        <h1 className="text-3xl font-bold tracking-tight">
-          <span className="text-gray-400 dark:text-gray-500">Sheikh</span>{" "}
-          <span className="text-gray-900 dark:text-white">Limon</span>
-        </h1>
-        <a
-          href="/Sheikh_Limon_FullStack_Developer.pdf"
-          download
-          className="inline-flex items-center gap-1.5 text-sm font-sans text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 mt-2"
-        >
-          <DownloadSimple className="w-4 h-4" />
-          Download PDF
-        </a>
+        <div className="flex items-center gap-4">
+          <h1 className="text-3xl font-bold tracking-tight">
+            <span className="text-gray-400 dark:text-gray-500">Sheikh</span>{" "}
+            <span className="text-gray-900 dark:text-white">Limon</span>
+          </h1>
+          <a
+            href="/Sheikh_Limon_FullStack_Developer.pdf"
+            download
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-display border border-zinc-400/70 dark:border-zinc-500/50 rounded text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:border-gray-400 dark:hover:border-gray-400 transition-colors duration-200"
+          >
+            <DownloadSimple className="w-4 h-4" />
+            PDF
+          </a>
+        </div>
         <p className="text-gray-700 dark:text-gray-300 max-w-2xl mt-4">
           Full-Stack Developer with 1+ years building web applications from scratch. Contributor to
           production codebases at{" "}
