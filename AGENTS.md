@@ -24,12 +24,14 @@ Use CSS variables, not raw tailwind colors:
 
 ## Component Patterns
 
-- **Container**: `max-w-3xl mx-auto px-5 py-10` (main), `max-w-4xl` (wider)
+- **Container**: Each page handles its own width — `max-w-3xl mx-auto` for standard pages, `max-w-5xl mx-auto` for projects page. Layout provides no max-width.
 - **Spacing**: `space-y-6`, `space-y-8`, `space-y-10`
 - **Rounded**: `rounded` (0.625rem), `rounded-lg` (0.75rem)
 - **Responsive**: Mobile-first → `sm:` breakpoint
 - **Hover**: `hover:*` classes with `transition-colors`
 - **Cards**: `border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg hover:shadow-lg`
+- **Project cards**: `variant="featured"` (no tech stack, full description) vs `variant="default"` (with tech stack, line-clamped description)
+- **Social link fonts**: Use `font-sans` (DM Sans), not `font-display`
 
 ## Mobile Responsiveness
 
@@ -38,6 +40,7 @@ Use CSS variables, not raw tailwind colors:
 - Test on mobile viewport for overflow issues
 - Use `whitespace-nowrap` sparingly on long text
 - Padding: `px-5` on mobile is safe, can increase on larger screens
+- **Featured projects**: Horizontal scroll with snap on mobile (`overflow-x-auto snap-x snap-mandatory`), arrows for navigation, 3-column grid on `sm:`+
 
 ## Dark Mode
 
@@ -49,6 +52,7 @@ Use CSS variables, not raw tailwind colors:
 - Subtle micro-interactions: `hover:scale-[1.02]`, `hover:-translate-y-1`
 - Transitions: `transition-colors duration-200` or `duration-300`
 - Focus: `outline-ring/50`
+- **Image zoom**: Project card images use `scale-105` default with `group-hover:scale-100` and `overflow-hidden` on container — crops edges slightly at rest, settles on hover
 
 ## Code Style
 
@@ -56,6 +60,7 @@ Use CSS variables, not raw tailwind colors:
 - Server components: default for static content
 - Semantic HTML: `<nav>`, `<article>`, etc.
 - **Icons**: Use `@phosphor-icons/react` package (e.g., `import { GithubLogo } from '@phosphor-icons/react'`)
+- **Footer**: Social icons (GitHub, LinkedIn, Twitter) with SVG icons from SOCIAL_LINKS, centered above copyright
 
 ## Blog / Log Posts
 
@@ -80,6 +85,8 @@ Use CSS variables, not raw tailwind colors:
 ## Configuration
 
 - All personal config lives in `lib/constants.ts` (SITE_CONFIG, BIO, SOCIAL_LINKS)
+- Project data lives in `lib/projects.ts` — `Project` interface with `image?: string` for screenshots
+- Project screenshots go in `public/` (e.g. `public/infra-scope.png`)
 - When adding a new page, add its URL to `app/sitemap.ts`
 
 ## Build Commands
