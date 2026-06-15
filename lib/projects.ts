@@ -42,22 +42,6 @@ export const projects: Project[] = [
     icon: "Shield",
   },
   {
-    title: "QuickHire",
-    description:
-      "Modern job board application for browsing jobs, submitting applications, and managing listings with admin panel",
-    techStack: ["Next.js", "Express", "MongoDB", "Prisma", "TypeScript", "Turborepo"],
-    features: [
-      "Job search and filtering by category/location",
-      "Application system with resume and cover letter upload",
-      "Admin panel for creating and managing job listings",
-      "JWT authentication with user signup and login",
-    ],
-    github: "https://github.com/sheikhlimon/quick-hire",
-    live: "https://quick-hire-web-delta.vercel.app",
-    image: "/quick-hire.png",
-    icon: "Briefcase",
-  },
-  {
     title: "College Booking App",
     description:
       "Discover, compare, and apply to colleges with ease. Search for colleges, view details, add reviews, and submit admission applications online.",
