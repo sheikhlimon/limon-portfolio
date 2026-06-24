@@ -29,6 +29,7 @@ export const SITE_CONFIG = {
       "firstcontributions/first-contributions",
       "sheikhlimon/dotfiles-old",
       "sheikhlimon/daily-tasks-app",
+      "sheikhlimon/focus-tracker",
     ],
   },
 }
