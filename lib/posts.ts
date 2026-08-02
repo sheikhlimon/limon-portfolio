@@ -1,17 +1,6 @@
-import { Metadata } from "next"
-import { Suspense } from "react"
 import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
-import BlogClient from "./blog-client"
-import { SITE_CONFIG } from "../../lib/constants"
-
-export const metadata: Metadata = {
-  title: `Blog - ${SITE_CONFIG.name}`,
-  description: `Blog posts and logs by ${SITE_CONFIG.name} - ${SITE_CONFIG.title}`,
-}
-
-const postsDirectory = path.join(process.cwd(), "logs")
 
 export interface Post {
   title: string
@@ -39,7 +28,8 @@ function calculateReadingTime(content: string): string {
   return `${minutes} min`
 }
 
-function getPosts(): Post[] {
+export function getPosts(): Post[] {
+  const postsDirectory = path.join(process.cwd(), "logs")
   if (!fs.existsSync(postsDirectory)) {
     return []
   }
@@ -68,40 +58,4 @@ function getPosts(): Post[] {
     const dateDiff = new Date(b.date).getTime() - new Date(a.date).getTime()
     return dateDiff !== 0 ? dateDiff : b.slug.localeCompare(a.slug)
   })
-}
-
-function PostsSkeleton() {
-  return (
-    <div className="max-w-3xl mx-auto pt-2 pb-12 w-full">
-      {/* Tab skeleton */}
-      <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-6 mb-10">
-        <div className="h-8 w-20 bg-gray-200 dark:bg-gray-800 rounded animate-pulse" />
-        <div className="h-8 w-16 bg-gray-200 dark:bg-gray-800 rounded animate-pulse" />
-      </div>
-      {/* Posts skeleton */}
-      <div className="space-y-10">
-        <div className="h-6 w-16 bg-gray-200 dark:bg-gray-800 rounded animate-pulse mb-8" />
-        <div className="space-y-3">
-          {["skeleton-1", "skeleton-2", "skeleton-3"].map((key) => (
-            <div
-              key={key}
-              className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-6"
-            >
-              <div className="h-6 w-64 bg-gray-200 dark:bg-gray-800 rounded animate-pulse" />
-              <div className="h-5 w-24 bg-gray-200 dark:bg-gray-800 rounded animate-pulse" />
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-}
-
-export default function BlogPage() {
-  const posts = getPosts()
-  return (
-    <Suspense fallback={<PostsSkeleton />}>
-      <BlogClient posts={posts} />
-    </Suspense>
-  )
 }

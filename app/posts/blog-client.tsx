@@ -4,7 +4,7 @@ import { useState, useCallback, useMemo } from "react"
 import { useSearchParams, useRouter, usePathname } from "next/navigation"
 import { motion } from "framer-motion"
 import Link from "next/link"
-import type { Post } from "./page"
+import type { Post } from "../../lib/posts"
 
 type TabType = "blog" | "log"
 

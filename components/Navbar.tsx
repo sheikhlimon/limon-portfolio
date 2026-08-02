@@ -16,19 +16,19 @@ const ThemeToggle = dynamic(() => import("../app/components/ThemeToggle"), {
 const navItems = [
   {
     name: "Blog",
-    href: "/posts",
+    href: "/#blog",
     icon: Article,
     showLabel: true,
   },
   {
     name: "Projects",
-    href: "/projects",
+    href: "/#projects",
     icon: Folder,
     showLabel: true,
   },
   {
     name: "Resume",
-    href: "/resume",
+    href: "/#resume",
     icon: FileText,
     showLabel: true,
   },
