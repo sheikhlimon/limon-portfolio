@@ -48,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang={SITE_CONFIG.lang} suppressHydrationWarning>
+    <html lang={SITE_CONFIG.lang} suppressHydrationWarning data-scroll-behavior="smooth">
       <body
         suppressHydrationWarning
         className={`${caskaydia.variable} ${dmSans.variable} antialiased bg-white dark:bg-zinc-950 text-gray-900 dark:text-white transition-colors duration-300 min-h-screen flex flex-col relative overflow-x-hidden font-sans`}
