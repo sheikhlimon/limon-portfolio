@@ -157,7 +157,7 @@ export default function ContributionsClient({
 
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
-                        <h3 className="text-base font-semibold text-gray-900 dark:text-white group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors truncate">
+                        <h3 className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors truncate">
                           {contribution.title}
                         </h3>
                         <span className="text-sm text-gray-500 dark:text-gray-400 font-display flex-shrink-0">
@@ -221,7 +221,7 @@ export default function ContributionsClient({
                   <div className="flex items-start gap-3">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-2 mb-2 w-full">
-                        <h3 className="text-base font-semibold text-gray-900 dark:text-white group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors truncate">
+                        <h3 className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors truncate">
                           {repo.fullName}
                         </h3>
                         <span className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 font-display shrink-0">
