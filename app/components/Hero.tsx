@@ -26,8 +26,8 @@ export default function Hero() {
 
       <div className="text-gray-700 dark:text-gray-300 space-y-4 text-base leading-relaxed max-w-xl">
         <p>
-          Hey, I'm Limon. I spend most of my time reading other people's code and trying to make it
-          better. Right now I'm contributing to{" "}
+          Hey, I'm Limon. I spend my time collaborating on open-source codebases and leveraging AI
+          to build and ship things faster. Right now I'm contributing to{" "}
           <a
             href="https://github.com/fedora-infra"
             target="_blank"
