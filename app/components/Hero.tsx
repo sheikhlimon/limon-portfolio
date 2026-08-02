@@ -57,7 +57,7 @@ export default function Hero() {
           , and other infrastructure tooling.
         </p>
         <p>
-          Before that, I was deep in{" "}
+          Previously, I spent time contributing to{" "}
           <a
             href="https://github.com/block/goose"
             target="_blank"
