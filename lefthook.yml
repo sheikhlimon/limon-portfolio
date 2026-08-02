@@ -1,0 +1,13 @@
+pre-commit:
+  parallel: true
+  commands:
+    oxlint:
+      glob: "*.{js,ts,jsx,tsx}"
+      run: npx oxlint --fix {staged_files}
+      stage_fixed: true
+    oxfmt:
+      glob: "*.{js,ts,jsx,tsx,json,md,css}"
+      run: npx oxfmt --write {staged_files}
+      stage_fixed: true
+    typecheck:
+      run: bun run typecheck
