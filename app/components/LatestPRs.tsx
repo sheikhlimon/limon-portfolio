@@ -45,28 +45,27 @@ export default async function LatestPRs() {
     return excludedRepos.includes(repoFullName)
   }
 
-  // Filter out excluded repos and get only the latest 10
   const latestPRs = prs.filter((pr) => !isExcluded(pr)).slice(0, 10)
 
   if (latestPRs.length === 0) return null
 
   return (
-    <section className="max-w-3xl mx-auto space-y-6">
+    <section className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-medium text-gray-900 dark:text-white font-display">
-          Latest Open Source PRs
+        <h2 className="section-heading text-gray-500 dark:text-gray-400">
+          <span className="text-gray-300 dark:text-gray-700">## </span>latest prs
         </h2>
         <Link
           href="/contributions"
-          className="group flex items-center gap-2 text-sm font-display text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
+          className="group flex items-center gap-1 text-xs font-display text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
         >
-          View all
-          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          view all
+          <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5" />
         </Link>
       </div>
 
-      <div className="flex flex-col gap-3">
-        {latestPRs.map((pr) => {
+      <div className="flex flex-col">
+        {latestPRs.map((pr, index) => {
           const parts = pr.repository_url.split("/")
           const repoOwner = parts[parts.length - 2]
           const repoName = parts[parts.length - 1]
@@ -74,17 +73,11 @@ export default async function LatestPRs() {
           const isOpen = pr.state === "open"
           const Icon = isMerged ? GitMerge : GitPullRequest
 
-          const statusColors = isMerged
-            ? "text-purple-500 dark:text-purple-400 group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]"
+          const statusColor = isMerged
+            ? "text-purple-500 dark:text-purple-400"
             : isOpen
-              ? "text-green-500 dark:text-green-400 group-hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.5)]"
+              ? "text-green-600 dark:text-green-400"
               : "text-red-500 dark:text-red-400"
-
-          const borderHoverColors = isMerged
-            ? "hover:border-purple-500/30 dark:hover:border-purple-500/30 hover:shadow-[0_0_15px_rgba(168,85,247,0.1)]"
-            : isOpen
-              ? "hover:border-green-500/30 dark:hover:border-green-500/30 hover:shadow-[0_0_15px_rgba(34,197,94,0.1)]"
-              : "hover:border-red-500/30 dark:hover:border-red-500/30"
 
           return (
             <a
@@ -92,34 +85,23 @@ export default async function LatestPRs() {
               href={pr.html_url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`group flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 p-4 rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white/50 dark:bg-zinc-900/30 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-all duration-300 ${borderHoverColors}`}
+              className={`group flex items-start gap-3 py-3 hover:bg-gray-50 dark:hover:bg-zinc-900/50 -mx-3 px-3 rounded transition-colors ${index < latestPRs.length - 1 ? "border-b border-dashed border-gray-200 dark:border-gray-800/80" : ""}`}
             >
-              <div className="flex items-center gap-3 min-w-0 flex-1">
-                <Icon
-                  className={`w-5 h-5 shrink-0 transition-all duration-300 ${statusColors}`}
-                  weight="regular"
-                />
-                <div className="flex flex-col min-w-0">
-                  <span className="text-sm font-display text-gray-500 dark:text-gray-400 truncate">
-                    {repoOwner}/{repoName}
-                  </span>
-                  <span className="text-gray-900 dark:text-gray-100 font-medium truncate transition-colors">
-                    {pr.title}
-                  </span>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 sm:gap-4 shrink-0 mt-2 sm:mt-0">
-                <span className="text-xs font-mono text-gray-400 dark:text-gray-500">
-                  #{pr.number}
+              <Icon className={`w-4 h-4 shrink-0 mt-0.5 ${statusColor}`} weight="regular" />
+              <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 min-w-0 flex-1">
+                <span className="text-gray-900 dark:text-gray-100 text-sm truncate group-hover:underline decoration-gray-400 dark:decoration-gray-600">
+                  {pr.title}
                 </span>
-                <span className="text-xs text-gray-400 dark:text-gray-500 font-sans">
-                  {new Date(pr.created_at).toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
+                <span className="text-xs font-display text-gray-400 dark:text-gray-500 whitespace-nowrap">
+                  {repoOwner}/{repoName} #{pr.number}
                 </span>
               </div>
+              <span className="text-xs text-gray-400 dark:text-gray-600 whitespace-nowrap shrink-0 font-display">
+                {new Date(pr.created_at).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                })}
+              </span>
             </a>
           )
         })}

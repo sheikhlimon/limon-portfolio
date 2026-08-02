@@ -2,65 +2,95 @@
 
 ## Design Vibe
 
-Clean, modern, minimalist developer portfolio with subtle sci-fi aesthetic. Less is more.
+Minimal, terminal-inspired single-page portfolio. Looks like a well-maintained README. Linux/open-source engineer aesthetic — not flashy "modern", just clean and honest.
 
 ## Typography
 
-- **Body font**: DM Sans (sans-serif — bio, project descriptions, resume body, blog prose)
-- **Display font**: CaskaydiaMono Nerd Font (mono — nav, titles, headings, brand, logo, social links)
+- **Body font**: DM Sans (sans-serif — bio paragraphs, project descriptions, blog prose)
+- **Display font**: CaskaydiaMono Nerd Font (mono — headings, section labels, links, email, social)
 - **Code font**: CaskaydiaMono Nerd Font (code blocks and inline code)
-- **Hierarchy**: `font-sans` (DM Sans) for body text, `font-display` (CaskaydiaMono) for headings/nav, `font-mono` for code
+- **Hierarchy**: `font-sans` (DM Sans) for body text, `font-display` (CaskaydiaMono) for headings/labels, `font-mono` for code
 - **Brand name**: Two-tone styling — "Sheikh" (gray-400/500), "Limon" (gray-900/white)
 
-## Colors (OKLCH - defined in globals.css)
+## Colors
 
-Use CSS variables, not raw tailwind colors:
+Mostly grayscale. Only color comes from PR status indicators:
 
-- `bg-background` / `text-foreground` (main colors)
-- `text-gray-900 dark:text-white` (headings)
-- `text-gray-700 dark:text-gray-300` (body)
-- `text-gray-600 dark:text-gray-400` (muted/meta)
-- Border: `border-gray-200 dark:border-gray-800` or `border-zinc-400/70 dark:border-zinc-500/50`
+- `text-purple-500 dark:text-purple-400` (merged PRs)
+- `text-green-600 dark:text-green-400` (open PRs)
+- Headings: `text-gray-900 dark:text-white`
+- Body: `text-gray-700 dark:text-gray-300`
+- Muted/labels: `text-gray-400 dark:text-gray-500`
+- Very muted: `text-gray-300 dark:text-gray-700` (## prefix in headings)
+- Borders: dashed `border-gray-200 dark:border-gray-800/80` or `border-gray-300 dark:border-gray-800`
+
+## Page Structure (Single Page)
+
+One page, top to bottom:
+
+1. **Hero** — name, subtitle ("open source engineer"), conversational bio, email, social links
+2. **Latest PRs** — 10 most recent, fetched from GitHub API
+3. **Projects** — clean list with description + tech stack
+4. **Writing** — blog posts list with dates
+5. **Footer** — inline in layout, just copyright
+
+Sections separated by dashed dividers (`.section-divider`).
+
+## Section Headings
+
+Use `.section-heading` class with `## ` prefix:
+
+```tsx
+<h2 className="section-heading text-gray-500 dark:text-gray-400">
+  <span className="text-gray-300 dark:text-gray-700">## </span>latest prs
+</h2>
+```
+
+Always lowercase. Always monospace.
+
+## Layout
+
+- **No navbar** — removed entirely
+- **Floating controls**: GitHub icon + theme toggle, fixed top-right (`fixed top-5 right-5 z-50`)
+- **Container**: `max-w-2xl mx-auto px-5` in layout
+- **Spacing**: `space-y-16 sm:space-y-20` between sections
 
 ## Component Patterns
 
-- **Container**: Each page handles its own width — `max-w-3xl mx-auto` for standard pages, `max-w-5xl mx-auto` for projects page. Layout provides no max-width.
-- **Spacing**: `space-y-6`, `space-y-8`, `space-y-10`
-- **Rounded**: `rounded` (0.625rem), `rounded-lg` (0.75rem)
-- **Responsive**: Mobile-first → `sm:` breakpoint
-- **Hover**: `hover:*` classes with `transition-colors`
-- **Cards**: `border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg hover:shadow-lg`
-- **Project cards**: `variant="featured"` (no tech stack, full description) vs `variant="default"` (with tech stack, line-clamped description)
-- **Social link fonts**: Use `font-sans` (DM Sans), not `font-display`
+- **No cards** — everything is flat lists with dashed border-bottom dividers
+- **No framer-motion animations** — just `transition-colors` on hover
+- **No images** — projects are text-only
+- **Links**: lowercase monospace text, `hover:text-gray-900 dark:hover:text-white transition-colors`
+- **PR items**: icon + title + repo/number + date, dashed divider between items
+- **Project items**: title + live/source links + description + tech stack (lowercase)
+- **Writing items**: title + date/reading time, link to `/posts/[slug]`
 
 ## Mobile Responsiveness
 
-- **Always** ensure mobile responsiveness - use `flex-col sm:flex-row` for stacked → side-by-side
-- Markdown content: code blocks need `overflow-x-auto`, tables need proper overflow handling
-- Test on mobile viewport for overflow issues
-- Use `whitespace-nowrap` sparingly on long text
-- Padding: `px-5` on mobile is safe, can increase on larger screens
-- **Featured projects**: Horizontal scroll with snap on mobile (`overflow-x-auto snap-x snap-mandatory`), arrows for navigation, 3-column grid on `sm:`+
+- **Always** mobile-first — `flex-col sm:flex-row` for stacked → side-by-side
+- PR list items stack on mobile, inline on desktop
+- Code blocks need `overflow-x-auto`
+- Padding: `px-5` on mobile
 
 ## Dark Mode
 
 - Always include `dark:` variant for all color classes
 - Theme via `next-themes` with system preference
+- Background: `bg-white dark:bg-zinc-950`
 
 ## Interactions
 
-- Subtle micro-interactions: `hover:scale-[1.02]`, `hover:-translate-y-1`
-- Transitions: `transition-colors duration-200` or `duration-300`
-- Focus: `outline-ring/50`
-- **Image zoom**: Project card images use `scale-105` default with `group-hover:scale-100` and `overflow-hidden` on container — crops edges slightly at rest, settles on hover
+- **Minimal** — no entrance animations, no scale transforms
+- Hover: `transition-colors` only, text color shifts
+- Email: click to copy with "copied!" feedback
+- Links: underline on hover (`group-hover:underline`)
 
 ## Code Style
 
 - Client components: `'use client'` at top for interactivity
 - Server components: default for static content
-- Semantic HTML: `<nav>`, `<article>`, etc.
-- **Icons**: Use `@phosphor-icons/react` package (e.g., `import { GithubLogo } from '@phosphor-icons/react'`)
-- **Footer**: Social icons (GitHub, LinkedIn, Twitter) with SVG icons from SOCIAL_LINKS, centered above copyright
+- Semantic HTML: `<section>`, `<article>`, etc.
+- **Icons**: Use `@phosphor-icons/react` (e.g., `import { GitMerge } from '@phosphor-icons/react'`)
 
 ## Blog / Log Posts
 
@@ -84,9 +114,9 @@ Use CSS variables, not raw tailwind colors:
 
 ## Configuration
 
-- All personal config lives in `lib/constants.ts` (SITE_CONFIG, BIO, SOCIAL_LINKS)
-- Project data lives in `lib/projects.ts` — `Project` interface with `image?: string` for screenshots
-- Project screenshots go in `public/` (e.g. `public/infra-scope.png`)
+- All personal config lives in `lib/constants.ts` (SITE_CONFIG, SOCIAL_LINKS)
+- Project data lives in `lib/projects.ts`
+- Post data helper in `lib/posts.ts`
 - When adding a new page, add its URL to `app/sitemap.ts`
 
 ## Build Commands
@@ -100,5 +130,8 @@ Use CSS variables, not raw tailwind colors:
 - Don't add emojis (unless explicitly asked)
 - Don't create new files unnecessarily — edit existing ones
 - Don't over-engineer — keep it minimal
-- Don't change navbar items without asking
-- Don't add "generative AI" aesthetics — follow the established clean vibe
+- Don't add navbar back
+- Don't add resume section
+- Don't add cards or image thumbnails
+- Don't add framer-motion animations
+- Don't add "generative AI" aesthetics

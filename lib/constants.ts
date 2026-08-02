@@ -2,14 +2,14 @@ export const SITE_CONFIG = {
   name: "Sheikh Limon",
   firstName: "Sheikh",
   lastName: "Limon",
-  title: "Full-Stack Developer",
+  title: "Open Source Engineer",
   email: "sheikhlimondev@gmail.com",
   githubUsername: "sheikhlimon",
-  siteTitle: "Sheikh Limon – Full-Stack Developer",
+  siteTitle: "Sheikh Limon – Open Source Engineer",
   siteDescription:
-    "Full-Stack Developer building reliable real-world systems. Open Source Contributor.",
+    "Open source engineer. Contributing to fedora-infra (packager dashboard). Previously goose and Podman Desktop.",
   siteKeywords: [
-    "Full-Stack Developer",
+    "Open Source Engineer",
     "Software Engineer",
     "React",
     "Node.js",
@@ -33,47 +33,6 @@ export const SITE_CONFIG = {
     ],
   },
 }
-
-type BioItem = {
-  text: string
-  link?: string
-  bold?: boolean
-  italic?: boolean
-}
-
-export const BIO: BioItem[][] = [
-  [
-    {
-      text: "Hey, I'm ",
-    },
-    {
-      text: "Limon",
-      bold: true,
-    },
-    {
-      text: ". I'm an open source engineer who loves diving into complex codebases, fixing hard bugs, and building tools that developers actually use. I spend most of my time contributing to open source projects and learning how systems work under the hood.",
-    },
-  ],
-  [
-    {
-      text: "Lately, I've been heavily involved in ",
-    },
-    {
-      text: "goose",
-      link: "https://github.com/block/goose",
-    },
-    {
-      text: " and ",
-    },
-    {
-      text: "Podman Desktop",
-      link: "https://github.com/podman-desktop/podman-desktop",
-    },
-    {
-      text: ".",
-    },
-  ],
-]
 
 export const SOCIAL_LINKS = [
   {
