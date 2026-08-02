@@ -125,6 +125,12 @@ Always lowercase. Always monospace.
 - `bun dev` — dev server
 - `bun run build` — production build
 
+## Git Hooks & Linting
+
+- We use **Lefthook** (`lefthook.yml`) instead of Husky.
+- Linting and formatting run automatically via `oxlint` and `oxfmt` on pre-commit.
+- The `typecheck` hook ensures no TypeScript errors (`tsc --noEmit`).
+
 ## Don't
 
 - Don't add emojis (unless explicitly asked)
