@@ -36,7 +36,16 @@ export default function Hero() {
           >
             fedora-infra
           </a>{" "}
-          &mdash; mainly working on the{" "}
+          &mdash; mainly working on{" "}
+          <a
+            href="https://github.com/fedora-infra/anitya"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-900 dark:text-white underline decoration-gray-400 dark:decoration-gray-600 hover:decoration-gray-900 dark:hover:decoration-white transition-colors"
+          >
+            Anitya
+          </a>
+          , the{" "}
           <a
             href="https://forge.fedoraproject.org/apps/packager_dashboard"
             target="_blank"
@@ -44,8 +53,8 @@ export default function Hero() {
             className="text-gray-900 dark:text-white underline decoration-gray-400 dark:decoration-gray-600 hover:decoration-gray-900 dark:hover:decoration-white transition-colors"
           >
             packager dashboard
-          </a>{" "}
-          and other infrastructure tooling.
+          </a>
+          , and other infrastructure tooling.
         </p>
         <p>
           Before that, I was deep in{" "}
