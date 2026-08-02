@@ -44,26 +44,33 @@ type BioItem = {
 export const BIO: BioItem[][] = [
   [
     {
-      text: "Full-stack developer with a strong focus on reliability and real-world systems. I build applications using React/Next.js and Node.js, and contribute to open source projects where I work on debugging issues, improving stability, and fixing production-level problems.",
+      text: "Hey, I'm ",
+    },
+    {
+      text: "Limon",
+      bold: true,
+    },
+    {
+      text: ". I'm an open source engineer who loves diving into complex codebases, fixing hard bugs, and building tools that developers actually use. I spend most of my time contributing to open source projects and learning how systems work under the hood.",
     },
   ],
   [
     {
-      text: "Contributor to ",
+      text: "Lately, I've been heavily involved in ",
     },
     {
       text: "goose",
       link: "https://github.com/block/goose",
     },
     {
-      text: " (AAIF) and ",
+      text: " and ",
     },
     {
       text: "Podman Desktop",
       link: "https://github.com/podman-desktop/podman-desktop",
     },
     {
-      text: " (Red Hat). ",
+      text: ".",
     },
   ],
 ]
