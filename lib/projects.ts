@@ -56,34 +56,4 @@ export const projects: Project[] = [
     image: "/college-booking.png",
     icon: "GraduationCap",
   },
-  {
-    title: "Gesture Share",
-    description: "Cross-device gesture-controlled file sharing using React, MediaPipe, and WebRTC",
-    techStack: ["React", "MediaPipe", "WebRTC"],
-    features: [
-      "95%+ gesture accuracy with MediaPipe",
-      "80% faster setup with QR-based pairing",
-      "P2P file transfers without keyboard requirements",
-    ],
-    github: "https://github.com/sheikhlimon/gesture-share",
-    live: "https://gesture-share.vercel.app",
-    image: "/gesture-share.png",
-    icon: "Globe",
-  },
-  {
-    title: "AI Agent Profile Builder",
-    description:
-      "Visual drag-and-drop interface for building AI agent profiles. Pick components from a library, arrange them on a canvas, and preview your agent in real time.",
-    techStack: ["React", "TypeScript", "Zustand", "@dnd-kit", "Tailwind CSS", "Vite", "Bun"],
-    features: [
-      "Drag-and-drop assembly with live agent preview",
-      "Saved agents persisted locally via Zustand",
-      "Responsive — desktop drag-and-drop, mobile tap-to-select",
-      "Terminal-inspired UI with dark theme",
-    ],
-    github: "https://github.com/sheikhlimon/agent-builder",
-    live: "https://agent-builder-omega.vercel.app",
-    image: "/ai-agent-builder.png",
-    icon: "Terminal",
-  },
 ]
