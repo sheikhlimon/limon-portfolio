@@ -80,29 +80,25 @@ export default function Hero() {
         </p>
       </div>
 
-      <div className="flex flex-col gap-4 pt-2">
-        <div className="relative inline-block">
-          <button
-            onClick={copyEmail}
-            className="font-display text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer"
+      <div className="flex flex-wrap items-center gap-4 pt-4">
+        <span className="text-sm font-display text-gray-400 dark:text-gray-500">reach me:</span>
+        <button
+          onClick={copyEmail}
+          className="font-display text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer"
+        >
+          {copied ? "copied!" : "email"}
+        </button>
+        {SOCIAL_LINKS.map((link) => (
+          <a
+            key={link.name}
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-display text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
           >
-            {copied ? "copied!" : SITE_CONFIG.email}
-          </button>
-        </div>
-
-        <div className="flex items-center gap-4">
-          {SOCIAL_LINKS.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-display text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
-            >
-              {link.name.toLowerCase()}
-            </a>
-          ))}
-        </div>
+            {link.name.toLowerCase()}
+          </a>
+        ))}
       </div>
     </section>
   )
