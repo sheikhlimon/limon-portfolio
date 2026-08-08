@@ -11,16 +11,16 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "Fedora Ecosystem Tooling",
+    title: "Packager Dashboard",
     description:
-      "Maintainer for Fedora ecosystem tooling (Packager Dashboard, Oraculum), driving maintenance, feature work, and release cycles for active packager infrastructure.",
-    techStack: ["Python", "Flask", "Linux"],
+      "Displays real-time ecosystem metrics for Fedora packagers, including open bugs, proposed updates, pull requests, and build status.",
+    techStack: ["React", "JavaScript", "Python", "Flask", "Linux"],
     features: [
-      "Maintain active packager infrastructure for Fedora",
-      "Lead feature development and release cycles for Packager Dashboard & Oraculum",
+      "Track open bugs, proposed updates, and build failures for Fedora packages",
+      "Real-time packager metrics and active release monitoring",
     ],
-    github: "https://forge.fedoraproject.org/sheikhlimon",
-    live: "https://forge.fedoraproject.org/apps/packager_dashboard",
+    github: "https://forge.fedoraproject.org/apps/packager_dashboard",
+    live: "https://packager-dashboard.fedoraproject.org",
     icon: "Terminal",
   },
   {
@@ -53,20 +53,5 @@ export const projects: Project[] = [
     live: "https://crypto-guardian-frontend.vercel.app",
     image: "/crypto-guardian.png",
     icon: "Shield",
-  },
-  {
-    title: "College Booking App",
-    description:
-      "Discover, compare, and apply to colleges with ease. Search for colleges, view details, add reviews, and submit admission applications online.",
-    techStack: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "Firebase"],
-    features: [
-      "College search with filtering and detailed admission information",
-      "Online admission system with review and rating functionality",
-      "Email/password and Google OAuth authentication",
-    ],
-    github: "https://github.com/sheikhlimon/college-booking-app",
-    live: "https://college-booking-app-nine.vercel.app",
-    image: "/college-booking.png",
-    icon: "GraduationCap",
   },
 ]
