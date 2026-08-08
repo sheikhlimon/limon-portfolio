@@ -146,7 +146,7 @@ export async function fetchFedoraForgePRs(): Promise<PRItem[]> {
 
 export async function fetchAllPRs(): Promise<PRItem[]> {
   const [ghPRs, forgePRs] = await Promise.all([fetchGitHubPRs(), fetchFedoraForgePRs()])
-  const all = [...ghPRs, ...forgePRs]
+  const all = [...ghPRs, ...forgePRs].filter((pr) => pr.state === "open" || pr.isMerged)
   all.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
   return all
 }
