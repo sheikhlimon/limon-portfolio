@@ -24,6 +24,32 @@ export const projects: Project[] = [
     icon: "Terminal",
   },
   {
+    title: "Anitya",
+    description:
+      "Upstream release monitoring project for Linux distributions and open-source ecosystems, automatically tracking package updates.",
+    techStack: ["Python", "Flask", "SQLAlchemy", "Fedora Infra"],
+    features: [
+      "Monitors upstream project releases across the open-source ecosystem",
+      "Sends real-time notification events when new versions are released",
+    ],
+    github: "https://github.com/fedora-infra/anitya",
+    live: "https://release-monitoring.org",
+    icon: "Globe",
+  },
+  {
+    title: "goose",
+    description:
+      "Open-source AI agent that automates software engineering tasks and developer workflows.",
+    techStack: ["Rust", "AI Agents", "CLI"],
+    features: [
+      "Extensible open-source AI agent framework",
+      "Automates repetitive coding, testing, and debugging tasks",
+    ],
+    github: "https://github.com/aaif-goose/goose",
+    live: "https://goose-docs.ai",
+    icon: "Terminal",
+  },
+  {
     title: "InfraScope",
     description:
       "Infrastructure monitoring and management platform for Linux systems. Track system status, trigger scans, and maintain audit logs from one place.",

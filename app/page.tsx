@@ -9,7 +9,7 @@ function ProjectsList() {
   return (
     <section className="space-y-4">
       <h2 className="section-heading text-gray-500 dark:text-gray-400">
-        <span className="text-gray-300 dark:text-gray-700">## </span>projects
+        <span className="text-gray-300 dark:text-gray-700">## </span>open source & projects
       </h2>
 
       <div className="flex flex-col">
