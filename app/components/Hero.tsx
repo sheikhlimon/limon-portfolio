@@ -27,16 +27,26 @@ export default function Hero() {
       <div className="text-gray-700 dark:text-gray-300 space-y-4 text-base leading-relaxed max-w-xl">
         <p>
           Hey, I'm Limon. I spend my time collaborating on open-source codebases and leveraging AI
-          to build and ship things faster. Right now I'm contributing to{" "}
+          to build and ship things faster. Right now I maintain Fedora ecosystem tooling, driving
+          maintenance, feature work, and release cycles for active packager infrastructure like{" "}
           <a
-            href="https://github.com/fedora-infra"
+            href="https://forge.fedoraproject.org/apps/packager_dashboard"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-900 dark:text-white underline decoration-gray-400 dark:decoration-gray-600 hover:decoration-gray-900 dark:hover:decoration-white transition-colors"
           >
-            fedora-infra
+            Packager Dashboard
           </a>{" "}
-          &mdash; mainly working on{" "}
+          and{" "}
+          <a
+            href="https://forge.fedoraproject.org/apps/oraculum"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-900 dark:text-white underline decoration-gray-400 dark:decoration-gray-600 hover:decoration-gray-900 dark:hover:decoration-white transition-colors"
+          >
+            Oraculum
+          </a>
+          , while also contributing to{" "}
           <a
             href="https://github.com/fedora-infra/anitya"
             target="_blank"
@@ -45,16 +55,7 @@ export default function Hero() {
           >
             Anitya
           </a>
-          , the{" "}
-          <a
-            href="https://forge.fedoraproject.org/apps/packager_dashboard"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-900 dark:text-white underline decoration-gray-400 dark:decoration-gray-600 hover:decoration-gray-900 dark:hover:decoration-white transition-colors"
-          >
-            packager dashboard
-          </a>
-          , and other infrastructure tooling.
+          .
         </p>
         <p>
           Previously, I spent time contributing to{" "}

@@ -11,6 +11,19 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: "Fedora Ecosystem Tooling",
+    description:
+      "Maintainer for Fedora ecosystem tooling (Packager Dashboard, Oraculum), driving maintenance, feature work, and release cycles for active packager infrastructure.",
+    techStack: ["Python", "Flask", "Linux"],
+    features: [
+      "Maintain active packager infrastructure for Fedora",
+      "Lead feature development and release cycles for Packager Dashboard & Oraculum",
+    ],
+    github: "https://forge.fedoraproject.org/sheikhlimon",
+    live: "https://forge.fedoraproject.org/apps/packager_dashboard",
+    icon: "Terminal",
+  },
+  {
     title: "InfraScope",
     description:
       "Infrastructure monitoring and management platform for Linux systems. Track system status, trigger scans, and maintain audit logs from one place.",
