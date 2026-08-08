@@ -27,56 +27,83 @@ export default function Hero() {
       <div className="text-gray-700 dark:text-gray-300 space-y-4 text-base leading-relaxed max-w-xl">
         <p>
           Hey, I'm Limon. I spend my time collaborating on open-source codebases and leveraging AI
-          to build and ship things faster. Right now I maintain Fedora ecosystem tooling like{" "}
-          <a
-            href="https://forge.fedoraproject.org/apps/packager_dashboard"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-900 dark:text-white underline decoration-gray-400 dark:decoration-gray-600 hover:decoration-gray-900 dark:hover:decoration-white transition-colors"
-          >
-            Packager Dashboard
-          </a>{" "}
-          and{" "}
-          <a
-            href="https://forge.fedoraproject.org/apps/oraculum"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-900 dark:text-white underline decoration-gray-400 dark:decoration-gray-600 hover:decoration-gray-900 dark:hover:decoration-white transition-colors"
-          >
-            Oraculum
-          </a>
-          , while also contributing to{" "}
-          <a
-            href="https://github.com/fedora-infra/anitya"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-900 dark:text-white underline decoration-gray-400 dark:decoration-gray-600 hover:decoration-gray-900 dark:hover:decoration-white transition-colors"
-          >
-            Anitya
-          </a>
-          .
+          to build and ship things faster.
         </p>
-        <p>
-          Previously, I spent time contributing to{" "}
-          <a
-            href="https://github.com/aaif-goose/goose"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-900 dark:text-white underline decoration-gray-400 dark:decoration-gray-600 hover:decoration-gray-900 dark:hover:decoration-white transition-colors"
-          >
-            goose
-          </a>{" "}
-          and{" "}
-          <a
-            href="https://github.com/podman-desktop/podman-desktop"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-900 dark:text-white underline decoration-gray-400 dark:decoration-gray-600 hover:decoration-gray-900 dark:hover:decoration-white transition-colors"
-          >
-            Podman Desktop
-          </a>
-          . When I'm not submitting PRs, I write about what I learn and build things to scratch my
-          own itch.
+
+        <ul className="space-y-2 text-sm sm:text-base">
+          <li className="flex items-start gap-2">
+            <span>🛠️</span>
+            <span>
+              <strong className="font-semibold text-gray-900 dark:text-white font-display">
+                Maintainer:
+              </strong>{" "}
+              Fedora Apps (
+              <a
+                href="https://forge.fedoraproject.org/apps/packager_dashboard"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-900 dark:text-white underline decoration-gray-400 dark:decoration-gray-600 hover:decoration-gray-900 dark:hover:decoration-white transition-colors"
+              >
+                Packager Dashboard
+              </a>
+              ,{" "}
+              <a
+                href="https://forge.fedoraproject.org/apps/oraculum"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-900 dark:text-white underline decoration-gray-400 dark:decoration-gray-600 hover:decoration-gray-900 dark:hover:decoration-white transition-colors"
+              >
+                Oraculum
+              </a>
+              )
+            </span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span>🔌</span>
+            <span>
+              <strong className="font-semibold text-gray-900 dark:text-white font-display">
+                Contributor:
+              </strong>{" "}
+              <a
+                href="https://github.com/fedora-infra/anitya"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-900 dark:text-white underline decoration-gray-400 dark:decoration-gray-600 hover:decoration-gray-900 dark:hover:decoration-white transition-colors"
+              >
+                Anitya
+              </a>
+            </span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span>📦</span>
+            <span>
+              <strong className="font-semibold text-gray-900 dark:text-white font-display">
+                Past Contributions:
+              </strong>{" "}
+              <a
+                href="https://github.com/aaif-goose/goose"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-900 dark:text-white underline decoration-gray-400 dark:decoration-gray-600 hover:decoration-gray-900 dark:hover:decoration-white transition-colors"
+              >
+                goose
+              </a>{" "}
+              &{" "}
+              <a
+                href="https://github.com/podman-desktop/podman-desktop"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-900 dark:text-white underline decoration-gray-400 dark:decoration-gray-600 hover:decoration-gray-900 dark:hover:decoration-white transition-colors"
+              >
+                Podman Desktop
+              </a>
+            </span>
+          </li>
+        </ul>
+
+        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+          When I'm not submitting PRs, I write about what I learn and build things to scratch my own
+          itch.
         </p>
       </div>
 

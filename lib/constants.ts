@@ -7,7 +7,7 @@ export const SITE_CONFIG = {
   githubUsername: "sheikhlimon",
   siteTitle: "Sheikh Limon – Open Source Engineer",
   siteDescription:
-    "Open source engineer & maintainer for Fedora ecosystem tooling (Packager Dashboard, Oraculum).",
+    "Open source engineer & maintainer for Fedora Apps (Packager Dashboard, Oraculum).",
   siteKeywords: [
     "Open Source Engineer",
     "Software Engineer",
