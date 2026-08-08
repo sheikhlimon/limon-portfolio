@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 import { GitPullRequest, Star } from "@phosphor-icons/react"
 
 interface Contribution {
-  id: number
+  id: string | number
   title: string
   number: number
   url: string
