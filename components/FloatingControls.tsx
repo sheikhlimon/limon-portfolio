@@ -1,16 +1,11 @@
 "use client"
 
-import dynamic from "next/dynamic"
 import { SITE_CONFIG } from "../lib/constants"
-
-const ThemeToggle = dynamic(() => import("../app/components/ThemeToggle"), {
-  ssr: false,
-  loading: () => <div className="w-9 h-9" />,
-})
+import ThemeToggle from "../app/components/ThemeToggle"
 
 export default function FloatingControls() {
   return (
-    <div className="fixed top-5 right-5 z-50 flex items-center gap-2">
+    <div className="absolute sm:fixed top-5 right-5 z-50 flex items-center gap-2">
       <a
         href={`https://github.com/${SITE_CONFIG.githubUsername}`}
         target="_blank"

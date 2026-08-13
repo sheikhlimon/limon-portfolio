@@ -53,9 +53,10 @@ export default async function LatestPRs() {
                 </span>
               </div>
               <span className="text-xs text-gray-400 dark:text-gray-600 whitespace-nowrap shrink-0 font-display">
-                {new Date(pr.created_at).toLocaleDateString("en-US", {
+                {new Date(pr.created_at).toLocaleString("en-US", {
                   month: "short",
                   day: "numeric",
+                  timeZone: "UTC",
                 })}
               </span>
             </a>

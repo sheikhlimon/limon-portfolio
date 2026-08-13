@@ -1,9 +1,26 @@
 "use client"
 
 import { useTheme } from "next-themes"
+import { useEffect, useState } from "react"
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return (
+      <button
+        className="p-2 rounded-full text-gray-500 dark:text-gray-400 opacity-0 pointer-events-none"
+        aria-label="Toggle theme"
+      >
+        <div className="w-5 h-5" />
+      </button>
+    )
+  }
 
   const handleToggle = () => {
     setTheme(theme === "dark" ? "light" : "dark")
@@ -12,7 +29,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={handleToggle}
-      className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 group"
+      className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 group cursor-pointer"
       aria-label="Toggle theme"
       title="Toggle theme"
     >

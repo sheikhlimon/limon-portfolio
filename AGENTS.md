@@ -51,7 +51,7 @@ Always lowercase. Always monospace.
 ## Layout
 
 - **No navbar** — removed entirely
-- **Floating controls**: GitHub icon + theme toggle, fixed top-right (`fixed top-5 right-5 z-50`)
+- **Floating controls**: GitHub icon + theme toggle, top-right (`absolute sm:fixed top-5 right-5 z-50`)
 - **Container**: `max-w-2xl mx-auto px-5` in layout
 - **Spacing**: `space-y-16 sm:space-y-20` between sections
 

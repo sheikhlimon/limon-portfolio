@@ -111,9 +111,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                   {...props}
                 />
               ),
-              pre: ({ children }) => (
-                <div className="overflow-x-auto my-4 min-w-0 w-full max-w-full">{children}</div>
-              ),
+              pre: ({ children }) => <>{children}</>,
               code: ({ className, children, ...props }: React.HTMLAttributes<HTMLElement>) => {
                 const match = /language-(\w+)/.exec(className || "")
                 const language = match ? match[1] : ""

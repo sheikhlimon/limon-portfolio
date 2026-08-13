@@ -28,6 +28,13 @@ function calculateReadingTime(content: string): string {
   return `${minutes} min`
 }
 
+function parseString(val: unknown): string {
+  if (!val) return ""
+  if (typeof val === "string") return val
+  if (val instanceof Date) return val.toISOString().split("T")[0]
+  return String(val)
+}
+
 export function getPosts(): Post[] {
   const postsDirectory = path.join(process.cwd(), "logs")
   if (!fs.existsSync(postsDirectory)) {
@@ -43,9 +50,9 @@ export function getPosts(): Post[] {
       const { data, content } = matter(fileContents)
 
       return {
-        title: data.title || "",
-        date: data.date || "",
-        year: data.year || "",
+        title: parseString(data.title),
+        date: parseString(data.date),
+        year: parseString(data.year),
         slug: fileName.replace(/\.md$/, ""),
         readingTime: data.readingTime || (data.externalUrl ? "" : calculateReadingTime(content)),
         type: (data.type as "log" | "blog") || "log",
