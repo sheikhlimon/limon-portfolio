@@ -58,21 +58,51 @@ export async function fetchGitHubPRs(): Promise<PRItem[]> {
       headers.Authorization = `Bearer ${token}`
     }
 
-    const res = await fetch(
-      `https://api.github.com/search/issues?q=author:${SITE_CONFIG.githubUsername}+type:pr&sort=created&order=desc&per_page=50`,
+    const { excludedRepos } = SITE_CONFIG.contributions
+    const perPage = 100
+    const maxPages = 5
+    const firstRes = await fetch(
+      `https://api.github.com/search/issues?q=author:${SITE_CONFIG.githubUsername}+type:pr&sort=created&order=desc&per_page=${perPage}&page=1`,
       {
         headers,
         next: { revalidate: 3600 },
       }
     )
 
-    if (!res.ok) return []
-    const data = await res.json()
-    const items: GitHubPR[] = data.items || []
+    if (!firstRes.ok) return []
+    const firstData = await firstRes.json()
+    const allItems: GitHubPR[] = [...(firstData.items || [])]
 
-    const { excludedRepos } = SITE_CONFIG.contributions
+    const totalCount = firstData.total_count || 0
+    const totalPages = Math.min(maxPages, Math.ceil(totalCount / perPage))
 
-    return items
+    if (totalPages > 1) {
+      const pagePromises = []
+      for (let page = 2; page <= totalPages; page++) {
+        pagePromises.push(
+          fetch(
+            `https://api.github.com/search/issues?q=author:${SITE_CONFIG.githubUsername}+type:pr&sort=created&order=desc&per_page=${perPage}&page=${page}`,
+            {
+              headers,
+              next: { revalidate: 3600 },
+            }
+          )
+            .then(async (res) => {
+              if (!res.ok) return []
+              const data = await res.json()
+              return (data.items as GitHubPR[]) || []
+            })
+            .catch(() => [] as GitHubPR[])
+        )
+      }
+
+      const restPages = await Promise.all(pagePromises)
+      for (const items of restPages) {
+        allItems.push(...items)
+      }
+    }
+
+    return allItems
       .filter((pr) => {
         const parts = pr.repository_url.split("/")
         const repoFullName = `${parts[parts.length - 2]}/${parts[parts.length - 1]}`
