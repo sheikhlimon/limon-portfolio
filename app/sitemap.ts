@@ -1,7 +1,18 @@
 import type { MetadataRoute } from "next"
+import { getPosts } from "../lib/posts"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://sheikhlimon.vercel.app"
+  const posts = getPosts()
+
+  const postEntries: MetadataRoute.Sitemap = posts
+    .filter((post) => !post.externalUrl) // Only index internal posts
+    .map((post) => ({
+      url: `${baseUrl}/posts/${post.slug}`,
+      lastModified: new Date(post.date),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    }))
 
   return [
     {
@@ -16,5 +27,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    ...postEntries,
   ]
 }

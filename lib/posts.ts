@@ -7,25 +7,9 @@ export interface Post {
   date: string
   year: string
   slug: string
-  readingTime: string
   type: "log" | "blog"
   externalUrl?: string
   tags: string[]
-}
-
-function calculateReadingTime(content: string): string {
-  const plainText = content
-    .replace(/```[\s\S]*?```/g, "")
-    .replace(/`[^`]+`/g, "")
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
-    .replace(/[#*_~[\]()]/g, "")
-    .replace(/\s+/g, " ")
-    .trim()
-
-  const wordsPerMinute = 130
-  const words = plainText.split(/\s+/).filter((w) => w.length > 0).length
-  const minutes = Math.ceil(words / wordsPerMinute)
-  return `${minutes} min`
 }
 
 function parseString(val: unknown): string {
@@ -47,14 +31,13 @@ export function getPosts(): Post[] {
     .map((fileName) => {
       const fullPath = path.join(postsDirectory, fileName)
       const fileContents = fs.readFileSync(fullPath, "utf8")
-      const { data, content } = matter(fileContents)
+      const { data } = matter(fileContents)
 
       return {
         title: parseString(data.title),
         date: parseString(data.date),
         year: parseString(data.year),
         slug: fileName.replace(/\.md$/, ""),
-        readingTime: data.readingTime || (data.externalUrl ? "" : calculateReadingTime(content)),
         type: (data.type as "log" | "blog") || "log",
         externalUrl: data.externalUrl || undefined,
         tags: Array.isArray(data.tags) ? data.tags : [],

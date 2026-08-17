@@ -86,7 +86,6 @@ function WritingList() {
                 </span>
                 <span className="text-xs font-display text-gray-400 dark:text-gray-500 whitespace-nowrap">
                   {post.date}
-                  {post.readingTime && ` · ${post.readingTime}`}
                 </span>
               </a>
             ) : (
@@ -99,7 +98,6 @@ function WritingList() {
                 </span>
                 <span className="text-xs font-display text-gray-400 dark:text-gray-500 whitespace-nowrap">
                   {post.date}
-                  {post.readingTime && ` · ${post.readingTime}`}
                 </span>
               </Link>
             )}
