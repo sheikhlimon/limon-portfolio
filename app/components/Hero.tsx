@@ -20,7 +20,7 @@ export default function Hero() {
           <span className="text-gray-900 dark:text-white">{SITE_CONFIG.lastName}</span>
         </h1>
         <p className="text-base font-display text-gray-500 dark:text-gray-400 mt-1">
-          open source engineer
+          {SITE_CONFIG.title.toLowerCase()}
         </p>
       </div>
 

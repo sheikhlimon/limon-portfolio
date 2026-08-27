@@ -1,6 +1,6 @@
 # limon-portfolio
 
-Minimal, terminal-inspired single-page portfolio for Sheikh Limon (Open Source Engineer). Looks like a well-maintained README with open-source PRs, projects, and log posts.
+Minimal, terminal-inspired single-page portfolio for Sheikh Limon (Open Source Developer). Looks like a well-maintained README with open-source PRs, projects, and log posts.
 
 ## Tech Stack & Commands
 
@@ -18,7 +18,7 @@ Minimal, terminal-inspired single-page portfolio for Sheikh Limon (Open Source E
 
 ## Design Vibe & Typography
 
-- **Vibe**: Clean terminal / README Linux engineer aesthetic (mostly grayscale)
+- **Vibe**: Clean terminal / README Linux developer aesthetic (mostly grayscale)
 - **Typography**: DM Sans (`font-sans` for body), CaskaydiaMono (`font-display` / `font-mono` for headings & code)
 - **Brand**: Two-tone "Sheikh" (muted gray) "Limon" (gray-900/white)
 - **Headings**: Monospace lowercase with `## ` prefix (`<h2 className="section-heading text-gray-500 dark:text-gray-400"><span className="text-gray-300 dark:text-gray-700">## </span>section</h2>`)
