@@ -1,5 +1,5 @@
 ---
-title: "WSL Keyring Fallback: Investigation into Cross-Platform Secret Storage"
+title: "WSL Keyring Fallback: Debugging Secret Storage in Goose"
 date: 21 Feb 2026
 year: 2026
 tags: ["linux"]
