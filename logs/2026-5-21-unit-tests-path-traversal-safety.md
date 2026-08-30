@@ -1,5 +1,5 @@
 ---
-title: "Unit Tests for Path Traversal Safety in _serve_frontend"
+title: "Path Traversal Safety: Unit Testing Static File Serving"
 date: 21 May 2026
 year: 2026
 type: log

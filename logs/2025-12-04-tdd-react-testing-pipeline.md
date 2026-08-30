@@ -1,5 +1,5 @@
 ---
-title: "TDD + React Testing Pipeline — A Simple Example for Beginners"
+title: "TDD + React Testing Pipeline: A Simple Example for Beginners"
 date: 4 Dec 2025
 year: 2025
 type: blog
