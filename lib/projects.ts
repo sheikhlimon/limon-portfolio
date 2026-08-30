@@ -1,5 +1,6 @@
 export interface Project {
   title: string
+  role?: "maintainer" | "contributor" | "side project"
   description: string
   techStack: string[]
   features: string[]
@@ -12,6 +13,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     title: "Packager Dashboard",
+    role: "maintainer",
     description:
       "Displays real-time ecosystem metrics for Fedora packagers, including open bugs, proposed updates, pull requests, and build status.",
     techStack: ["React", "JavaScript", "Python", "Flask", "Linux"],
@@ -25,6 +27,7 @@ export const projects: Project[] = [
   },
   {
     title: "Anitya",
+    role: "contributor",
     description:
       "Upstream release monitoring project for Linux distributions and open-source ecosystems, automatically tracking package updates.",
     techStack: ["Python", "Flask", "SQLAlchemy", "Fedora Infra"],
@@ -38,6 +41,7 @@ export const projects: Project[] = [
   },
   {
     title: "goose",
+    role: "contributor",
     description:
       "Open-source AI agent that automates software engineering tasks and developer workflows.",
     techStack: ["Rust", "AI Agents", "CLI"],
@@ -51,6 +55,7 @@ export const projects: Project[] = [
   },
   {
     title: "InfraScope",
+    role: "side project",
     description:
       "Infrastructure monitoring and management platform for Linux systems. Track system status, trigger scans, and maintain audit logs from one place.",
     techStack: ["Next.js", "Express.js", "PostgreSQL", "Prisma", "JWT", "Turborepo"],
@@ -67,6 +72,7 @@ export const projects: Project[] = [
   },
   {
     title: "Crypto Guardian",
+    role: "side project",
     description:
       "Real-time crypto fraud detection system with risk scoring and multi-API validation",
     techStack: ["React", "Node.js", "Express"],

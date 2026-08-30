@@ -19,9 +19,16 @@ function ProjectsList() {
             className={`py-4 ${index < projects.length - 1 ? "border-b border-dashed border-gray-200 dark:border-gray-800/80" : ""}`}
           >
             <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-              <h3 className="text-base font-medium text-gray-900 dark:text-white font-display">
-                {project.title}
-              </h3>
+              <div className="flex items-baseline gap-2 flex-wrap">
+                <h3 className="text-base font-medium text-gray-900 dark:text-white font-display">
+                  {project.title}
+                </h3>
+                {project.role && (
+                  <span className="text-xs font-display text-gray-400 dark:text-gray-500">
+                    [{project.role}]
+                  </span>
+                )}
+              </div>
               <div className="flex items-center gap-3">
                 {project.live && (
                   <a
