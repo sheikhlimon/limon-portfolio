@@ -1,5 +1,5 @@
 ---
-title: "Why React Testing Library is a Game-Changer for React Testing"
+title: "Why React Testing Library Reshaped Component Testing"
 date: 8 Dec 2025
 year: 2025
 type: blog
