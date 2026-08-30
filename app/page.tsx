@@ -81,7 +81,7 @@ function WritingList() {
                 rel="noopener noreferrer"
                 className="group flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1"
               >
-                <span className="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
+                <span className="text-sm text-gray-900 dark:text-gray-100 group-hover:underline decoration-gray-400 dark:decoration-gray-600">
                   {post.title}
                 </span>
                 <span className="text-xs font-display text-gray-400 dark:text-gray-500 whitespace-nowrap">
@@ -93,7 +93,7 @@ function WritingList() {
                 href={`/posts/${post.slug}`}
                 className="group flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1"
               >
-                <span className="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
+                <span className="text-sm text-gray-900 dark:text-gray-100 group-hover:underline decoration-gray-400 dark:decoration-gray-600">
                   {post.title}
                 </span>
                 <span className="text-xs font-display text-gray-400 dark:text-gray-500 whitespace-nowrap">

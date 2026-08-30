@@ -41,7 +41,7 @@ export default async function LatestPRs() {
               href={pr.html_url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`group flex items-start gap-3 py-3 hover:bg-gray-50 dark:hover:bg-zinc-900/50 -mx-3 px-3 rounded transition-colors ${index < latestPRs.length - 1 ? "border-b border-dashed border-gray-200 dark:border-gray-800/80" : ""}`}
+              className={`group flex items-start gap-3 py-3 transition-colors ${index < latestPRs.length - 1 ? "border-b border-dashed border-gray-200 dark:border-gray-800/80" : ""}`}
             >
               <Icon className={`w-4 h-4 shrink-0 mt-0.5 ${statusColor}`} weight="regular" />
               <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 min-w-0 flex-1">
@@ -52,7 +52,7 @@ export default async function LatestPRs() {
                   {pr.repo} #{pr.number}
                 </span>
               </div>
-              <span className="text-xs text-gray-400 dark:text-gray-600 whitespace-nowrap shrink-0 font-display">
+              <span className="text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap shrink-0 font-display">
                 {new Date(pr.created_at).toLocaleString("en-US", {
                   month: "short",
                   day: "numeric",
