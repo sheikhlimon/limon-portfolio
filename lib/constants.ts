@@ -6,6 +6,7 @@ export const SITE_CONFIG = {
   email: "sheikhlimondev@gmail.com",
   githubUsername: "sheikhlimon",
   siteTitle: "Sheikh Limon – Open Source Developer",
+  siteUrl: "https://sheikhlimon.fedorapeople.org",
   siteDescription:
     "Open source developer & maintainer for Fedora Apps (Packager Dashboard, Oraculum).",
   siteKeywords: [

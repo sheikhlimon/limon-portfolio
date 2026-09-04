@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next"
+import { SITE_CONFIG } from "../lib/constants"
 
 export const dynamic = "force-static"
 
@@ -8,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://sheikhlimon.vercel.app/sitemap.xml",
+    sitemap: `${SITE_CONFIG.siteUrl}/sitemap.xml`,
   }
 }

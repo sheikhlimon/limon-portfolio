@@ -26,6 +26,7 @@ const dmSans = localFont({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_CONFIG.siteUrl),
   title: SITE_CONFIG.siteTitle,
   description: SITE_CONFIG.siteDescription,
   keywords: SITE_CONFIG.siteKeywords,
