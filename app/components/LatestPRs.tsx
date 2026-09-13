@@ -24,7 +24,7 @@ export default async function LatestPRs() {
   if (latestPRs.length === 0) return null
 
   return (
-    <section suppressHydrationWarning className="space-y-4 snap-start">
+    <section suppressHydrationWarning className="space-y-4">
       <div suppressHydrationWarning className="flex items-center justify-between">
         <h2 className="section-heading text-gray-500 dark:text-gray-400">
           <span className="text-gray-300 dark:text-gray-700">## </span>latest prs

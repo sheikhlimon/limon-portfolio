@@ -53,7 +53,7 @@ export default function RootLayout({
     <html
       lang={SITE_CONFIG.lang}
       suppressHydrationWarning
-      className={`${caskaydia.variable} ${spaceGrotesk.variable} snap-y snap-proximity`}
+      className={`${caskaydia.variable} ${spaceGrotesk.variable}`}
     >
       <body
         suppressHydrationWarning

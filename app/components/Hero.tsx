@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
 import { SOCIAL_LINKS, SITE_CONFIG } from "../../lib/constants"
 
 function RepoBadge({
@@ -35,10 +34,7 @@ export default function Hero() {
   }
 
   return (
-    <section
-      id="about"
-      className="min-h-[100svh] flex flex-col justify-start sm:justify-center pt-28 pb-12 sm:py-16 space-y-6 snap-start"
-    >
+    <section id="about" className="pt-16 sm:pt-20 space-y-6">
       <div className="flex items-center gap-4 sm:gap-5">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -131,12 +127,6 @@ export default function Hero() {
             {link.name.toLowerCase()}
           </a>
         ))}
-        <Link
-          href="/contributions"
-          className="font-semibold text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors sm:ml-auto"
-        >
-          contributions →
-        </Link>
       </div>
     </section>
   )
