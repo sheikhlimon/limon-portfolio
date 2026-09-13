@@ -62,9 +62,7 @@ export default function RootLayout({
         >
           <FloatingControls />
 
-          <main className="max-w-2xl mx-auto px-5 pt-12 sm:pt-20 pb-16 grow w-full">
-            {children}
-          </main>
+          <main className="w-full grow pt-6 sm:pt-10 pb-16">{children}</main>
 
           <footer className="max-w-2xl mx-auto px-5 pb-8 w-full">
             <div className="border-t border-dashed border-gray-300 dark:border-gray-800 pt-6">

@@ -1,11 +1,28 @@
 "use client"
 
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { GitPullRequest } from "@phosphor-icons/react"
 import { SITE_CONFIG } from "../lib/constants"
 import ThemeToggle from "../app/components/ThemeToggle"
 
 export default function FloatingControls() {
+  const pathname = usePathname()
+
+  if (pathname === "/contributions") {
+    return null
+  }
+
   return (
     <div className="absolute sm:fixed top-5 right-5 z-50 flex items-center gap-2">
+      <Link
+        href="/contributions"
+        className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+        aria-label="Contributions"
+        title="Contributions"
+      >
+        <GitPullRequest className="w-5 h-5" />
+      </Link>
       <a
         href={`https://github.com/${SITE_CONFIG.githubUsername}`}
         target="_blank"

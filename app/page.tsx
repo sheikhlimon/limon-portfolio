@@ -117,7 +117,7 @@ function WritingList() {
 
 export default function Home() {
   return (
-    <div className="space-y-16 sm:space-y-20">
+    <div className="max-w-2xl mx-auto px-5 w-full space-y-16 sm:space-y-20">
       <Hero />
 
       <div className="section-divider" />

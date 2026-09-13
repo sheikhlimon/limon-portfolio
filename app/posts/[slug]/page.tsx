@@ -108,7 +108,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const { data, content } = matter(fileContents)
 
   return (
-    <div className="max-w-3xl mx-auto w-full overflow-x-hidden">
+    <div className="max-w-2xl mx-auto px-5 w-full overflow-x-hidden">
       <div className="space-y-6">
         <div className="space-y-2">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white break-words">

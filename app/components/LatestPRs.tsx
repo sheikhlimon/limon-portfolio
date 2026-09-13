@@ -1,6 +1,6 @@
 import { GitPullRequest, GitMerge, ArrowRight } from "@phosphor-icons/react/dist/ssr"
 import Link from "next/link"
-import { fetchAllPRs } from "../../lib/prs"
+import { fetchAllPRs } from "../../lib/contributions"
 
 export default async function LatestPRs() {
   const prs = await fetchAllPRs()
