@@ -37,7 +37,7 @@ export default function Hero() {
   return (
     <section
       id="about"
-      className="min-h-[100svh] flex flex-col justify-center py-12 sm:py-16 space-y-6 snap-start"
+      className="min-h-[100svh] flex flex-col justify-center pt-24 pb-12 sm:py-16 space-y-6 snap-start"
     >
       <div className="flex items-center gap-4 sm:gap-5">
         {/* eslint-disable-next-line @next/next/no-img-element */}
