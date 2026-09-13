@@ -196,19 +196,19 @@ export default function ContributionsClient({
   const tabs: { key: TabType; label: string; count: number; icon: React.ReactNode }[] = [
     {
       key: "merged",
-      label: "merged",
+      label: "Merged",
       count: mergedPRs.length,
       icon: <GitMerge className="w-3.5 h-3.5 text-mauve" weight="regular" />,
     },
     {
       key: "open",
-      label: "open",
+      label: "Opened",
       count: openPRs.length,
       icon: <PullRequestIcon className="w-3.5 h-3.5 text-green-600 dark:text-green-400" />,
     },
     {
       key: "closed",
-      label: "closed",
+      label: "Closed",
       count: closedPRs.length,
       icon: <XCircle className="w-3.5 h-3.5 text-gray-400 dark:text-gray-500" weight="regular" />,
     },
@@ -303,7 +303,7 @@ export default function ContributionsClient({
                           setVisiblePRCount(PR_PAGE_SIZE)
                         })
                       }}
-                      className={`h-8 px-3 rounded-full border text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer shrink-0 ${
+                      className={`h-9 px-3.5 rounded-full border text-[13px] font-bold flex items-center gap-1.5 transition-colors cursor-pointer shrink-0 ${
                         isActive
                           ? "border-gray-900 dark:border-white bg-gray-900 dark:bg-white text-white dark:text-zinc-950"
                           : "border-gray-200 dark:border-zinc-800 text-gray-500 dark:text-gray-400 hover:border-gray-300 dark:hover:border-zinc-700 hover:text-gray-900 dark:hover:text-white"
@@ -314,8 +314,8 @@ export default function ContributionsClient({
                       <span
                         className={
                           isActive
-                            ? "opacity-75 font-mono text-[11px]"
-                            : "text-gray-400 dark:text-gray-500 font-mono text-[11px]"
+                            ? "opacity-75 font-mono text-xs"
+                            : "text-gray-400 dark:text-gray-500 font-mono text-xs"
                         }
                       >
                         {t.count}
@@ -331,7 +331,7 @@ export default function ContributionsClient({
                   <button
                     type="button"
                     onClick={() => setIsFilterOpen((prev) => !prev)}
-                    className={`h-8 px-2.5 rounded-full border text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer ${
+                    className={`h-9 px-3 rounded-full border text-[13px] font-medium flex items-center gap-1.5 transition-colors cursor-pointer ${
                       selectedRepo !== "all"
                         ? "border-gray-900 dark:border-white bg-gray-900 dark:bg-white text-white dark:text-zinc-950"
                         : "border-gray-200 dark:border-zinc-800 text-gray-500 dark:text-gray-400 hover:border-gray-300 dark:hover:border-zinc-700 hover:text-gray-900 dark:hover:text-white"
@@ -339,12 +339,12 @@ export default function ContributionsClient({
                     aria-expanded={isFilterOpen}
                     aria-label="Filter pull requests by repository"
                   >
-                    <Funnel className="w-3 h-3 shrink-0" weight="regular" />
-                    <span className="font-mono text-[11px] max-w-[120px] sm:max-w-[160px] truncate">
+                    <Funnel className="w-3.5 h-3.5 shrink-0" weight="regular" />
+                    <span className="font-mono text-xs max-w-[120px] sm:max-w-[160px] truncate">
                       {selectedRepo === "all" ? "all repos" : selectedRepo}
                     </span>
                     <CaretDown
-                      className={`w-2.5 h-2.5 shrink-0 transition-transform ${isFilterOpen ? "rotate-180" : ""}`}
+                      className={`w-3 h-3 shrink-0 transition-transform ${isFilterOpen ? "rotate-180" : ""}`}
                     />
                   </button>
 
@@ -361,7 +361,7 @@ export default function ContributionsClient({
                       title="Clear repo filter"
                       aria-label="Clear repo filter"
                     >
-                      <X className="w-3 h-3" />
+                      <X className="w-3.5 h-3.5" />
                     </button>
                   )}
                 </div>
