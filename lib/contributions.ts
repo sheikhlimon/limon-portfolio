@@ -50,37 +50,34 @@ interface ForgejoPR {
   }
 }
 
-interface CacheEntry<T> {
-  data: T
-  timestamp: number
-}
-
 const CACHE_TTL_MS = 10 * 60 * 1000 // 10 minutes
 
-function readDevCache<T>(key: string): T | null {
-  if (process.env.NODE_ENV === "production") return null
-  try {
-    const file = path.join(process.cwd(), ".cache", `${key}.json`)
-    if (!fs.existsSync(file)) return null
-    const { data, timestamp } = JSON.parse(fs.readFileSync(file, "utf8"))
-    if (Date.now() - timestamp < CACHE_TTL_MS) return data as T
-  } catch {}
-  return null
-}
+async function cachedDev<T>(key: string, fetcher: () => Promise<T>): Promise<T> {
+  if (process.env.NODE_ENV !== "production") {
+    try {
+      const file = path.join(process.cwd(), ".cache", `${key}.json`)
+      if (fs.existsSync(file)) {
+        const { data, timestamp } = JSON.parse(fs.readFileSync(file, "utf8"))
+        if (Date.now() - timestamp < CACHE_TTL_MS) return data as T
+      }
+    } catch {}
+  }
 
-function writeDevCache<T>(key: string, data: T): void {
-  if (process.env.NODE_ENV === "production") return
-  try {
-    const dir = path.join(process.cwd(), ".cache")
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
-    fs.writeFileSync(path.join(dir, `${key}.json`), JSON.stringify({ data, timestamp: Date.now() }))
-  } catch {}
-}
+  const data = await fetcher()
 
-let prsCache: CacheEntry<PRItem[]> | null = null
-let reviewsCache: CacheEntry<ReviewItem[]> | null = null
-let issuesCache: CacheEntry<IssueItem[]> | null = null
-let activityCache: CacheEntry<ActivityItem[]> | null = null
+  if (process.env.NODE_ENV !== "production") {
+    try {
+      const dir = path.join(process.cwd(), ".cache")
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
+      fs.writeFileSync(
+        path.join(dir, `${key}.json`),
+        JSON.stringify({ data, timestamp: Date.now() })
+      )
+    } catch {}
+  }
+
+  return data
+}
 
 const FEDORA_FORGE_REPOS = ["apps/packager_dashboard", "apps/oraculum", "infra/ansible"]
 
@@ -251,21 +248,12 @@ export async function fetchFedoraForgePRs(): Promise<PRItem[]> {
 }
 
 export async function fetchAllPRs(): Promise<PRItem[]> {
-  const now = Date.now()
-  if (prsCache && now - prsCache.timestamp < CACHE_TTL_MS) {
-    return prsCache.data
-  }
-  const cached = readDevCache<PRItem[]>("prs")
-  if (cached) {
-    prsCache = { data: cached, timestamp: now }
-    return cached
-  }
-  const [ghPRs, forgePRs] = await Promise.all([fetchGitHubPRs(), fetchFedoraForgePRs()])
-  const all = [...ghPRs, ...forgePRs]
-  all.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-  prsCache = { data: all, timestamp: now }
-  writeDevCache("prs", all)
-  return all
+  return cachedDev("prs", async () => {
+    const [ghPRs, forgePRs] = await Promise.all([fetchGitHubPRs(), fetchFedoraForgePRs()])
+    const all = [...ghPRs, ...forgePRs]
+    all.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+    return all
+  })
 }
 
 export interface ReviewItem {
@@ -378,26 +366,16 @@ export async function fetchFedoraForgeReviews(): Promise<ReviewItem[]> {
 }
 
 export async function fetchAllReviews(): Promise<ReviewItem[]> {
-  const now = Date.now()
-  if (reviewsCache && now - reviewsCache.timestamp < CACHE_TTL_MS) {
-    return reviewsCache.data
-  }
-  const cached = readDevCache<ReviewItem[]>("reviews")
-  if (cached) {
-    reviewsCache = { data: cached, timestamp: now }
-    return cached
-  }
-  const [ghReviews, forgeReviews] = await Promise.all([
-    fetchGitHubReviews(),
-    fetchFedoraForgeReviews(),
-  ])
-  const all = [...ghReviews, ...forgeReviews]
-  const sorted = all.toSorted(
-    (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-  )
-  reviewsCache = { data: sorted, timestamp: now }
-  writeDevCache("reviews", sorted)
-  return sorted
+  return cachedDev("reviews", async () => {
+    const [ghReviews, forgeReviews] = await Promise.all([
+      fetchGitHubReviews(),
+      fetchFedoraForgeReviews(),
+    ])
+    const all = [...ghReviews, ...forgeReviews]
+    return all.toSorted(
+      (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    )
+  })
 }
 
 export interface IssueItem {
@@ -451,23 +429,16 @@ export async function fetchFedoraForgeIssues(): Promise<IssueItem[]> {
 }
 
 export async function fetchAllIssues(): Promise<IssueItem[]> {
-  const now = Date.now()
-  if (issuesCache && now - issuesCache.timestamp < CACHE_TTL_MS) {
-    return issuesCache.data
-  }
-  const cached = readDevCache<IssueItem[]>("issues")
-  if (cached) {
-    issuesCache = { data: cached, timestamp: now }
-    return cached
-  }
-  const [ghIssues, forgeIssues] = await Promise.all([fetchGitHubIssues(), fetchFedoraForgeIssues()])
-  const all = [...ghIssues, ...forgeIssues]
-  const sorted = all.toSorted(
-    (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-  )
-  issuesCache = { data: sorted, timestamp: now }
-  writeDevCache("issues", sorted)
-  return sorted
+  return cachedDev("issues", async () => {
+    const [ghIssues, forgeIssues] = await Promise.all([
+      fetchGitHubIssues(),
+      fetchFedoraForgeIssues(),
+    ])
+    const all = [...ghIssues, ...forgeIssues]
+    return all.toSorted(
+      (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    )
+  })
 }
 
 export type ActivityType = "pr_merged" | "pr_opened" | "pr_closed" | "review" | "issue"
@@ -483,11 +454,6 @@ export interface ActivityItem {
 }
 
 export async function fetchRecentActivity(limit = 10): Promise<ActivityItem[]> {
-  const now = Date.now()
-  if (activityCache && now - activityCache.timestamp < CACHE_TTL_MS) {
-    return activityCache.data.slice(0, limit)
-  }
-
   const [prs, reviews, issues] = await Promise.all([
     fetchAllPRs(),
     fetchAllReviews(),
@@ -528,6 +494,5 @@ export async function fetchRecentActivity(limit = 10): Promise<ActivityItem[]> {
     })),
   ].toSorted((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
 
-  activityCache = { data: activity, timestamp: now }
   return activity.slice(0, limit)
 }

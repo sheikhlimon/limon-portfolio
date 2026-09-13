@@ -2,20 +2,11 @@
 
 import { useState, useMemo, useRef, useEffect, startTransition } from "react"
 import Link from "next/link"
-import {
-  GitMerge,
-  GitPullRequest,
-  XCircle,
-  ArrowUpRight,
-  House,
-  Funnel,
-  CaretDown,
-  X,
-} from "@phosphor-icons/react"
+import { GitMerge, XCircle, ArrowUpRight, House, Funnel, CaretDown, X } from "@phosphor-icons/react"
 import { SITE_CONFIG } from "../../lib/constants"
 import type { PRItem, ReviewItem, IssueItem } from "../../lib/contributions"
 import ThemeToggle from "../components/ThemeToggle"
-import { IssueIcon, ReviewIcon } from "../../components/icons"
+import { PullRequestIcon, IssueIcon, ReviewIcon } from "../../components/icons"
 import RepoBadge from "../../components/RepoBadge"
 
 export interface RepoStat {
@@ -213,12 +204,7 @@ export default function ContributionsClient({
       key: "open",
       label: "open",
       count: openPRs.length,
-      icon: (
-        <GitPullRequest
-          className="w-3.5 h-3.5 text-green-600 dark:text-green-400"
-          weight="regular"
-        />
-      ),
+      icon: <PullRequestIcon className="w-3.5 h-3.5 text-green-600 dark:text-green-400" />,
     },
     {
       key: "closed",
@@ -441,13 +427,6 @@ export default function ContributionsClient({
                   {displayedPRs.map((pr) => {
                     const isMerged = pr.isMerged
                     const isOpen = pr.state === "open"
-                    const Icon = isMerged ? GitMerge : isOpen ? GitPullRequest : XCircle
-
-                    const statusColor = isMerged
-                      ? "text-mauve"
-                      : isOpen
-                        ? "text-green-600 dark:text-green-400"
-                        : "text-gray-400 dark:text-gray-500"
 
                     return (
                       <div
@@ -455,7 +434,16 @@ export default function ContributionsClient({
                         className="flex items-center gap-3.5 px-5 py-3.5 border-t border-dashed border-gray-200 dark:border-gray-800/80 first:border-t-0"
                       >
                         <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[10px] bg-gray-100 dark:bg-zinc-900 border border-gray-200/80 dark:border-gray-800/80">
-                          <Icon className={`w-4 h-4 ${statusColor}`} weight="bold" />
+                          {isMerged ? (
+                            <GitMerge className="w-4 h-4 text-mauve" weight="regular" />
+                          ) : isOpen ? (
+                            <PullRequestIcon className="w-4 h-4 text-green-600 dark:text-green-400" />
+                          ) : (
+                            <XCircle
+                              className="w-4 h-4 text-gray-400 dark:text-gray-500"
+                              weight="regular"
+                            />
+                          )}
                         </span>
 
                         <div className="flex min-w-0 flex-1 flex-col gap-0.5">

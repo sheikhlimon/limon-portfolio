@@ -1,6 +1,6 @@
-import { GitPullRequest, GitMerge, XCircle, ArrowUpRight } from "@phosphor-icons/react/dist/ssr"
+import { GitMerge, XCircle, ArrowUpRight } from "@phosphor-icons/react/dist/ssr"
 import { fetchRecentActivity, type ActivityType } from "../../lib/contributions"
-import { IssueIcon, ReviewIcon } from "../../components/icons"
+import { PullRequestIcon, IssueIcon, ReviewIcon } from "../../components/icons"
 import RepoBadge from "../../components/RepoBadge"
 
 const TYPE_VERB: Record<ActivityType, string> = {
@@ -16,18 +16,13 @@ function ActivityIcon({ type }: { type: ActivityType }) {
     case "pr_merged":
       return <GitMerge className="w-3.5 h-3.5 text-mauve" weight="regular" />
     case "pr_opened":
-      return (
-        <GitPullRequest
-          className="w-3.5 h-3.5 text-green-600 dark:text-green-400"
-          weight="regular"
-        />
-      )
+      return <PullRequestIcon className="w-3.5 h-3.5 text-green-600 dark:text-green-400" />
     case "pr_closed":
       return <XCircle className="w-3.5 h-3.5 text-gray-400 dark:text-gray-500" weight="regular" />
     case "review":
-      return <ReviewIcon className="w-3.5 h-3.5 text-mauve" />
+      return <ReviewIcon className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" />
     case "issue":
-      return <IssueIcon className="w-3.5 h-3.5 text-green-600 dark:text-green-400" />
+      return <IssueIcon className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" />
   }
 }
 
