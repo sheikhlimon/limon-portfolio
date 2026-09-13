@@ -111,7 +111,7 @@ function SidebarFeed({
                   href={item.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="truncate text-[13px] font-bold text-gray-900 dark:text-gray-100 hover:text-purple-700 dark:hover:text-purple-400/80 transition-colors"
+                  className="truncate text-[13px] font-bold text-gray-900 dark:text-gray-100 hover:text-mauve transition-colors"
                 >
                   {item.title}
                 </a>
@@ -132,7 +132,7 @@ function SidebarFeed({
                 href={item.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shrink-0 text-gray-400 hover:text-purple-700 dark:hover:text-purple-400/80 transition-colors"
+                className="shrink-0 text-gray-400 hover:text-mauve transition-colors"
                 aria-label="View on GitHub/Forge"
               >
                 <ArrowUpRight className="w-4 h-4" />
@@ -145,7 +145,7 @@ function SidebarFeed({
           <button
             type="button"
             onClick={onLoadMore}
-            className="w-full py-3 px-5 text-[13px] font-bold text-gray-400 dark:text-gray-500 hover:text-purple-700 dark:hover:text-purple-400/80 border-t border-dashed border-gray-200 dark:border-gray-800/80 transition-colors text-center cursor-pointer"
+            className="w-full py-3 px-5 text-[13px] font-bold text-gray-400 dark:text-gray-500 hover:text-mauve border-t border-dashed border-gray-200 dark:border-gray-800/80 transition-colors text-center cursor-pointer"
           >
             Load more · {items.length - visibleCount} remaining
           </button>
@@ -184,7 +184,7 @@ export default function ContributionsClient({
       key: "merged",
       label: "Merged",
       count: mergedPRs.length,
-      icon: <GitMerge className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" weight="bold" />,
+      icon: <GitMerge className="w-3.5 h-3.5 text-mauve" weight="bold" />,
     },
     {
       key: "open",
@@ -272,9 +272,7 @@ export default function ContributionsClient({
               <span className="text-lg font-extrabold tracking-tight text-gray-900 dark:text-white">
                 Pull requests
               </span>
-              <span className="text-sm font-bold text-purple-600 dark:text-purple-400">
-                {mergedPRs.length} merged
-              </span>
+              <span className="text-sm font-bold text-mauve">{mergedPRs.length} merged</span>
             </div>
 
             {/* Filter tabs */}
@@ -315,7 +313,7 @@ export default function ContributionsClient({
                     const Icon = isMerged ? GitMerge : isOpen ? GitPullRequest : XCircle
 
                     const statusColor = isMerged
-                      ? "text-purple-600 dark:text-purple-400"
+                      ? "text-mauve"
                       : isOpen
                         ? "text-green-600 dark:text-green-400"
                         : "text-gray-400 dark:text-gray-500"
@@ -334,7 +332,7 @@ export default function ContributionsClient({
                             href={pr.html_url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="truncate text-sm font-bold text-gray-900 dark:text-gray-100 hover:text-purple-700 dark:hover:text-purple-400/80 transition-colors"
+                            className="truncate text-sm font-bold text-gray-900 dark:text-gray-100 hover:text-mauve transition-colors"
                           >
                             {pr.title}
                           </a>
@@ -355,7 +353,7 @@ export default function ContributionsClient({
                           href={pr.html_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="shrink-0 text-gray-400 hover:text-purple-700 dark:hover:text-purple-400/80 transition-colors"
+                          className="shrink-0 text-gray-400 hover:text-mauve transition-colors"
                           aria-label="View PR"
                         >
                           <ArrowUpRight className="w-4 h-4" />
@@ -374,7 +372,7 @@ export default function ContributionsClient({
                 <button
                   type="button"
                   onClick={() => setVisiblePRCount((c) => c + PR_PAGE_SIZE)}
-                  className="w-full py-3 px-5 text-[13px] font-bold text-gray-500 dark:text-gray-400 hover:text-purple-700 dark:hover:text-purple-400/80 border-t border-dashed border-gray-200 dark:border-gray-800/80 transition-colors text-center cursor-pointer"
+                  className="w-full py-3 px-5 text-[13px] font-bold text-gray-500 dark:text-gray-400 hover:text-mauve border-t border-dashed border-gray-200 dark:border-gray-800/80 transition-colors text-center cursor-pointer"
                 >
                   Load more · {tabFilteredPRs.length - visiblePRCount} remaining
                 </button>
@@ -403,7 +401,7 @@ export default function ContributionsClient({
 
                     <div className="h-2 w-24 shrink-0 overflow-hidden rounded-full bg-gray-100 dark:bg-zinc-800">
                       <div
-                        className="h-full rounded-full transition-all duration-300 bg-purple-600/80 dark:bg-purple-400/80"
+                        className="h-full rounded-full transition-all duration-300 bg-mauve/80"
                         style={{ width: `${percentage}%` }}
                       />
                     </div>
@@ -419,7 +417,7 @@ export default function ContributionsClient({
                 <button
                   type="button"
                   onClick={() => setVisibleRepoCount((c) => c + REPO_PAGE_SIZE)}
-                  className="self-start mt-2 text-[13px] font-bold text-gray-400 dark:text-gray-500 hover:text-purple-700 dark:hover:text-purple-400/80 transition-colors cursor-pointer"
+                  className="self-start mt-2 text-[13px] font-bold text-gray-400 dark:text-gray-500 hover:text-mauve transition-colors cursor-pointer"
                 >
                   Load more · {repos.length - visibleRepoCount} remaining
                 </button>

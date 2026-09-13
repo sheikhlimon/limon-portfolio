@@ -66,7 +66,7 @@ type: "blog" # or 'log'
 ## Design Guidelines
 
 - **Terminal Vibe**: Clean, grayscale-first Linux developer aesthetic.
-- **Grayscale with Status Colors**: Grayscale text and interactions; accent colors are reserved for Git status (`text-purple-600` merged, `text-green-600` open).
+- **Grayscale with Status Colors**: Grayscale text and interactions; accent colors are reserved for Git status (`text-mauve` merged with Catppuccin Mauve, `text-green-600` open).
 - **Flat Lists**: No cards or heavy shadows — flat lists with dashed dividers (`border-b border-dashed`).
 - **Snappy & Light**: Fast transitions without bulky entrance motions or scroll lag.
 
