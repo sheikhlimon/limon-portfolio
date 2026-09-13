@@ -1,19 +1,22 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo, useRef, useEffect, startTransition } from "react"
 import Link from "next/link"
 import {
   GitMerge,
   GitPullRequest,
-  ChatCircleText,
-  Circle,
   XCircle,
   ArrowUpRight,
   House,
+  Funnel,
+  CaretDown,
+  X,
 } from "@phosphor-icons/react"
 import { SITE_CONFIG } from "../../lib/constants"
 import type { PRItem, ReviewItem, IssueItem } from "../../lib/contributions"
 import ThemeToggle from "../components/ThemeToggle"
+import { IssueIcon, ReviewIcon } from "../../components/icons"
+import RepoBadge from "../../components/RepoBadge"
 
 export interface RepoStat {
   repo: string
@@ -47,26 +50,6 @@ function formatDate(dateStr: string): string {
     day: "numeric",
     timeZone: "UTC",
   })
-}
-
-function getRepoUrl(repo: string): string {
-  if (repo.startsWith("apps/") || repo.startsWith("infra/")) {
-    return `https://forge.fedoraproject.org/${repo}`
-  }
-  return `https://github.com/${repo}`
-}
-
-function RepoBadge({ repo, className = "" }: { repo: string; className?: string }) {
-  return (
-    <a
-      href={getRepoUrl(repo)}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`font-mono inline-flex min-w-0 max-w-full items-center rounded-full border border-gray-300 dark:border-gray-800 bg-gray-50 dark:bg-zinc-900 px-2 py-0.5 text-xs text-gray-500 dark:text-gray-400 transition-colors hover:border-gray-400 dark:hover:border-gray-700 hover:text-gray-900 dark:hover:text-white ${className}`}
-    >
-      <span className="truncate">{repo}</span>
-    </a>
-  )
 }
 
 function SidebarFeed({
@@ -163,17 +146,57 @@ export default function ContributionsClient({
   stats,
 }: ContributionsClientProps) {
   const [activeTab, setActiveTab] = useState<TabType>("merged")
+  const [selectedRepo, setSelectedRepo] = useState<string>("all")
+  const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false)
   const [visiblePRCount, setVisiblePRCount] = useState<number>(PR_PAGE_SIZE)
   const [visibleRepoCount, setVisibleRepoCount] = useState<number>(REPO_PAGE_SIZE)
   const [visibleIssueCount, setVisibleIssueCount] = useState<number>(SIDEBAR_PAGE_SIZE)
   const [visibleReviewCount, setVisibleReviewCount] = useState<number>(SIDEBAR_PAGE_SIZE)
 
+  const dropdownRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsFilterOpen(false)
+      }
+    }
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsFilterOpen(false)
+      }
+    }
+    if (isFilterOpen) {
+      document.addEventListener("mousedown", handleClickOutside)
+      document.addEventListener("keydown", handleKeyDown)
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside)
+        document.removeEventListener("keydown", handleKeyDown)
+      }
+    }
+  }, [isFilterOpen])
+
   const mergedPRs = prs.filter((pr) => pr.isMerged)
   const openPRs = prs.filter((pr) => pr.state === "open" && !pr.isMerged)
   const closedPRs = prs.filter((pr) => pr.state === "closed" && !pr.isMerged)
 
-  const tabFilteredPRs =
+  const currentTabPRs =
     activeTab === "merged" ? mergedPRs : activeTab === "open" ? openPRs : closedPRs
+
+  const repoOptions = useMemo(() => {
+    const counts = new Map<string, number>()
+    currentTabPRs.forEach((pr) => {
+      counts.set(pr.repo, (counts.get(pr.repo) || 0) + 1)
+    })
+    return Array.from(counts.entries())
+      .map(([name, count]) => ({ name, count }))
+      .toSorted((a, b) => b.count - a.count || a.name.localeCompare(b.name))
+  }, [currentTabPRs])
+
+  const tabFilteredPRs =
+    selectedRepo === "all"
+      ? currentTabPRs
+      : currentTabPRs.filter((pr) => pr.repo.toLowerCase() === selectedRepo.toLowerCase())
 
   const displayedPRs = tabFilteredPRs.slice(0, visiblePRCount)
   const visibleRepos = repos.slice(0, visibleRepoCount)
@@ -182,23 +205,26 @@ export default function ContributionsClient({
   const tabs: { key: TabType; label: string; count: number; icon: React.ReactNode }[] = [
     {
       key: "merged",
-      label: "Merged",
+      label: "merged",
       count: mergedPRs.length,
-      icon: <GitMerge className="w-3.5 h-3.5 text-mauve" weight="bold" />,
+      icon: <GitMerge className="w-3.5 h-3.5 text-mauve" weight="regular" />,
     },
     {
       key: "open",
-      label: "Open",
+      label: "open",
       count: openPRs.length,
       icon: (
-        <GitPullRequest className="w-3.5 h-3.5 text-green-600 dark:text-green-400" weight="bold" />
+        <GitPullRequest
+          className="w-3.5 h-3.5 text-green-600 dark:text-green-400"
+          weight="regular"
+        />
       ),
     },
     {
       key: "closed",
-      label: "Closed",
+      label: "closed",
       count: closedPRs.length,
-      icon: <XCircle className="w-3.5 h-3.5 text-gray-400 dark:text-gray-500" weight="bold" />,
+      icon: <XCircle className="w-3.5 h-3.5 text-gray-400 dark:text-gray-500" weight="regular" />,
     },
   ]
 
@@ -276,32 +302,136 @@ export default function ContributionsClient({
               <span className="text-sm font-bold text-mauve">{mergedPRs.length} merged</span>
             </div>
 
-            {/* Filter tabs */}
-            <div className="flex items-center gap-2 px-5 pb-4 pt-1 overflow-x-auto">
-              {tabs.map((t) => {
-                const isActive = activeTab === t.key
-                return (
+            {/* Filter tabs & repo filter row */}
+            <div className="flex items-center justify-between gap-2 px-5 pb-4 pt-1 flex-wrap sm:flex-nowrap">
+              <div className="flex items-center gap-1.5 overflow-x-auto min-w-0 py-0.5">
+                {tabs.map((t) => {
+                  const isActive = activeTab === t.key
+                  return (
+                    <button
+                      key={t.key}
+                      type="button"
+                      onClick={() => {
+                        startTransition(() => {
+                          setActiveTab(t.key)
+                          setVisiblePRCount(PR_PAGE_SIZE)
+                        })
+                      }}
+                      className={`h-8 px-3 rounded-full border text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer shrink-0 ${
+                        isActive
+                          ? "border-gray-900 dark:border-white bg-gray-900 dark:bg-white text-white dark:text-zinc-950"
+                          : "border-gray-200 dark:border-zinc-800 text-gray-500 dark:text-gray-400 hover:border-gray-300 dark:hover:border-zinc-700 hover:text-gray-900 dark:hover:text-white"
+                      }`}
+                    >
+                      <span>{t.label}</span>
+                      {t.icon}
+                      <span
+                        className={
+                          isActive
+                            ? "opacity-75 font-mono text-[11px]"
+                            : "text-gray-400 dark:text-gray-500 font-mono text-[11px]"
+                        }
+                      >
+                        {t.count}
+                      </span>
+                    </button>
+                  )
+                })}
+              </div>
+
+              {/* Repo filter dropdown */}
+              <div className="relative shrink-0 ml-auto" ref={dropdownRef}>
+                <div className="flex items-center">
                   <button
-                    key={t.key}
                     type="button"
-                    onClick={() => {
-                      setActiveTab(t.key)
-                      setVisiblePRCount(PR_PAGE_SIZE)
-                    }}
-                    className={`h-9 px-3.5 rounded-full border text-[13px] font-bold flex items-center gap-1.5 transition-colors cursor-pointer shrink-0 ${
-                      isActive
+                    onClick={() => setIsFilterOpen((prev) => !prev)}
+                    className={`h-8 px-2.5 rounded-full border text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer ${
+                      selectedRepo !== "all"
                         ? "border-gray-900 dark:border-white bg-gray-900 dark:bg-white text-white dark:text-zinc-950"
-                        : "border-gray-300 dark:border-gray-800 text-gray-500 dark:text-gray-400 hover:border-gray-400 dark:hover:border-gray-700 hover:text-gray-900 dark:hover:text-white"
+                        : "border-gray-200 dark:border-zinc-800 text-gray-500 dark:text-gray-400 hover:border-gray-300 dark:hover:border-zinc-700 hover:text-gray-900 dark:hover:text-white"
                     }`}
+                    aria-expanded={isFilterOpen}
+                    aria-label="Filter pull requests by repository"
                   >
-                    <span>{t.label}</span>
-                    {t.icon}
-                    <span className={isActive ? "opacity-75" : "text-gray-400 dark:text-gray-500"}>
-                      {t.count}
+                    <Funnel className="w-3 h-3 shrink-0" weight="regular" />
+                    <span className="font-mono text-[11px] max-w-[120px] sm:max-w-[160px] truncate">
+                      {selectedRepo === "all" ? "all repos" : selectedRepo}
                     </span>
+                    <CaretDown
+                      className={`w-2.5 h-2.5 shrink-0 transition-transform ${isFilterOpen ? "rotate-180" : ""}`}
+                    />
                   </button>
-                )
-              })}
+
+                  {selectedRepo !== "all" && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        startTransition(() => {
+                          setSelectedRepo("all")
+                          setVisiblePRCount(PR_PAGE_SIZE)
+                        })
+                      }}
+                      className="ml-1 p-1 rounded-full text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer"
+                      title="Clear repo filter"
+                      aria-label="Clear repo filter"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  )}
+                </div>
+
+                {/* Dropdown Menu */}
+                {isFilterOpen && (
+                  <div className="absolute right-0 top-full mt-2 z-20 w-64 max-h-72 overflow-y-auto rounded-xl border border-dashed border-gray-200 dark:border-gray-800/80 bg-white dark:bg-zinc-950 p-1.5 shadow-lg">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        startTransition(() => {
+                          setSelectedRepo("all")
+                          setVisiblePRCount(PR_PAGE_SIZE)
+                        })
+                        setIsFilterOpen(false)
+                      }}
+                      className={`w-full flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium transition-colors text-left cursor-pointer ${
+                        selectedRepo === "all"
+                          ? "bg-gray-100 dark:bg-zinc-900 text-gray-900 dark:text-white font-bold"
+                          : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-zinc-900/60 hover:text-gray-900 dark:hover:text-white"
+                      }`}
+                    >
+                      <span>all repositories</span>
+                      <span className="font-mono text-[11px] text-gray-400 dark:text-gray-500">
+                        {currentTabPRs.length}
+                      </span>
+                    </button>
+
+                    <div className="my-1 border-t border-dashed border-gray-200 dark:border-gray-800/80" />
+
+                    {repoOptions.map(({ name, count }) => (
+                      <button
+                        key={name}
+                        type="button"
+                        onClick={() => {
+                          startTransition(() => {
+                            setSelectedRepo(name)
+                            setVisiblePRCount(PR_PAGE_SIZE)
+                          })
+                          setIsFilterOpen(false)
+                        }}
+                        className={`w-full flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-mono transition-colors text-left cursor-pointer ${
+                          selectedRepo === name
+                            ? "bg-gray-100 dark:bg-zinc-900 text-mauve font-bold"
+                            : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-zinc-900/60 hover:text-gray-900 dark:hover:text-white"
+                        }`}
+                      >
+                        <span className="truncate mr-2">{name}</span>
+                        <span className="text-[11px] text-gray-400 dark:text-gray-500 shrink-0">
+                          {count}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* PR Rows */}
@@ -364,9 +494,24 @@ export default function ContributionsClient({
                   })}
                 </div>
               ) : (
-                <p className="px-5 py-8 text-center text-sm text-gray-400 dark:text-gray-500">
-                  No {activeTab} pull requests found.
-                </p>
+                <div className="px-5 py-8 text-center flex flex-col items-center gap-2">
+                  <p className="text-sm text-gray-400 dark:text-gray-500">
+                    No {activeTab} pull requests found
+                    {selectedRepo !== "all" ? ` in ${selectedRepo}` : ""}.
+                  </p>
+                  {selectedRepo !== "all" && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedRepo("all")
+                        setVisiblePRCount(PR_PAGE_SIZE)
+                      }}
+                      className="text-xs font-bold text-mauve hover:underline cursor-pointer"
+                    >
+                      clear filter
+                    </button>
+                  )}
+                </div>
               )}
 
               {visiblePRCount < tabFilteredPRs.length && (
@@ -430,7 +575,7 @@ export default function ContributionsClient({
           <SidebarFeed
             title="Issues filed"
             items={issues}
-            icon={<Circle className="w-3.5 h-3.5" weight="bold" />}
+            icon={<IssueIcon className="w-3.5 h-3.5" />}
             visibleCount={visibleIssueCount}
             onLoadMore={() => setVisibleIssueCount((c) => c + SIDEBAR_PAGE_SIZE)}
           />
@@ -439,7 +584,7 @@ export default function ContributionsClient({
           <SidebarFeed
             title="Reviews"
             items={reviews}
-            icon={<ChatCircleText className="w-3.5 h-3.5" weight="bold" />}
+            icon={<ReviewIcon className="w-3.5 h-3.5" />}
             visibleCount={visibleReviewCount}
             onLoadMore={() => setVisibleReviewCount((c) => c + SIDEBAR_PAGE_SIZE)}
           />

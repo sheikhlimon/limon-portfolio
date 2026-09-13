@@ -1,3 +1,5 @@
+import fs from "node:fs"
+import path from "node:path"
 import { SITE_CONFIG } from "./constants"
 
 export interface PRItem {
@@ -55,9 +57,30 @@ interface CacheEntry<T> {
 
 const CACHE_TTL_MS = 10 * 60 * 1000 // 10 minutes
 
+function readDevCache<T>(key: string): T | null {
+  if (process.env.NODE_ENV === "production") return null
+  try {
+    const file = path.join(process.cwd(), ".cache", `${key}.json`)
+    if (!fs.existsSync(file)) return null
+    const { data, timestamp } = JSON.parse(fs.readFileSync(file, "utf8"))
+    if (Date.now() - timestamp < CACHE_TTL_MS) return data as T
+  } catch {}
+  return null
+}
+
+function writeDevCache<T>(key: string, data: T): void {
+  if (process.env.NODE_ENV === "production") return
+  try {
+    const dir = path.join(process.cwd(), ".cache")
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
+    fs.writeFileSync(path.join(dir, `${key}.json`), JSON.stringify({ data, timestamp: Date.now() }))
+  } catch {}
+}
+
 let prsCache: CacheEntry<PRItem[]> | null = null
 let reviewsCache: CacheEntry<ReviewItem[]> | null = null
 let issuesCache: CacheEntry<IssueItem[]> | null = null
+let activityCache: CacheEntry<ActivityItem[]> | null = null
 
 const FEDORA_FORGE_REPOS = ["apps/packager_dashboard", "apps/oraculum", "infra/ansible"]
 
@@ -232,10 +255,16 @@ export async function fetchAllPRs(): Promise<PRItem[]> {
   if (prsCache && now - prsCache.timestamp < CACHE_TTL_MS) {
     return prsCache.data
   }
+  const cached = readDevCache<PRItem[]>("prs")
+  if (cached) {
+    prsCache = { data: cached, timestamp: now }
+    return cached
+  }
   const [ghPRs, forgePRs] = await Promise.all([fetchGitHubPRs(), fetchFedoraForgePRs()])
   const all = [...ghPRs, ...forgePRs]
   all.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
   prsCache = { data: all, timestamp: now }
+  writeDevCache("prs", all)
   return all
 }
 
@@ -353,6 +382,11 @@ export async function fetchAllReviews(): Promise<ReviewItem[]> {
   if (reviewsCache && now - reviewsCache.timestamp < CACHE_TTL_MS) {
     return reviewsCache.data
   }
+  const cached = readDevCache<ReviewItem[]>("reviews")
+  if (cached) {
+    reviewsCache = { data: cached, timestamp: now }
+    return cached
+  }
   const [ghReviews, forgeReviews] = await Promise.all([
     fetchGitHubReviews(),
     fetchFedoraForgeReviews(),
@@ -362,6 +396,7 @@ export async function fetchAllReviews(): Promise<ReviewItem[]> {
     (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
   )
   reviewsCache = { data: sorted, timestamp: now }
+  writeDevCache("reviews", sorted)
   return sorted
 }
 
@@ -420,11 +455,79 @@ export async function fetchAllIssues(): Promise<IssueItem[]> {
   if (issuesCache && now - issuesCache.timestamp < CACHE_TTL_MS) {
     return issuesCache.data
   }
+  const cached = readDevCache<IssueItem[]>("issues")
+  if (cached) {
+    issuesCache = { data: cached, timestamp: now }
+    return cached
+  }
   const [ghIssues, forgeIssues] = await Promise.all([fetchGitHubIssues(), fetchFedoraForgeIssues()])
   const all = [...ghIssues, ...forgeIssues]
   const sorted = all.toSorted(
     (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
   )
   issuesCache = { data: sorted, timestamp: now }
+  writeDevCache("issues", sorted)
   return sorted
+}
+
+export type ActivityType = "pr_merged" | "pr_opened" | "pr_closed" | "review" | "issue"
+
+export interface ActivityItem {
+  id: string
+  type: ActivityType
+  title: string
+  number: number
+  html_url: string
+  repo: string
+  created_at: string
+}
+
+export async function fetchRecentActivity(limit = 10): Promise<ActivityItem[]> {
+  const now = Date.now()
+  if (activityCache && now - activityCache.timestamp < CACHE_TTL_MS) {
+    return activityCache.data.slice(0, limit)
+  }
+
+  const [prs, reviews, issues] = await Promise.all([
+    fetchAllPRs(),
+    fetchAllReviews(),
+    fetchAllIssues(),
+  ])
+
+  const activity: ActivityItem[] = [
+    ...prs.map((pr) => ({
+      id: `act-${pr.id}`,
+      type: (pr.isMerged
+        ? "pr_merged"
+        : pr.state === "open"
+          ? "pr_opened"
+          : "pr_closed") as ActivityType,
+      title: pr.title,
+      number: pr.number,
+      html_url: pr.html_url,
+      repo: pr.repo,
+      created_at: pr.merged_at || pr.created_at,
+    })),
+    ...reviews.map((r) => ({
+      id: `act-${r.id}`,
+      type: "review" as const,
+      title: r.title,
+      number: r.number,
+      html_url: r.html_url,
+      repo: r.repo,
+      created_at: r.created_at,
+    })),
+    ...issues.map((i) => ({
+      id: `act-${i.id}`,
+      type: "issue" as const,
+      title: i.title,
+      number: i.number,
+      html_url: i.html_url,
+      repo: i.repo,
+      created_at: i.created_at,
+    })),
+  ].toSorted((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+
+  activityCache = { data: activity, timestamp: now }
+  return activity.slice(0, limit)
 }

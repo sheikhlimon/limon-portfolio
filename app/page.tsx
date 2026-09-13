@@ -1,6 +1,6 @@
 import { Suspense } from "react"
 import Hero from "./components/Hero"
-import LatestPRs from "./components/LatestPRs"
+import RecentActivity from "./components/RecentActivity"
 import { projects } from "../lib/projects"
 import { getPosts } from "../lib/posts"
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr"
@@ -119,7 +119,7 @@ export default function Home() {
 
       <div className="section-divider" />
       <Suspense>
-        <LatestPRs />
+        <RecentActivity />
       </Suspense>
 
       <div className="section-divider" />
