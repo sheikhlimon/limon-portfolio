@@ -9,7 +9,6 @@ import {
   Circle,
   XCircle,
   ArrowUpRight,
-  House,
 } from "@phosphor-icons/react"
 import { SITE_CONFIG } from "../../lib/constants"
 import type { PRItem, ReviewItem, IssueItem } from "../../lib/contributions"
@@ -206,12 +205,23 @@ export default function ContributionsClient({
     <div className="max-w-[1440px] mx-auto px-5 sm:px-8 w-full flex flex-col gap-8 pt-6 sm:pt-8">
       {/* Top back navigation & controls */}
       <div className="flex items-center justify-between">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-1.5 text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
-        >
-          <House className="w-4 h-4" weight="bold" />
-          <span>home</span>
+        <Link href="/" className="flex items-center group" aria-label="Home">
+          <svg
+            className="w-7 h-7 sm:w-8 sm:h-8 text-gray-900 dark:text-white transition-opacity group-hover:opacity-70"
+            viewBox="0 0 32 32"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="square"
+            strokeLinejoin="miter"
+          >
+            {/* S */}
+            <path d="M13 10H7v5h6v5H7" />
+            {/* L */}
+            <path d="M17 10v10h6" />
+            {/* Terminal cursor _ */}
+            <path d="M25 20h4" className="animate-pulse" />
+          </svg>
         </Link>
         <div className="flex items-center gap-2">
           <a

@@ -16,7 +16,26 @@ export default function FloatingControls() {
   return (
     <header className="sticky top-0 z-50 w-full bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-dashed border-gray-200/80 dark:border-gray-800/80 transition-colors">
       <div className="max-w-4xl mx-auto px-5 sm:px-8 h-13 sm:h-14 flex items-center justify-between">
-        <div></div>
+        <div>
+          <Link href="/" className="flex items-center group" aria-label="Home">
+            <svg
+              className="w-7 h-7 sm:w-8 sm:h-8 text-gray-900 dark:text-white transition-opacity group-hover:opacity-70"
+              viewBox="0 0 32 32"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="square"
+              strokeLinejoin="miter"
+            >
+              {/* S */}
+              <path d="M13 10H7v5h6v5H7" />
+              {/* L */}
+              <path d="M17 10v10h6" />
+              {/* Terminal cursor _ */}
+              <path d="M25 20h4" className="animate-pulse" />
+            </svg>
+          </Link>
+        </div>
 
         <div className="flex items-center gap-2 sm:gap-2.5">
           <Link
