@@ -65,7 +65,7 @@ export default async function LatestPRs() {
                   href={pr.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="truncate text-base sm:text-[17px] font-medium text-gray-900 dark:text-white hover:text-mauve transition-colors"
+                  className="line-clamp-2 sm:truncate text-base sm:text-[17px] font-medium text-gray-900 dark:text-white hover:text-mauve transition-colors"
                 >
                   {pr.title}
                 </a>

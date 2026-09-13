@@ -111,7 +111,7 @@ function SidebarFeed({
                   href={item.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="truncate text-[13px] font-bold text-gray-900 dark:text-gray-100 hover:text-mauve transition-colors"
+                  className="line-clamp-2 sm:truncate text-[13px] font-bold text-gray-900 dark:text-gray-100 hover:text-mauve transition-colors"
                 >
                   {item.title}
                 </a>
@@ -332,7 +332,7 @@ export default function ContributionsClient({
                             href={pr.html_url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="truncate text-sm font-bold text-gray-900 dark:text-gray-100 hover:text-mauve transition-colors"
+                            className="line-clamp-2 sm:truncate text-sm font-bold text-gray-900 dark:text-gray-100 hover:text-mauve transition-colors"
                           >
                             {pr.title}
                           </a>

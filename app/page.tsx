@@ -95,7 +95,7 @@ function WritingList() {
               rel={post.externalUrl ? "noopener noreferrer" : undefined}
               className="group flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1"
             >
-              <span className="text-base sm:text-[17px] font-medium text-gray-900 dark:text-white group-hover:text-mauve truncate transition-colors">
+              <span className="text-base sm:text-[17px] font-medium text-gray-900 dark:text-white group-hover:text-mauve line-clamp-2 sm:truncate transition-colors">
                 {post.title}
               </span>
               <span className="text-xs sm:text-sm text-gray-400 dark:text-gray-500 whitespace-nowrap shrink-0">
