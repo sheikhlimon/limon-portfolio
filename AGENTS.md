@@ -22,7 +22,7 @@
 
 - **One Logical Unit:** One focused step per response, commit after each complete change.
 - **Explain First:** Explain WHAT and WHY before writing or modifying code.
-- **Verification over Heavy Builds:** Do not run `bun run build` on every intermediate step. Run `bunx oxlint && bunx tsc --noEmit` as the final check before commenting.
+- **Fast Verification:** Do not run full TypeScript checks (`bunx tsc --noEmit`) on small, obvious styling or markup changes. Rely on fast `bunx oxlint` (or let pre-commit `lefthook` verify types). Only run `bunx tsc --noEmit` on architectural refactors, API changes, or complex data handling.
 - **Definition of Done:** 0 lint errors, 0 type errors, clean responsive UI matching the terminal aesthetic, and accurate config in `lib/constants.ts`.
 
 ## 3. Strict Constraints (No Vibe-Coding)
@@ -30,7 +30,7 @@
 - **RSC & Event Handlers:** Never pass event handlers (`onClick`, `onMouseEnter`) to Client Component props from Server Components (`LatestPRs.tsx` is an async RSC). Use native semantic `<a>` tags with `href` and `target="_blank"`.
 - **Layout Sizing:** Home & post reading views must use `max-w-4xl mx-auto px-5 sm:px-8`. Contributions dashboard uses `max-w-[1440px] mx-auto px-5 sm:px-8`.
 - **Typography & Font Roles:** Primary typeface across headings, titles, buttons, and prose is Space Grotesk (`font-sans`). CaskaydiaMono (`font-mono`) is reserved strictly for code blocks, inline code, repo identifiers, PR numbers, and the `## ` markdown prefix. Headings use lowercase with `## ` prefix.
-- **Grayscale Palette with Git-Merged Purple Accents:** Keep base text strictly grayscale (`text-gray-900`, `text-gray-400`, `dark:text-white`, `dark:text-gray-500`). Purple hover (`hover:text-purple-600 dark:hover:text-purple-400 transition-colors`) is reserved strictly for Git PRs, issues, and reviews. All navigation, bio links (`@sheikhlimon`), `reach me` social links, back links (`← home`), and `contributions →` use neutral grayscale hover (`hover:text-gray-900 dark:hover:text-white` or `hover:text-gray-600 dark:hover:text-gray-300`). Status indicators follow git conventions (`text-purple-600` merged, `text-green-600` open, `text-red-500` / `text-gray-400` closed).
+- **Grayscale Palette with Git-Merged Purple Accents:** Keep base text strictly grayscale (`text-gray-900`, `text-gray-400`, `dark:text-white`, `dark:text-gray-500`). Purple hover (`hover:text-purple-600 dark:hover:text-purple-400 transition-colors`) is reserved strictly for Git PRs, issues, and reviews. All navigation, bio links (`@sheikhlimon`), `reach me` social links, back links (`← home`), and section links (`view all`, `contributions →`) use neutral grayscale hover (`hover:text-gray-900 dark:hover:text-white` or `hover:text-gray-600 dark:hover:text-gray-300`). Status indicators follow git conventions (`text-purple-600` merged, `text-green-600` open, `text-red-500` / `text-gray-400` closed).
 - **External Links & Stats:** External links must use `rel="noopener noreferrer"`. "Merged by repo" lists must filter to repositories with `merged > 0`. On rows with hover actions, icons fade in on hover (`opacity-0 transition group-hover:opacity-100`).
 
 ## 4. The Anti-Pattern Graveyard

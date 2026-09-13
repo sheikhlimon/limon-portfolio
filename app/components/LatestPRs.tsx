@@ -31,7 +31,7 @@ export default async function LatestPRs() {
         </h2>
         <Link
           href="/contributions"
-          className="group flex items-center gap-1 text-sm text-gray-400 dark:text-gray-500 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+          className="group flex items-center gap-1 text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
         >
           view all
           <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
