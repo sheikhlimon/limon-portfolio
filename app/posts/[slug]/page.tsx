@@ -110,13 +110,15 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   return (
     <div className="max-w-4xl mx-auto px-5 sm:px-8 w-full overflow-x-hidden pt-6 sm:pt-10">
-      <div className="space-y-6">
-        <Link
-          href="/"
-          className="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
-        >
-          ← home
-        </Link>
+      <div className="flex flex-col gap-8 sm:gap-10">
+        <div>
+          <Link
+            href="/"
+            className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
+          >
+            ← home
+          </Link>
+        </div>
 
         <div className="space-y-2 pb-6 border-b border-dashed border-gray-200 dark:border-gray-800/80">
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white break-words">
