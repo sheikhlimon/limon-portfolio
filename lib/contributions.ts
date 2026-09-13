@@ -48,7 +48,42 @@ interface ForgejoPR {
   }
 }
 
+interface CacheEntry<T> {
+  data: T
+  timestamp: number
+}
+
+const CACHE_TTL_MS = 10 * 60 * 1000 // 10 minutes
+
+let prsCache: CacheEntry<PRItem[]> | null = null
+let reviewsCache: CacheEntry<ReviewItem[]> | null = null
+let issuesCache: CacheEntry<IssueItem[]> | null = null
+
 const FEDORA_FORGE_REPOS = ["apps/packager_dashboard", "apps/oraculum", "infra/ansible"]
+
+async function fetchForgeWithRetry(url: string, timeoutMs = 30000): Promise<Response | null> {
+  try {
+    const res = await fetch(url, {
+      next: { revalidate: 3600 },
+      signal: AbortSignal.timeout(timeoutMs),
+    })
+    if (res.ok) return res
+  } catch {
+    await new Promise((r) => setTimeout(r, 1000))
+  }
+
+  try {
+    const retryRes = await fetch(url, {
+      next: { revalidate: 3600 },
+      signal: AbortSignal.timeout(timeoutMs),
+    })
+    if (retryRes.ok) return retryRes
+  } catch {
+    return null
+  }
+
+  return null
+}
 
 async function fetchGitHub(url: string) {
   const headers: Record<string, string> = { Accept: "application/vnd.github.v3+json" }
@@ -57,25 +92,41 @@ async function fetchGitHub(url: string) {
     headers.Authorization = `Bearer ${token}`
   }
 
-  let res = await fetch(url, {
-    headers,
-    next: { revalidate: 3600 },
-  })
-
-  if (res.status === 401) {
-    console.warn(`[GitHub API] 401 for ${url}. Falling back to unauthenticated fetch.`)
-    res = await fetch(url, {
-      headers: { Accept: "application/vnd.github.v3+json" },
+  const doFetch = async () => {
+    let res = await fetch(url, {
+      headers,
       next: { revalidate: 3600 },
+      signal: AbortSignal.timeout(15000),
     })
+
+    if (res.status === 401) {
+      console.warn(`[GitHub API] 401 for ${url}. Falling back to unauthenticated fetch.`)
+      res = await fetch(url, {
+        headers: { Accept: "application/vnd.github.v3+json" },
+        next: { revalidate: 3600 },
+        signal: AbortSignal.timeout(15000),
+      })
+    }
+
+    if (!res.ok) {
+      console.error(`[GitHub API] Error ${res.status} for ${url}`)
+      return null
+    }
+
+    return (await res.json()) as { items?: GitHubPR[]; total_count?: number }
   }
 
-  if (!res.ok) {
-    console.error(`[GitHub API] Error ${res.status} for ${url}`)
-    return null
+  try {
+    return await doFetch()
+  } catch {
+    await new Promise((r) => setTimeout(r, 800))
+    try {
+      return await doFetch()
+    } catch (err) {
+      console.error(`[GitHub API] Fetch failed for ${url}:`, err)
+      return null
+    }
   }
-
-  return res.json()
 }
 
 export async function fetchGitHubPRs(): Promise<PRItem[]> {
@@ -94,21 +145,16 @@ export async function fetchGitHubPRs(): Promise<PRItem[]> {
     const totalPages = Math.min(maxPages, Math.ceil(totalCount / perPage))
 
     if (totalPages > 1) {
-      const pagePromises = []
-      for (let page = 2; page <= totalPages; page++) {
-        pagePromises.push(
+      const restPages = await Promise.all(
+        Array.from({ length: totalPages - 1 }, (_, i) =>
           fetchGitHub(
-            `https://api.github.com/search/issues?q=author:${SITE_CONFIG.githubUsername}+type:pr&sort=created&order=desc&per_page=${perPage}&page=${page}`
+            `https://api.github.com/search/issues?q=author:${SITE_CONFIG.githubUsername}+type:pr&sort=created&order=desc&per_page=${perPage}&page=${i + 2}`
           )
             .then((data) => (data?.items as GitHubPR[]) || [])
             .catch(() => [] as GitHubPR[])
         )
-      }
-
-      const restPages = await Promise.all(pagePromises)
-      for (const items of restPages) {
-        allItems.push(...items)
-      }
+      )
+      allItems.push(...restPages.flat())
     }
 
     return allItems
@@ -146,13 +192,11 @@ export async function fetchFedoraForgePRs(): Promise<PRItem[]> {
     const forgeUser = SITE_CONFIG.githubUsername
     const prPromises = FEDORA_FORGE_REPOS.map(async (repo) => {
       try {
-        const res = await fetch(
-          `https://forge.fedoraproject.org/api/v1/repos/${repo}/pulls?state=all`,
-          {
-            next: { revalidate: 3600 },
-          }
+        const res = await fetchForgeWithRetry(
+          `https://forge.fedoraproject.org/api/v1/repos/${repo}/pulls?state=all&limit=50`,
+          30000
         )
-        if (!res.ok) return []
+        if (!res || !res.ok) return []
         const pulls: ForgejoPR[] = await res.json()
         if (!Array.isArray(pulls)) return []
         return pulls
@@ -184,9 +228,14 @@ export async function fetchFedoraForgePRs(): Promise<PRItem[]> {
 }
 
 export async function fetchAllPRs(): Promise<PRItem[]> {
+  const now = Date.now()
+  if (prsCache && now - prsCache.timestamp < CACHE_TTL_MS) {
+    return prsCache.data
+  }
   const [ghPRs, forgePRs] = await Promise.all([fetchGitHubPRs(), fetchFedoraForgePRs()])
   const all = [...ghPRs, ...forgePRs]
   all.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+  prsCache = { data: all, timestamp: now }
   return all
 }
 
@@ -242,26 +291,25 @@ export async function fetchGitHubReviews(): Promise<ReviewItem[]> {
 export async function fetchFedoraForgeReviews(): Promise<ReviewItem[]> {
   try {
     const forgeUser = SITE_CONFIG.githubUsername
-    const promises = FEDORA_FORGE_REPOS.map(async (repo) => {
+    const maintainerRepos = ["apps/packager_dashboard", "apps/oraculum"]
+    const promises = maintainerRepos.map(async (repo) => {
       try {
-        const res = await fetch(
-          `https://forge.fedoraproject.org/api/v1/repos/${repo}/pulls?state=all&limit=20`,
-          {
-            next: { revalidate: 3600 },
-          }
+        const res = await fetchForgeWithRetry(
+          `https://forge.fedoraproject.org/api/v1/repos/${repo}/pulls?state=all&limit=30`,
+          15000
         )
-        if (!res.ok) return []
+        if (!res || !res.ok) return []
         const pulls = await res.json()
         if (!Array.isArray(pulls)) return []
-        const otherPulls = pulls.filter((p) => p.user?.login !== forgeUser)
+        const otherPulls = pulls.filter((p) => p.user?.login !== forgeUser).slice(0, 15)
 
         const revPromises = otherPulls.map(async (pull) => {
           try {
-            const rRes = await fetch(
+            const rRes = await fetchForgeWithRetry(
               `https://forge.fedoraproject.org/api/v1/repos/${repo}/pulls/${pull.number}/reviews`,
-              { next: { revalidate: 3600 } }
+              8000
             )
-            if (!rRes.ok) return []
+            if (!rRes || !rRes.ok) return []
             const revs = await rRes.json()
             if (!Array.isArray(revs)) return []
             const userRevs = revs.filter((r) => r.user?.login === forgeUser)
@@ -301,12 +349,20 @@ export async function fetchFedoraForgeReviews(): Promise<ReviewItem[]> {
 }
 
 export async function fetchAllReviews(): Promise<ReviewItem[]> {
+  const now = Date.now()
+  if (reviewsCache && now - reviewsCache.timestamp < CACHE_TTL_MS) {
+    return reviewsCache.data
+  }
   const [ghReviews, forgeReviews] = await Promise.all([
     fetchGitHubReviews(),
     fetchFedoraForgeReviews(),
   ])
   const all = [...ghReviews, ...forgeReviews]
-  return all.toSorted((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+  const sorted = all.toSorted(
+    (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+  )
+  reviewsCache = { data: sorted, timestamp: now }
+  return sorted
 }
 
 export interface IssueItem {
@@ -328,8 +384,11 @@ export async function fetchFedoraForgeIssues(): Promise<IssueItem[]> {
     const promises = FEDORA_FORGE_REPOS.map(async (repo) => {
       try {
         const res = await fetch(
-          `https://forge.fedoraproject.org/api/v1/repos/${repo}/issues?state=all&type=issues`,
-          { next: { revalidate: 3600 } }
+          `https://forge.fedoraproject.org/api/v1/repos/${repo}/issues?state=all&type=issues&limit=20`,
+          {
+            next: { revalidate: 3600 },
+            signal: AbortSignal.timeout(5000),
+          }
         )
         if (!res.ok) return []
         const issues = await res.json()
@@ -357,7 +416,15 @@ export async function fetchFedoraForgeIssues(): Promise<IssueItem[]> {
 }
 
 export async function fetchAllIssues(): Promise<IssueItem[]> {
+  const now = Date.now()
+  if (issuesCache && now - issuesCache.timestamp < CACHE_TTL_MS) {
+    return issuesCache.data
+  }
   const [ghIssues, forgeIssues] = await Promise.all([fetchGitHubIssues(), fetchFedoraForgeIssues()])
   const all = [...ghIssues, ...forgeIssues]
-  return all.toSorted((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+  const sorted = all.toSorted(
+    (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+  )
+  issuesCache = { data: sorted, timestamp: now }
+  return sorted
 }

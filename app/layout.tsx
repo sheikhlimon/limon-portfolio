@@ -50,10 +50,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang={SITE_CONFIG.lang} suppressHydrationWarning className="snap-y snap-proximity">
+    <html
+      lang={SITE_CONFIG.lang}
+      suppressHydrationWarning
+      className={`${caskaydia.variable} ${spaceGrotesk.variable} snap-y snap-proximity`}
+    >
       <body
         suppressHydrationWarning
-        className={`${caskaydia.variable} ${spaceGrotesk.variable} antialiased bg-white dark:bg-zinc-950 text-gray-900 dark:text-white transition-colors duration-300 min-h-screen flex flex-col relative overflow-x-hidden font-sans`}
+        className="antialiased bg-white dark:bg-zinc-950 text-gray-900 dark:text-white transition-colors duration-300 min-h-screen flex flex-col relative overflow-x-hidden font-sans"
       >
         <ThemeProvider
           attribute="class"

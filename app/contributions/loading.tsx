@@ -6,12 +6,9 @@ export default function Loading() {
 
       {/* Header */}
       <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-        <div className="flex items-center gap-5">
-          <div className="w-20 h-20 rounded-2xl bg-gray-200 dark:bg-gray-800 shrink-0" />
-          <div className="space-y-2">
-            <div className="h-8 w-48 bg-gray-200 dark:bg-gray-800 rounded" />
-            <div className="h-4 w-28 bg-gray-200 dark:bg-gray-800 rounded" />
-          </div>
+        <div className="space-y-2">
+          <div className="h-8 w-64 bg-gray-200 dark:bg-gray-800 rounded" />
+          <div className="h-4 w-80 max-w-full bg-gray-200 dark:bg-gray-800 rounded" />
         </div>
 
         <div className="flex items-center gap-6 sm:gap-8">

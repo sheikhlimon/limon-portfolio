@@ -113,7 +113,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <div className="space-y-6">
         <Link
           href="/"
-          className="inline-flex items-center gap-1 text-xs font-mono text-gray-400 dark:text-gray-500 hover:text-purple-500 dark:hover:text-purple-400 transition-colors"
+          className="inline-flex items-center gap-1 text-xs font-mono text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
         >
           ← home
         </Link>

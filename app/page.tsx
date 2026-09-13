@@ -3,6 +3,7 @@ import Hero from "./components/Hero"
 import LatestPRs from "./components/LatestPRs"
 import { projects } from "../lib/projects"
 import { getPosts } from "../lib/posts"
+import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr"
 import Link from "next/link"
 
 function ProjectsList() {
@@ -20,8 +21,15 @@ function ProjectsList() {
           >
             <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
               <div className="flex items-baseline gap-2 flex-wrap">
-                <h3 className="text-base sm:text-[17px] font-medium text-gray-900 dark:text-white">
-                  {project.title}
+                <h3 className="text-base sm:text-[17px] font-bold text-gray-900 dark:text-white">
+                  <a
+                    href={project.live || project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                  >
+                    {project.title}
+                  </a>
                 </h3>
                 {project.role && (
                   <span className="font-mono inline-flex items-center rounded-full border border-dashed border-gray-300 dark:border-gray-800 bg-gray-50 dark:bg-zinc-900 px-2 py-0.5 text-xs text-gray-500 dark:text-gray-400">
@@ -29,24 +37,15 @@ function ProjectsList() {
                   </span>
                 )}
               </div>
-              <div className="flex items-center gap-3">
-                {project.live && (
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-gray-400 dark:text-gray-500 hover:text-purple-500 dark:hover:text-purple-400 transition-colors"
-                  >
-                    live
-                  </a>
-                )}
+              <div>
                 <a
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-gray-400 dark:text-gray-500 hover:text-purple-500 dark:hover:text-purple-400 transition-colors"
+                  className="inline-flex items-center gap-1 text-sm sm:text-[15px] font-bold text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
                 >
                   source
+                  <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
               </div>
             </div>
@@ -86,33 +85,19 @@ function WritingList() {
             key={post.slug}
             className={`py-3.5 ${index < posts.length - 1 ? "border-b border-dashed border-gray-200 dark:border-gray-800/80" : ""}`}
           >
-            {post.externalUrl ? (
-              <a
-                href={post.externalUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1"
-              >
-                <span className="text-sm sm:text-base text-gray-900 dark:text-white group-hover:text-purple-500 dark:group-hover:text-purple-400 truncate transition-colors">
-                  {post.title}
-                </span>
-                <span className="text-xs sm:text-sm font-mono tabular-nums text-gray-400 dark:text-gray-500 whitespace-nowrap shrink-0">
-                  {post.date}
-                </span>
-              </a>
-            ) : (
-              <Link
-                href={`/posts/${post.slug}`}
-                className="group flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1"
-              >
-                <span className="text-sm sm:text-base text-gray-900 dark:text-white group-hover:text-purple-500 dark:group-hover:text-purple-400 truncate transition-colors">
-                  {post.title}
-                </span>
-                <span className="text-xs sm:text-sm font-mono tabular-nums text-gray-400 dark:text-gray-500 whitespace-nowrap shrink-0">
-                  {post.date}
-                </span>
-              </Link>
-            )}
+            <Link
+              href={post.externalUrl || `/posts/${post.slug}`}
+              target={post.externalUrl ? "_blank" : undefined}
+              rel={post.externalUrl ? "noopener noreferrer" : undefined}
+              className="group flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1"
+            >
+              <span className="text-base sm:text-[17px] font-medium text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 truncate transition-colors">
+                {post.title}
+              </span>
+              <span className="text-xs sm:text-sm font-mono tabular-nums text-gray-400 dark:text-gray-500 whitespace-nowrap shrink-0">
+                {post.date}
+              </span>
+            </Link>
           </div>
         ))}
       </div>
@@ -122,7 +107,10 @@ function WritingList() {
 
 export default function Home() {
   return (
-    <div className="max-w-4xl mx-auto px-5 sm:px-8 w-full space-y-12 sm:space-y-14">
+    <div
+      suppressHydrationWarning
+      className="max-w-4xl mx-auto px-5 sm:px-8 w-full space-y-12 sm:space-y-14"
+    >
       <Hero />
 
       <div className="section-divider" />
