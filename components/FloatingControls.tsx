@@ -19,7 +19,7 @@ export default function FloatingControls() {
         <div>
           <Link href="/" className="flex items-center group" aria-label="Home">
             <svg
-              className="w-7 h-7 sm:w-8 sm:h-8 text-gray-900 dark:text-white transition-opacity group-hover:opacity-70"
+              className="w-8 h-8 sm:w-9 sm:h-9 text-gray-700 dark:text-gray-200 transition-opacity group-hover:opacity-70"
               viewBox="0 0 32 32"
               fill="none"
               stroke="currentColor"
