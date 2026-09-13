@@ -44,7 +44,6 @@ function formatDate(dateStr: string): string {
   return new Date(dateStr).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
-    year: "numeric",
     timeZone: "UTC",
   })
 }
@@ -124,7 +123,7 @@ function SidebarFeed({
                 </div>
               </div>
 
-              <span className="font-mono tabular-nums text-[11px] text-gray-400 dark:text-gray-500 shrink-0 hidden sm:inline">
+              <span className="text-xs sm:text-sm text-gray-400 dark:text-gray-500 whitespace-nowrap shrink-0 hidden sm:inline">
                 {formatDate(item.created_at)}
               </span>
 
@@ -345,7 +344,7 @@ export default function ContributionsClient({
                           </div>
                         </div>
 
-                        <span className="font-mono tabular-nums text-xs text-gray-400 dark:text-gray-500 shrink-0 hidden sm:inline">
+                        <span className="text-xs sm:text-sm text-gray-400 dark:text-gray-500 whitespace-nowrap shrink-0 hidden sm:inline">
                           {formatDate(pr.created_at)}
                         </span>
 

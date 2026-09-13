@@ -76,7 +76,7 @@ export default async function LatestPRs() {
                   </span>
                 </div>
               </div>
-              <span className="font-mono text-xs sm:text-sm tabular-nums text-gray-400 dark:text-gray-500 shrink-0 hidden sm:inline">
+              <span className="text-xs sm:text-sm text-gray-400 dark:text-gray-500 whitespace-nowrap shrink-0 hidden sm:inline">
                 {new Date(pr.created_at).toLocaleString("en-US", {
                   month: "short",
                   day: "numeric",
