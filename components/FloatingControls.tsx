@@ -13,21 +13,10 @@ export default function FloatingControls() {
     return null
   }
 
-  const isPost = pathname.startsWith("/posts/")
-
   return (
     <header className="sticky top-0 z-50 w-full bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-dashed border-gray-200/80 dark:border-gray-800/80 transition-colors">
       <div className="max-w-4xl mx-auto px-5 sm:px-8 h-13 sm:h-14 flex items-center justify-between">
-        <div>
-          {isPost ? (
-            <Link
-              href="/"
-              className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
-            >
-              ← home
-            </Link>
-          ) : null}
-        </div>
+        <div></div>
 
         <div className="flex items-center gap-2 sm:gap-2.5">
           <Link

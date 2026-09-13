@@ -9,6 +9,7 @@ import {
   Circle,
   XCircle,
   ArrowUpRight,
+  House,
 } from "@phosphor-icons/react"
 import { SITE_CONFIG } from "../../lib/constants"
 import type { PRItem, ReviewItem, IssueItem } from "../../lib/contributions"
@@ -207,9 +208,10 @@ export default function ContributionsClient({
       <div className="flex items-center justify-between">
         <Link
           href="/"
-          className="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
+          className="inline-flex items-center gap-1.5 text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
         >
-          ← home
+          <House className="w-4 h-4" weight="bold" />
+          <span>home</span>
         </Link>
         <div className="flex items-center gap-2">
           <a
