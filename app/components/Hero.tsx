@@ -34,7 +34,7 @@ export default function Hero() {
   }
 
   return (
-    <section id="about" className="pt-16 sm:pt-20 space-y-6">
+    <section id="about" className="pt-20 sm:pt-20 space-y-6">
       <div className="flex items-center gap-4 sm:gap-5">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img

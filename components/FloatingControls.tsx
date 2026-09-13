@@ -26,15 +26,19 @@ export default function FloatingControls() {
     <div className="fixed top-5 right-5 sm:top-6 sm:right-6 z-50 flex items-center gap-2 sm:gap-2.5">
       <Link
         href="/contributions"
-        className="flex items-center justify-center p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+        className={
+          isScrolled
+            ? "p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-mauve hover:text-gray-900 dark:hover:text-white"
+            : "flex items-center gap-1.5 px-3 py-1 rounded-full border border-dashed border-gray-300 dark:border-gray-800 bg-gray-50/90 dark:bg-zinc-900/90 text-xs sm:text-sm font-semibold text-gray-900 dark:text-white hover:border-gray-400 dark:hover:border-gray-700 transition-colors"
+        }
         aria-label="Contributions"
         title="Contributions"
       >
-        {isScrolled ? (
-          <GitPullRequest className="w-5 h-5" />
-        ) : (
-          <span className="text-sm font-medium px-1">contributions</span>
-        )}
+        <GitPullRequest
+          className={isScrolled ? "w-5 h-5 text-mauve" : "w-3.5 h-3.5 sm:w-4 sm:h-4 text-mauve"}
+          weight="bold"
+        />
+        {!isScrolled && <span>contributions</span>}
       </Link>
       <a
         href={`https://github.com/${SITE_CONFIG.githubUsername}`}
