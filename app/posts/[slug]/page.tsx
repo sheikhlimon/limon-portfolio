@@ -113,7 +113,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <div className="space-y-6">
         <Link
           href="/"
-          className="inline-flex items-center gap-1 text-xs font-mono text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
+          className="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
         >
           ← home
         </Link>
@@ -122,9 +122,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white break-words">
             {data.title || "Untitled"}
           </h1>
-          <p className="font-mono text-xs tabular-nums text-gray-400 dark:text-gray-500">
-            {data.date || ""}
-          </p>
+          <p className="text-sm text-gray-400 dark:text-gray-500">{data.date || ""}</p>
         </div>
 
         <article className="prose prose-gray dark:prose-invert max-w-none w-full overflow-x-hidden">

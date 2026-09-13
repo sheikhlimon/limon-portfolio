@@ -98,7 +98,7 @@ function WritingList() {
               <span className="text-base sm:text-[17px] font-medium text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 truncate transition-colors">
                 {post.title}
               </span>
-              <span className="text-xs sm:text-sm font-mono tabular-nums text-gray-400 dark:text-gray-500 whitespace-nowrap shrink-0">
+              <span className="text-xs sm:text-sm text-gray-400 dark:text-gray-500 whitespace-nowrap shrink-0">
                 {post.date}
               </span>
             </Link>
