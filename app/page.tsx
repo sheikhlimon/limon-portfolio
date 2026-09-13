@@ -26,7 +26,7 @@ function ProjectsList() {
                     href={project.live || project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                    className="hover:text-purple-700 dark:hover:text-purple-400/80 transition-colors"
                   >
                     {project.title}
                   </a>
@@ -43,7 +43,7 @@ function ProjectsList() {
                   target="_blank"
                   rel="noopener noreferrer"
                   title={project.github.includes("forge.fedoraproject.org") ? "forge" : "github"}
-                  className="inline-flex items-center gap-1 text-sm sm:text-[15px] font-bold text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                  className="inline-flex items-center gap-1 text-sm sm:text-[15px] font-bold text-gray-500 dark:text-gray-400 hover:text-purple-700 dark:hover:text-purple-400/80 transition-colors"
                 >
                   source
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -95,7 +95,7 @@ function WritingList() {
               rel={post.externalUrl ? "noopener noreferrer" : undefined}
               className="group flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1"
             >
-              <span className="text-base sm:text-[17px] font-medium text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 truncate transition-colors">
+              <span className="text-base sm:text-[17px] font-medium text-gray-900 dark:text-white group-hover:text-purple-700 dark:group-hover:text-purple-400/80 truncate transition-colors">
                 {post.title}
               </span>
               <span className="text-xs sm:text-sm text-gray-400 dark:text-gray-500 whitespace-nowrap shrink-0">

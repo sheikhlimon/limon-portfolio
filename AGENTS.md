@@ -30,7 +30,7 @@
 - **RSC & Event Handlers:** Never pass event handlers (`onClick`, `onMouseEnter`) to Client Component props from Server Components (`LatestPRs.tsx` is an async RSC). Use native semantic `<a>` tags with `href` and `target="_blank"`.
 - **Layout Sizing:** Home & post reading views must use `max-w-4xl mx-auto px-5 sm:px-8`. Contributions dashboard uses `max-w-[1440px] mx-auto px-5 sm:px-8`.
 - **Typography & Font Roles:** Primary typeface across headings, titles, buttons, and prose is Space Grotesk (`font-sans`). CaskaydiaMono (`font-mono`) is reserved strictly for code blocks, inline code, repo identifiers, PR numbers, and the `## ` markdown prefix. Headings use lowercase with `## ` prefix.
-- **Grayscale Palette with Git-Merged Purple Accents:** Keep base text strictly grayscale (`text-gray-900`, `text-gray-400`, `dark:text-white`, `dark:text-gray-500`). Purple hover (`hover:text-purple-600 dark:hover:text-purple-400 transition-colors`) is reserved strictly for Git PRs, issues, and reviews. All navigation, bio links (`@sheikhlimon`), `reach me` social links, back links (`← home`), and section links (`view all`, `contributions →`) use neutral grayscale hover (`hover:text-gray-900 dark:hover:text-white` or `hover:text-gray-600 dark:hover:text-gray-300`). Status indicators follow git conventions (`text-purple-600` merged, `text-green-600` open, `text-red-500` / `text-gray-400` closed).
+- **Grayscale Palette with Git-Merged Purple Accents:** Keep base text strictly grayscale (`text-gray-900`, `text-gray-400`, `dark:text-white`, `dark:text-gray-500`). Purple hover (`hover:text-purple-700 dark:hover:text-purple-400/80 transition-colors`) is reserved strictly for Git PRs, issues, and reviews. All navigation, bio links (`@sheikhlimon`), `reach me` social links, back links (`← home`), and section links (`view all`, `contributions →`) use neutral grayscale hover (`hover:text-gray-900 dark:hover:text-white` or `hover:text-gray-600 dark:hover:text-gray-300`). Status indicators follow git conventions (`text-purple-600` merged, `text-green-600` open, `text-red-500` / `text-gray-400` closed).
 - **External Links & Stats:** External links must use `rel="noopener noreferrer"`. "Merged by repo" lists must filter to repositories with `merged > 0`. On rows with hover actions, icons fade in on hover (`opacity-0 transition group-hover:opacity-100`).
 
 ## 4. The Anti-Pattern Graveyard
@@ -39,7 +39,7 @@ _(Avoid these past failures and generic AI habits)_
 
 - **No HR Lines in README:** Do not add horizontal divider lines (`---` or `<hr>`) in README files.
 - **No Cards:** Do not create boxed cards with shadows or borders. Use flat lists with dashed dividers (`border-b border-dashed border-gray-200 dark:border-gray-800/80`).
-- **No Inconsistent Link Hovers:** Keep interactive text link hovers matching the git-merged purple (`hover:text-purple-600 dark:hover:text-purple-400 transition-colors`).
+- **No Inconsistent Link Hovers:** Keep interactive text link hovers matching the git-merged purple (`hover:text-purple-700 dark:hover:text-purple-400/80 transition-colors`).
 - **No Heavy Animations:** Subtle `transition-colors` only. No entrance motion, scale transforms, or floaty smooth-scroll lag.
 - **No Underlined Default Links:** Avoid browser default link underlines on interactive list rows; use subtle hover color changes instead.
 - **No Duplicate Shell Profiles:** Do not duplicate avatar/bio cards on subpages (e.g., `/contributions` has its own clean `## open source contributions` title).

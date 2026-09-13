@@ -65,7 +65,7 @@ export default async function LatestPRs() {
                   href={pr.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="truncate text-base sm:text-[17px] font-medium text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                  className="truncate text-base sm:text-[17px] font-medium text-gray-900 dark:text-white hover:text-purple-700 dark:hover:text-purple-400/80 transition-colors"
                 >
                   {pr.title}
                 </a>
@@ -87,7 +87,7 @@ export default async function LatestPRs() {
                 href={pr.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shrink-0 text-gray-400 opacity-0 transition group-hover:opacity-100 hover:text-purple-600 dark:hover:text-purple-400"
+                className="shrink-0 text-gray-400 opacity-0 transition group-hover:opacity-100 hover:text-purple-700 dark:hover:text-purple-400/80"
                 aria-label="View PR"
               >
                 <ArrowUpRight className="w-4 h-4" />
