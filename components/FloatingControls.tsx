@@ -40,14 +40,11 @@ export default function FloatingControls() {
         <div className="flex items-center gap-2 sm:gap-2.5">
           <Link
             href="/contributions"
-            className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-dashed border-gray-300 dark:border-gray-800 bg-gray-50/90 dark:bg-zinc-900/90 text-xs sm:text-sm font-semibold text-gray-900 dark:text-white hover:border-gray-400 dark:hover:border-gray-700 transition-colors"
+            className="flex items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
             aria-label="Contributions"
             title="Contributions"
           >
-            <GitPullRequest
-              className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-900 dark:text-white"
-              weight="bold"
-            />
+            <GitPullRequest className="w-4 h-4" weight="bold" />
             <span>contributions</span>
           </Link>
           <a
