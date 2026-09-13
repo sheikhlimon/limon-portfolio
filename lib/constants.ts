@@ -37,6 +37,7 @@ export const SITE_CONFIG = {
       "sheikhlimon/dotfiles-old",
       "sheikhlimon/daily-tasks-app",
       "sheikhlimon/focus-tracker",
+      "sheikhlimon/infra-scope",
     ],
   },
 }

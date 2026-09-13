@@ -3,6 +3,7 @@ import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
 import { notFound } from "next/navigation"
+import Link from "next/link"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import CodeBlock from "../../components/CodeBlock"
@@ -48,25 +49,25 @@ export async function generateMetadata({
 const markdownComponents = {
   h1: ({ ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1
-      className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-4 break-words"
+      className="text-2xl font-bold text-gray-900 dark:text-white mt-10 mb-4 break-words font-sans"
       {...props}
     />
   ),
   h2: ({ ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
-      className="text-base font-semibold text-gray-900 dark:text-white mt-8 mb-4 break-words"
+      className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-3 break-words font-sans"
       {...props}
     />
   ),
   h3: ({ ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3
-      className="text-sm font-semibold text-gray-900 dark:text-white mt-6 mb-3 break-words"
+      className="text-lg font-bold text-gray-900 dark:text-white mt-6 mb-2 break-words font-sans"
       {...props}
     />
   ),
   p: ({ ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p
-      className="my-4 leading-relaxed text-lg text-gray-700 dark:text-gray-300 break-words"
+      className="my-4 leading-relaxed text-base text-gray-700 dark:text-gray-300 break-words font-sans"
       {...props}
     />
   ),
@@ -79,7 +80,7 @@ const markdownComponents = {
     if (isInline && !language) {
       return (
         <code
-          className="bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-gray-800 dark:text-gray-200 font-mono text-sm break-all inline-block max-w-full"
+          className="bg-gray-100 dark:bg-zinc-800 px-1.5 py-0.5 rounded text-gray-800 dark:text-gray-200 font-mono text-xs break-all inline-block max-w-full"
           {...props}
         >
           {children}
@@ -108,13 +109,22 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const { data, content } = matter(fileContents)
 
   return (
-    <div className="max-w-2xl mx-auto px-5 w-full overflow-x-hidden">
+    <div className="max-w-4xl mx-auto px-5 sm:px-8 w-full overflow-x-hidden pt-6 sm:pt-10">
       <div className="space-y-6">
-        <div className="space-y-2">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white break-words">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1 text-xs font-mono text-gray-400 dark:text-gray-500 hover:text-purple-500 dark:hover:text-purple-400 transition-colors"
+        >
+          ← home
+        </Link>
+
+        <div className="space-y-2 pb-6 border-b border-dashed border-gray-200 dark:border-gray-800/80">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white break-words">
             {data.title || "Untitled"}
           </h1>
-          <p className="text-base text-gray-600 dark:text-gray-400">{data.date || ""}</p>
+          <p className="font-mono text-xs tabular-nums text-gray-400 dark:text-gray-500">
+            {data.date || ""}
+          </p>
         </div>
 
         <article className="prose prose-gray dark:prose-invert max-w-none w-full overflow-x-hidden">

@@ -16,16 +16,16 @@ function ProjectsList() {
         {projects.map((project, index) => (
           <div
             key={project.title}
-            className={`py-4 ${index < projects.length - 1 ? "border-b border-dashed border-gray-200 dark:border-gray-800/80" : ""}`}
+            className={`py-3.5 ${index < projects.length - 1 ? "border-b border-dashed border-gray-200 dark:border-gray-800/80" : ""}`}
           >
             <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
               <div className="flex items-baseline gap-2 flex-wrap">
-                <h3 className="text-base font-medium text-gray-900 dark:text-white font-display">
+                <h3 className="text-base sm:text-[17px] font-medium text-gray-900 dark:text-white">
                   {project.title}
                 </h3>
                 {project.role && (
-                  <span className="text-xs font-display text-gray-400 dark:text-gray-500">
-                    [{project.role}]
+                  <span className="font-mono inline-flex items-center rounded-full border border-dashed border-gray-300 dark:border-gray-800 bg-gray-50 dark:bg-zinc-900 px-2 py-0.5 text-xs text-gray-500 dark:text-gray-400">
+                    {project.role}
                   </span>
                 )}
               </div>
@@ -35,7 +35,7 @@ function ProjectsList() {
                     href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs font-display text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
+                    className="text-sm text-gray-400 dark:text-gray-500 hover:text-purple-500 dark:hover:text-purple-400 transition-colors"
                   >
                     live
                   </a>
@@ -44,16 +44,21 @@ function ProjectsList() {
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-display text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
+                  className="text-sm text-gray-400 dark:text-gray-500 hover:text-purple-500 dark:hover:text-purple-400 transition-colors"
                 >
                   source
                 </a>
               </div>
             </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{project.description}</p>
-            <div className="flex flex-wrap gap-2 mt-2">
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mt-1.5 leading-relaxed">
+              {project.description}
+            </p>
+            <div className="flex flex-wrap gap-1.5 mt-2">
               {project.techStack.map((tech) => (
-                <span key={tech} className="text-xs font-display text-gray-400 dark:text-gray-500">
+                <span
+                  key={tech}
+                  className="text-xs sm:text-[13px] text-gray-400 dark:text-gray-500 font-mono"
+                >
                   {tech.toLowerCase()}
                 </span>
               ))}
@@ -79,7 +84,7 @@ function WritingList() {
         {posts.map((post, index) => (
           <div
             key={post.slug}
-            className={`py-3 ${index < posts.length - 1 ? "border-b border-dashed border-gray-200 dark:border-gray-800/80" : ""}`}
+            className={`py-3.5 ${index < posts.length - 1 ? "border-b border-dashed border-gray-200 dark:border-gray-800/80" : ""}`}
           >
             {post.externalUrl ? (
               <a
@@ -88,10 +93,10 @@ function WritingList() {
                 rel="noopener noreferrer"
                 className="group flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1"
               >
-                <span className="text-sm text-gray-900 dark:text-gray-100 group-hover:underline decoration-gray-400 dark:decoration-gray-600">
+                <span className="text-sm sm:text-base text-gray-900 dark:text-white group-hover:text-purple-500 dark:group-hover:text-purple-400 truncate transition-colors">
                   {post.title}
                 </span>
-                <span className="text-xs font-display text-gray-400 dark:text-gray-500 whitespace-nowrap">
+                <span className="text-xs sm:text-sm font-mono tabular-nums text-gray-400 dark:text-gray-500 whitespace-nowrap shrink-0">
                   {post.date}
                 </span>
               </a>
@@ -100,10 +105,10 @@ function WritingList() {
                 href={`/posts/${post.slug}`}
                 className="group flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1"
               >
-                <span className="text-sm text-gray-900 dark:text-gray-100 group-hover:underline decoration-gray-400 dark:decoration-gray-600">
+                <span className="text-sm sm:text-base text-gray-900 dark:text-white group-hover:text-purple-500 dark:group-hover:text-purple-400 truncate transition-colors">
                   {post.title}
                 </span>
-                <span className="text-xs font-display text-gray-400 dark:text-gray-500 whitespace-nowrap">
+                <span className="text-xs sm:text-sm font-mono tabular-nums text-gray-400 dark:text-gray-500 whitespace-nowrap shrink-0">
                   {post.date}
                 </span>
               </Link>
@@ -117,7 +122,7 @@ function WritingList() {
 
 export default function Home() {
   return (
-    <div className="max-w-2xl mx-auto px-5 w-full space-y-16 sm:space-y-20">
+    <div className="max-w-4xl mx-auto px-5 sm:px-8 w-full space-y-12 sm:space-y-14">
       <Hero />
 
       <div className="section-divider" />

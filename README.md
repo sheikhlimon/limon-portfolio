@@ -1,21 +1,28 @@
-**Personal portfolio, blog and engineering logs**
+# Sheikh Limon — Portfolio
+
+Minimal, terminal-inspired personal portfolio, engineering logs, and open-source contribution explorer. Designed like a living, well-maintained README.
 
 ## Stack
 
-- **Framework**: Next.js 16 (React 19, TypeScript)
-- **Styling**: Tailwind CSS + next-themes
-- **Content**: Markdown, Shiki for code highlighting
-- **Linting & Hooks**: Oxlint, Oxfmt, Lefthook
-- **Fonts**: DM Sans (body) + CaskaydiaMono Nerd Font (display/code)
+- **Framework**: Next.js 16 (App Router, React 19, TypeScript)
+- **Styling**: Tailwind CSS v4 + `next-themes`
+- **Content & Syntax**: Markdown, Shiki syntax highlighting
+- **Icons**: Phosphor Icons (`@phosphor-icons/react`)
+- **Linting & Formatting**: Oxlint, Oxfmt, Lefthook
+- **Typography**: Space Grotesk (body & headings) + CaskaydiaMono Nerd Font (code & terminal indicators)
 
-## Setup
+## Setup & Commands
 
 ```bash
 # Install dependencies
 bun install
 
-# Run dev server
+# Run dev server (localhost:3000)
 bun dev
+
+# Lint & type check
+bun run lint
+bun run typecheck
 
 # Build for production
 bun run build
@@ -25,37 +32,43 @@ bun run build
 
 ```
 app/
-├── components/     # React components
-├── contributions/  # GitHub PRs data & components
-├── posts/          # Blog & logs page (/posts)
-├── globals.css     # Global styles & CSS variables
-└── layout.tsx      # Root layout + fonts
+├── components/     # Route components (Hero, LatestPRs, ThemeToggle, CodeBlock)
+├── contributions/  # Open-source contributions dashboard & metrics
+├── posts/[slug]/   # Blog post reader & markdown renderer
+├── globals.css     # Tailwind v4 theme, font variables & prose styles
+├── layout.tsx      # Root layout & theme provider
+└── page.tsx        # Portfolio home page
 
-logs/               # Markdown files (blog posts, logs)
-lib/                # Project data & constants
-public/             # Static assets
+components/         # Global shared components (FloatingControls, Footer)
+lib/                # Projects, blog parser, constants & contribution fetchers
+logs/               # Markdown engineering posts & log entries
+public/             # Font files & static icons
 ```
 
 ## Configuration
 
-To make this your own, edit these files:
+To customize the portfolio:
 
-- `lib/constants.ts` — name, email, GitHub username, bio, social links, site metadata, contributions config (excluded repos)
-- `lib/projects.ts` — your projects with GitHub/live URLs
-- `.env.example` → `.env.local` — GitHub token for contributions API (optional)
-- `package.json` — project name
-
-## Adding Content
-
-Posts go in `logs/` with frontmatter:
+- `lib/constants.ts` — Name, email, GitHub username, bio, social links, and contribution filters (`EXCLUDED_REPOS`).
+- `lib/projects.ts` — Projects list with live demo and source code URLs.
+- `lib/contributions.ts` — GitHub & Fedora Forge / Pagure PR and issue fetchers.
+- `.env.example` → `.env.local` — Optional `GITHUB_TOKEN` to increase GitHub API rate limits.
+- `logs/` — Add markdown posts with YAML frontmatter:
 
 ```yaml
 ---
 title: "Post Title"
-date: DD MMM YYYY
-type: blog # or 'log'
+date: "2026-03-15"
+type: "blog" # or 'log'
 ---
 ```
+
+## Design Guidelines
+
+- **Terminal Vibe**: Clean, grayscale-first Linux developer aesthetic.
+- **Grayscale with Status Colors**: Grayscale text and interactions; accent colors are reserved for Git status (`text-purple-500` merged, `text-green-600` open).
+- **Flat Lists**: No cards or heavy shadows — flat lists with dashed dividers (`border-b border-dashed`).
+- **Snappy & Light**: Fast transitions without bulky entrance motions or scroll lag.
 
 ## License
 

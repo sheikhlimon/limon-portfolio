@@ -87,8 +87,7 @@ function RepoBadge({ repo, className = "" }: { repo: string; className?: string 
       href={getRepoUrl(repo)}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={(e) => e.stopPropagation()}
-      className={`font-display inline-flex min-w-0 max-w-full items-center rounded-full border border-dashed border-gray-300 dark:border-gray-800 bg-gray-50 dark:bg-zinc-900 px-2 py-0.5 text-xs text-gray-500 dark:text-gray-400 transition-colors hover:border-gray-400 dark:hover:border-gray-700 hover:text-gray-900 dark:hover:text-white ${className}`}
+      className={`font-mono inline-flex min-w-0 max-w-full items-center rounded-full border border-dashed border-gray-300 dark:border-gray-800 bg-gray-50 dark:bg-zinc-900 px-2 py-0.5 text-xs text-gray-500 dark:text-gray-400 transition-colors hover:border-gray-400 dark:hover:border-gray-700 hover:text-gray-900 dark:hover:text-white ${className}`}
     >
       <span className="truncate">{repo}</span>
     </a>
@@ -139,21 +138,16 @@ function SidebarFeed({
                   href={item.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="truncate text-[13px] font-bold text-gray-900 dark:text-gray-100 hover:underline hover:text-black dark:hover:text-white transition-colors"
+                  className="truncate text-[13px] font-bold text-gray-900 dark:text-gray-100 group-hover:text-purple-500 dark:group-hover:text-purple-400 hover:text-purple-500 dark:hover:text-purple-400 transition-colors"
                 >
                   {item.title}
                 </a>
 
                 <div className="flex items-center gap-2 min-w-0">
                   <RepoBadge repo={item.repo} />
-                  <a
-                    href={item.html_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-display text-[11px] text-gray-400 dark:text-gray-500 shrink-0 hover:underline"
-                  >
+                  <span className="font-display text-[11px] text-gray-400 dark:text-gray-500 shrink-0">
                     #{item.number}
-                  </a>
+                  </span>
                 </div>
               </div>
 
@@ -161,7 +155,15 @@ function SidebarFeed({
                 {formatDate(item.created_at)}
               </span>
 
-              <ExternalIcon className="shrink-0 text-gray-400 dark:text-zinc-500 opacity-0 transition group-hover:opacity-100" />
+              <a
+                href={item.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 text-gray-400 opacity-0 transition group-hover:opacity-100 hover:text-purple-500 dark:hover:text-purple-400"
+                aria-label="View on GitHub/Forge"
+              >
+                <ExternalIcon />
+              </a>
             </div>
           ))}
         </div>
@@ -170,7 +172,7 @@ function SidebarFeed({
           <button
             type="button"
             onClick={onLoadMore}
-            className="w-full py-3 px-5 text-[13px] font-bold font-display text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white border-t border-dashed border-gray-200 dark:border-gray-800/80 transition-colors text-center cursor-pointer"
+            className="w-full py-3 px-5 text-[13px] font-bold font-display text-gray-400 dark:text-gray-500 hover:text-purple-500 dark:hover:text-purple-400 border-t border-dashed border-gray-200 dark:border-gray-800/80 transition-colors text-center cursor-pointer"
           >
             Load more · {items.length - visibleCount} remaining
           </button>
@@ -228,12 +230,12 @@ export default function ContributionsClient({
   ]
 
   return (
-    <div className="max-w-[1440px] mx-auto px-5 sm:px-8 w-full flex flex-col gap-8">
+    <div className="max-w-[1440px] mx-auto px-5 sm:px-8 w-full flex flex-col gap-8 pt-6 sm:pt-8">
       {/* Top back navigation & controls */}
       <div className="flex items-center justify-between">
         <Link
           href="/"
-          className="text-sm font-display font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
+          className="text-sm font-display font-medium text-gray-500 hover:text-purple-500 dark:text-gray-400 dark:hover:text-purple-400 transition-colors"
         >
           ← home
         </Link>
@@ -242,7 +244,7 @@ export default function ContributionsClient({
             href={`https://github.com/${SITE_CONFIG.githubUsername}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 text-gray-500 dark:text-gray-400 hover:text-purple-500 dark:hover:text-purple-400"
             aria-label="GitHub"
             title="GitHub"
           >
@@ -256,29 +258,13 @@ export default function ContributionsClient({
 
       {/* Header */}
       <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-        <div className="flex items-center gap-5">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={`https://github.com/${SITE_CONFIG.githubUsername}.png`}
-            alt={SITE_CONFIG.name}
-            width={80}
-            height={80}
-            className="w-20 h-20 rounded-2xl border border-gray-200 dark:border-gray-800 shrink-0 bg-gray-100 dark:bg-zinc-800 object-cover"
-          />
-          <div className="flex flex-col gap-1">
-            <h1 className="text-[32px] sm:text-[40px] font-extrabold leading-none tracking-[-0.03em]">
-              <span className="text-gray-400 dark:text-gray-500">{SITE_CONFIG.firstName}</span>{" "}
-              <span className="text-gray-900 dark:text-white">{SITE_CONFIG.lastName}</span>
-            </h1>
-            <a
-              href={`https://github.com/${SITE_CONFIG.githubUsername}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-display text-sm text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
-            >
-              @{SITE_CONFIG.githubUsername}
-            </a>
-          </div>
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight font-display text-gray-900 dark:text-white">
+            <span className="text-gray-300 dark:text-gray-700">## </span>open source contributions
+          </h1>
+          <p className="font-display text-xs sm:text-sm text-gray-400 dark:text-gray-500 mt-1.5">
+            pull requests, code reviews, and issues across GitHub & Fedora Forge
+          </p>
         </div>
 
         {/* Big numbers on right */}
@@ -375,21 +361,16 @@ export default function ContributionsClient({
                             href={pr.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="truncate text-sm font-bold text-gray-900 dark:text-gray-100 hover:underline hover:text-black dark:hover:text-white transition-colors"
+                            className="truncate text-sm font-bold text-gray-900 dark:text-gray-100 group-hover:text-purple-500 dark:group-hover:text-purple-400 hover:text-purple-500 dark:hover:text-purple-400 transition-colors"
                           >
                             {pr.title}
                           </a>
 
                           <div className="flex items-center gap-2 min-w-0">
                             <RepoBadge repo={pr.repo} />
-                            <a
-                              href={pr.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="font-display text-xs text-gray-400 dark:text-gray-500 shrink-0 hover:underline"
-                            >
+                            <span className="font-display text-xs text-gray-400 dark:text-gray-500 shrink-0">
                               #{pr.number}
-                            </a>
+                            </span>
                           </div>
                         </div>
 
@@ -397,7 +378,15 @@ export default function ContributionsClient({
                           {formatDate(pr.createdAt)}
                         </span>
 
-                        <ExternalIcon className="shrink-0 text-gray-400 dark:text-zinc-500 opacity-0 transition group-hover:opacity-100" />
+                        <a
+                          href={pr.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="shrink-0 text-gray-400 opacity-0 transition group-hover:opacity-100 hover:text-purple-500 dark:hover:text-purple-400"
+                          aria-label="View PR"
+                        >
+                          <ExternalIcon />
+                        </a>
                       </div>
                     )
                   })}
@@ -412,7 +401,7 @@ export default function ContributionsClient({
                 <button
                   type="button"
                   onClick={() => setVisiblePRCount((c) => c + PR_PAGE_SIZE)}
-                  className="w-full py-3 px-5 text-[13px] font-bold font-display text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white border-t border-dashed border-gray-200 dark:border-gray-800/80 transition-colors text-center cursor-pointer"
+                  className="w-full py-3 px-5 text-[13px] font-bold font-display text-gray-500 dark:text-gray-400 hover:text-purple-500 dark:hover:text-purple-400 border-t border-dashed border-gray-200 dark:border-gray-800/80 transition-colors text-center cursor-pointer"
                 >
                   Load more · {tabFilteredPRs.length - visiblePRCount} remaining
                 </button>
@@ -421,8 +410,8 @@ export default function ContributionsClient({
           </section>
         </div>
 
-        {/* Right Column: Sidebar (Merged by repo, Issues filed & Reviews) */}
-        <div className="flex flex-col gap-6">
+        {/* Right Column: Breakdown & Feeds */}
+        <div className="lg:col-span-4 flex flex-col gap-6">
           {/* Merged by Repo Box */}
           <section className="rounded-xl border border-dashed border-gray-200 dark:border-gray-800/80 bg-white dark:bg-zinc-950 p-5">
             <span className="text-lg font-extrabold tracking-tight text-gray-900 dark:text-white">
@@ -457,7 +446,7 @@ export default function ContributionsClient({
                 <button
                   type="button"
                   onClick={() => setVisibleRepoCount((c) => c + REPO_PAGE_SIZE)}
-                  className="self-start mt-2 text-[13px] font-bold font-display text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer"
+                  className="self-start mt-2 text-[13px] font-bold font-display text-gray-400 dark:text-gray-500 hover:text-purple-500 dark:hover:text-purple-400 transition-colors cursor-pointer"
                 >
                   Load more · {repos.length - visibleRepoCount} remaining
                 </button>

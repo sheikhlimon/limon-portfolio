@@ -115,7 +115,7 @@ export async function fetchGitHubPRs(): Promise<PRItem[]> {
       .filter((pr) => {
         const parts = pr.repository_url.split("/")
         const repoFullName = `${parts[parts.length - 2]}/${parts[parts.length - 1]}`
-        return !excludedRepos.includes(repoFullName)
+        return !excludedRepos.some((ex) => ex.toLowerCase() === repoFullName.toLowerCase())
       })
       .map((pr) => {
         const parts = pr.repository_url.split("/")
@@ -223,7 +223,12 @@ async function fetchGitHubItems(query: string, idPrefix: string): Promise<Review
         repo: item.repository_url.split("/").slice(-2).join("/"),
         created_at: item.created_at,
       }))
-      .filter((item) => !SITE_CONFIG.contributions.excludedRepos.includes(item.repo))
+      .filter(
+        (item) =>
+          !SITE_CONFIG.contributions.excludedRepos.some(
+            (ex) => ex.toLowerCase() === item.repo.toLowerCase()
+          )
+      )
   } catch (err) {
     console.error(`Error fetching GitHub items (${idPrefix}):`, err)
     return []

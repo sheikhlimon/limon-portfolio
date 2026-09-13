@@ -4,6 +4,7 @@ import "./globals.css"
 import { SITE_CONFIG } from "../lib/constants"
 import { ThemeProvider } from "next-themes"
 import FloatingControls from "../components/FloatingControls"
+import Footer from "../components/Footer"
 
 const caskaydia = localFont({
   src: [
@@ -14,15 +15,15 @@ const caskaydia = localFont({
   variable: "--font-caskaydia",
 })
 
-const dmSans = localFont({
+const spaceGrotesk = localFont({
   src: [
-    { path: "../public/fonts/DMSans-Regular.ttf", weight: "400", style: "normal" },
-    { path: "../public/fonts/DMSans-Medium.ttf", weight: "500", style: "normal" },
-    { path: "../public/fonts/DMSans-SemiBold.ttf", weight: "600", style: "normal" },
-    { path: "../public/fonts/DMSans-Bold.ttf", weight: "700", style: "normal" },
+    { path: "../public/fonts/SpaceGrotesk-Regular.ttf", weight: "400", style: "normal" },
+    { path: "../public/fonts/SpaceGrotesk-Medium.ttf", weight: "500", style: "normal" },
+    { path: "../public/fonts/SpaceGrotesk-SemiBold.ttf", weight: "600", style: "normal" },
+    { path: "../public/fonts/SpaceGrotesk-Bold.ttf", weight: "700", style: "normal" },
   ],
   display: "swap",
-  variable: "--font-dm-sans",
+  variable: "--font-space-grotesk",
 })
 
 export const metadata: Metadata = {
@@ -49,10 +50,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang={SITE_CONFIG.lang} suppressHydrationWarning data-scroll-behavior="smooth">
+    <html lang={SITE_CONFIG.lang} suppressHydrationWarning className="snap-y snap-proximity">
       <body
         suppressHydrationWarning
-        className={`${caskaydia.variable} ${dmSans.variable} antialiased bg-white dark:bg-zinc-950 text-gray-900 dark:text-white transition-colors duration-300 min-h-screen flex flex-col relative overflow-x-hidden font-sans`}
+        className={`${caskaydia.variable} ${spaceGrotesk.variable} antialiased bg-white dark:bg-zinc-950 text-gray-900 dark:text-white transition-colors duration-300 min-h-screen flex flex-col relative overflow-x-hidden font-sans`}
       >
         <ThemeProvider
           attribute="class"
@@ -62,15 +63,9 @@ export default function RootLayout({
         >
           <FloatingControls />
 
-          <main className="w-full grow pt-6 sm:pt-10 pb-16">{children}</main>
+          <main className="w-full grow pb-16">{children}</main>
 
-          <footer className="max-w-2xl mx-auto px-5 pb-8 w-full">
-            <div className="border-t border-dashed border-gray-300 dark:border-gray-800 pt-6">
-              <p className="text-sm font-display text-gray-400 dark:text-gray-600">
-                2025-PRESENT &copy; Sheikh Limon
-              </p>
-            </div>
-          </footer>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

@@ -1,32 +1,51 @@
-# limon-portfolio
+# AGENTS.md
 
-Minimal, terminal-inspired single-page portfolio for Sheikh Limon (Open Source Developer). Looks like a well-maintained README with open-source PRs, projects, and log posts.
+## 1. Project Context & Architecture
 
-## Tech Stack & Commands
+- **Purpose:** Minimal, terminal-inspired developer portfolio and engineering logs for Sheikh Limon (Fedora apps maintainer & open-source contributor). Looks like a living, well-maintained README.
+- **Stack & Commands:** Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, `next-themes`, Bun, `@phosphor-icons/react`, `shiki`, `oxlint`, `oxfmt`, `lefthook`.
+  - `bun dev` (dev server on `localhost:3000`)
+  - `bun run build` (production build)
+  - `bunx oxlint && bunx tsc --noEmit` (fast pre-commit / pre-response verification)
+- **Directory Map:**
+  - `/app` — App Router routes: `/` (home), `/contributions` (full contribution dashboard), `/posts/[slug]` (markdown reader).
+  - `/app/components` — Route components (`Hero.tsx`, `LatestPRs.tsx`, `ThemeToggle.tsx`, `CodeBlock.tsx`).
+  - `/components` — Shell components (`FloatingControls.tsx`, `Footer.tsx`).
+  - `/lib` — Data sources & utilities (`constants.ts`, `projects.ts`, `posts.ts`, `contributions.ts`).
+  - `/logs` — Markdown log posts with YAML frontmatter.
+- **Domain Terminology:**
+  - _Fedora Forge / Pagure_: Fedora Project's Git forge (`forge.fedoraproject.org` / `src.fedoraproject.org`). Repos starting with `apps/` or `infra/` link to Fedora Forge, not GitHub.
+  - _PR Stats_: PRs fetched from GitHub & Pagure APIs with memory caching and deduplication.
+  - _Excluded Repos_: Configured in `lib/constants.ts` (`EXCLUDED_REPOS`). Short names (e.g. `infra-scope`) and case-insensitive matching must be supported.
 
-- **Stack**: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS, Next Themes, Bun
-- **Icons**: `@phosphor-icons/react`
-- **Commands**: `bun dev` (dev server), `bun run build` (production build), `bun install`
-- **Tooling**: Lefthook (`oxlint`, `oxfmt`, `tsc --noEmit`)
+## 2. Working Rules & Definition of Done
 
-## Working Rules
+- **One Logical Unit:** One focused step per response, commit after each complete change.
+- **Explain First:** Explain WHAT and WHY before writing or modifying code.
+- **Verification over Heavy Builds:** Do not run `bun run build` on every intermediate step. Run `bunx oxlint && bunx tsc --noEmit` as the final check before commenting.
+- **Definition of Done:** 0 lint errors, 0 type errors, clean responsive UI matching the terminal aesthetic, and accurate config in `lib/constants.ts`.
 
-- **EXPLAIN FIRST**: Explain WHAT and WHY before writing code
-- **ONE LOGICAL UNIT**: Work in focused steps, commit after each complete change
-- **GIT COMMITS**: Conventional commit format (`feat: ...`, `fix: ...`, `refactor: ...`)
-- **DRY**: Use `lib/constants.ts` for config, `lib/projects.ts` for projects, `lib/posts.ts` for posts
+## 3. Strict Constraints (No Vibe-Coding)
 
-## Design Vibe & Typography
+- **RSC & Event Handlers:** Never pass event handlers (`onClick`, `onMouseEnter`) to Client Component props from Server Components (`LatestPRs.tsx` is an async RSC). Use native semantic `<a>` tags with `href` and `target="_blank"`.
+- **Layout Sizing:** Home & post reading views must use `max-w-4xl mx-auto px-5 sm:px-8`. Contributions dashboard uses `max-w-[1440px] mx-auto px-5 sm:px-8`.
+- **Typography & Font Roles:** Primary typeface across headings, titles, buttons, and prose is Space Grotesk (`font-sans`). CaskaydiaMono (`font-mono`) is reserved strictly for code blocks, inline code, repo identifiers, PR numbers, and the `## ` markdown prefix. Headings use lowercase with `## ` prefix.
+- **Grayscale Palette with Git-Merged Purple Accents:** Keep base text strictly grayscale (`text-gray-900`, `text-gray-400`, `dark:text-white`, `dark:text-gray-500`). Interactive link hover states use git-merged purple (`hover:text-purple-500 dark:hover:text-purple-400 transition-colors`). Status indicators follow git conventions (`text-purple-500` merged, `text-green-600` open, `text-red-500` / `text-gray-400` closed).
+- **External Links:** External links on rows must fade in on hover (`opacity-0 transition group-hover:opacity-100`) and be clickable `<a>` elements with `rel="noopener noreferrer"`.
 
-- **Vibe**: Clean terminal / README Linux developer aesthetic (mostly grayscale)
-- **Typography**: DM Sans (`font-sans` for body), CaskaydiaMono (`font-display` / `font-mono` for headings & code)
-- **Brand**: Two-tone "Sheikh" (muted gray) "Limon" (gray-900/white)
-- **Headings**: Monospace lowercase with `## ` prefix (`<h2 className="section-heading text-gray-500 dark:text-gray-400"><span className="text-gray-300 dark:text-gray-700">## </span>section</h2>`)
-- **Layout**: Single-page (`max-w-2xl mx-auto px-5`), floating top-right controls (`absolute sm:fixed top-5 right-5 z-50`), no navbar
+## 4. The Anti-Pattern Graveyard
 
-## Anti-Patterns (Avoid)
+_(Avoid these past failures and generic AI habits)_
 
-- **No cards**: Use flat lists with dashed dividers (`border-b border-dashed border-gray-200 dark:border-gray-800/80`)
-- **No heavy animations**: Use subtle `transition-colors` only (no entrance animations or scale transforms)
-- **No arbitrary colors**: Grayscale base with status colors only (`text-purple-500` merged PRs, `text-green-600` open PRs)
-- **No unnecessary files**: Edit existing files over creating new ones; no emojis unless requested
+- **No HR Lines in README:** Do not add horizontal divider lines (`---` or `<hr>`) in README files.
+- **No Cards:** Do not create boxed cards with shadows or borders. Use flat lists with dashed dividers (`border-b border-dashed border-gray-200 dark:border-gray-800/80`).
+- **No Inconsistent Link Hovers:** Keep interactive text link hovers matching the git-merged purple (`hover:text-purple-500 dark:hover:text-purple-400 transition-colors`).
+- **No Heavy Animations:** Subtle `transition-colors` only. No entrance motion, scale transforms, or floaty smooth-scroll lag.
+- **No Underlined Default Links:** Avoid browser default link underlines on interactive list rows; use subtle hover color changes instead.
+- **No Duplicate Shell Profiles:** Do not duplicate avatar/bio cards on subpages (e.g., `/contributions` has its own clean `## open source contributions` title).
+- **No Emojis:** Do not add emojis to headings, badges, or copy unless explicitly requested by the user.
+
+## 5. Git Hygiene
+
+- Format: Conventional commits (`feat: ...`, `fix: ...`, `refactor: ...`, `docs: ...`).
+- One logical unit per commit.
