@@ -14,7 +14,7 @@ export default function FloatingControls() {
   }
 
   return (
-    <div className="absolute sm:fixed top-5 right-5 z-50 flex items-center gap-2">
+    <div className="absolute sm:fixed top-7 right-5 sm:top-6 sm:right-6 z-50 flex items-center gap-2">
       <Link
         href="/contributions"
         className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"

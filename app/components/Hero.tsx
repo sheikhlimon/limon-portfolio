@@ -106,7 +106,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+        <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed pt-1">
           When I'm not submitting PRs, I write about what I learn and build things to scratch my own
           itch.
         </p>
