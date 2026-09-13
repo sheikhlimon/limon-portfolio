@@ -37,16 +37,20 @@ function ProjectsList() {
                   </span>
                 )}
               </div>
-              <div>
+              <div className="relative group/tooltip inline-flex items-center">
                 <a
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
+                  title={project.github.includes("forge.fedoraproject.org") ? "forge" : "github"}
                   className="inline-flex items-center gap-1 text-sm sm:text-[15px] font-bold text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
                 >
                   source
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
+                <span className="pointer-events-none absolute -top-7 right-0 opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-150 font-mono text-[11px] px-1.5 py-0.5 rounded border border-dashed border-gray-300 dark:border-gray-800 bg-gray-50 dark:bg-zinc-900 text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                  {project.github.includes("forge.fedoraproject.org") ? "forge" : "github"}
+                </span>
               </div>
             </div>
             <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mt-1.5 leading-relaxed">
