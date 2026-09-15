@@ -53,7 +53,7 @@ const FEDORA_FORGE_REPOS = ["apps/packager_dashboard", "apps/oraculum", "infra/a
 async function fetchForgeWithRetry(url: string, timeoutMs = 30000): Promise<Response | null> {
   try {
     const res = await fetch(url, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 300 },
       signal: AbortSignal.timeout(timeoutMs),
     })
     if (res.ok) return res
@@ -63,7 +63,7 @@ async function fetchForgeWithRetry(url: string, timeoutMs = 30000): Promise<Resp
 
   try {
     const retryRes = await fetch(url, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 300 },
       signal: AbortSignal.timeout(timeoutMs),
     })
     if (retryRes.ok) return retryRes
@@ -84,7 +84,7 @@ async function fetchGitHub(url: string) {
   const doFetch = async () => {
     let res = await fetch(url, {
       headers,
-      next: { revalidate: 3600 },
+      next: { revalidate: 300 },
       signal: AbortSignal.timeout(15000),
     })
 
@@ -92,7 +92,7 @@ async function fetchGitHub(url: string) {
       console.warn(`[GitHub API] 401 for ${url}. Falling back to unauthenticated fetch.`)
       res = await fetch(url, {
         headers: { Accept: "application/vnd.github.v3+json" },
-        next: { revalidate: 3600 },
+        next: { revalidate: 300 },
         signal: AbortSignal.timeout(15000),
       })
     }
@@ -230,20 +230,25 @@ export interface ReviewItem {
   created_at: string
 }
 
-async function fetchGitHubItems(query: string, idPrefix: string): Promise<ReviewItem[]> {
+async function fetchGitHubItems(
+  query: string,
+  idPrefix: string,
+  sortField: "created" | "updated" = "created"
+): Promise<ReviewItem[]> {
   try {
     const data = await fetchGitHub(
-      `https://api.github.com/search/issues?q=${query}&sort=created&order=desc&per_page=100`
+      `https://api.github.com/search/issues?q=${query}&sort=${sortField}&order=desc&per_page=100`
     )
     if (!data?.items) return []
     return (
-      data.items as {
+      data.items as unknown as {
         id: number
         title: string
         number: number
         html_url: string
         repository_url: string
         created_at: string
+        updated_at: string
       }[]
     )
       .map((item) => ({
@@ -252,7 +257,7 @@ async function fetchGitHubItems(query: string, idPrefix: string): Promise<Review
         number: item.number,
         html_url: item.html_url,
         repo: item.repository_url.split("/").slice(-2).join("/"),
-        created_at: item.created_at,
+        created_at: sortField === "updated" ? item.updated_at : item.created_at,
       }))
       .filter(
         (item) =>
@@ -267,7 +272,11 @@ async function fetchGitHubItems(query: string, idPrefix: string): Promise<Review
 }
 
 export async function fetchGitHubReviews(): Promise<ReviewItem[]> {
-  return fetchGitHubItems(`reviewed-by:${SITE_CONFIG.githubUsername}+type:pr`, "gh-review")
+  return fetchGitHubItems(
+    `reviewed-by:${SITE_CONFIG.githubUsername}+type:pr`,
+    "gh-review",
+    "updated"
+  )
 }
 
 export async function fetchFedoraForgeReviews(): Promise<ReviewItem[]> {
@@ -304,7 +313,7 @@ export async function fetchFedoraForgeIssues(): Promise<IssueItem[]> {
         const res = await fetch(
           `https://forge.fedoraproject.org/api/v1/repos/${repo}/issues?state=all&type=issues&limit=20`,
           {
-            next: { revalidate: 3600 },
+            next: { revalidate: 300 },
             signal: AbortSignal.timeout(5000),
           }
         )
