@@ -1,5 +1,3 @@
-import fs from "node:fs"
-import path from "node:path"
 import { SITE_CONFIG } from "./constants"
 
 export interface PRItem {
@@ -48,35 +46,6 @@ interface ForgejoPR {
       full_name: string
     }
   }
-}
-
-const CACHE_TTL_MS = 10 * 60 * 1000 // 10 minutes
-
-async function cachedDev<T>(key: string, fetcher: () => Promise<T>): Promise<T> {
-  if (process.env.NODE_ENV !== "production") {
-    try {
-      const file = path.join(process.cwd(), ".cache", `${key}.json`)
-      if (fs.existsSync(file)) {
-        const { data, timestamp } = JSON.parse(fs.readFileSync(file, "utf8"))
-        if (Date.now() - timestamp < CACHE_TTL_MS) return data as T
-      }
-    } catch {}
-  }
-
-  const data = await fetcher()
-
-  if (process.env.NODE_ENV !== "production") {
-    try {
-      const dir = path.join(process.cwd(), ".cache")
-      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
-      fs.writeFileSync(
-        path.join(dir, `${key}.json`),
-        JSON.stringify({ data, timestamp: Date.now() })
-      )
-    } catch {}
-  }
-
-  return data
 }
 
 const FEDORA_FORGE_REPOS = ["apps/packager_dashboard", "apps/oraculum", "infra/ansible"]
@@ -179,13 +148,11 @@ export async function fetchGitHubPRs(): Promise<PRItem[]> {
 
     return allItems
       .filter((pr) => {
-        const parts = pr.repository_url.split("/")
-        const repoFullName = `${parts[parts.length - 2]}/${parts[parts.length - 1]}`
+        const repoFullName = pr.repository_url.split("/").slice(-2).join("/")
         return !excludedRepos.some((ex) => ex.toLowerCase() === repoFullName.toLowerCase())
       })
       .map((pr) => {
-        const parts = pr.repository_url.split("/")
-        const repo = `${parts[parts.length - 2]}/${parts[parts.length - 1]}`
+        const repo = pr.repository_url.split("/").slice(-2).join("/")
         const isMerged = !!pr.pull_request?.merged_at
         return {
           id: `gh-${pr.id}`,
@@ -248,12 +215,10 @@ export async function fetchFedoraForgePRs(): Promise<PRItem[]> {
 }
 
 export async function fetchAllPRs(): Promise<PRItem[]> {
-  return cachedDev("prs", async () => {
-    const [ghPRs, forgePRs] = await Promise.all([fetchGitHubPRs(), fetchFedoraForgePRs()])
-    const all = [...ghPRs, ...forgePRs]
-    all.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-    return all
-  })
+  const [ghPRs, forgePRs] = await Promise.all([fetchGitHubPRs(), fetchFedoraForgePRs()])
+  const all = [...ghPRs, ...forgePRs]
+  all.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+  return all
 }
 
 export interface ReviewItem {
@@ -306,74 +271,16 @@ export async function fetchGitHubReviews(): Promise<ReviewItem[]> {
 }
 
 export async function fetchFedoraForgeReviews(): Promise<ReviewItem[]> {
-  try {
-    const forgeUser = SITE_CONFIG.githubUsername
-    const maintainerRepos = ["apps/packager_dashboard", "apps/oraculum"]
-    const promises = maintainerRepos.map(async (repo) => {
-      try {
-        const res = await fetchForgeWithRetry(
-          `https://forge.fedoraproject.org/api/v1/repos/${repo}/pulls?state=all&limit=30`,
-          15000
-        )
-        if (!res || !res.ok) return []
-        const pulls = await res.json()
-        if (!Array.isArray(pulls)) return []
-        const otherPulls = pulls.filter((p) => p.user?.login !== forgeUser).slice(0, 15)
-
-        const revPromises = otherPulls.map(async (pull) => {
-          try {
-            const rRes = await fetchForgeWithRetry(
-              `https://forge.fedoraproject.org/api/v1/repos/${repo}/pulls/${pull.number}/reviews`,
-              8000
-            )
-            if (!rRes || !rRes.ok) return []
-            const revs = await rRes.json()
-            if (!Array.isArray(revs)) return []
-            const userRevs = revs.filter((r) => r.user?.login === forgeUser)
-            if (userRevs.length === 0) return []
-            userRevs.sort(
-              (a, b) =>
-                new Date(b.submitted_at || b.updated_at).getTime() -
-                new Date(a.submitted_at || a.updated_at).getTime()
-            )
-            const latest = userRevs[0]
-            return [
-              {
-                id: `forge-review-${pull.id}`,
-                title: pull.title,
-                number: pull.number,
-                html_url: latest.html_url || pull.html_url,
-                repo,
-                created_at: latest.submitted_at || latest.updated_at,
-              },
-            ]
-          } catch {
-            return []
-          }
-        })
-        const revResults = await Promise.all(revPromises)
-        return revResults.flat()
-      } catch {
-        return []
-      }
-    })
-    const results = await Promise.all(promises)
-    return results.flat()
-  } catch (err) {
-    console.error("Error fetching Fedora Forge reviews:", err)
-    return []
-  }
+  return []
 }
 
 export async function fetchAllReviews(): Promise<ReviewItem[]> {
-  return cachedDev("reviews", async () => {
-    const [ghReviews, forgeReviews] = await Promise.all([
-      fetchGitHubReviews(),
-      fetchFedoraForgeReviews(),
-    ])
-    const all = [...ghReviews, ...forgeReviews]
-    return all.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-  })
+  const [ghReviews, forgeReviews] = await Promise.all([
+    fetchGitHubReviews(),
+    fetchFedoraForgeReviews(),
+  ])
+  const all = [...ghReviews, ...forgeReviews]
+  return all.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
 }
 
 export interface IssueItem {
@@ -427,14 +334,9 @@ export async function fetchFedoraForgeIssues(): Promise<IssueItem[]> {
 }
 
 export async function fetchAllIssues(): Promise<IssueItem[]> {
-  return cachedDev("issues", async () => {
-    const [ghIssues, forgeIssues] = await Promise.all([
-      fetchGitHubIssues(),
-      fetchFedoraForgeIssues(),
-    ])
-    const all = [...ghIssues, ...forgeIssues]
-    return all.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-  })
+  const [ghIssues, forgeIssues] = await Promise.all([fetchGitHubIssues(), fetchFedoraForgeIssues()])
+  const all = [...ghIssues, ...forgeIssues]
+  return all.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
 }
 
 export type ActivityType = "pr_merged" | "pr_opened" | "pr_closed" | "review" | "issue"
