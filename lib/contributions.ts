@@ -372,9 +372,7 @@ export async function fetchAllReviews(): Promise<ReviewItem[]> {
       fetchFedoraForgeReviews(),
     ])
     const all = [...ghReviews, ...forgeReviews]
-    return all.toSorted(
-      (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-    )
+    return all.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
   })
 }
 
@@ -435,9 +433,7 @@ export async function fetchAllIssues(): Promise<IssueItem[]> {
       fetchFedoraForgeIssues(),
     ])
     const all = [...ghIssues, ...forgeIssues]
-    return all.toSorted(
-      (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-    )
+    return all.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
   })
 }
 
@@ -492,7 +488,7 @@ export async function fetchRecentActivity(limit = 10): Promise<ActivityItem[]> {
       repo: i.repo,
       created_at: i.created_at,
     })),
-  ].toSorted((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+  ].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
 
   return activity.slice(0, limit)
 }
