@@ -1,6 +1,6 @@
 # Sheikh Limon — Portfolio
 
-Minimal, terminal-inspired personal portfolio, engineering logs, and open-source contribution explorer. Designed like a living, well-maintained README.
+Personal portfolio, engineering logs, and open-source contribution tracker.
 
 ## Stack
 
@@ -9,7 +9,7 @@ Minimal, terminal-inspired personal portfolio, engineering logs, and open-source
 - **Content & Syntax**: Markdown, Shiki syntax highlighting
 - **Icons**: Phosphor Icons (`@phosphor-icons/react`)
 - **Linting & Formatting**: Oxlint, Oxfmt, Lefthook
-- **Typography**: Space Grotesk (body & headings) + CaskaydiaMono Nerd Font (code & terminal indicators)
+- **Typography**: Space Grotesk (body & headings) + CaskaydiaMono Nerd Font (code & mono accents)
 
 ## Setup & Commands
 
@@ -62,13 +62,6 @@ date: "2026-03-15"
 type: "blog" # or 'log'
 ---
 ```
-
-## Design Guidelines
-
-- **Terminal Vibe**: Clean, grayscale-first Linux developer aesthetic.
-- **Grayscale with Status Colors**: Grayscale text and interactions; accent colors are reserved for Git status (`text-mauve` merged with Catppuccin Mauve, `text-green-600` open).
-- **Flat Lists**: No cards or heavy shadows — flat lists with dashed dividers (`border-b border-dashed`).
-- **Snappy & Light**: Fast transitions without bulky entrance motions or scroll lag.
 
 ## License
 
