@@ -180,7 +180,7 @@ export async function fetchFedoraForgePRs(): Promise<PRItem[]> {
     const prPromises = FEDORA_FORGE_REPOS.map(async (repo) => {
       try {
         const res = await fetchForgeWithRetry(
-          `https://forge.fedoraproject.org/api/v1/repos/${repo}/pulls?state=all&limit=50`,
+          `https://forge.fedoraproject.org/api/v1/repos/${repo}/pulls?state=all&limit=50&poster=${forgeUser}`,
           30000
         )
         if (!res || !res.ok) return []
@@ -311,7 +311,7 @@ export async function fetchFedoraForgeIssues(): Promise<IssueItem[]> {
     const promises = FEDORA_FORGE_REPOS.map(async (repo) => {
       try {
         const res = await fetch(
-          `https://forge.fedoraproject.org/api/v1/repos/${repo}/issues?state=all&type=issues&limit=20`,
+          `https://forge.fedoraproject.org/api/v1/repos/${repo}/issues?state=all&type=issues&limit=20&created_by=${forgeUser}`,
           {
             next: { revalidate: 300 },
             signal: AbortSignal.timeout(5000),
