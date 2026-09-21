@@ -28,28 +28,6 @@ interface GitHubPR {
   body?: string | null
 }
 
-interface ForgejoPR {
-  id: number
-  html_url: string
-  title: string
-  number: number
-  state: string
-  created_at: string
-  merged_at: string | null
-  merged: boolean
-  body?: string | null
-  user: {
-    login: string
-  }
-  base: {
-    repo: {
-      full_name: string
-    }
-  }
-}
-
-const FEDORA_FORGE_REPOS = ["apps/packager_dashboard", "apps/oraculum", "infra/ansible"]
-
 async function fetchForgeWithRetry(url: string, timeoutMs = 30000): Promise<Response | null> {
   const headers: Record<string, string> = {}
   if (process.env.FEDORA_FORGE_TOKEN) {
@@ -181,69 +159,56 @@ export async function fetchGitHubPRs(): Promise<PRItem[]> {
   }
 }
 
+async function fetchForgeGlobalItems(type: "pulls" | "issues"): Promise<any[]> {
+  const token = process.env.FEDORA_FORGE_TOKEN
+  if (!token) {
+    console.warn(`FEDORA_FORGE_TOKEN is missing. Skipping Fedora Forge ${type}.`)
+    return []
+  }
+
+  const allItems: any[] = []
+  let page = 1
+  const limit = 50
+  const maxPages = 5 // Fetch up to 250 items
+
+  while (page <= maxPages) {
+    const res = await fetchForgeWithRetry(
+      `https://forge.fedoraproject.org/api/v1/repos/issues/search?type=${type}&state=all&created=true&limit=${limit}&page=${page}`,
+      30000
+    )
+    if (!res || !res.ok) break
+
+    const items: any[] = await res.json()
+    if (!Array.isArray(items) || items.length === 0) break
+
+    allItems.push(...items)
+    if (items.length < limit) break
+    page++
+  }
+
+  return allItems
+}
+
 export async function fetchFedoraForgePRs(): Promise<PRItem[]> {
   try {
     const forgeUser = SITE_CONFIG.githubUsername
-    const token = process.env.FEDORA_FORGE_TOKEN
+    const pulls = await fetchForgeGlobalItems("pulls")
 
-    if (token) {
-      const res = await fetchForgeWithRetry(
-        `https://forge.fedoraproject.org/api/v1/repos/issues/search?type=pulls&state=all&created=true&limit=100`,
-        30000
-      )
-      if (res && res.ok) {
-        const pulls: any[] = await res.json()
-        if (Array.isArray(pulls)) {
-          return pulls
-            .filter((p) => p.user?.login === forgeUser)
-            .map((p) => ({
-              id: `forge-${p.id}`,
-              title: p.title,
-              number: p.number,
-              html_url: p.html_url,
-              repo: p.repository?.full_name || p.base?.repo?.full_name || "unknown",
-              created_at: p.created_at,
-              merged_at: p.pull_request?.merged_at || p.merged_at || null,
-              state: p.state === "open" ? ("open" as const) : ("closed" as const),
-              isMerged: !!p.pull_request?.merged_at || p.merged || !!p.merged_at,
-              provider: "forge" as const,
-              body: p.body || null,
-            }))
-        }
-      }
-    }
-
-    const prPromises = FEDORA_FORGE_REPOS.map(async (repo) => {
-      try {
-        const res = await fetchForgeWithRetry(
-          `https://forge.fedoraproject.org/api/v1/repos/${repo}/pulls?state=all&limit=50&poster=${forgeUser}`,
-          30000
-        )
-        if (!res || !res.ok) return []
-        const pulls: ForgejoPR[] = await res.json()
-        if (!Array.isArray(pulls)) return []
-        return pulls
-          .filter((p) => p.user?.login === forgeUser)
-          .map((p) => ({
-            id: `forge-${p.id}`,
-            title: p.title,
-            number: p.number,
-            html_url: p.html_url,
-            repo: p.base?.repo?.full_name || repo,
-            created_at: p.created_at,
-            merged_at: p.merged_at || null,
-            state: p.state === "open" ? ("open" as const) : ("closed" as const),
-            isMerged: p.merged || !!p.merged_at,
-            provider: "forge" as const,
-            body: p.body || null,
-          }))
-      } catch {
-        return []
-      }
-    })
-
-    const results = await Promise.all(prPromises)
-    return results.flat()
+    return pulls
+      .filter((p) => p.user?.login === forgeUser)
+      .map((p) => ({
+        id: `forge-${p.id}`,
+        title: p.title,
+        number: p.number,
+        html_url: p.html_url,
+        repo: p.repository?.full_name || p.base?.repo?.full_name || "unknown",
+        created_at: p.created_at,
+        merged_at: p.pull_request?.merged_at || p.merged_at || null,
+        state: p.state === "open" ? ("open" as const) : ("closed" as const),
+        isMerged: !!p.pull_request?.merged_at || p.merged || !!p.merged_at,
+        provider: "forge" as const,
+        body: p.body || null,
+      }))
   } catch (err) {
     console.error("Error fetching Fedora Forge PRs:", err)
     return []
@@ -344,58 +309,18 @@ export async function fetchGitHubIssues(): Promise<IssueItem[]> {
 export async function fetchFedoraForgeIssues(): Promise<IssueItem[]> {
   try {
     const forgeUser = SITE_CONFIG.githubUsername
-    const token = process.env.FEDORA_FORGE_TOKEN
+    const issues = await fetchForgeGlobalItems("issues")
 
-    if (token) {
-      const res = await fetchForgeWithRetry(
-        `https://forge.fedoraproject.org/api/v1/repos/issues/search?type=issues&state=all&created=true&limit=50`,
-        30000
-      )
-      if (res && res.ok) {
-        const issues: any[] = await res.json()
-        if (Array.isArray(issues)) {
-          return issues
-            .filter((i) => i.user?.login === forgeUser)
-            .map((i) => ({
-              id: `forge-issue-${i.id}`,
-              title: i.title,
-              number: i.number,
-              html_url: i.html_url,
-              repo: i.repository?.full_name || "unknown",
-              created_at: i.created_at,
-            }))
-        }
-      }
-    }
-
-    const promises = FEDORA_FORGE_REPOS.map(async (repo) => {
-      try {
-        const res = await fetch(
-          `https://forge.fedoraproject.org/api/v1/repos/${repo}/issues?state=all&type=issues&limit=20&created_by=${forgeUser}`,
-          {
-            next: { revalidate: 300 },
-            signal: AbortSignal.timeout(5000),
-          }
-        )
-        if (!res.ok) return []
-        const issues = await res.json()
-        if (!Array.isArray(issues)) return []
-        return issues
-          .filter((i) => i.user?.login === forgeUser)
-          .map((i) => ({
-            id: `forge-issue-${i.id}`,
-            title: i.title,
-            number: i.number,
-            html_url: i.html_url,
-            repo,
-            created_at: i.created_at,
-          }))
-      } catch {
-        return []
-      }
-    })
-    const results = await Promise.all(promises)
-    return results.flat()
+    return issues
+      .filter((i) => i.user?.login === forgeUser)
+      .map((i) => ({
+        id: `forge-issue-${i.id}`,
+        title: i.title,
+        number: i.number,
+        html_url: i.html_url,
+        repo: i.repository?.full_name || "unknown",
+        created_at: i.created_at,
+      }))
   } catch (err) {
     console.error("Error fetching Fedora Forge issues:", err)
     return []

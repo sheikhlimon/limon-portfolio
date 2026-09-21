@@ -52,7 +52,7 @@ To customize the portfolio:
 - `lib/constants.ts` — Name, email, GitHub username, bio, social links, and contribution filters (`EXCLUDED_REPOS`).
 - `lib/projects.ts` — Projects list with live demo and source code URLs.
 - `lib/contributions.ts` — GitHub & Fedora Forge / Pagure PR and issue fetchers.
-- `.env.example` → `.env.local` — Optional `GITHUB_TOKEN` to increase GitHub API rate limits.
+- `.env.example` → `.env.local` — Optional `GITHUB_TOKEN` (increases rate limits) and `FEDORA_FORGE_TOKEN` (enables global repository search).
 - `logs/` — Add markdown posts with YAML frontmatter:
 
 ```yaml
