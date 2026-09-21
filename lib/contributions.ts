@@ -51,8 +51,14 @@ interface ForgejoPR {
 const FEDORA_FORGE_REPOS = ["apps/packager_dashboard", "apps/oraculum", "infra/ansible"]
 
 async function fetchForgeWithRetry(url: string, timeoutMs = 30000): Promise<Response | null> {
+  const headers: Record<string, string> = {}
+  if (process.env.FEDORA_FORGE_TOKEN) {
+    headers.Authorization = `token ${process.env.FEDORA_FORGE_TOKEN}`
+  }
+
   try {
     const res = await fetch(url, {
+      headers,
       next: { revalidate: 300 },
       signal: AbortSignal.timeout(timeoutMs),
     })
@@ -63,6 +69,7 @@ async function fetchForgeWithRetry(url: string, timeoutMs = 30000): Promise<Resp
 
   try {
     const retryRes = await fetch(url, {
+      headers,
       next: { revalidate: 300 },
       signal: AbortSignal.timeout(timeoutMs),
     })
@@ -177,6 +184,35 @@ export async function fetchGitHubPRs(): Promise<PRItem[]> {
 export async function fetchFedoraForgePRs(): Promise<PRItem[]> {
   try {
     const forgeUser = SITE_CONFIG.githubUsername
+    const token = process.env.FEDORA_FORGE_TOKEN
+
+    if (token) {
+      const res = await fetchForgeWithRetry(
+        `https://forge.fedoraproject.org/api/v1/repos/issues/search?type=pulls&state=all&created=true&limit=100`,
+        30000
+      )
+      if (res && res.ok) {
+        const pulls: any[] = await res.json()
+        if (Array.isArray(pulls)) {
+          return pulls
+            .filter((p) => p.user?.login === forgeUser)
+            .map((p) => ({
+              id: `forge-${p.id}`,
+              title: p.title,
+              number: p.number,
+              html_url: p.html_url,
+              repo: p.repository?.full_name || p.base?.repo?.full_name || "unknown",
+              created_at: p.created_at,
+              merged_at: p.pull_request?.merged_at || p.merged_at || null,
+              state: p.state === "open" ? ("open" as const) : ("closed" as const),
+              isMerged: !!p.pull_request?.merged_at || p.merged || !!p.merged_at,
+              provider: "forge" as const,
+              body: p.body || null,
+            }))
+        }
+      }
+    }
+
     const prPromises = FEDORA_FORGE_REPOS.map(async (repo) => {
       try {
         const res = await fetchForgeWithRetry(
@@ -308,6 +344,30 @@ export async function fetchGitHubIssues(): Promise<IssueItem[]> {
 export async function fetchFedoraForgeIssues(): Promise<IssueItem[]> {
   try {
     const forgeUser = SITE_CONFIG.githubUsername
+    const token = process.env.FEDORA_FORGE_TOKEN
+
+    if (token) {
+      const res = await fetchForgeWithRetry(
+        `https://forge.fedoraproject.org/api/v1/repos/issues/search?type=issues&state=all&created=true&limit=50`,
+        30000
+      )
+      if (res && res.ok) {
+        const issues: any[] = await res.json()
+        if (Array.isArray(issues)) {
+          return issues
+            .filter((i) => i.user?.login === forgeUser)
+            .map((i) => ({
+              id: `forge-issue-${i.id}`,
+              title: i.title,
+              number: i.number,
+              html_url: i.html_url,
+              repo: i.repository?.full_name || "unknown",
+              created_at: i.created_at,
+            }))
+        }
+      }
+    }
+
     const promises = FEDORA_FORGE_REPOS.map(async (repo) => {
       try {
         const res = await fetch(
