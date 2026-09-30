@@ -26,6 +26,20 @@ export const projects: Project[] = [
     icon: "Terminal",
   },
   {
+    title: "Kestra",
+    role: "contributor",
+    description:
+      "Event-driven orchestration & scheduling platform for mission critical applications and workflows.",
+    techStack: ["Java", "Orchestration", "Vue.js", "Micronaut"],
+    features: [
+      "Declarative YAML data pipelines and workflow orchestration",
+      "Event-driven architecture with scalable execution",
+    ],
+    github: "https://github.com/kestra-io/kestra",
+    live: "https://kestra.io",
+    icon: "Cube",
+  },
+  {
     title: "Anitya",
     role: "contributor",
     description:
