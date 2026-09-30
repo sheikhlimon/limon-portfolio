@@ -6,7 +6,7 @@ Personal portfolio, engineering logs, and open-source contribution tracker.
 
 - **Framework**: Next.js 16 (App Router, React 19, TypeScript)
 - **Styling**: Tailwind CSS v4 + `next-themes`
-- **Content & Syntax**: Markdown, Shiki syntax highlighting
+- **Content & Syntax**: Markdown, Shiki syntax highlighting, D2 diagrams (via Kroki)
 - **Icons**: Phosphor Icons (`@phosphor-icons/react`)
 - **Linting & Formatting**: Oxlint, Oxfmt, Lefthook
 - **Typography**: Space Grotesk (body & headings) + CaskaydiaMono Nerd Font (code & mono accents)
@@ -32,7 +32,7 @@ bun run build
 
 ```
 app/
-├── components/     # Route components (Hero, LatestPRs, ThemeToggle, CodeBlock)
+├── components/     # Route components (Hero, LatestPRs, ThemeToggle, CodeBlock, D2Diagram)
 ├── contributions/  # Open-source contributions dashboard & metrics
 ├── posts/[slug]/   # Blog post reader & markdown renderer
 ├── globals.css     # Tailwind v4 theme, font variables & prose styles

@@ -12,12 +12,18 @@ This is like trying to understand a new city using only Google Maps Street View.
 
 To actually understand an architecture, you have to shift through four zoom levels. You can't jump straight to the bottom.
 
-```mermaid
-flowchart TD
-    Z1[Zoom 1: Project] -->|What are the major pieces?| Z2[Zoom 2: Concept]
-    Z2 -->|Where does this live?| Z3[Zoom 3: Relationship]
-    Z3 -->|Who calls who?| Z4[Zoom 4: Implementation]
-    Z4 -->|What does this code do?| Z4
+```d2
+direction: down
+
+Z1: "Zoom 1: Project"
+Z2: "Zoom 2: Concept"
+Z3: "Zoom 3: Relationship"
+Z4: "Zoom 4: Implementation"
+
+Z1 -> Z2: "What are the major pieces?"
+Z2 -> Z3: "Where does this live?"
+Z3 -> Z4: "Who calls who?"
+Z4 -> Z4: "What does this code do?"
 ```
 
 Most developers jump straight to **Zoom 4** and try to read 800 lines of code. Everything feels like an incomprehensible microscope.
@@ -64,14 +70,23 @@ By repeating this drill, you stop reading files top-to-bottom. Instead, you buil
 
 Following the `LoopTask` through its incoming and outgoing calls reveals the exact execution path relevant to your bug:
 
-```mermaid
-flowchart LR
-    A[Loop Task] -->|creates iteration| B(loopExecution)
-    B -->|instantiates| C(new Execution)
-    C -->|computes| D(computeParents)
-    C -->|persists| E[(Database)]
+```d2
+direction: right
 
-    style A fill:#5e81ac,stroke:#eceff4,color:#eceff4
+A: "Loop Task"
+B: "loopExecution"
+C: "new Execution"
+D: "computeParents"
+E: "Database"
+
+A -> B: "creates iteration"
+B -> C: "instantiates"
+C -> D: "computes"
+C -> E: "persists"
+
+E.shape: cylinder
+A.style.fill: "#5e81ac"
+A.style.font-color: "#eceff4"
 ```
 
 You trace the system by following its nouns. Find the core object, list its properties, and trace the callers. You build a structural map of the architecture before you read a single line of business logic.

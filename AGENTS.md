@@ -7,6 +7,7 @@
 - **Commands:** `bunx oxlint` (fast verification), `bunx tsc --noEmit`.
 - **Directories:** `/app` (routes), `/components` (UI), `/lib` (data/fetchers), `/logs` (markdown).
 - **Fedora Forge:** Repos starting with `apps/` or `infra/` link to `forge.fedoraproject.org`.
+- **Diagrams:** Use D2 (` ```d2 `) rendered via Kroki (`D2Diagram.tsx`).
 
 ## 2. Design System & Constraints
 
@@ -30,4 +31,5 @@
 - **No Scroll Snapping.** Flow naturally.
 - **No Underlined Default Links.**
 - **No Duplicate Shell Profiles.**
+- **No Mermaid Diagrams.** Use D2 instead (avoids Dagre font bounding-box and text-clipping bugs).
 - **No Emojis.** (Unless explicitly requested).

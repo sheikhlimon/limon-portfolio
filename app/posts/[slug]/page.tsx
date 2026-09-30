@@ -8,7 +8,7 @@ import remarkGfm from "remark-gfm"
 import CodeBlock from "../../components/CodeBlock"
 import Link from "next/link"
 import { ArrowLeft } from "@phosphor-icons/react/dist/ssr"
-import Mermaid from "../../components/Mermaid"
+import D2Diagram from "../../components/D2Diagram"
 const postsDirectory = path.join(process.cwd(), "logs")
 
 export async function generateStaticParams() {
@@ -95,8 +95,8 @@ const markdownComponents = {
       )
     }
 
-    if (language === "mermaid") {
-      return <Mermaid chart={String(children).replace(/\n$/, "")} />
+    if (language === "d2") {
+      return <D2Diagram chart={String(children).replace(/\n$/, "")} />
     }
 
     return <CodeBlock code={String(children).replace(/\n$/, "")} language={language || "text"} />
