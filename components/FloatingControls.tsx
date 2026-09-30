@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { GitPullRequest } from "@phosphor-icons/react"
+import { GitPullRequest, Article } from "@phosphor-icons/react"
 import { SITE_CONFIG } from "../lib/constants"
 import ThemeToggle from "../app/components/ThemeToggle"
 
@@ -37,15 +37,24 @@ export default function FloatingControls() {
           </Link>
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-2.5">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <Link
+            href="/posts"
+            className="flex items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
+            aria-label="Posts"
+            title="Posts"
+          >
+            <Article className="w-5 h-5 sm:w-4 sm:h-4" weight="bold" />
+            <span className="hidden sm:inline">posts</span>
+          </Link>
           <Link
             href="/contributions"
             className="flex items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
             aria-label="Contributions"
             title="Contributions"
           >
-            <GitPullRequest className="w-4 h-4" weight="bold" />
-            <span>contributions</span>
+            <GitPullRequest className="w-5 h-5 sm:w-4 sm:h-4" weight="bold" />
+            <span className="hidden sm:inline">contributions</span>
           </Link>
           <a
             href={`https://github.com/${SITE_CONFIG.githubUsername}`}

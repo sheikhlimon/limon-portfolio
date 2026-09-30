@@ -7,7 +7,7 @@ import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import CodeBlock from "../../components/CodeBlock"
 import Link from "next/link"
-import { House } from "@phosphor-icons/react/dist/ssr"
+import { ArrowLeft } from "@phosphor-icons/react/dist/ssr"
 const postsDirectory = path.join(process.cwd(), "logs")
 
 export async function generateStaticParams() {
@@ -113,11 +113,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <div className="flex flex-col gap-8 sm:gap-10">
         <div className="space-y-4 pb-6 border-b border-dashed border-gray-200 dark:border-gray-800/80">
           <Link
-            href="/"
+            href="/posts"
             className="inline-flex items-center gap-1.5 text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
           >
-            <House className="w-5 h-5" weight="bold" />
-            <span>home</span>
+            <ArrowLeft className="w-5 h-5" weight="bold" />
+            <span>all posts</span>
           </Link>
           <div className="space-y-2">
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white break-words">

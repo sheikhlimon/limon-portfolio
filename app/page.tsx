@@ -74,14 +74,26 @@ function ProjectsList() {
 }
 
 function WritingList() {
-  const posts = getPosts()
+  const allPosts = getPosts()
+  const posts = allPosts.slice(0, 5)
+
   if (posts.length === 0) return null
 
   return (
     <section className="space-y-4">
-      <h2 className="section-heading text-gray-500 dark:text-gray-400">
-        <span className="text-gray-300 dark:text-gray-700">## </span>writing
-      </h2>
+      <div className="flex items-center justify-between">
+        <h2 className="section-heading text-gray-500 dark:text-gray-400">
+          <span className="text-gray-300 dark:text-gray-700">## </span>writing
+        </h2>
+        {allPosts.length > 5 && (
+          <Link
+            href="/posts"
+            className="text-sm font-mono text-gray-400 hover:text-gray-900 dark:text-gray-500 dark:hover:text-white transition-colors"
+          >
+            view all →
+          </Link>
+        )}
+      </div>
 
       <div className="flex flex-col">
         {posts.map((post, index) => (
