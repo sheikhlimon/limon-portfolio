@@ -3,7 +3,7 @@ title: 'The "Noun First" Strategy for Navigating Large Codebases'
 date: 30 September 2026
 year: 2026
 type: log
-tags: ["architecture", "workflow", "neovim"]
+tags: ["workflow", "neovim"]
 ---
 
 When you open a massive codebase for the first time, the instinct is to open a file and start reading from line 1.

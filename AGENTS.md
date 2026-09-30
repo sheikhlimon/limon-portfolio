@@ -4,7 +4,6 @@
 
 - **Purpose:** Developer portfolio, engineering logs, and open-source contribution tracker.
 - **Stack & Commands:** Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, Bun, `oxlint`, `oxfmt`, `lefthook`.
-  - `bun dev` (dev server on `localhost:3000`)
   - `bun run build` (production build)
   - `bunx oxlint` (fast pre-commit / pre-response verification)
 - **Directory Map:**
