@@ -27,8 +27,8 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
 
   if (!highlighted) {
     return (
-      <div className="border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg my-4 overflow-hidden min-w-0 w-full max-w-full">
-        <pre className="font-mono text-sm whitespace-pre overflow-x-auto p-4 bg-gray-50 dark:bg-[#1e1e2e]">
+      <div className="border border-dashed border-gray-200 dark:border-gray-800/80 rounded-xl my-6 overflow-hidden min-w-0 w-full max-w-full bg-gray-50 dark:bg-zinc-950/50">
+        <pre className="font-mono text-sm whitespace-pre overflow-x-auto p-4 sm:p-5">
           <code className="text-gray-700 dark:text-gray-300">{code}</code>
         </pre>
       </div>
@@ -37,7 +37,7 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
 
   return (
     <div
-      className="border border-zinc-400/70 dark:border-zinc-500/50 rounded-lg my-4 overflow-hidden min-w-0 w-full max-w-full"
+      className="border border-dashed border-gray-200 dark:border-gray-800/80 rounded-xl my-6 overflow-hidden min-w-0 w-full max-w-full bg-gray-50 dark:bg-zinc-950/50 [&>pre]:!m-0 [&>pre]:!p-5 [&>pre]:!bg-transparent"
       dangerouslySetInnerHTML={{ __html: highlighted }}
     />
   )
