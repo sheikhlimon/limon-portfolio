@@ -7,14 +7,16 @@ import { useTheme } from "next-themes"
 mermaid.initialize({
   startOnLoad: false,
   theme: "base",
+  flowchart: { htmlLabels: false },
   themeVariables: {
-    fontFamily: "var(--font-sans), sans-serif",
+    fontFamily: "system-ui, sans-serif",
     primaryColor: "#f3f4f6", // gray-100
     primaryTextColor: "#111827", // gray-900
     primaryBorderColor: "#d1d5db", // gray-300
     lineColor: "#6b7280", // gray-500
     secondaryColor: "#e5e7eb", // gray-200
     tertiaryColor: "#f9fafb", // gray-50
+    edgeLabelBackground: "#ffffff",
   },
 })
 
@@ -37,22 +39,24 @@ export default function Mermaid({ chart }: { chart: string }) {
           theme: isDark ? "dark" : "base",
           themeVariables: isDark
             ? {
-                fontFamily: "var(--font-sans), sans-serif",
+                fontFamily: "system-ui, sans-serif",
                 primaryColor: "#18181b", // zinc-900
                 primaryTextColor: "#f4f4f5", // zinc-50
                 primaryBorderColor: "#3f3f46", // zinc-700
                 lineColor: "#a1a1aa", // zinc-400
                 secondaryColor: "#27272a", // zinc-800
                 tertiaryColor: "#09090b", // zinc-950
+                edgeLabelBackground: "#09090b",
               }
             : {
-                fontFamily: "var(--font-sans), sans-serif",
+                fontFamily: "system-ui, sans-serif",
                 primaryColor: "#f3f4f6", // gray-100
                 primaryTextColor: "#111827", // gray-900
                 primaryBorderColor: "#d1d5db", // gray-300
                 lineColor: "#6b7280", // gray-500
                 secondaryColor: "#e5e7eb", // gray-200
                 tertiaryColor: "#f9fafb", // gray-50
+                edgeLabelBackground: "#ffffff",
               },
         })
 
