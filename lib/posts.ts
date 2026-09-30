@@ -33,9 +33,24 @@ export function getPosts(): Post[] {
       const fileContents = fs.readFileSync(fullPath, "utf8")
       const { data } = matter(fileContents)
 
+      let dateStr = parseString(data.date)
+      try {
+        const parsedDate = new Date(dateStr)
+        if (!isNaN(parsedDate.getTime())) {
+          dateStr = parsedDate.toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+            timeZone: "UTC",
+          })
+        }
+      } catch {
+        // Fallback to raw string
+      }
+
       return {
         title: parseString(data.title),
-        date: parseString(data.date),
+        date: dateStr,
         year: parseString(data.year),
         slug: fileName.replace(/\.md$/, ""),
         type: (data.type as "log" | "blog") || "log",

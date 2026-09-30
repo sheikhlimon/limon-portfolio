@@ -14,7 +14,7 @@ export default function ThemeToggle() {
   if (!mounted) {
     return (
       <button
-        className="p-2 rounded-full text-gray-500 dark:text-gray-400 opacity-0 pointer-events-none"
+        className="p-2 rounded-full text-gray-500 dark:text-gray-400 opacity-0 pointer-events-none shrink-0"
         aria-label="Toggle theme"
       >
         <div className="w-5 h-5" />
@@ -29,7 +29,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={handleToggle}
-      className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 group cursor-pointer"
+      className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 group cursor-pointer shrink-0"
       aria-label="Toggle theme"
       title="Toggle theme"
     >
