@@ -83,7 +83,7 @@ function WritingList() {
     <section className="space-y-4">
       <div className="flex items-center justify-between">
         <h2 className="section-heading text-gray-500 dark:text-gray-400">
-          <span className="text-gray-300 dark:text-gray-700">## </span>writing
+          <span className="text-gray-300 dark:text-gray-700">## </span>logs
         </h2>
         {allPosts.length > 5 && (
           <Link
