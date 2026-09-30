@@ -92,6 +92,7 @@ export default function Hero() {
               contributed
             </span>
             <div className="flex flex-wrap items-center gap-1.5">
+              <RepoBadge repo="kestra" href="https://github.com/kestra-io/kestra" />
               <RepoBadge repo="anitya" href="https://github.com/fedora-infra/anitya" />
               <RepoBadge
                 repo="podman-desktop"
