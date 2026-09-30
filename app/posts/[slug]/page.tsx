@@ -59,6 +59,12 @@ const markdownComponents = {
       {...props}
     />
   ),
+  blockquote: ({ ...props }: React.HTMLAttributes<HTMLQuoteElement>) => (
+    <blockquote
+      className="border-l-2 border-dashed border-gray-300 dark:border-gray-700 pl-4 sm:pl-5 py-1 my-6 italic text-gray-500 dark:text-gray-400 font-sans"
+      {...props}
+    />
+  ),
   h3: ({ ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3
       className="text-lg font-bold text-gray-900 dark:text-white mt-6 mb-2 break-words font-sans"
